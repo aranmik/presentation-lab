@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab - Action Line R&D 03</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101318;
+      --panel: #171c24;
+      --line: #303947;
+      --text: #eef3f8;
+      --muted: #9aa8b8;
+      --front: #f0c36a;
+      --heal: #9fe6cf;
+      --archer: #a8d46a;
+      --slime: #8fd9b6;
+      --goblin: #a8c96b;
+      --wolf: #9ba8bb;
+      --attack: #d9e886;
+      --hit: #ef7d6a;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; justify-content: center; background: var(--bg); color: var(--text); font-family: Arial, sans-serif; }
+    button { font: inherit; }
+    .page { width: min(100vw, 390px); min-height: 100vh; padding: 14px; background: linear-gradient(180deg, #151a21 0%, #0f1217 100%); }
+    .kicker { margin: 0 0 4px; color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: 20px; line-height: 1.2; }
+    .note { margin: 8px 0 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .note a { color: var(--heal); }
+    .card { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+    .head { display: flex; justify-content: space-between; gap: 10px; padding: 10px 11px; border-bottom: 1px solid var(--line); }
+    .head h2 { margin: 0; font-size: 14px; line-height: 1.2; }
+    .head p { margin: 4px 0 0; color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .badge { flex: 0 0 auto; align-self: flex-start; padding: 4px 7px; border: 1px solid rgba(159, 230, 207, 0.45); border-radius: 5px; color: var(--heal); font-size: 10px; }
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 10px 11px; border-bottom: 1px solid rgba(48, 57, 71, 0.7); }
+    .tabs button { min-height: 31px; border: 1px solid #2f3845; border-radius: 6px; background: #10151d; color: var(--muted); font-size: 11px; cursor: pointer; }
+    .tabs button[aria-pressed="true"] { border-color: rgba(159, 230, 207, 0.68); color: var(--text); background: rgba(159, 230, 207, 0.08); }
+
+    .field {
+      position: relative;
+      height: 360px;
+      overflow: hidden;
+      background:
+        linear-gradient(132deg, transparent 0 34%, rgba(159, 230, 207, 0.04) 34% 41%, transparent 41% 60%, rgba(217, 232, 134, 0.04) 60% 66%, transparent 66%),
+        linear-gradient(132deg, transparent 0 38%, rgba(255, 255, 255, 0.035) 38% 62%, transparent 62%),
+        radial-gradient(circle at 25% 82%, rgba(159, 230, 207, 0.08), transparent 35%),
+        radial-gradient(circle at 78% 20%, rgba(239, 125, 106, 0.08), transparent 32%),
+        #151b23;
+    }
+    .field::before { content: ""; position: absolute; left: 92px; right: 62px; top: 42px; bottom: 82px; clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); background: linear-gradient(180deg, rgba(217, 232, 134, 0.035), rgba(159, 230, 207, 0.075)); pointer-events: none; }
+    .team-label { position: absolute; color: rgba(154, 168, 184, 0.76); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .team-label.enemy { right: 13px; top: 10px; }
+    .team-label.party { left: 13px; bottom: 10px; }
+    .unit { position: absolute; width: 62px; min-height: 74px; text-align: center; z-index: 5; }
+    .unit.party { transform: scale(1.06); transform-origin: center bottom; }
+    .unit.enemy { transform: scale(0.94); transform-origin: center top; }
+    .unit .name { display: block; margin-top: -2px; color: var(--muted); font-size: 10px; line-height: 1.1; }
+    .warrior-pos { left: 26px; bottom: 56px; }
+    .priest-pos { left: 74px; bottom: 142px; }
+    .archer-pos { left: 106px; bottom: 42px; }
+    .slime-pos { right: 98px; top: 74px; }
+    .goblin-pos { right: 44px; top: 40px; }
+    .wolf-pos { right: 20px; top: 126px; }
+    .avatar, .monster { position: relative; width: 62px; height: 64px; margin: 0 auto; }
+    .part { position: absolute; display: block; }
+    .shadow { left: 9px; bottom: 1px; width: 44px; height: 7px; border-radius: 50%; background: rgba(0, 0, 0, 0.34); }
+    .base { left: 10px; bottom: 0; width: 42px; height: 7px; border-radius: 50%; background: rgba(0, 0, 0, 0.35); }
+    .stance { left: 18px; bottom: 7px; width: 26px; height: 8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #526071; }
+    .body { left: 20px; top: 27px; width: 24px; height: 25px; border-radius: 8px 8px 6px 6px; background: #78889a; border: 2px solid #d5dde6; }
+    .head { left: 22px; top: 10px; width: 19px; height: 19px; border-radius: 50%; background: #f0c9a2; border: 2px solid #f8e5c8; }
+    .aura { inset: 4px 5px 2px; border-radius: 50%; border: 2px solid transparent; opacity: 0.65; }
+    .warrior .body { left: 17px; width: 29px; background: #6d7685; border-color: var(--front); }
+    .warrior .stance { left: 12px; width: 38px; border-left-width: 13px; border-right-width: 13px; border-top-color: #7c6c4a; }
+    .warrior .shield { left: -1px; top: 25px; width: 25px; height: 32px; border-radius: 11px 11px 15px 15px; background: #455160; border: 3px solid var(--front); box-shadow: inset 0 0 0 3px rgba(240, 195, 106, 0.22); transform: rotate(-7deg); z-index: 2; }
+    .priest .body { left: 21px; width: 21px; height: 28px; background: #446b62; border-color: var(--heal); border-radius: 14px 14px 8px 8px; }
+    .priest .aura { border-color: rgba(159, 230, 207, 0.72); box-shadow: 0 0 16px rgba(159, 230, 207, 0.34); }
+    .priest .staff { right: 4px; top: 11px; width: 4px; height: 46px; border-radius: 4px; background: #d6f8ec; transform: rotate(3deg); }
+    .priest .staff::before { content: ""; position: absolute; left: -8px; top: -9px; width: 20px; height: 20px; border-radius: 50%; border: 3px solid var(--heal); background: rgba(159, 230, 207, 0.2); box-shadow: 0 0 8px rgba(159, 230, 207, 0.32); }
+    .archer .body { left: 24px; width: 21px; background: #536a3e; border-color: var(--archer); transform: skewX(-8deg); }
+    .archer .stance { left: 16px; width: 34px; border-left-width: 5px; border-right-width: 16px; border-top-color: #5f753f; transform: skewX(-15deg); }
+    .archer .bow { left: 1px; top: 13px; width: 31px; height: 47px; border-left: 5px solid var(--archer); border-radius: 50% 0 0 50%; transform: rotate(-13deg); }
+    .archer .arrow { left: 27px; top: 35px; width: 31px; height: 3px; border-radius: 3px; background: #dce8c4; transform: rotate(-14deg); z-index: 3; }
+    .slime .slime-body { left: 7px; bottom: 8px; width: 50px; height: 43px; border-radius: 52% 52% 42% 42%; background: var(--slime); border: 3px solid #d8f8eb; box-shadow: inset 0 -10px 0 rgba(52, 120, 100, 0.18); }
+    .slime .shine { left: 19px; top: 21px; width: 12px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.55); transform: rotate(-22deg); }
+    .slime .eye, .goblin .eye, .wolf .eye { border-radius: 50%; background: #182027; }
+    .slime .eye { top: 37px; width: 5px; height: 6px; }
+    .slime .eye.left { left: 23px; }
+    .slime .eye.right { right: 23px; }
+    .goblin .ear { top: 22px; width: 19px; height: 15px; background: var(--goblin); border: 3px solid #ddeaab; clip-path: polygon(0 50%, 100% 0, 78% 100%); }
+    .goblin .ear.left { left: 4px; transform: rotate(155deg); }
+    .goblin .ear.right { right: 4px; transform: rotate(25deg); }
+    .goblin .goblin-head { left: 15px; top: 18px; width: 38px; height: 37px; border-radius: 43% 43% 40% 40%; background: var(--goblin); border: 3px solid #ddeaab; box-shadow: inset 0 -8px 0 rgba(72, 96, 45, 0.18); }
+    .goblin .eye { top: 32px; width: 7px; height: 5px; border-radius: 8px; }
+    .goblin .eye.left { left: 22px; transform: rotate(-10deg); }
+    .goblin .eye.right { right: 22px; transform: rotate(10deg); }
+    .goblin .mouth { left: 28px; top: 44px; width: 14px; height: 5px; border-bottom: 2px solid #171d20; border-radius: 0 0 10px 10px; }
+    .goblin .goblin-body { left: 22px; bottom: 9px; width: 25px; height: 18px; border-radius: 8px 8px 5px 5px; background: #6f7c49; border: 2px solid var(--front); }
+    .wolf .tail { left: 5px; bottom: 23px; width: 23px; height: 12px; border-radius: 12px 0 0 12px; background: #7d8998; border: 2px solid #d7dee8; transform: rotate(-24deg); }
+    .wolf .wolf-body { left: 18px; bottom: 17px; width: 39px; height: 24px; border-radius: 45% 45% 35% 35%; background: var(--wolf); border: 3px solid #d7dee8; box-shadow: inset 0 -7px 0 rgba(65, 75, 88, 0.18); }
+    .wolf .wolf-head { right: 7px; top: 18px; width: 31px; height: 28px; border-radius: 42% 46% 36% 42%; background: var(--wolf); border: 3px solid #d7dee8; transform: rotate(-8deg); }
+    .wolf .snout { right: 0; top: 30px; width: 22px; height: 13px; border-radius: 0 12px 12px 0; background: #d7dee8; transform: rotate(-7deg); }
+    .wolf .ear { top: 9px; width: 13px; height: 16px; background: var(--wolf); border: 3px solid #d7dee8; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .wolf .ear.left { right: 29px; transform: rotate(-18deg); }
+    .wolf .ear.right { right: 13px; transform: rotate(16deg); }
+    .wolf .eye { right: 25px; top: 29px; width: 5px; height: 5px; }
+    .wolf .leg { bottom: 8px; width: 5px; height: 12px; border-radius: 5px; background: #d7dee8; }
+    .wolf .leg.one { left: 26px; }
+    .wolf .leg.two { left: 47px; }
+
+    .anchor-dot { position: absolute; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: rgba(238, 243, 248, 0.78); box-shadow: 0 0 0 3px rgba(238, 243, 248, 0.1); opacity: 0; z-index: 13; pointer-events: none; }
+    .archer-source { left: 147px; top: 273px; }
+    .slime-target { left: 247px; top: 112px; }
+    .warrior-source { left: 75px; top: 238px; }
+    .goblin-target { left: 287px; top: 68px; }
+    .priest-source { left: 115px; top: 141px; }
+    .warrior-heal-target { left: 56px; top: 230px; }
+    .wolf-source { left: 326px; top: 157px; }
+    .warrior-hit-target { left: 58px; top: 232px; }
+
+    .action-line { position: absolute; height: 2px; border-radius: 999px; opacity: 0; transform-origin: left center; pointer-events: none; z-index: 10; }
+    .line-archer { left: 147px; top: 273px; width: 190px; transform: rotate(-58deg); background: linear-gradient(90deg, transparent, rgba(217, 232, 134, 0.34) 16%, rgba(217, 232, 134, 0.78)); }
+    .line-warrior { left: 75px; top: 238px; width: 271px; transform: rotate(-38deg); background: linear-gradient(90deg, transparent, rgba(240, 195, 106, 0.38) 14%, rgba(240, 195, 106, 0.74)); }
+    .line-priest { left: 72px; top: 143px; width: 98px; height: 86px; border: 2px solid transparent; border-left-color: rgba(159, 230, 207, 0.6); border-bottom-color: rgba(159, 230, 207, 0.52); border-radius: 0 0 0 72px; transform: rotate(-8deg); background: none; }
+    .line-wolf { left: 326px; top: 157px; width: 278px; transform: rotate(164deg); background: linear-gradient(90deg, transparent, rgba(239, 125, 106, 0.34) 16%, rgba(239, 125, 106, 0.72)); }
+    .action-line::after { content: ""; position: absolute; right: -1px; top: -3px; border-left: 7px solid currentColor; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+    .line-archer, .line-archer::after { color: rgba(217, 232, 134, 0.82); }
+    .line-warrior, .line-warrior::after { color: rgba(240, 195, 106, 0.8); }
+    .line-wolf, .line-wolf::after { color: rgba(239, 125, 106, 0.72); }
+    .line-priest::after { display: none; }
+
+    .hit-pulse { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(239, 125, 106, 0.76); box-shadow: 0 0 10px rgba(239, 125, 106, 0.38); opacity: 0; z-index: 11; pointer-events: none; }
+    .hit-slime { left: 240px; top: 105px; }
+    .hit-goblin { left: 280px; top: 61px; }
+    .hit-warrior { left: 51px; top: 225px; }
+    .float-number { position: absolute; font-size: 10px; line-height: 1; font-weight: 700; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55); opacity: 0; z-index: 12; pointer-events: none; }
+    .num-slime-a { left: 247px; top: 83px; color: #f4b1a6; }
+    .num-slime-b { left: 258px; top: 76px; color: #f4b1a6; }
+    .num-goblin { left: 288px; top: 40px; color: #f4b1a6; }
+    .num-warrior-dmg { left: 39px; top: 210px; color: #f4b1a6; }
+    .num-warrior-heal { left: 40px; top: 197px; color: var(--heal); }
+    .heal-spark { position: absolute; left: 52px; top: 224px; width: 8px; height: 8px; border-radius: 50%; background: rgba(159, 230, 207, 0.84); box-shadow: 0 0 10px rgba(159, 230, 207, 0.35); opacity: 0; z-index: 11; }
+
+    .field[data-scene="archer"] .line-archer,
+    .field[data-scene="warrior"] .line-warrior,
+    .field[data-scene="priest"] .line-priest,
+    .field[data-scene="wolf"] .line-wolf,
+    .field[data-scene="queue"] .line-archer,
+    .field[data-scene="mixed"] .line-priest,
+    .field[data-scene="mixed"] .line-wolf { opacity: 1; animation: line-breathe 1.25s ease-in-out infinite; }
+    .field[data-scene="archer"] .archer-source,
+    .field[data-scene="archer"] .slime-target,
+    .field[data-scene="warrior"] .warrior-source,
+    .field[data-scene="warrior"] .goblin-target,
+    .field[data-scene="priest"] .priest-source,
+    .field[data-scene="priest"] .warrior-heal-target,
+    .field[data-scene="wolf"] .wolf-source,
+    .field[data-scene="wolf"] .warrior-hit-target { opacity: 1; }
+    .field[data-scene="archer"] .hit-slime,
+    .field[data-scene="queue"] .hit-slime,
+    .field[data-scene="warrior"] .hit-goblin,
+    .field[data-scene="wolf"] .hit-warrior,
+    .field[data-scene="mixed"] .hit-warrior { opacity: 1; animation: hit-pulse 1.25s ease-in-out infinite; }
+    .field[data-scene="priest"] .heal-spark,
+    .field[data-scene="mixed"] .heal-spark { opacity: 1; animation: heal-pulse 1.25s ease-in-out infinite; }
+    .field[data-scene="archer"] .num-slime-a,
+    .field[data-scene="warrior"] .num-goblin,
+    .field[data-scene="wolf"] .num-warrior-dmg,
+    .field[data-scene="priest"] .num-warrior-heal { opacity: 1; animation: number-float 1.25s ease-in-out infinite; }
+    .field[data-scene="queue"] .num-slime-a { opacity: 1; animation: number-float 1.25s ease-in-out infinite; }
+    .field[data-scene="queue"] .num-slime-b { opacity: 1; animation: number-float-late 1.25s ease-in-out infinite; }
+    .field[data-scene="mixed"] .num-warrior-heal { opacity: 1; animation: number-float 1.25s ease-in-out infinite; }
+    .field[data-scene="mixed"] .num-warrior-dmg { opacity: 1; animation: number-float-late 1.25s ease-in-out infinite; }
+    .field[data-scene="warrior"] .warrior-pos { animation: tiny-lunge 1.25s ease-in-out infinite; }
+    .field[data-scene="archer"] .slime-pos,
+    .field[data-scene="queue"] .slime-pos,
+    .field[data-scene="warrior"] .goblin-pos,
+    .field[data-scene="wolf"] .warrior-pos,
+    .field[data-scene="mixed"] .warrior-pos { animation: tiny-hit 1.25s ease-in-out infinite; }
+    .field[data-scene="priest"] .warrior-pos { animation: tiny-heal 1.25s ease-in-out infinite; }
+
+    .scene-note { min-height: 63px; padding: 9px 11px 11px; border-top: 1px solid rgba(48, 57, 71, 0.65); color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .scene-note p { display: none; margin: 0; }
+    .card[data-scene="idle"] .note-idle,
+    .card[data-scene="archer"] .note-archer,
+    .card[data-scene="warrior"] .note-warrior,
+    .card[data-scene="priest"] .note-priest,
+    .card[data-scene="wolf"] .note-wolf,
+    .card[data-scene="queue"] .note-queue,
+    .card[data-scene="mixed"] .note-mixed { display: block; }
+    .notes { margin-top: 12px; padding: 11px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, 0.03); color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .notes h2 { margin: 0 0 6px; color: var(--text); font-size: 14px; }
+    .notes ul { margin: 0; padding-left: 18px; }
+
+    @keyframes line-breathe { 0%, 100% { opacity: 0; } 18%, 76% { opacity: 1; } }
+    @keyframes hit-pulse { 0%, 100% { opacity: 0; transform: scale(0.78); } 24%, 58% { opacity: 1; transform: scale(1); } }
+    @keyframes heal-pulse { 0%, 100% { opacity: 0; transform: scale(0.84); } 24%, 58% { opacity: 1; transform: scale(1); } }
+    @keyframes number-float { 0%, 100% { opacity: 0; transform: translateY(2px); } 20%, 65% { opacity: 1; transform: translateY(-4px); } }
+    @keyframes number-float-late { 0%, 18%, 100% { opacity: 0; transform: translate(0, 2px); } 38%, 78% { opacity: 1; transform: translate(7px, -5px); } }
+    @keyframes tiny-lunge { 0%, 100% { transform: scale(1.06) translate(0, 0); } 30%, 54% { transform: scale(1.06) translate(3px, -2px); } }
+    @keyframes tiny-hit { 0%, 100% { filter: none; } 28% { filter: brightness(1.24); } 36% { transform: scale(0.94) translateX(1px); filter: brightness(1.14); } 44% { transform: scale(0.94) translateX(-1px); } }
+    @keyframes tiny-heal { 0%, 100% { filter: none; } 32%, 56% { filter: brightness(1.16) saturate(1.08); } }
+    @media (prefers-reduced-motion: reduce) {
+      .action-line, .hit-pulse, .float-number, .unit, .heal-spark { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="kicker">Project Signal Personal / presentation lab</p>
+      <h1>Action Line R&amp;D 03</h1>
+      <p class="note">Source anchor → target anchor grammar test. One quiet line should say who acted on whom.</p>
+      <p class="note"><a href="./lab-museum-index-01.html">← 전시관으로</a></p>
+    </header>
+
+    <section class="card" data-scene="idle">
+      <div class="head">
+        <div>
+          <h2>source → target action grammar</h2>
+          <p>Every action line starts from a unit anchor and lands on a target anchor.</p>
+        </div>
+        <span class="badge">R&amp;D 03</span>
+      </div>
+
+      <div class="tabs" aria-label="Action line scenes">
+        <button type="button" data-scene="idle" aria-pressed="true">1 대치</button>
+        <button type="button" data-scene="archer" aria-pressed="false">2 궁수</button>
+        <button type="button" data-scene="warrior" aria-pressed="false">3 전사</button>
+        <button type="button" data-scene="priest" aria-pressed="false">4 사제</button>
+        <button type="button" data-scene="wolf" aria-pressed="false">5 늑대</button>
+        <button type="button" data-scene="queue" aria-pressed="false">6 중복</button>
+        <button type="button" data-scene="mixed" aria-pressed="false">7 피해/회복</button>
+      </div>
+
+      <div class="field" data-scene="idle">
+        <span class="team-label enemy">enemy side</span>
+        <span class="team-label party">party side</span>
+        <div class="unit party warrior-pos" data-unit="warrior" data-source-anchor="weapon" data-target-anchor="body"><div class="avatar warrior"><span class="part aura"></span><span class="part base"></span><span class="part stance"></span><span class="part body"></span><span class="part head"></span><span class="part shield"></span></div><span class="name">전사</span></div>
+        <div class="unit party priest-pos" data-unit="priest" data-source-anchor="staff" data-target-anchor="heal-point"><div class="avatar priest"><span class="part aura"></span><span class="part base"></span><span class="part stance"></span><span class="part body"></span><span class="part head"></span><span class="part staff"></span></div><span class="name">사제</span></div>
+        <div class="unit party archer-pos" data-unit="archer" data-source-anchor="bow" data-target-anchor="hit-point"><div class="avatar archer"><span class="part aura"></span><span class="part base"></span><span class="part stance"></span><span class="part body"></span><span class="part head"></span><span class="part bow"></span><span class="part arrow"></span></div><span class="name">궁수</span></div>
+        <div class="unit enemy slime-pos" data-unit="slime" data-target-anchor="body"><div class="monster slime"><span class="part shadow"></span><span class="part slime-body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span></div><span class="name">슬라임</span></div>
+        <div class="unit enemy goblin-pos" data-unit="goblin" data-target-anchor="body"><div class="monster goblin"><span class="part shadow"></span><span class="part ear left"></span><span class="part ear right"></span><span class="part goblin-body"></span><span class="part goblin-head"></span><span class="part eye left"></span><span class="part eye right"></span><span class="part mouth"></span></div><span class="name">고블린</span></div>
+        <div class="unit enemy wolf-pos" data-unit="wolf" data-source-anchor="snout" data-target-anchor="hit-point"><div class="monster wolf"><span class="part shadow"></span><span class="part tail"></span><span class="part wolf-body"></span><span class="part leg one"></span><span class="part leg two"></span><span class="part wolf-head"></span><span class="part ear left"></span><span class="part ear right"></span><span class="part snout"></span><span class="part eye"></span></div><span class="name">늑대</span></div>
+
+        <span class="anchor-dot archer-source" title="archer source: bow"></span>
+        <span class="anchor-dot slime-target" title="slime target: body"></span>
+        <span class="anchor-dot warrior-source" title="warrior source: weapon/front"></span>
+        <span class="anchor-dot goblin-target" title="goblin target: body"></span>
+        <span class="anchor-dot priest-source" title="priest source: staff"></span>
+        <span class="anchor-dot warrior-heal-target" title="warrior target: heal-point"></span>
+        <span class="anchor-dot wolf-source" title="wolf source: snout/front"></span>
+        <span class="anchor-dot warrior-hit-target" title="warrior target: hit-point"></span>
+
+        <span class="action-line line-archer" data-source="archer:bow" data-target="slime:body"></span>
+        <span class="action-line line-warrior" data-source="warrior:front" data-target="goblin:body"></span>
+        <span class="action-line line-priest" data-source="priest:staff" data-target="warrior:heal-point"></span>
+        <span class="action-line line-wolf" data-source="wolf:snout" data-target="warrior:hit-point"></span>
+        <span class="hit-pulse hit-slime"></span>
+        <span class="hit-pulse hit-goblin"></span>
+        <span class="hit-pulse hit-warrior"></span>
+        <span class="heal-spark"></span>
+        <span class="float-number num-slime-a">-8</span>
+        <span class="float-number num-slime-b">-6</span>
+        <span class="float-number num-goblin">-10</span>
+        <span class="float-number num-warrior-dmg">-7</span>
+        <span class="float-number num-warrior-heal">+6</span>
+      </div>
+
+      <div class="scene-note" aria-live="polite">
+        <p class="note-idle">기본 대치. 행동선, pulse, 숫자 없이 anchor 설계를 얹을 전장 위치만 확인합니다.</p>
+        <p class="note-archer">궁수 bow anchor → 슬라임 body anchor. Prototype 02의 얇고 조용한 감성은 유지하되 출발점과 도착점을 명확히 둡니다.</p>
+        <p class="note-warrior">전사 front/weapon anchor → 고블린 body anchor. 짧은 arc 단독 대신 긴 연결선을 아주 약하게 보여 “누구를 쳤는지”를 우선합니다.</p>
+        <p class="note-priest">사제 staff anchor → 전사 heal-point. 공격선과 구분되는 부드러운 곡선과 +숫자 조합을 봅니다.</p>
+        <p class="note-wolf">늑대 snout/front anchor → 전사 hit-point. 적 행동도 source → target 방향성이 즉시 읽히는지 확인합니다.</p>
+        <p class="note-queue">같은 슬라임에게 피해 숫자 2개가 0.2초 안팎으로 겹치는 상황. 두 번째 숫자는 우상단 offset으로 피합니다.</p>
+        <p class="note-mixed">전사 위치에 회복과 피해 숫자가 가까운 간격으로 뜨는 비교. 색과 위치, 시간차만으로 구분 가능한지 봅니다.</p>
+      </div>
+    </section>
+
+    <section class="notes">
+      <h2>Luda notes</h2>
+      <ul>
+        <li>Core grammar: `.action-line[data-source][data-target]` plus unit `data-source-anchor` / `data-target-anchor`.</li>
+        <li>Best candidate: archer and priest lines. They read clearly without covering silhouettes.</li>
+        <li>Watch: warrior line must stay low-opacity, otherwise it stops feeling melee.</li>
+        <li>Number queue: 0.15-0.25s delay and a small x/y offset is enough for compact mobile readability.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const card = document.querySelector(".card");
+    const field = document.querySelector(".field");
+    const buttons = [...document.querySelectorAll(".tabs button")];
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const scene = button.dataset.scene;
+        card.dataset.scene = scene;
+        field.dataset.scene = scene;
+        buttons.forEach((item) => {
+          item.setAttribute("aria-pressed", String(item === button));
+        });
+      });
+    });
+  </script>
+</body>
+</html>

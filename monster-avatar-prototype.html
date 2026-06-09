@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>연출실 - 몬스터 아바타 프로토타입</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lab-bg: #101318;
+      --lab-panel: #171c24;
+      --lab-panel-2: #202733;
+      --lab-line: #303947;
+      --lab-text: #eef3f8;
+      --lab-muted: #9aa8b8;
+      --lab-slime: #8fd9b6;
+      --lab-goblin: #a8c96b;
+      --lab-wolf: #9ba8bb;
+      --lab-warn: #f0c36a;
+      --lab-hit: #ef7d6a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--lab-bg);
+      color: var(--lab-text);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lab-page {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      padding: 14px;
+      background: linear-gradient(180deg, #151a21 0%, #0f1217 100%);
+    }
+
+    .lab-kicker {
+      margin: 0 0 4px;
+      color: var(--lab-muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lab-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lab-note {
+      margin: 8px 0 12px;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .lab-note a {
+      color: #9fe6cf;
+    }
+
+    .monster-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .monster-card,
+    .compare-card,
+    .evolve-card {
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel);
+      overflow: hidden;
+    }
+
+    .monster-card {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      gap: 11px;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .monster-stage {
+      display: grid;
+      place-items: center;
+      width: 92px;
+      height: 98px;
+      border: 1px solid #2c3542;
+      border-radius: 8px;
+      background: #10151d;
+    }
+
+    .monster-copy h2,
+    .compare-card h2,
+    .evolve-card h2 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .monster-copy p,
+    .compare-card p,
+    .evolve-card p {
+      margin: 0;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tag-list li {
+      padding: 4px 6px;
+      border: 1px solid #2f3845;
+      border-radius: 5px;
+      background: #10151d;
+      color: #d7e0ea;
+      font-size: 11px;
+    }
+
+    .monster {
+      position: relative;
+      width: 72px;
+      height: 72px;
+    }
+
+    .part {
+      position: absolute;
+      display: block;
+    }
+
+    .shadow {
+      left: 12px;
+      bottom: 1px;
+      width: 48px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.34);
+    }
+
+    .slime .body {
+      left: 9px;
+      bottom: 8px;
+      width: 54px;
+      height: 46px;
+      border-radius: 52% 52% 42% 42%;
+      background: var(--lab-slime);
+      border: 3px solid #d8f8eb;
+      box-shadow: inset 0 -10px 0 rgba(52, 120, 100, 0.18);
+    }
+
+    .slime .shine {
+      left: 21px;
+      top: 21px;
+      width: 13px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.55);
+      transform: rotate(-22deg);
+    }
+
+    .slime .eye {
+      top: 39px;
+      width: 5px;
+      height: 6px;
+      border-radius: 50%;
+      background: #182027;
+    }
+
+    .slime .eye.left { left: 29px; }
+    .slime .eye.right { right: 29px; }
+
+    .slime .mouth {
+      left: 33px;
+      top: 48px;
+      width: 8px;
+      height: 4px;
+      border-bottom: 2px solid #182027;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .goblin .ear {
+      top: 22px;
+      width: 20px;
+      height: 16px;
+      background: var(--lab-goblin);
+      border: 3px solid #ddeaab;
+      transform: rotate(25deg);
+      clip-path: polygon(0 50%, 100% 0, 78% 100%);
+    }
+
+    .goblin .ear.left {
+      left: 5px;
+      transform: rotate(155deg);
+    }
+
+    .goblin .ear.right {
+      right: 5px;
+    }
+
+    .goblin .head {
+      left: 17px;
+      top: 18px;
+      width: 40px;
+      height: 38px;
+      border-radius: 43% 43% 40% 40%;
+      background: var(--lab-goblin);
+      border: 3px solid #ddeaab;
+      box-shadow: inset 0 -8px 0 rgba(72, 96, 45, 0.18);
+    }
+
+    .goblin .eye {
+      top: 33px;
+      width: 7px;
+      height: 5px;
+      border-radius: 8px;
+      background: #171d20;
+      transform: rotate(-10deg);
+    }
+
+    .goblin .eye.left { left: 27px; }
+    .goblin .eye.right {
+      right: 27px;
+      transform: rotate(10deg);
+    }
+
+    .goblin .mouth {
+      left: 30px;
+      top: 44px;
+      width: 14px;
+      height: 5px;
+      border-radius: 0 0 10px 10px;
+      border-bottom: 2px solid #171d20;
+    }
+
+    .goblin .body {
+      left: 24px;
+      bottom: 9px;
+      width: 25px;
+      height: 18px;
+      border-radius: 8px 8px 5px 5px;
+      background: #6f7c49;
+      border: 2px solid var(--lab-warn);
+    }
+
+    .wolf .tail {
+      left: 5px;
+      bottom: 23px;
+      width: 23px;
+      height: 12px;
+      border-radius: 12px 0 0 12px;
+      background: #7d8998;
+      border: 2px solid #d7dee8;
+      transform: rotate(-24deg);
+    }
+
+    .wolf .body {
+      left: 18px;
+      bottom: 17px;
+      width: 39px;
+      height: 24px;
+      border-radius: 45% 45% 35% 35%;
+      background: var(--lab-wolf);
+      border: 3px solid #d7dee8;
+      box-shadow: inset 0 -7px 0 rgba(65, 75, 88, 0.18);
+    }
+
+    .wolf .head {
+      right: 7px;
+      top: 18px;
+      width: 31px;
+      height: 28px;
+      border-radius: 42% 46% 36% 42%;
+      background: var(--lab-wolf);
+      border: 3px solid #d7dee8;
+      transform: rotate(-8deg);
+    }
+
+    .wolf .snout {
+      right: 0;
+      top: 31px;
+      width: 19px;
+      height: 12px;
+      border-radius: 0 12px 12px 0;
+      background: #d7dee8;
+      transform: rotate(-7deg);
+    }
+
+    .wolf .ear {
+      top: 9px;
+      width: 13px;
+      height: 16px;
+      background: var(--lab-wolf);
+      border: 3px solid #d7dee8;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .wolf .ear.left {
+      right: 29px;
+      transform: rotate(-18deg);
+    }
+
+    .wolf .ear.right {
+      right: 13px;
+      transform: rotate(16deg);
+    }
+
+    .wolf .eye {
+      right: 24px;
+      top: 30px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #15191f;
+    }
+
+    .wolf .leg {
+      bottom: 8px;
+      width: 5px;
+      height: 12px;
+      border-radius: 5px;
+      background: #d7dee8;
+    }
+
+    .wolf .leg.one { left: 26px; }
+    .wolf .leg.two { left: 47px; }
+
+    .compare-card,
+    .evolve-card {
+      margin-top: 12px;
+      padding: 12px;
+    }
+
+    .compare-row,
+    .evolve-row {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .mini-card {
+      width: 74px;
+      padding: 7px 5px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel-2);
+      text-align: center;
+    }
+
+    .mini-card .monster {
+      transform: scale(0.72);
+      transform-origin: center;
+      margin: -8px auto -5px;
+    }
+
+    .mini-card span {
+      display: block;
+      color: var(--lab-muted);
+      font-size: 10px;
+    }
+
+    .scale-card {
+      width: 96px;
+      min-height: 100px;
+      padding: 8px 5px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel-2);
+      text-align: center;
+    }
+
+    .scale-card .monster {
+      margin: -3px auto 0;
+    }
+
+    .scale-card.large .monster {
+      transform: scale(1.08);
+      transform-origin: center;
+    }
+
+    .scale-card.boss .monster {
+      transform: scale(1.16);
+      transform-origin: center;
+    }
+
+    .scale-card span {
+      display: block;
+      margin-top: 3px;
+      color: var(--lab-muted);
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <main class="lab-page">
+    <header>
+      <p class="lab-kicker">Project Signal Personal / 연출실</p>
+      <h1 class="lab-title">몬스터 아바타 프로토타입 01</h1>
+      <p class="lab-note">초반 적 3종이 작은 모바일 화면에서도 한눈에 구분되는지 보는 실험입니다.</p>
+      <p class="lab-note"><a href="./index.html">타이틀로 돌아가기</a></p>
+    </header>
+
+    <section class="monster-grid" aria-label="기본 몬스터 3종">
+      <article class="monster-card">
+        <div class="monster-stage">
+          <div class="monster slime" aria-hidden="true">
+            <span class="part shadow"></span>
+            <span class="part body"></span>
+            <span class="part shine"></span>
+            <span class="part eye left"></span>
+            <span class="part eye right"></span>
+            <span class="part mouth"></span>
+          </div>
+        </div>
+        <div class="monster-copy">
+          <h2>슬라임</h2>
+          <p>말랑하고 둥근 초반 기본 몬스터. 무섭기보다 가볍게 상대하는 느낌입니다.</p>
+          <ul class="tag-list"><li>둥근 몸</li><li>말랑함</li><li>단순 표정</li></ul>
+        </div>
+      </article>
+
+      <article class="monster-card">
+        <div class="monster-stage">
+          <div class="monster goblin" aria-hidden="true">
+            <span class="part shadow"></span>
+            <span class="part ear left"></span>
+            <span class="part ear right"></span>
+            <span class="part body"></span>
+            <span class="part head"></span>
+            <span class="part eye left"></span>
+            <span class="part eye right"></span>
+            <span class="part mouth"></span>
+          </div>
+        </div>
+        <div class="monster-copy">
+          <h2>고블린</h2>
+          <p>작고 얄미운 장난꾸러기. 큰 귀와 삐딱한 눈으로 고블린 느낌을 잡았습니다.</p>
+          <ul class="tag-list"><li>큰 귀</li><li>얄미운 눈</li><li>작은 몸</li></ul>
+        </div>
+      </article>
+
+      <article class="monster-card">
+        <div class="monster-stage">
+          <div class="monster wolf" aria-hidden="true">
+            <span class="part shadow"></span>
+            <span class="part tail"></span>
+            <span class="part body"></span>
+            <span class="part leg one"></span>
+            <span class="part leg two"></span>
+            <span class="part head"></span>
+            <span class="part ear left"></span>
+            <span class="part ear right"></span>
+            <span class="part snout"></span>
+            <span class="part eye"></span>
+          </div>
+        </div>
+        <div class="monster-copy">
+          <h2>늑대</h2>
+          <p>날렵한 네발짐승. 측면 실루엣과 주둥이, 꼬리로 돌진감을 읽히게 했습니다.</p>
+          <ul class="tag-list"><li>측면 실루엣</li><li>주둥이</li><li>꼬리</li></ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="compare-card">
+      <h2>작은 크기 읽힘</h2>
+      <p>본게임 카드 안에 들어갈 크기를 상상해 보는 축소 비교입니다.</p>
+      <div class="compare-row">
+        <div class="mini-card"><div class="monster slime"><span class="part shadow"></span><span class="part body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span><span class="part mouth"></span></div><span>슬라임</span></div>
+        <div class="mini-card"><div class="monster goblin"><span class="part shadow"></span><span class="part ear left"></span><span class="part ear right"></span><span class="part body"></span><span class="part head"></span><span class="part eye left"></span><span class="part eye right"></span><span class="part mouth"></span></div><span>고블린</span></div>
+        <div class="mini-card"><div class="monster wolf"><span class="part shadow"></span><span class="part tail"></span><span class="part body"></span><span class="part leg one"></span><span class="part leg two"></span><span class="part head"></span><span class="part ear left"></span><span class="part ear right"></span><span class="part snout"></span><span class="part eye"></span></div><span>늑대</span></div>
+      </div>
+    </section>
+
+    <section class="evolve-card">
+      <h2>확장 상상</h2>
+      <p>나중에 small / large / boss로 키울 수 있는지 보는 아주 가벼운 스케치입니다.</p>
+      <div class="evolve-row">
+        <div class="scale-card"><div class="monster slime"><span class="part shadow"></span><span class="part body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span><span class="part mouth"></span></div><span>기본</span></div>
+        <div class="scale-card large"><div class="monster slime"><span class="part shadow"></span><span class="part body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span><span class="part mouth"></span></div><span>대형화</span></div>
+        <div class="scale-card boss"><div class="monster wolf"><span class="part shadow"></span><span class="part tail"></span><span class="part body"></span><span class="part leg one"></span><span class="part leg two"></span><span class="part head"></span><span class="part ear left"></span><span class="part ear right"></span><span class="part snout"></span><span class="part eye"></span></div><span>거대 늑대</span></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

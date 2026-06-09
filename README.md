@@ -76,5 +76,9 @@ Current suggested priority:
 1. Avatar Prototype 01 readability polish.
 2. Action Line Prototype 01: small attack, heal, and hit feedback readability test.
 3. Battlefield Layout Prototype 01: party slots, enemy footprint, boss presence, and quiet FX path sketch.
-4. Speed gauge or action-ready state prototype.
-5. Skill label and combat log readability prototype.
+4. Monster Avatar Prototype 01: slime, goblin, and wolf symbol readability test.
+5. Monster Battlefield Mockup 01: party and early monsters facing each other in a diagonal field.
+6. Idle Prototype 01: very subtle character and field breathing tests.
+7. Action Feedback Prototype 01: attack, hit, and heal moment readability test.
+8. Speed gauge or action-ready state prototype.
+9. Skill label and combat log readability prototype.

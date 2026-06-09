@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab - Avatar Museum 01</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101318;
+      --panel: #171c24;
+      --panel-2: #202733;
+      --line: #303947;
+      --text: #eef3f8;
+      --muted: #9aa8b8;
+      --gold: #f0c36a;
+      --mint: #9fe6cf;
+      --leaf: #a8d46a;
+      --violet: #c7a2ff;
+      --rose: #ef9a9a;
+      --sky: #9ad4f0;
+      --ash: #9ba8bb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    .museum-page {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      padding: 16px 14px 22px;
+      background: linear-gradient(180deg, #151a21 0%, #0f1217 100%);
+    }
+
+    .kicker {
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .intro {
+      margin: 8px 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .museum-back {
+      display: inline-block;
+      margin: 8px 0 12px;
+      color: var(--mint);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .museum-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .exhibit-card {
+      min-height: 178px;
+      padding: 9px 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), transparent 42%),
+        var(--panel);
+      overflow: hidden;
+    }
+
+    .stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      height: 104px;
+      margin-bottom: 8px;
+      border: 1px solid #2c3542;
+      border-radius: 7px;
+      background:
+        linear-gradient(140deg, transparent 0 36%, rgba(159, 230, 207, 0.035) 36% 58%, transparent 58%),
+        #10151d;
+      overflow: hidden;
+    }
+
+    .stage::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 18px;
+      bottom: 17px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(154, 168, 184, 0.28), transparent);
+      transform: rotate(-12deg);
+    }
+
+    .avatar {
+      position: relative;
+      width: 76px;
+      height: 82px;
+      z-index: 1;
+    }
+
+    .avatar.small {
+      transform: scale(0.92);
+      transform-origin: center bottom;
+    }
+
+    .part {
+      position: absolute;
+      display: block;
+    }
+
+    .shadow {
+      left: 14px;
+      bottom: 2px;
+      width: 48px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .feet {
+      left: 23px;
+      bottom: 9px;
+      width: 30px;
+      height: 9px;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-top: 9px solid #526071;
+    }
+
+    .body {
+      left: 24px;
+      top: 35px;
+      width: 29px;
+      height: 31px;
+      border-radius: 9px 9px 7px 7px;
+      background: #78889a;
+      border: 2px solid #d5dde6;
+    }
+
+    .head {
+      left: 27px;
+      top: 16px;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #f0c9a2;
+      border: 2px solid #f8e5c8;
+    }
+
+    .mask {
+      left: 29px;
+      top: 24px;
+      width: 19px;
+      height: 7px;
+      border-radius: 7px;
+      background: #293241;
+    }
+
+    .aura {
+      inset: 7px 8px 4px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      opacity: 0.45;
+    }
+
+    .blade-saint .body {
+      left: 21px;
+      width: 34px;
+      border-color: var(--gold);
+      background: #6d7685;
+    }
+
+    .blade-saint .feet {
+      left: 17px;
+      width: 42px;
+      border-left-width: 14px;
+      border-right-width: 14px;
+      border-top-color: #7c6c4a;
+    }
+
+    .blade-saint .sword {
+      right: 6px;
+      top: 18px;
+      width: 5px;
+      height: 51px;
+      border-radius: 4px;
+      background: linear-gradient(to top, #c7d0da, #f7fbff);
+      transform: rotate(15deg);
+    }
+
+    .blade-saint .guard {
+      right: 1px;
+      top: 42px;
+      width: 17px;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--gold);
+      transform: rotate(15deg);
+    }
+
+    .lantern-mender .body {
+      left: 26px;
+      width: 24px;
+      height: 35px;
+      border-radius: 16px 16px 9px 9px;
+      border-color: var(--mint);
+      background: #446b62;
+    }
+
+    .lantern-mender .staff {
+      left: 12px;
+      top: 16px;
+      width: 4px;
+      height: 55px;
+      border-radius: 4px;
+      background: #d6f8ec;
+    }
+
+    .lantern-mender .lamp {
+      left: 4px;
+      top: 8px;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--mint);
+      border-radius: 50%;
+      background: rgba(159, 230, 207, 0.16);
+      box-shadow: 0 0 14px rgba(159, 230, 207, 0.36);
+    }
+
+    .thorn-runner .body {
+      left: 28px;
+      width: 23px;
+      border-color: var(--leaf);
+      background: #536a3e;
+      transform: skewX(-9deg);
+    }
+
+    .thorn-runner .feet {
+      left: 20px;
+      width: 39px;
+      border-left-width: 6px;
+      border-right-width: 18px;
+      border-top-color: #5f753f;
+      transform: skewX(-15deg);
+    }
+
+    .thorn-runner .bow {
+      left: 5px;
+      top: 13px;
+      width: 37px;
+      height: 58px;
+      border-left: 5px solid var(--leaf);
+      border-radius: 50% 0 0 50%;
+      transform: rotate(-13deg);
+    }
+
+    .thorn-runner .arrow {
+      left: 30px;
+      top: 46px;
+      width: 35px;
+      height: 3px;
+      border-radius: 3px;
+      background: #dce8c4;
+      transform: rotate(-14deg);
+    }
+
+    .moon-mask .body {
+      left: 25px;
+      width: 28px;
+      height: 30px;
+      border-color: var(--violet);
+      background: #3a2a5f;
+      border-radius: 13px 13px 7px 7px;
+    }
+
+    .moon-mask .head {
+      background: #d8c8ff;
+      border-color: var(--violet);
+    }
+
+    .moon-mask .hood {
+      left: 21px;
+      top: 10px;
+      width: 35px;
+      height: 36px;
+      border-radius: 50% 50% 45% 45%;
+      background: rgba(58, 42, 95, 0.92);
+      border: 2px solid var(--violet);
+    }
+
+    .moon-mask .mask {
+      background: #10151d;
+    }
+
+    .moon-mask .moon {
+      right: 9px;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border-left: 4px solid var(--violet);
+      transform: rotate(-18deg);
+    }
+
+    .bell-guard .body {
+      left: 20px;
+      width: 36px;
+      height: 34px;
+      border-color: #e7d08a;
+      background: #756848;
+      border-radius: 12px 12px 8px 8px;
+    }
+
+    .bell-guard .shield {
+      left: 6px;
+      top: 31px;
+      width: 31px;
+      height: 39px;
+      border-radius: 15px 15px 18px 18px;
+      border: 3px solid #e7d08a;
+      background: #4c5360;
+      box-shadow: inset 0 0 0 4px rgba(231, 208, 138, 0.18);
+      transform: rotate(-8deg);
+      z-index: 3;
+    }
+
+    .bell-guard .bell {
+      right: 12px;
+      top: 13px;
+      width: 17px;
+      height: 18px;
+      border-radius: 9px 9px 6px 6px;
+      background: #e7d08a;
+      border: 2px solid #fff0b8;
+    }
+
+    .spark-needle .body {
+      left: 27px;
+      width: 23px;
+      height: 28px;
+      border-color: var(--sky);
+      background: #2b526a;
+      transform: skewX(6deg);
+    }
+
+    .spark-needle .needle {
+      right: 4px;
+      top: 12px;
+      width: 3px;
+      height: 59px;
+      border-radius: 4px;
+      background: var(--sky);
+      box-shadow: 0 0 10px rgba(154, 212, 240, 0.38);
+      transform: rotate(28deg);
+    }
+
+    .spark-needle .spark {
+      right: 1px;
+      top: 11px;
+      width: 12px;
+      height: 12px;
+      background: var(--sky);
+      clip-path: polygon(50% 0, 61% 37%, 100% 50%, 61% 63%, 50% 100%, 39% 63%, 0 50%, 39% 37%);
+    }
+
+    .ember-horn .body {
+      left: 22px;
+      width: 33px;
+      height: 32px;
+      border-color: var(--rose);
+      background: #6b3a3a;
+      border-radius: 12px 12px 7px 7px;
+    }
+
+    .ember-horn .horn {
+      top: 8px;
+      width: 15px;
+      height: 18px;
+      background: #f6c7b8;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .ember-horn .horn.left {
+      left: 18px;
+      transform: rotate(-20deg);
+    }
+
+    .ember-horn .horn.right {
+      right: 18px;
+      transform: rotate(20deg);
+    }
+
+    .ember-horn .tail {
+      left: 9px;
+      bottom: 18px;
+      width: 25px;
+      height: 10px;
+      border-radius: 12px 0 0 12px;
+      border: 2px solid var(--rose);
+      border-right: none;
+      transform: rotate(-23deg);
+    }
+
+    .shell-kin .body {
+      left: 18px;
+      top: 34px;
+      width: 40px;
+      height: 34px;
+      border-color: #d2cab8;
+      background: #676f75;
+      border-radius: 45% 45% 32% 32%;
+      box-shadow: inset 0 -9px 0 rgba(0,0,0,0.13);
+    }
+
+    .shell-kin .head {
+      left: 29px;
+      top: 20px;
+      width: 19px;
+      height: 19px;
+      background: #aab5b8;
+      border-color: #edf0e8;
+    }
+
+    .shell-kin .shell {
+      left: 12px;
+      top: 32px;
+      width: 53px;
+      height: 38px;
+      border-radius: 50% 50% 42% 42%;
+      border: 3px solid #d2cab8;
+      background:
+        linear-gradient(90deg, transparent 31%, rgba(255,255,255,0.22) 31% 36%, transparent 36% 62%, rgba(255,255,255,0.18) 62% 67%, transparent 67%),
+        #676f75;
+      z-index: 2;
+    }
+
+    .glass-wisp .body {
+      left: 18px;
+      top: 25px;
+      width: 42px;
+      height: 45px;
+      border-radius: 54% 46% 48% 52%;
+      border: 3px solid rgba(154, 212, 240, 0.85);
+      background: rgba(85, 145, 170, 0.54);
+      box-shadow: inset 0 -10px 0 rgba(20, 55, 75, 0.14), 0 0 12px rgba(154, 212, 240, 0.18);
+      transform: rotate(-7deg);
+    }
+
+    .glass-wisp .eye {
+      top: 43px;
+      width: 5px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0f1920;
+      z-index: 3;
+    }
+
+    .glass-wisp .eye.left { left: 31px; }
+    .glass-wisp .eye.right { right: 31px; }
+    .glass-wisp .shine {
+      left: 25px;
+      top: 29px;
+      width: 12px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.48);
+      transform: rotate(-22deg);
+      z-index: 3;
+    }
+
+    .raven-scout .body {
+      left: 26px;
+      width: 24px;
+      height: 29px;
+      border-color: #adb6c9;
+      background: #252a36;
+      border-radius: 10px 10px 7px 7px;
+    }
+
+    .raven-scout .head {
+      background: #252a36;
+      border-color: #adb6c9;
+    }
+
+    .raven-scout .beak {
+      right: 18px;
+      top: 25px;
+      width: 0;
+      height: 0;
+      border-left: 13px solid #d0a85a;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      z-index: 3;
+    }
+
+    .raven-scout .wing {
+      left: 10px;
+      top: 35px;
+      width: 29px;
+      height: 31px;
+      border-radius: 50% 0 50% 50%;
+      background: #1a1e2a;
+      border: 2px solid #707b92;
+      transform: rotate(16deg);
+      z-index: 2;
+    }
+
+    .exhibit-code {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .code {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .type {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .keywords {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+  </style>
+</head>
+<body>
+  <main class="museum-page">
+    <header>
+      <p class="kicker">Project Signal Personal / presentation lab</p>
+      <h1>Avatar Museum 01</h1>
+      <a class="museum-back" href="./lab-museum-index-01.html">← 전시관으로</a>
+      <p class="intro">직업을 확정하기 전, 실루엣과 개성부터 고르는 작은 전시입니다. 마음에 드는 전시 코드만 골라두면 됩니다.</p>
+    </header>
+
+    <section class="museum-grid" aria-label="Avatar museum exhibits">
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar blade-saint"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part sword"></span><span class="part guard"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-01</span><span class="type">human</span></div>
+        <p class="keywords">넓은 자세, 긴 검, 안정적인 전열감</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar lantern-mender"><span class="part aura"></span><span class="part shadow"></span><span class="part staff"></span><span class="part lamp"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-02</span><span class="type">human</span></div>
+        <p class="keywords">작은 등불, 부드러운 원형, 후열 지원감</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar thorn-runner"><span class="part shadow"></span><span class="part bow"></span><span class="part arrow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-03</span><span class="type">human</span></div>
+        <p class="keywords">기울어진 몸, 큰 활, 빠른 사선</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar moon-mask"><span class="part aura"></span><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part hood"></span><span class="part head"></span><span class="part mask"></span><span class="part moon"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-04</span><span class="type">human</span></div>
+        <p class="keywords">두건, 반달 표식, 가면 실루엣</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar bell-guard"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part shield"></span><span class="part bell"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-05</span><span class="type">human</span></div>
+        <p class="keywords">큰 방패, 방울 장식, 묵직한 덩어리</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar spark-needle"><span class="part aura"></span><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part needle"></span><span class="part spark"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-06</span><span class="type">human</span></div>
+        <p class="keywords">가느다란 창, 별 모양 끝, 예민한 선</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar ember-horn"><span class="part shadow"></span><span class="part tail"></span><span class="part feet"></span><span class="part body"></span><span class="part horn left"></span><span class="part horn right"></span><span class="part head"></span><span class="part mask"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-07</span><span class="type">hybrid</span></div>
+        <p class="keywords">작은 뿔, 꼬리, 장난스러운 전열감</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar shell-kin small"><span class="part shadow"></span><span class="part body"></span><span class="part shell"></span><span class="part head"></span></div></div>
+        <div class="exhibit-code"><span class="code">M-01</span><span class="type">monster</span></div>
+        <p class="keywords">껍질 덩어리, 낮은 무게중심, 단단함</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar glass-wisp small"><span class="part shadow"></span><span class="part body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span></div></div>
+        <div class="exhibit-code"><span class="code">M-02</span><span class="type">monster</span></div>
+        <p class="keywords">투명한 물방울, 둥근 몸, 작은 눈</p>
+      </article>
+
+      <article class="exhibit-card">
+        <div class="stage"><div class="avatar raven-scout"><span class="part shadow"></span><span class="part feet"></span><span class="part wing"></span><span class="part body"></span><span class="part head"></span><span class="part beak"></span></div></div>
+        <div class="exhibit-code"><span class="code">A-08</span><span class="type">hybrid</span></div>
+        <p class="keywords">새 부리, 한쪽 날개, 정찰자 실루엣</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

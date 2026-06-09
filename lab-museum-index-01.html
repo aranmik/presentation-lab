@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab Museum</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101318;
+      --panel: #171c24;
+      --panel-2: #202733;
+      --line: #303947;
+      --text: #eef3f8;
+      --muted: #9aa8b8;
+      --accent: #9fe6cf;
+      --gold: #f0c36a;
+      --hit: #ef7d6a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    .museum-home {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      padding: 18px 14px 24px;
+      background: linear-gradient(180deg, #151a21 0%, #0f1217 100%);
+    }
+
+    .kicker {
+      margin: 0 0 5px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.16;
+    }
+
+    .subtitle {
+      margin: 6px 0 16px;
+      color: var(--accent);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .museum-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .museum-card {
+      display: block;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(159, 230, 207, 0.055), transparent 42%),
+        var(--panel);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .museum-card.pending {
+      opacity: 0.62;
+      pointer-events: none;
+      background: var(--panel);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 7px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      padding: 4px 7px;
+      border: 1px solid rgba(159, 230, 207, 0.46);
+      border-radius: 5px;
+      color: var(--accent);
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .pending .badge {
+      border-color: rgba(154, 168, 184, 0.35);
+      color: var(--muted);
+    }
+
+    .card-desc {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .link-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .chip {
+      padding: 4px 6px;
+      border-radius: 5px;
+      background: #10151d;
+      border: 1px solid #2f3845;
+      color: #d7e0ea;
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .museum-note {
+      margin-top: 14px;
+      padding: 11px;
+      border: 1px solid rgba(48, 57, 71, 0.78);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main class="museum-home">
+    <header>
+      <p class="kicker">Project Signal Personal / Presentation Lab</p>
+      <h1>Presentation Lab Museum</h1>
+      <p class="subtitle">루다의 연출실 전시관</p>
+    </header>
+
+    <section class="museum-grid" aria-label="Presentation lab categories">
+      <a class="museum-card" href="./avatar-museum-01.html">
+        <div class="card-top">
+          <h2 class="card-title">캐릭터 박물관</h2>
+          <span class="badge">OPEN</span>
+        </div>
+        <p class="card-desc">직업 확정 전, 실루엣과 개성으로 먼저 고르는 아바타 전시입니다.</p>
+        <div class="link-list"><span class="chip">Avatar Museum 01</span><span class="chip">10 exhibits</span></div>
+      </a>
+
+      <a class="museum-card" href="./action-line-rnd-03-5.html">
+        <div class="card-top">
+          <h2 class="card-title">행동선 R&amp;D</h2>
+          <span class="badge">OPEN</span>
+        </div>
+        <p class="card-desc">source → target 문법, 선 타입 variation, 숫자 queue를 비교합니다.</p>
+        <div class="link-list"><span class="chip">R&amp;D 03.5</span><span class="chip">R&amp;D 03</span><span class="chip">Action Line 01</span></div>
+      </a>
+
+      <a class="museum-card" href="./action-feedback-prototype-02.html">
+        <div class="card-top">
+          <h2 class="card-title">피격/회복 리액션</h2>
+          <span class="badge">OPEN</span>
+        </div>
+        <p class="card-desc">작고 조용한 hit pulse, 회복선, 피해/회복 숫자 감각을 확인합니다.</p>
+        <div class="link-list"><span class="chip">Feedback 02</span><span class="chip">Feedback 01</span></div>
+      </a>
+
+      <a class="museum-card" href="./battlefield-layout-prototype.html">
+        <div class="card-top">
+          <h2 class="card-title">전장 레이아웃</h2>
+          <span class="badge">OPEN</span>
+        </div>
+        <p class="card-desc">아군 좌하단, 적 우상단, 대각선 전장 구도와 보스 존재감을 봅니다.</p>
+        <div class="link-list"><span class="chip">Battlefield Layout</span><span class="chip">390px</span></div>
+      </a>
+
+      <a class="museum-card" href="./monster-battlefield-mockup.html">
+        <div class="card-top">
+          <h2 class="card-title">몬스터/보스 mockup</h2>
+          <span class="badge">OPEN</span>
+        </div>
+        <p class="card-desc">아바타와 초반 몬스터가 같은 전장 안에서 마주 보는 기준 mockup입니다.</p>
+        <div class="link-list"><span class="chip">Monster Battlefield</span><span class="chip">Monster Avatar</span></div>
+      </a>
+
+      <a class="museum-card pending" href="#" aria-disabled="true">
+        <div class="card-top">
+          <h2 class="card-title">HUD/게이지 R&amp;D</h2>
+          <span class="badge">준비 중</span>
+        </div>
+        <p class="card-desc">속도 게이지, 행동 준비 상태, 상단/하단 정보 정리는 이후 전시 예정입니다.</p>
+        <div class="link-list"><span class="chip">coming soon</span></div>
+      </a>
+    </section>
+
+    <section class="museum-note" aria-label="Museum note">
+      이 전시관은 본게임이 아니라 presentation-lab 시안 허브입니다. 마음에 드는 페이지와 전시 코드를 골라두면 유키가 본게임 후보로 정리합니다.
+    </section>
+  </main>
+</body>
+</html>

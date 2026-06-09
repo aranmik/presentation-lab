@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab - Action Feedback Prototype 02</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lab-bg: #101318;
+      --lab-panel: #171c24;
+      --lab-line: #303947;
+      --lab-text: #eef3f8;
+      --lab-muted: #9aa8b8;
+      --lab-front: #f0c36a;
+      --lab-heal: #9fe6cf;
+      --lab-archer: #a8d46a;
+      --lab-slime: #8fd9b6;
+      --lab-goblin: #a8c96b;
+      --lab-wolf: #9ba8bb;
+      --lab-attack: #d9e886;
+      --lab-hit: #ef7d6a;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--lab-bg); color: var(--lab-text); font-family: Arial, sans-serif; display: flex; justify-content: center; }
+    button { font: inherit; }
+    .lab-page { width: min(100vw, 390px); min-height: 100vh; padding: 14px; background: linear-gradient(180deg, #151a21 0%, #0f1217 100%); }
+    .lab-kicker { margin: 0 0 4px; color: var(--lab-muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .lab-title { margin: 0; font-size: 20px; line-height: 1.2; }
+    .lab-note { margin: 8px 0 12px; color: var(--lab-muted); font-size: 12px; line-height: 1.5; }
+    .lab-note a { color: var(--lab-heal); }
+    .feedback-card { border: 1px solid var(--lab-line); border-radius: 8px; background: var(--lab-panel); overflow: hidden; }
+    .feedback-head { display: flex; justify-content: space-between; gap: 10px; padding: 10px 11px; border-bottom: 1px solid var(--lab-line); }
+    .feedback-head h2 { margin: 0; font-size: 14px; line-height: 1.2; }
+    .feedback-head p { margin: 4px 0 0; color: var(--lab-muted); font-size: 11px; line-height: 1.35; }
+    .feedback-badge { flex: 0 0 auto; align-self: flex-start; padding: 4px 7px; border: 1px solid rgba(159, 230, 207, 0.45); border-radius: 5px; color: var(--lab-heal); font-size: 10px; }
+    .mode-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 10px 11px; border-bottom: 1px solid rgba(48, 57, 71, 0.7); }
+    .mode-tabs button { min-height: 31px; border: 1px solid #2f3845; border-radius: 6px; background: #10151d; color: var(--lab-muted); font-size: 11px; cursor: pointer; }
+    .mode-tabs button[aria-pressed="true"] { border-color: rgba(159, 230, 207, 0.68); color: var(--lab-text); background: rgba(159, 230, 207, 0.08); }
+
+    .field {
+      position: relative;
+      height: 360px;
+      overflow: hidden;
+      background:
+        linear-gradient(132deg, transparent 0 34%, rgba(159, 230, 207, 0.04) 34% 41%, transparent 41% 60%, rgba(217, 232, 134, 0.04) 60% 66%, transparent 66%),
+        linear-gradient(132deg, transparent 0 38%, rgba(255, 255, 255, 0.035) 38% 62%, transparent 62%),
+        radial-gradient(circle at 25% 82%, rgba(159, 230, 207, 0.08), transparent 35%),
+        radial-gradient(circle at 78% 20%, rgba(239, 125, 106, 0.08), transparent 32%),
+        #151b23;
+    }
+    .field::before { content: ""; position: absolute; left: 92px; right: 62px; top: 42px; bottom: 82px; clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); background: linear-gradient(180deg, rgba(217, 232, 134, 0.035), rgba(159, 230, 207, 0.075)); pointer-events: none; }
+    .team-label { position: absolute; color: rgba(154, 168, 184, 0.76); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .team-label.enemy { right: 13px; top: 10px; }
+    .team-label.party { left: 13px; bottom: 10px; }
+    .unit { position: absolute; width: 62px; min-height: 74px; text-align: center; z-index: 5; }
+    .unit.party { transform: scale(1.06); transform-origin: center bottom; }
+    .unit.enemy { transform: scale(0.94); transform-origin: center top; }
+    .unit .name { display: block; margin-top: -2px; color: var(--lab-muted); font-size: 10px; line-height: 1.1; }
+    .warrior-pos { left: 26px; bottom: 56px; }
+    .priest-pos { left: 74px; bottom: 142px; }
+    .archer-pos { left: 106px; bottom: 42px; }
+    .slime-pos { right: 98px; top: 74px; }
+    .goblin-pos { right: 44px; top: 40px; }
+    .wolf-pos { right: 20px; top: 126px; }
+    .avatar, .monster { position: relative; width: 62px; height: 64px; margin: 0 auto; }
+    .part { position: absolute; display: block; }
+    .shadow { left: 9px; bottom: 1px; width: 44px; height: 7px; border-radius: 50%; background: rgba(0, 0, 0, 0.34); }
+    .base { left: 10px; bottom: 0; width: 42px; height: 7px; border-radius: 50%; background: rgba(0, 0, 0, 0.35); }
+    .stance { left: 18px; bottom: 7px; width: 26px; height: 8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #526071; }
+    .body { left: 20px; top: 27px; width: 24px; height: 25px; border-radius: 8px 8px 6px 6px; background: #78889a; border: 2px solid #d5dde6; }
+    .head { left: 22px; top: 10px; width: 19px; height: 19px; border-radius: 50%; background: #f0c9a2; border: 2px solid #f8e5c8; }
+    .aura { inset: 4px 5px 2px; border-radius: 50%; border: 2px solid transparent; opacity: 0.65; }
+    .warrior .body { left: 17px; width: 29px; background: #6d7685; border-color: var(--lab-front); }
+    .warrior .stance { left: 12px; width: 38px; border-left-width: 13px; border-right-width: 13px; border-top-color: #7c6c4a; }
+    .warrior .shield { left: -1px; top: 25px; width: 25px; height: 32px; border-radius: 11px 11px 15px 15px; background: #455160; border: 3px solid var(--lab-front); box-shadow: inset 0 0 0 3px rgba(240, 195, 106, 0.22); transform: rotate(-7deg); z-index: 2; }
+    .priest .body { left: 21px; width: 21px; height: 28px; background: #446b62; border-color: var(--lab-heal); border-radius: 14px 14px 8px 8px; }
+    .priest .aura { border-color: rgba(159, 230, 207, 0.72); box-shadow: 0 0 16px rgba(159, 230, 207, 0.34); }
+    .priest .staff { right: 4px; top: 11px; width: 4px; height: 46px; border-radius: 4px; background: #d6f8ec; transform: rotate(3deg); }
+    .priest .staff::before { content: ""; position: absolute; left: -8px; top: -9px; width: 20px; height: 20px; border-radius: 50%; border: 3px solid var(--lab-heal); background: rgba(159, 230, 207, 0.2); box-shadow: 0 0 8px rgba(159, 230, 207, 0.32); }
+    .archer .body { left: 24px; width: 21px; background: #536a3e; border-color: var(--lab-archer); transform: skewX(-8deg); }
+    .archer .stance { left: 16px; width: 34px; border-left-width: 5px; border-right-width: 16px; border-top-color: #5f753f; transform: skewX(-15deg); }
+    .archer .bow { left: 1px; top: 13px; width: 31px; height: 47px; border-left: 5px solid var(--lab-archer); border-radius: 50% 0 0 50%; transform: rotate(-13deg); }
+    .archer .arrow { left: 27px; top: 35px; width: 31px; height: 3px; border-radius: 3px; background: #dce8c4; transform: rotate(-14deg); z-index: 3; }
+    .slime .slime-body { left: 7px; bottom: 8px; width: 50px; height: 43px; border-radius: 52% 52% 42% 42%; background: var(--lab-slime); border: 3px solid #d8f8eb; box-shadow: inset 0 -10px 0 rgba(52, 120, 100, 0.18); }
+    .slime .shine { left: 19px; top: 21px; width: 12px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.55); transform: rotate(-22deg); }
+    .slime .eye, .goblin .eye, .wolf .eye { border-radius: 50%; background: #182027; }
+    .slime .eye { top: 37px; width: 5px; height: 6px; }
+    .slime .eye.left { left: 23px; }
+    .slime .eye.right { right: 23px; }
+    .goblin .ear { top: 22px; width: 19px; height: 15px; background: var(--lab-goblin); border: 3px solid #ddeaab; clip-path: polygon(0 50%, 100% 0, 78% 100%); }
+    .goblin .ear.left { left: 4px; transform: rotate(155deg); }
+    .goblin .ear.right { right: 4px; transform: rotate(25deg); }
+    .goblin .goblin-head { left: 15px; top: 18px; width: 38px; height: 37px; border-radius: 43% 43% 40% 40%; background: var(--lab-goblin); border: 3px solid #ddeaab; box-shadow: inset 0 -8px 0 rgba(72, 96, 45, 0.18); }
+    .goblin .eye { top: 32px; width: 7px; height: 5px; border-radius: 8px; }
+    .goblin .eye.left { left: 22px; transform: rotate(-10deg); }
+    .goblin .eye.right { right: 22px; transform: rotate(10deg); }
+    .goblin .mouth { left: 28px; top: 44px; width: 14px; height: 5px; border-bottom: 2px solid #171d20; border-radius: 0 0 10px 10px; }
+    .goblin .goblin-body { left: 22px; bottom: 9px; width: 25px; height: 18px; border-radius: 8px 8px 5px 5px; background: #6f7c49; border: 2px solid var(--lab-front); }
+    .wolf .tail { left: 5px; bottom: 23px; width: 23px; height: 12px; border-radius: 12px 0 0 12px; background: #7d8998; border: 2px solid #d7dee8; transform: rotate(-24deg); }
+    .wolf .wolf-body { left: 18px; bottom: 17px; width: 39px; height: 24px; border-radius: 45% 45% 35% 35%; background: var(--lab-wolf); border: 3px solid #d7dee8; box-shadow: inset 0 -7px 0 rgba(65, 75, 88, 0.18); }
+    .wolf .wolf-head { right: 7px; top: 18px; width: 31px; height: 28px; border-radius: 42% 46% 36% 42%; background: var(--lab-wolf); border: 3px solid #d7dee8; transform: rotate(-8deg); }
+    .wolf .snout { right: 0; top: 30px; width: 22px; height: 13px; border-radius: 0 12px 12px 0; background: #d7dee8; transform: rotate(-7deg); }
+    .wolf .ear { top: 9px; width: 13px; height: 16px; background: var(--lab-wolf); border: 3px solid #d7dee8; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .wolf .ear.left { right: 29px; transform: rotate(-18deg); }
+    .wolf .ear.right { right: 13px; transform: rotate(16deg); }
+    .wolf .eye { right: 25px; top: 29px; width: 5px; height: 5px; }
+    .wolf .leg { bottom: 8px; width: 5px; height: 12px; border-radius: 5px; background: #d7dee8; }
+    .wolf .leg.one { left: 26px; }
+    .wolf .leg.two { left: 47px; }
+
+    .fx { position: absolute; pointer-events: none; z-index: 10; opacity: 0; }
+    .fx-archer-line { left: 151px; top: 237px; width: 129px; height: 2px; border-radius: 999px; background: linear-gradient(90deg, transparent 0%, rgba(217, 232, 134, 0.28) 18%, rgba(217, 232, 134, 0.72) 100%); transform: rotate(-45deg); transform-origin: left center; }
+    .fx-archer-line::after { content: ""; position: absolute; right: -1px; top: -3px; border-left: 7px solid rgba(217, 232, 134, 0.78); border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+    .fx-warrior-arc { left: 72px; bottom: 119px; width: 54px; height: 34px; border-top: 2px solid rgba(240, 195, 106, 0.72); border-right: 2px solid rgba(240, 195, 106, 0.42); border-radius: 50%; transform: rotate(-24deg); }
+    .fx-warrior-dash { left: 102px; bottom: 130px; width: 34px; height: 2px; border-radius: 999px; background: linear-gradient(90deg, rgba(240, 195, 106, 0.62), transparent); transform: rotate(-28deg); }
+    .fx-heal-line { left: 65px; bottom: 116px; width: 74px; height: 72px; border: 2px solid transparent; border-left-color: rgba(159, 230, 207, 0.62); border-bottom-color: rgba(159, 230, 207, 0.48); border-radius: 0 0 0 58px; transform: rotate(7deg); }
+    .fx-heal-line::after { content: ""; position: absolute; left: -4px; bottom: 7px; width: 7px; height: 7px; border-radius: 50%; background: rgba(159, 230, 207, 0.82); box-shadow: 0 0 9px rgba(159, 230, 207, 0.34); }
+    .fx-wolf-line { right: 86px; top: 150px; width: 72px; height: 2px; border-radius: 999px; background: linear-gradient(90deg, transparent, rgba(239, 125, 106, 0.68)); transform: rotate(145deg); transform-origin: right center; }
+    .hit-pulse { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(239, 125, 106, 0.76); box-shadow: 0 0 10px rgba(239, 125, 106, 0.38); opacity: 0; z-index: 11; }
+    .hit-slime { right: 119px; top: 89px; }
+    .hit-goblin { right: 66px; top: 58px; }
+    .hit-warrior { left: 50px; bottom: 106px; }
+    .float-number { position: absolute; font-size: 10px; line-height: 1; font-weight: 700; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55); opacity: 0; z-index: 12; pointer-events: none; }
+    .damage-slime { right: 108px; top: 67px; color: #f4b1a6; }
+    .damage-goblin { right: 56px; top: 38px; color: #f4b1a6; }
+    .damage-warrior { left: 43px; bottom: 131px; color: #f4b1a6; }
+    .heal-warrior { left: 40px; bottom: 131px; color: var(--lab-heal); }
+
+    .field[data-mode="archer"] .fx-archer-line,
+    .field[data-mode="warrior"] .fx-warrior-arc,
+    .field[data-mode="warrior"] .fx-warrior-dash,
+    .field[data-mode="heal"] .fx-heal-line,
+    .field[data-mode="wolf"] .fx-wolf-line,
+    .field[data-mode="numbers"] .fx-archer-line,
+    .field[data-mode="numbers"] .fx-heal-line { opacity: 1; animation: soft-appear 1.2s ease-in-out infinite; }
+    .field[data-mode="archer"] .hit-slime,
+    .field[data-mode="warrior"] .hit-goblin,
+    .field[data-mode="wolf"] .hit-warrior,
+    .field[data-mode="numbers"] .hit-slime { opacity: 1; animation: hit-pulse 1.2s ease-in-out infinite; }
+    .field[data-mode="archer"] .damage-slime,
+    .field[data-mode="warrior"] .damage-goblin,
+    .field[data-mode="wolf"] .damage-warrior,
+    .field[data-mode="heal"] .heal-warrior,
+    .field[data-mode="numbers"] .damage-slime,
+    .field[data-mode="numbers"] .heal-warrior { opacity: 1; animation: number-float 1.2s ease-in-out infinite; }
+    .field[data-mode="warrior"] .warrior-pos { animation: warrior-lunge 1.2s ease-in-out infinite; }
+    .field[data-mode="archer"] .slime-pos,
+    .field[data-mode="warrior"] .goblin-pos,
+    .field[data-mode="wolf"] .warrior-pos,
+    .field[data-mode="numbers"] .slime-pos { animation: unit-hit 1.2s ease-in-out infinite; }
+    .field[data-mode="heal"] .warrior-pos,
+    .field[data-mode="numbers"] .warrior-pos { animation: unit-heal 1.2s ease-in-out infinite; }
+
+    .scene-note { min-height: 54px; padding: 9px 11px 11px; border-top: 1px solid rgba(48, 57, 71, 0.65); color: var(--lab-muted); font-size: 11px; line-height: 1.45; }
+    .scene-note p { display: none; margin: 0; }
+    .feedback-card[data-mode="idle"] .note-idle,
+    .feedback-card[data-mode="archer"] .note-archer,
+    .feedback-card[data-mode="warrior"] .note-warrior,
+    .feedback-card[data-mode="heal"] .note-heal,
+    .feedback-card[data-mode="wolf"] .note-wolf,
+    .feedback-card[data-mode="numbers"] .note-numbers { display: block; }
+    .judgement { margin-top: 12px; padding: 11px; border: 1px solid var(--lab-line); border-radius: 8px; background: rgba(255, 255, 255, 0.03); color: var(--lab-muted); font-size: 12px; line-height: 1.55; }
+    .judgement h2 { margin: 0 0 6px; color: var(--lab-text); font-size: 14px; }
+    .judgement ul { margin: 0; padding-left: 18px; }
+
+    @keyframes soft-appear { 0%, 100% { opacity: 0; } 18%, 72% { opacity: 1; } }
+    @keyframes hit-pulse { 0%, 100% { opacity: 0; transform: scale(0.8); } 25%, 58% { opacity: 1; transform: scale(1); } }
+    @keyframes number-float { 0%, 100% { opacity: 0; transform: translateY(2px); } 22%, 64% { opacity: 1; transform: translateY(-3px); } }
+    @keyframes warrior-lunge { 0%, 100% { transform: scale(1.06) translate(0, 0); } 30%, 54% { transform: scale(1.06) translate(3px, -2px); } }
+    @keyframes unit-hit { 0%, 100% { filter: none; } 28% { filter: brightness(1.28); } 36% { transform: scale(0.94) translateX(1px); filter: brightness(1.18); } 44% { transform: scale(0.94) translateX(-1px); } }
+    @keyframes unit-heal { 0%, 100% { filter: none; } 32%, 56% { filter: brightness(1.18) saturate(1.08); } }
+    @media (prefers-reduced-motion: reduce) {
+      .fx, .hit-pulse, .float-number, .unit { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="lab-page">
+    <header>
+      <p class="lab-kicker">Project Signal Personal / presentation lab</p>
+      <h1 class="lab-title">Action Feedback Prototype 02</h1>
+      <p class="lab-note">Baseline 01 field mood on a 390px mobile screen. Quiet attack, hit, and heal feedback only.</p>
+      <p class="lab-note"><a href="./lab-museum-index-01.html">← 전시관으로</a></p>
+    </header>
+
+    <section class="feedback-card" data-mode="idle">
+      <div class="feedback-head">
+        <div>
+          <h2>Baseline 01 quiet feedback</h2>
+          <p>Use the buttons to compare one small feedback moment at a time.</p>
+        </div>
+        <span class="feedback-badge">R&amp;D 02</span>
+      </div>
+      <div class="mode-tabs" aria-label="Feedback scenes">
+        <button type="button" data-mode="idle" aria-pressed="true">1 대치</button>
+        <button type="button" data-mode="archer" aria-pressed="false">2 궁수</button>
+        <button type="button" data-mode="warrior" aria-pressed="false">3 전사</button>
+        <button type="button" data-mode="heal" aria-pressed="false">4 회복</button>
+        <button type="button" data-mode="wolf" aria-pressed="false">5 늑대</button>
+        <button type="button" data-mode="numbers" aria-pressed="false">6 숫자</button>
+      </div>
+      <div class="field" data-mode="idle">
+        <span class="team-label enemy">enemy side</span>
+        <span class="team-label party">party side</span>
+        <div class="unit party warrior-pos"><div class="avatar warrior"><span class="part aura"></span><span class="part base"></span><span class="part stance"></span><span class="part body"></span><span class="part head"></span><span class="part shield"></span></div><span class="name">전사</span></div>
+        <div class="unit party priest-pos"><div class="avatar priest"><span class="part aura"></span><span class="part base"></span><span class="part stance"></span><span class="part body"></span><span class="part head"></span><span class="part staff"></span></div><span class="name">사제</span></div>
+        <div class="unit party archer-pos"><div class="avatar archer"><span class="part aura"></span><span class="part base"></span><span class="part stance"></span><span class="part body"></span><span class="part head"></span><span class="part bow"></span><span class="part arrow"></span></div><span class="name">궁수</span></div>
+        <div class="unit enemy slime-pos"><div class="monster slime"><span class="part shadow"></span><span class="part slime-body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span></div><span class="name">슬라임</span></div>
+        <div class="unit enemy goblin-pos"><div class="monster goblin"><span class="part shadow"></span><span class="part ear left"></span><span class="part ear right"></span><span class="part goblin-body"></span><span class="part goblin-head"></span><span class="part eye left"></span><span class="part eye right"></span><span class="part mouth"></span></div><span class="name">고블린</span></div>
+        <div class="unit enemy wolf-pos"><div class="monster wolf"><span class="part shadow"></span><span class="part tail"></span><span class="part wolf-body"></span><span class="part leg one"></span><span class="part leg two"></span><span class="part wolf-head"></span><span class="part ear left"></span><span class="part ear right"></span><span class="part snout"></span><span class="part eye"></span></div><span class="name">늑대</span></div>
+        <span class="fx fx-archer-line"></span>
+        <span class="fx fx-warrior-arc"></span>
+        <span class="fx fx-warrior-dash"></span>
+        <span class="fx fx-heal-line"></span>
+        <span class="fx fx-wolf-line"></span>
+        <span class="hit-pulse hit-slime"></span>
+        <span class="hit-pulse hit-goblin"></span>
+        <span class="hit-pulse hit-warrior"></span>
+        <span class="float-number damage-slime">-8</span>
+        <span class="float-number damage-goblin">-10</span>
+        <span class="float-number damage-warrior">-7</span>
+        <span class="float-number heal-warrior">+6</span>
+      </div>
+      <div class="scene-note" aria-live="polite">
+        <p class="note-idle">기본 대치. 선과 숫자 없이 캐릭터 실루엣과 좌하단/우상단 구도만 확인합니다.</p>
+        <p class="note-archer">궁수 → 슬라임. 얇은 사선과 작은 hit pulse만 사용합니다. 선은 중앙 공간을 지나가되 몸체를 덮지 않습니다.</p>
+        <p class="note-warrior">전사 → 고블린. 긴 원거리 선 대신 짧은 arc, 짧은 dash, 3px 이하 전진감만 봅니다.</p>
+        <p class="note-heal">사제 → 전사. 공격선보다 부드러운 곡선과 작은 회복 숫자로 대상을 읽게 합니다.</p>
+        <p class="note-wolf">늑대 → 전사. 적 공격도 화면 흔들림 없이 짧은 선과 전사 1px 반응만 봅니다.</p>
+        <p class="note-numbers">피해/회복 숫자 비교. 숫자는 이름과 몸체를 가리지 않는 바깥쪽 위치에 작게 둡니다.</p>
+      </div>
+    </section>
+
+    <section class="judgement">
+      <h2>Luda notes</h2>
+      <ul>
+        <li>Best candidate: archer line, priest curve, and tiny number float feel portable.</li>
+        <li>Watch: warrior lunge can become noisy if movement exceeds 3px.</li>
+        <li>Keep: one active feedback at a time, low opacity, no full-screen flash.</li>
+      </ul>
+    </section>
+  </main>
+  <script>
+    const card = document.querySelector(".feedback-card");
+    const field = document.querySelector(".field");
+    const buttons = [...document.querySelectorAll(".mode-tabs button")];
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const mode = button.dataset.mode;
+        card.dataset.mode = mode;
+        field.dataset.mode = mode;
+        buttons.forEach((item) => {
+          item.setAttribute("aria-pressed", String(item === button));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
