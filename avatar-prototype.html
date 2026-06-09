@@ -1,0 +1,517 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab - Avatar Prototype</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lab-bg: #101318;
+      --lab-panel: #171c24;
+      --lab-panel-2: #202733;
+      --lab-line: #303947;
+      --lab-text: #eef3f8;
+      --lab-muted: #9aa8b8;
+      --lab-front: #f0c36a;
+      --lab-priest: #9fe6cf;
+      --lab-archer: #a8d46a;
+      --lab-danger: #ef7d6a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--lab-bg);
+      color: var(--lab-text);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lab-page {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      padding: 14px;
+      background: linear-gradient(180deg, #151a21 0%, #0f1217 100%);
+    }
+
+    .lab-header {
+      margin-bottom: 12px;
+    }
+
+    .lab-kicker {
+      margin: 0 0 4px;
+      color: var(--lab-muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lab-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lab-note {
+      margin: 8px 0 0;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .lab-stage {
+      border: 1px solid var(--lab-line);
+      background: var(--lab-panel);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .lab-row-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: var(--lab-muted);
+      font-size: 11px;
+    }
+
+    .lab-party {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .proto-unit-card {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 118px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel-2);
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .proto-unit-card[data-row="front"] {
+      box-shadow: inset 4px 0 0 rgba(240, 195, 106, 0.85);
+    }
+
+    .proto-unit-card[data-row="back"] {
+      box-shadow: inset 4px 0 0 rgba(154, 168, 184, 0.65);
+    }
+
+    .proto-avatar-slot {
+      width: 86px;
+      height: 96px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #10151d;
+      border: 1px solid #2c3542;
+    }
+
+    .proto-avatar {
+      position: relative;
+      width: 70px;
+      height: 82px;
+    }
+
+    .proto-part {
+      position: absolute;
+      display: block;
+    }
+
+    .proto-base {
+      left: 12px;
+      bottom: 1px;
+      width: 46px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .proto-stance {
+      left: 20px;
+      bottom: 8px;
+      width: 30px;
+      height: 10px;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-top: 10px solid #526071;
+    }
+
+    .proto-body {
+      left: 22px;
+      top: 32px;
+      width: 28px;
+      height: 32px;
+      border-radius: 9px 9px 7px 7px;
+      background: #78889a;
+      border: 2px solid #d5dde6;
+    }
+
+    .proto-head {
+      left: 25px;
+      top: 14px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #f0c9a2;
+      border: 2px solid #f8e5c8;
+    }
+
+    .proto-mark {
+      left: 31px;
+      top: 20px;
+      width: 9px;
+      height: 4px;
+      border-radius: 8px;
+      background: #293241;
+    }
+
+    .proto-aura {
+      inset: 8px 9px 5px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      opacity: 0.55;
+    }
+
+    .proto-weapon,
+    .proto-offhand {
+      transform-origin: center bottom;
+    }
+
+    .proto-warrior .proto-body {
+      width: 32px;
+      left: 19px;
+      background: #6d7685;
+      border-color: var(--lab-front);
+      border-radius: 8px 8px 5px 5px;
+    }
+
+    .proto-warrior .proto-stance {
+      left: 14px;
+      width: 42px;
+      border-left-width: 14px;
+      border-right-width: 14px;
+      border-top-color: #7c6c4a;
+    }
+
+    .proto-warrior .proto-weapon {
+      right: 0;
+      top: 25px;
+      width: 6px;
+      height: 42px;
+      border-radius: 4px;
+      background: #c7d0da;
+      transform: rotate(16deg);
+    }
+
+    .proto-warrior .proto-weapon::before {
+      content: "";
+      position: absolute;
+      left: -4px;
+      top: 7px;
+      width: 15px;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--lab-front);
+    }
+
+    .proto-warrior .proto-offhand {
+      left: -1px;
+      top: 29px;
+      width: 28px;
+      height: 37px;
+      border-radius: 12px 12px 16px 16px;
+      background: #455160;
+      border: 3px solid var(--lab-front);
+      box-shadow: inset 0 0 0 3px rgba(240, 195, 106, 0.24);
+      transform: rotate(-7deg);
+      z-index: 2;
+    }
+
+    .proto-warrior .proto-offhand::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 5px;
+      width: 7px;
+      height: 19px;
+      border-radius: 4px;
+      background: rgba(240, 195, 106, 0.85);
+    }
+
+    .proto-warrior .proto-aura {
+      border-color: rgba(240, 195, 106, 0.35);
+    }
+
+    .proto-priest .proto-body {
+      left: 24px;
+      width: 23px;
+      height: 36px;
+      background: #446b62;
+      border-color: var(--lab-priest);
+      border-radius: 16px 16px 9px 9px;
+    }
+
+    .proto-priest .proto-stance {
+      left: 23px;
+      width: 24px;
+      border-left-width: 7px;
+      border-right-width: 7px;
+      border-top-color: #4d7468;
+    }
+
+    .proto-priest .proto-weapon {
+      right: 5px;
+      top: 15px;
+      width: 5px;
+      height: 54px;
+      border-radius: 4px;
+      background: #d6f8ec;
+      transform: rotate(3deg);
+    }
+
+    .proto-priest .proto-weapon::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: -10px;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      border: 3px solid var(--lab-priest);
+      background: rgba(159, 230, 207, 0.2);
+      box-shadow: 0 0 10px rgba(159, 230, 207, 0.4);
+    }
+
+    .proto-priest .proto-aura {
+      inset: 5px 5px 3px;
+      border-color: rgba(159, 230, 207, 0.72);
+      box-shadow: 0 0 20px rgba(159, 230, 207, 0.4), inset 0 0 14px rgba(159, 230, 207, 0.16);
+    }
+
+    .proto-priest .proto-mark {
+      left: 31px;
+      top: 6px;
+      width: 10px;
+      height: 16px;
+      background: transparent;
+      border-left: 3px solid var(--lab-priest);
+      border-bottom: 3px solid var(--lab-priest);
+      transform: rotate(-45deg);
+    }
+
+    .proto-archer .proto-body {
+      left: 26px;
+      width: 23px;
+      height: 30px;
+      background: #536a3e;
+      border-color: var(--lab-archer);
+      transform: skewX(-8deg);
+    }
+
+    .proto-archer .proto-head {
+      left: 27px;
+    }
+
+    .proto-archer .proto-stance {
+      left: 18px;
+      width: 36px;
+      border-left-width: 5px;
+      border-right-width: 17px;
+      border-top-color: #5f753f;
+      transform: skewX(-15deg);
+    }
+
+    .proto-archer .proto-weapon {
+      left: 3px;
+      top: 16px;
+      width: 34px;
+      height: 55px;
+      border-left: 5px solid var(--lab-archer);
+      border-radius: 50% 0 0 50%;
+      transform: rotate(-13deg);
+    }
+
+    .proto-archer .proto-weapon::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 4px;
+      width: 2px;
+      height: 46px;
+      background: #dce8c4;
+      transform: rotate(15deg);
+    }
+
+    .proto-archer .proto-offhand {
+      left: 28px;
+      top: 40px;
+      width: 34px;
+      height: 3px;
+      border-radius: 3px;
+      background: #dce8c4;
+      transform: rotate(-14deg);
+      z-index: 3;
+    }
+
+    .proto-archer .proto-offhand::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: -3px;
+      border-left: 8px solid var(--lab-archer);
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+    }
+
+    .proto-archer .proto-aura {
+      border-color: rgba(168, 212, 106, 0.25);
+    }
+
+    .proto-copy h2 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+
+    .proto-role {
+      margin: 0 0 8px;
+      color: var(--lab-muted);
+      font-size: 12px;
+    }
+
+    .proto-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .proto-tags li {
+      padding: 4px 6px;
+      border-radius: 5px;
+      background: #10151d;
+      border: 1px solid #2f3845;
+      color: #d7e0ea;
+      font-size: 11px;
+    }
+
+    .lab-summary {
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.5;
+      background: rgba(255, 255, 255, 0.03);
+    }
+  </style>
+</head>
+<body>
+  <main class="lab-page">
+    <header class="lab-header">
+      <p class="lab-kicker">Project Signal Personal / Presentation Lab</p>
+      <h1 class="lab-title">Avatar Prototype 01</h1>
+      <p class="lab-note">390px mobile-first check. The goal is class readability inside compact battle cards.</p>
+    </header>
+
+    <section class="lab-stage" aria-label="Avatar prototype stage">
+      <div class="lab-row-label">
+        <span>Front / Back row readability</span>
+        <span>No images, no canvas</span>
+      </div>
+
+      <div class="lab-party">
+        <article class="proto-unit-card" data-row="front">
+          <div class="proto-avatar-slot" aria-hidden="true">
+            <div class="proto-avatar proto-warrior">
+              <span class="proto-part proto-aura"></span>
+              <span class="proto-part proto-base"></span>
+              <span class="proto-part proto-stance"></span>
+              <span class="proto-part proto-body"></span>
+              <span class="proto-part proto-head"></span>
+              <span class="proto-part proto-weapon"></span>
+              <span class="proto-part proto-offhand"></span>
+              <span class="proto-part proto-mark"></span>
+            </div>
+          </div>
+          <div class="proto-copy">
+            <h2>전사</h2>
+            <p class="proto-role">Front row holder / sword and shield</p>
+            <ul class="proto-tags">
+              <li>wide stance</li>
+              <li>shield mass</li>
+              <li>stable silhouette</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="proto-unit-card" data-row="back">
+          <div class="proto-avatar-slot" aria-hidden="true">
+            <div class="proto-avatar proto-priest">
+              <span class="proto-part proto-aura"></span>
+              <span class="proto-part proto-base"></span>
+              <span class="proto-part proto-stance"></span>
+              <span class="proto-part proto-body"></span>
+              <span class="proto-part proto-head"></span>
+              <span class="proto-part proto-weapon"></span>
+              <span class="proto-part proto-offhand"></span>
+              <span class="proto-part proto-mark"></span>
+            </div>
+          </div>
+          <div class="proto-copy">
+            <h2>사제</h2>
+            <p class="proto-role">Back row support / staff and heal aura</p>
+            <ul class="proto-tags">
+              <li>soft aura</li>
+              <li>staff circle</li>
+              <li>support read</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="proto-unit-card" data-row="back">
+          <div class="proto-avatar-slot" aria-hidden="true">
+            <div class="proto-avatar proto-archer">
+              <span class="proto-part proto-aura"></span>
+              <span class="proto-part proto-base"></span>
+              <span class="proto-part proto-stance"></span>
+              <span class="proto-part proto-body"></span>
+              <span class="proto-part proto-head"></span>
+              <span class="proto-part proto-weapon"></span>
+              <span class="proto-part proto-offhand"></span>
+              <span class="proto-part proto-mark"></span>
+            </div>
+          </div>
+          <div class="proto-copy">
+            <h2>궁수</h2>
+            <p class="proto-role">Back row attacker / bow and arrow</p>
+            <ul class="proto-tags">
+              <li>leaning body</li>
+              <li>bow curve</li>
+              <li>arrow line</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="lab-summary" aria-label="Prototype notes">
+      This prototype uses proto- class names to avoid main game collisions. It is a visual lab only; selected ideas must be summarized before Ren ports them into the main game.
+    </section>
+  </main>
+</body>
+</html>

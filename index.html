@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lab-bg: #101318;
+      --lab-panel: #171c24;
+      --lab-line: #303947;
+      --lab-text: #eef3f8;
+      --lab-muted: #9aa8b8;
+      --lab-accent: #9fe6cf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--lab-bg);
+      color: var(--lab-text);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lab-home {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      padding: 18px 14px;
+      background: linear-gradient(180deg, #151a21 0%, #0f1217 100%);
+    }
+
+    .lab-kicker {
+      margin: 0 0 6px;
+      color: var(--lab-muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .lab-intro {
+      margin: 0 0 18px;
+      color: var(--lab-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .lab-card {
+      display: block;
+      padding: 14px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .lab-card-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .lab-badge {
+      flex: 0 0 auto;
+      padding: 4px 7px;
+      border-radius: 5px;
+      border: 1px solid rgba(159, 230, 207, 0.55);
+      color: var(--lab-accent);
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .lab-card p {
+      margin: 0;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .lab-rules {
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.5;
+      background: rgba(255, 255, 255, 0.03);
+    }
+  </style>
+</head>
+<body>
+  <main class="lab-home">
+    <p class="lab-kicker">Project Signal Personal</p>
+    <h1>Presentation Lab</h1>
+    <p class="lab-intro">
+      A small mobile-first lab for testing readable battle presentation before ideas move into the main game.
+    </p>
+
+    <a class="lab-card" href="./avatar-prototype.html">
+      <div class="lab-card-title">
+        <span>Avatar Prototype 01</span>
+        <span class="lab-badge">open</span>
+      </div>
+      <p>Warrior, priest, and archer readability test for compact 390px battle cards.</p>
+    </a>
+
+    <section class="lab-rules" aria-label="Lab rules">
+      This is an experiment lab, not the main game. Approved ideas are summarized for Yuki and ported by Ren after Naranim approval.
+    </section>
+  </main>
+</body>
+</html>
