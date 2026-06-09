@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab Codex 02</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1016;
+      --page: #121821;
+      --panel: #171e28;
+      --panel-2: #202a36;
+      --line: #303b4b;
+      --line-soft: rgba(255, 255, 255, 0.075);
+      --text: #eef3f8;
+      --muted: #9aa8b8;
+      --soft: #cbd5df;
+      --accent: #9fe6cf;
+      --gold: #f0c36a;
+      --watch: #efc16a;
+      --hit: #ef7d6a;
+      --blue: #9ad4f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(159, 230, 207, 0.08), transparent 36%),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    button { font: inherit; }
+
+    .codex-app {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      background: linear-gradient(180deg, #151b24 0%, #0f1217 100%);
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 16px 14px 24px;
+    }
+
+    .screen.is-active {
+      display: block;
+      animation: fade-in 150ms ease-out;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .kicker {
+      margin: 0 0 5px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 7px;
+      font-size: 25px;
+      line-height: 1.12;
+    }
+
+    .subtitle {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .home-card {
+      margin-bottom: 12px;
+      padding: 14px 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background:
+        linear-gradient(135deg, rgba(159, 230, 207, 0.075), transparent 40%),
+        var(--panel);
+    }
+
+    .home-card h2 {
+      margin-bottom: 5px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .home-card p {
+      margin-bottom: 11px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 0 7px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--soft);
+      font-size: 10px;
+    }
+
+    .badge.pass { color: var(--accent); border-color: rgba(159, 230, 207, 0.35); }
+    .badge.watch { color: var(--watch); border-color: rgba(239, 193, 106, 0.35); }
+    .badge.pending { color: var(--muted); }
+
+    .home-button,
+    .back-button,
+    .view-button {
+      min-height: 40px;
+      border-radius: 9px;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .home-button {
+      width: 100%;
+      border: 1px solid rgba(159, 230, 207, 0.48);
+      background: rgba(159, 230, 207, 0.09);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .home-button:active,
+    .back-button:active,
+    .view-button:active {
+      transform: translateY(1px);
+    }
+
+    .screen-head {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin: -16px -14px 12px;
+      padding: 13px 14px 11px;
+      border-bottom: 1px solid rgba(48, 59, 75, 0.78);
+      background: rgba(18, 24, 33, 0.94);
+      backdrop-filter: blur(8px);
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 0 10px;
+      border: 1px solid rgba(159, 230, 207, 0.42);
+      background: rgba(159, 230, 207, 0.08);
+      font-size: 12px;
+    }
+
+    .screen-title {
+      margin: 0 0 4px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .screen-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .group {
+      margin-bottom: 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 38%),
+        var(--panel);
+      overflow: hidden;
+    }
+
+    .group-head {
+      padding: 11px 11px 9px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .group-title {
+      margin: 0 0 4px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .group-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .entry-list {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .entry-card {
+      padding: 10px;
+      border: 1px solid #2d3746;
+      border-radius: 9px;
+      background: rgba(16, 21, 29, 0.78);
+    }
+
+    .entry-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .entry-title {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .entry-code {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .entry-purpose {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.42;
+    }
+
+    .entry-meta {
+      display: grid;
+      gap: 4px;
+      margin-bottom: 9px;
+      color: var(--soft);
+      font-size: 10.5px;
+      line-height: 1.35;
+    }
+
+    .entry-meta span { color: var(--muted); }
+
+    .view-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 31px;
+      padding: 0 10px;
+      border: 1px solid rgba(154, 212, 240, 0.45);
+      border-radius: 7px;
+      background: rgba(154, 212, 240, 0.08);
+      font-size: 12px;
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 11px;
+      border: 1px solid rgba(48, 59, 75, 0.8);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main class="codex-app">
+    <section id="home" class="screen is-active" aria-label="도감 입구">
+      <header>
+        <p class="kicker">Project Signal Personal / Presentation Lab</p>
+        <h1>Presentation Lab Codex</h1>
+        <p class="subtitle">본게임 이식 전 시안을 모으고 고르는 전시관입니다. 오늘 보고 싶은 전시실만 들어가면 됩니다.</p>
+      </header>
+
+      <article class="home-card">
+        <div class="status-row">
+          <span class="badge pass">시안 있음</span>
+          <span class="badge">선별용</span>
+        </div>
+        <h2>캐릭터/아바타 도감</h2>
+        <p>직업을 먼저 정하지 않고, 실루엣과 장비 차이로 마음에 드는 후보를 고르는 전시실입니다.</p>
+        <button class="home-button" type="button" data-screen="avatar">캐릭터 전시실 들어가기</button>
+      </article>
+
+      <article class="home-card">
+        <div class="status-row">
+          <span class="badge pass">PASS 후보</span>
+          <span class="badge watch">튜닝 필요</span>
+        </div>
+        <h2>전투 연출 도감</h2>
+        <p>행동선, 피격/회복 리액션, 피해/회복 숫자처럼 전투가 읽히는 방식을 보는 전시실입니다.</p>
+        <button class="home-button" type="button" data-screen="combat">전투 연출 전시실 들어가기</button>
+      </article>
+
+      <article class="home-card">
+        <div class="status-row">
+          <span class="badge pass">전장 기준</span>
+          <span class="badge pending">HUD 준비 중</span>
+        </div>
+        <h2>전장/HUD 도감</h2>
+        <p>전장 배치, 대치 구도, 몬스터 mockup, HUD/게이지 후보를 보는 전시실입니다.</p>
+        <button class="home-button" type="button" data-screen="field">전장/HUD 전시실 들어가기</button>
+      </article>
+
+      <section class="note">
+        사용법: 첫 화면에서 카테고리를 고르고, 안쪽 화면에서 필요한 시안만 엽니다. 뒤로 가기를 누르면 다시 이 입구로 돌아옵니다.
+      </section>
+    </section>
+
+    <section id="avatar" class="screen" aria-label="캐릭터 아바타 도감">
+      <header class="screen-head">
+        <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
+        <h2 class="screen-title">캐릭터/아바타 도감</h2>
+        <p class="screen-desc">아바타를 먼저 보고, 나중에 직업/몬스터/보스 역할을 붙이기 위한 선별 전시실입니다.</p>
+      </header>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">직업 후보</h3>
+          <p class="group-desc">전열/후열/지원/교란 후보로 발전할 수 있는 인간형과 하이브리드 후보입니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Avatar Museum 01</h4><span class="entry-code">A/M</span></div>
+            <p class="entry-purpose">직업 확정 전 아바타 10종을 전시 코드로 선별합니다.</p>
+            <div class="entry-meta">
+              <div><span>상태:</span> PASS 후보</div>
+              <div><span>이식:</span> 미이식 / 본게임 후보 선별용</div>
+              <div><span>보기:</span> 덩어리, 자세, 장비, 가면, 무기 차이</div>
+            </div>
+            <a class="view-button" href="./avatar-museum-01.html">보기</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">몬스터 후보</h3>
+          <p class="group-desc">작은 화면에서 굵고 구분되는 몬스터 실루엣을 보는 전시실입니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Monster Avatar Prototype</h4><span class="entry-code">MON</span></div>
+            <p class="entry-purpose">슬라임/고블린/늑대 단품 실루엣을 확인합니다.</p>
+            <div class="entry-meta">
+              <div><span>상태:</span> WATCH</div>
+              <div><span>이식:</span> 미이식</div>
+              <div><span>보기:</span> 귀, 몸통 덩어리, 작은 크기 가독성</div>
+            </div>
+            <a class="view-button" href="./monster-avatar-prototype.html">보기</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">정예/보스 후보</h3>
+          <p class="group-desc">큰 덩어리와 압박감은 후속 전시에서 분리합니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Boss Candidate Shelf</h4><span class="entry-code">BOSS</span></div>
+            <p class="entry-purpose">전용 보스 아바타 전시는 아직 준비 중입니다.</p>
+            <div class="entry-meta"><div><span>상태:</span> 준비 중</div><div><span>이식:</span> 미이식</div></div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section id="combat" class="screen" aria-label="전투 연출 도감">
+      <header class="screen-head">
+        <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
+        <h2 class="screen-title">전투 연출 도감</h2>
+        <p class="screen-desc">source→target 행동선, 피격/회복 리액션, 숫자 queue 후보를 보는 전시실입니다.</p>
+      </header>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">행동선</h3>
+          <p class="group-desc">누가 누구에게 행동했는지 읽히는 source→target 문법입니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Action Line R&amp;D 03.5</h4><span class="entry-code">LINE</span></div>
+            <p class="entry-purpose">straight / curve / slash / enemy line 타입과 anchor 구조를 비교합니다.</p>
+            <div class="entry-meta">
+              <div><span>상태:</span> PASS 후보</div>
+              <div><span>이식:</span> 후보 / 아직 미이식</div>
+              <div><span>보기:</span> data-source, data-target, data-line-type</div>
+            </div>
+            <a class="view-button" href="./action-line-rnd-03-5.html">보기</a>
+          </article>
+
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Action Line R&amp;D 03</h4><span class="entry-code">OLD</span></div>
+            <p class="entry-purpose">03.5 이전의 source→target 기준 비교용 시안입니다.</p>
+            <div class="entry-meta"><div><span>상태:</span> 보조 자료</div><div><span>이식:</span> 미이식</div></div>
+            <a class="view-button" href="./action-line-rnd-03.html">보기</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">피격/회복 리액션</h3>
+          <p class="group-desc">맞았거나 회복됐다는 감각이 몸체와 숫자로 읽히는지 보는 전시실입니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Action Feedback Prototype 02</h4><span class="entry-code">HIT</span></div>
+            <p class="entry-purpose">궁수 공격, 사제 회복, 늑대 공격, hit pulse, 숫자 queue를 봅니다.</p>
+            <div class="entry-meta">
+              <div><span>상태:</span> WATCH</div>
+              <div><span>이식:</span> 일부 후보</div>
+              <div><span>보기:</span> 숫자가 캐릭터를 덮지 않는지, 회복선이 공격선과 다른지</div>
+            </div>
+            <a class="view-button" href="./action-feedback-prototype-02.html">보기</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">idle/잔상 후보</h3>
+          <p class="group-desc">전투가 멈춰 보이지 않게 하는 조용한 대기감과 breathing 후보입니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Idle Prototype</h4><span class="entry-code">IDLE</span></div>
+            <p class="entry-purpose">조용한 idle 감각을 보는 초기 실험입니다.</p>
+            <div class="entry-meta"><div><span>상태:</span> 보류 / 참고 자료</div><div><span>이식:</span> 미이식</div></div>
+            <a class="view-button" href="./idle-prototype.html">보기</a>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section id="field" class="screen" aria-label="전장 HUD 도감">
+      <header class="screen-head">
+        <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
+        <h2 class="screen-title">전장/HUD 도감</h2>
+        <p class="screen-desc">전장 위 캐릭터, 대치 구도, 몬스터 mockup, HUD 후보를 보는 전시실입니다.</p>
+      </header>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">전장 레이아웃 / 대치 구도</h3>
+          <p class="group-desc">카드 안 아이콘이 아니라, 전장 위 캐릭터가 대치하는 감각을 보는 전시실입니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Monster Battlefield Mockup</h4><span class="entry-code">FIELD</span></div>
+            <p class="entry-purpose">전사/사제/궁수와 슬라임/고블린/늑대가 같은 전장 안에서 대치합니다.</p>
+            <div class="entry-meta">
+              <div><span>상태:</span> PASS 후보 / 본게임 감성 기준</div>
+              <div><span>이식:</span> 후보</div>
+              <div><span>보기:</span> 아군 좌하단, 적 우상단, 전장 위 캐릭터</div>
+            </div>
+            <a class="view-button" href="./monster-battlefield-mockup.html">보기</a>
+          </article>
+
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">Battlefield Layout Prototype</h4><span class="entry-code">LAYOUT</span></div>
+            <p class="entry-purpose">소형 적, 대형 적, 보스가 390px 전장에서 어느 정도 존재감을 갖는지 봅니다.</p>
+            <div class="entry-meta"><div><span>상태:</span> WATCH</div><div><span>이식:</span> 미이식</div></div>
+            <a class="view-button" href="./battlefield-layout-prototype.html">보기</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-head">
+          <h3 class="group-title">HUD/게이지 R&amp;D</h3>
+          <p class="group-desc">HP/속도 게이지, 로그/HUD 위치는 본게임 shell이 잠긴 뒤 따로 전시합니다.</p>
+        </div>
+        <div class="entry-list">
+          <article class="entry-card">
+            <div class="entry-top"><h4 class="entry-title">HUD/Gauge R&amp;D</h4><span class="entry-code">HUD</span></div>
+            <p class="entry-purpose">전용 HUD/게이지 전시는 아직 준비 중입니다.</p>
+            <div class="entry-meta"><div><span>상태:</span> 준비 중</div><div><span>이식:</span> 미이식</div></div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const screens = Array.from(document.querySelectorAll(".screen"));
+    const buttons = Array.from(document.querySelectorAll("[data-screen]"));
+
+    function showScreen(id) {
+      screens.forEach((screen) => {
+        screen.classList.toggle("is-active", screen.id === id);
+      });
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        showScreen(button.dataset.screen);
+      });
+    });
+  </script>
+</body>
+</html>

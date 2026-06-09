@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -553,78 +553,288 @@
       font-size: 11px;
       line-height: 1.35;
     }
+
+    .title-screen,
+    .category-screen {
+      display: none;
+    }
+
+    .title-screen.is-active,
+    .category-screen.is-active {
+      display: block;
+    }
+
+    .category-menu {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .category-button,
+    .back-button {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.055), transparent 54%),
+        var(--panel);
+      color: var(--text);
+      font: inherit;
+      text-align: left;
+      padding: 13px 14px;
+      cursor: pointer;
+    }
+
+    .category-button strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .category-button span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .back-button {
+      width: auto;
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .category-title-wrap {
+      min-width: 0;
+    }
+
+    .category-title-wrap h2 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    .category-title-wrap p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .recommend {
+      margin: 5px 0 0;
+      color: var(--gold);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .recommend b {
+      color: #ffe1a2;
+    }
+
+    .exhibit-card {
+      min-height: 205px;
+    }
+
+    .star-votary .body { left: 25px; width: 27px; height: 33px; border-color: #f5d78c; background: #514b6f; }
+    .star-votary .halo { left: 22px; top: 7px; width: 33px; height: 12px; border: 3px solid #f5d78c; border-radius: 50%; transform: rotate(-15deg); opacity: 0.88; }
+    .star-votary .orb { right: 5px; top: 24px; width: 18px; height: 18px; border-radius: 50%; background: #f5d78c; box-shadow: 0 0 13px rgba(245,215,140,.5); }
+
+    .iron-piper .body { left: 24px; width: 29px; border-color: #b8c0ca; background: #46505f; }
+    .iron-piper .pipe { right: 5px; top: 20px; width: 8px; height: 47px; border-radius: 5px; background: linear-gradient(#e2e8ee,#8793a1); transform: rotate(22deg); }
+    .iron-piper .flag { right: 0; top: 18px; width: 21px; height: 18px; border-radius: 3px 10px 10px 3px; background: #c7a2ff; transform: rotate(22deg); }
+
+    .red-thread .body { left: 26px; width: 25px; height: 32px; border-color: #ffb4bd; background: #593846; }
+    .red-thread .thread { left: 5px; top: 26px; width: 61px; height: 35px; border: 3px solid #ff8f9f; border-left-color: transparent; border-bottom-color: transparent; border-radius: 50%; transform: rotate(-18deg); }
+    .red-thread .pin { right: 8px; top: 19px; width: 7px; height: 48px; border-radius: 5px; background: #ffd2d8; transform: rotate(18deg); }
+
+    .mist-warder .body { left: 22px; width: 34px; height: 33px; border-color: #b9d8ff; background: #33485f; border-radius: 16px 16px 8px 8px; }
+    .mist-warder .cloak { left: 15px; top: 26px; width: 47px; height: 43px; border-radius: 50% 50% 30% 30%; background: rgba(120,160,200,.24); border: 2px solid rgba(185,216,255,.75); }
+    .mist-warder .staff { right: 8px; top: 13px; width: 4px; height: 56px; border-radius: 5px; background: #d7ebff; transform: rotate(10deg); }
+
+    .cinder-dancer .body { left: 25px; width: 28px; height: 30px; border-color: #ffc07a; background: #6b4231; transform: skewX(-8deg); }
+    .cinder-dancer .ribbon { left: 5px; top: 24px; width: 65px; height: 27px; border-top: 5px solid #ff9a55; border-radius: 50%; transform: rotate(-24deg); }
+    .cinder-dancer .spark { right: 7px; top: 7px; width: 15px; height: 15px; background: #ffc07a; clip-path: polygon(50% 0, 66% 34%, 100% 50%, 66% 66%, 50% 100%, 34% 66%, 0 50%, 34% 34%); }
+
+    .moss-mite .body { left: 18px; top: 35px; width: 42px; height: 30px; border-radius: 50% 50% 35% 35%; border-color: #b6de83; background: #516c3e; }
+    .moss-mite .sprout { left: 33px; top: 18px; width: 12px; height: 20px; border-radius: 50% 50% 0 50%; background: #b6de83; transform: rotate(-18deg); }
+    .moss-mite .eye { top: 45px; width: 5px; height: 5px; border-radius: 50%; background:#111; z-index:3; }
+    .moss-mite .eye.left { left: 29px; }
+    .moss-mite .eye.right { right: 29px; }
+
+    .ink-mollusk .body { left: 17px; top: 28px; width: 44px; height: 40px; border-radius: 48% 52% 35% 35%; border-color: #bda6ff; background: #3b2f59; }
+    .ink-mollusk .tentacle { bottom: 9px; width: 8px; height: 24px; border-radius: 8px; background: #6a58a3; }
+    .ink-mollusk .tentacle.t1 { left: 24px; transform: rotate(18deg); }
+    .ink-mollusk .tentacle.t2 { left: 36px; }
+    .ink-mollusk .tentacle.t3 { right: 24px; transform: rotate(-18deg); }
+    .ink-mollusk .eye { left: 34px; top: 41px; width: 9px; height: 9px; border-radius: 50%; background: #f5e9ff; z-index: 3; }
+
+    .clock-bat .body { left: 28px; top: 31px; width: 22px; height: 30px; border-radius: 50%; border-color: #d7c08a; background: #4a3f30; }
+    .clock-bat .wing { top: 34px; width: 29px; height: 25px; background: #2a2f3a; border: 2px solid #7c8798; }
+    .clock-bat .wing.left { left: 4px; border-radius: 50% 0 50% 50%; transform: rotate(20deg); }
+    .clock-bat .wing.right { right: 4px; border-radius: 0 50% 50% 50%; transform: rotate(-20deg); }
+    .clock-bat .gear { left: 31px; top: 16px; width: 16px; height: 16px; border: 4px dotted #d7c08a; border-radius: 50%; }
+
+    .spore-ram .body { left: 18px; top: 35px; width: 42px; height: 32px; border-radius: 45% 45% 33% 33%; border-color: #e9d1a0; background: #6a604f; }
+    .spore-ram .horn { top: 22px; width: 20px; height: 20px; border: 4px solid #e9d1a0; border-bottom-color: transparent; border-radius: 50%; }
+    .spore-ram .horn.left { left: 13px; transform: rotate(-35deg); }
+    .spore-ram .horn.right { right: 13px; transform: rotate(35deg); }
+    .spore-ram .spore { right: 7px; top: 14px; width: 12px; height: 12px; border-radius: 50%; background: #b6de83; opacity: .85; }
+
+    .tin-goblin .body { left: 24px; top: 34px; width: 31px; height: 30px; border-color: #b8c0ca; background: #56606d; }
+    .tin-goblin .helmet { left: 21px; top: 12px; width: 36px; height: 27px; border-radius: 50% 50% 35% 35%; background: #8994a2; border: 2px solid #d9e0e8; }
+    .tin-goblin .wrench { right: 2px; top: 20px; width: 6px; height: 50px; border-radius: 5px; background: #d9e0e8; transform: rotate(28deg); }
+    .tin-goblin .wrench::after { content:""; position:absolute; left:-5px; top:-5px; width:16px; height:10px; border:3px solid #d9e0e8; border-bottom:none; border-radius:10px 10px 0 0; }
+
+    .crown-ogre .body { left: 16px; top: 30px; width: 46px; height: 39px; border-radius: 14px 14px 9px 9px; border-color: #f0c36a; background: #5d465b; }
+    .crown-ogre .head { left: 25px; top: 11px; width: 28px; height: 26px; background: #b08d72; }
+    .crown-ogre .crown { left: 23px; top: 4px; width: 32px; height: 16px; background: #f0c36a; clip-path: polygon(0 100%, 0 35%, 22% 80%, 50% 10%, 78% 80%, 100% 35%, 100% 100%); }
+    .crown-ogre .club { right: 0; top: 20px; width: 9px; height: 52px; border-radius: 8px; background: #8a6b45; transform: rotate(23deg); }
+
+    .mirror-duke .body { left: 21px; top: 33px; width: 36px; height: 35px; border-radius: 12px; border-color: #c7a2ff; background: #2e2848; }
+    .mirror-duke .mirror { left: 17px; top: 7px; width: 43px; height: 43px; border-radius: 50%; border: 4px solid #c7a2ff; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.8), rgba(154,212,240,.18) 35%, rgba(30,40,70,.5)); z-index: 3; }
+    .mirror-duke .cape { left: 12px; top: 31px; width: 54px; height: 42px; border-radius: 50% 50% 24% 24%; background: rgba(199,162,255,.18); border: 2px solid rgba(199,162,255,.55); }
+
+    .serpent-bishop .body { left: 24px; top: 28px; width: 30px; height: 43px; border-radius: 45% 45% 18px 18px; border-color: #9fe6cf; background: #2f665d; }
+    .serpent-bishop .hood { left: 15px; top: 11px; width: 48px; height: 38px; border-radius: 50% 50% 38% 38%; border: 3px solid #9fe6cf; background: #244942; }
+    .serpent-bishop .fang { top: 34px; width: 7px; height: 12px; background: #f4fff9; clip-path: polygon(0 0,100% 0,50% 100%); z-index:4; }
+    .serpent-bishop .fang.left { left: 32px; }
+    .serpent-bishop .fang.right { right: 32px; }
+
+    .furnace-knight .body { left: 18px; top: 29px; width: 42px; height: 40px; border-radius: 11px; border-color: #ffb26b; background: #4b3b35; box-shadow: inset 0 -10px 0 rgba(255,120,60,.18); }
+    .furnace-knight .helm { left: 24px; top: 10px; width: 30px; height: 27px; border-radius: 7px; border: 3px solid #ffb26b; background: #3a3433; }
+    .furnace-knight .vent { left: 29px; top: 42px; width: 20px; height: 5px; background: #ff8a4c; box-shadow: 0 9px 0 #ff8a4c; }
+    .furnace-knight .greatsword { right: 3px; top: 8px; width: 8px; height: 65px; border-radius: 5px; background: #e8edf2; transform: rotate(19deg); }
+
+    .lotus-queen .body { left: 20px; top: 35px; width: 38px; height: 34px; border-radius: 18px 18px 8px 8px; border-color: #ffb4d8; background: #5c3c62; }
+    .lotus-queen .petal { top: 7px; width: 20px; height: 31px; border-radius: 50% 50% 35% 35%; background: #ffb4d8; opacity:.9; }
+    .lotus-queen .petal.p1 { left: 29px; }
+    .lotus-queen .petal.p2 { left: 16px; transform: rotate(-24deg); }
+    .lotus-queen .petal.p3 { right: 16px; transform: rotate(24deg); }
+    .lotus-queen .scepter { right: 6px; top: 17px; width: 5px; height: 55px; border-radius: 5px; background: #ffe0ef; transform: rotate(15deg); }
+
+    .gauntlet-scribe .body { left: 25px; width: 28px; border-color: #d7c08a; background: #3d5363; }
+    .gauntlet-scribe .gauntlet { left: 7px; top: 34px; width: 24px; height: 20px; border-radius: 9px 7px 10px 10px; background: #d7c08a; border: 2px solid #f5e3aa; transform: rotate(-15deg); }
+    .gauntlet-scribe .scroll { right: 5px; top: 20px; width: 16px; height: 43px; border-radius: 8px; background: #f2dfbd; border: 2px solid #c9a878; transform: rotate(15deg); }
+
+    .noon-duelist .body { left: 24px; width: 29px; border-color: #ffd481; background: #5c4731; transform: skewX(-6deg); }
+    .noon-duelist .hat { left: 20px; top: 10px; width: 38px; height: 11px; border-radius: 50%; background: #ffd481; }
+    .noon-duelist .rapier { right: 3px; top: 30px; width: 4px; height: 43px; border-radius: 4px; background: #eef6ff; transform: rotate(48deg); }
+
+    .signal-monk .body { left: 22px; width: 34px; height: 34px; border-color: #9fe6cf; background: #2e5a56; border-radius: 18px 18px 9px 9px; }
+    .signal-monk .ring { left: 16px; top: 22px; width: 45px; height: 45px; border: 3px solid rgba(159,230,207,.7); border-radius: 50%; }
+    .signal-monk .bead { left: 36px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: #f0c36a; box-shadow: 0 12px 0 #f0c36a; }
+
+    .salt-crawler .body { left: 17px; top: 36px; width: 44px; height: 28px; border-radius: 45% 45% 35% 35%; border-color: #d9e8e8; background: #6f8785; }
+    .salt-crawler .crystal { left: 30px; top: 18px; width: 17px; height: 24px; background: #e8ffff; clip-path: polygon(50% 0, 100% 38%, 80% 100%, 20% 100%, 0 38%); opacity: .92; }
+    .salt-crawler .leg { bottom: 15px; width: 12px; height: 5px; border-radius: 5px; background: #9fb8b5; }
+    .salt-crawler .leg.left { left: 14px; }
+    .salt-crawler .leg.right { right: 14px; }
+
+    .paper-ghoul .body { left: 20px; top: 27px; width: 39px; height: 40px; border-radius: 8px 8px 16px 16px; border-color: #e8dfc8; background: #756f64; }
+    .paper-ghoul .tag { left: 28px; top: 8px; width: 22px; height: 31px; border-radius: 4px; background: #f0dfb5; border: 2px solid #c2a56c; transform: rotate(-6deg); z-index: 4; }
+    .paper-ghoul .eye { top: 43px; width: 5px; height: 5px; border-radius: 50%; background: #181818; z-index: 5; }
+    .paper-ghoul .eye.left { left: 29px; }
+    .paper-ghoul .eye.right { right: 29px; }
+
+    .echo-bulb .body { left: 21px; top: 31px; width: 37px; height: 35px; border-radius: 50% 50% 35% 35%; border-color: #f0c36a; background: #574b32; }
+    .echo-bulb .bulb { left: 28px; top: 12px; width: 22px; height: 23px; border-radius: 50%; background: #f6d77d; box-shadow: 0 0 13px rgba(240,195,106,.38); }
+    .echo-bulb .wave { left: 8px; top: 25px; width: 62px; height: 36px; border: 3px solid rgba(240,195,106,.48); border-left-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-radius: 50%; }
+
+    .venom-countess .body { left: 20px; top: 33px; width: 38px; height: 36px; border-radius: 16px 16px 8px 8px; border-color: #a8d46a; background: #394d35; }
+    .venom-countess .veil { left: 13px; top: 15px; width: 52px; height: 50px; border-radius: 50% 50% 24% 24%; background: rgba(168,212,106,.16); border: 2px solid rgba(168,212,106,.58); }
+    .venom-countess .drop { right: 10px; top: 9px; width: 13px; height: 20px; border-radius: 50% 50% 50% 0; background: #a8d46a; transform: rotate(-35deg); }
+
+    .bell-titan .body { left: 15px; top: 28px; width: 48px; height: 42px; border-radius: 15px 15px 10px 10px; border-color: #f0c36a; background: #625136; }
+    .bell-titan .belltop { left: 22px; top: 7px; width: 34px; height: 31px; border-radius: 50% 50% 10px 10px; background: #d0a85a; border: 3px solid #ffe0a0; }
+    .bell-titan .chain { left: 37px; top: 0; width: 4px; height: 18px; border-radius: 4px; background: #d8dfe8; }
+
+    .archive-dragon .body { left: 17px; top: 33px; width: 45px; height: 36px; border-radius: 16px 10px 10px 16px; border-color: #c7a2ff; background: #332d4f; }
+    .archive-dragon .pagewing { left: 4px; top: 21px; width: 34px; height: 31px; border-radius: 6px 22px 6px 22px; background: #e8ddff; border: 2px solid #c7a2ff; transform: rotate(-18deg); }
+    .archive-dragon .horn { right: 15px; top: 12px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 17px solid #c7a2ff; }
   </style>
 </head>
 <body>
   <main class="museum-page">
-    <header>
-      <p class="kicker">Project Signal Personal / presentation lab</p>
-      <h1>Avatar Museum 01</h1>
-      <a class="museum-back" href="./lab-museum-index-01.html">← 전시관으로</a>
-      <p class="intro">직업을 확정하기 전, 실루엣과 개성부터 고르는 작은 전시입니다. 마음에 드는 전시 코드만 골라두면 됩니다.</p>
-    </header>
-
-    <section class="museum-grid" aria-label="Avatar museum exhibits">
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar blade-saint"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part sword"></span><span class="part guard"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-01</span><span class="type">human</span></div>
-        <p class="keywords">넓은 자세, 긴 검, 안정적인 전열감</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar lantern-mender"><span class="part aura"></span><span class="part shadow"></span><span class="part staff"></span><span class="part lamp"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-02</span><span class="type">human</span></div>
-        <p class="keywords">작은 등불, 부드러운 원형, 후열 지원감</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar thorn-runner"><span class="part shadow"></span><span class="part bow"></span><span class="part arrow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-03</span><span class="type">human</span></div>
-        <p class="keywords">기울어진 몸, 큰 활, 빠른 사선</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar moon-mask"><span class="part aura"></span><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part hood"></span><span class="part head"></span><span class="part mask"></span><span class="part moon"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-04</span><span class="type">human</span></div>
-        <p class="keywords">두건, 반달 표식, 가면 실루엣</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar bell-guard"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part shield"></span><span class="part bell"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-05</span><span class="type">human</span></div>
-        <p class="keywords">큰 방패, 방울 장식, 묵직한 덩어리</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar spark-needle"><span class="part aura"></span><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part needle"></span><span class="part spark"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-06</span><span class="type">human</span></div>
-        <p class="keywords">가느다란 창, 별 모양 끝, 예민한 선</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar ember-horn"><span class="part shadow"></span><span class="part tail"></span><span class="part feet"></span><span class="part body"></span><span class="part horn left"></span><span class="part horn right"></span><span class="part head"></span><span class="part mask"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-07</span><span class="type">hybrid</span></div>
-        <p class="keywords">작은 뿔, 꼬리, 장난스러운 전열감</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar shell-kin small"><span class="part shadow"></span><span class="part body"></span><span class="part shell"></span><span class="part head"></span></div></div>
-        <div class="exhibit-code"><span class="code">M-01</span><span class="type">monster</span></div>
-        <p class="keywords">껍질 덩어리, 낮은 무게중심, 단단함</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar glass-wisp small"><span class="part shadow"></span><span class="part body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span></div></div>
-        <div class="exhibit-code"><span class="code">M-02</span><span class="type">monster</span></div>
-        <p class="keywords">투명한 물방울, 둥근 몸, 작은 눈</p>
-      </article>
-
-      <article class="exhibit-card">
-        <div class="stage"><div class="avatar raven-scout"><span class="part shadow"></span><span class="part feet"></span><span class="part wing"></span><span class="part body"></span><span class="part head"></span><span class="part beak"></span></div></div>
-        <div class="exhibit-code"><span class="code">A-08</span><span class="type">hybrid</span></div>
-        <p class="keywords">새 부리, 한쪽 날개, 정찰자 실루엣</p>
-      </article>
+    <section class="title-screen is-active" id="screen-title" aria-label="Avatar museum title">
+      <header>
+        <p class="kicker">Project Signal Personal / presentation lab</p>
+        <h1>Avatar Museum 01</h1>
+        <a class="museum-back" href="./museum-codex-02.html">← 도감으로</a>
+        <p class="intro">직업을 먼저 확정하지 않고, 실루엣과 개성을 먼저 고르는 캐릭터 박물관입니다. 직업 / 몬스터 / 정예·보스 전시실로 나누어 봅니다.</p>
+      </header>
+      <nav class="category-menu" aria-label="avatar museum categories">
+        <button class="category-button" type="button" data-open="jobs"><strong>직업 후보 창구</strong><span>A-01 ~ A-16. 역할 후보와 신규 개성 후보를 봅니다.</span></button>
+        <button class="category-button" type="button" data-open="monsters"><strong>몬스터 창구</strong><span>M-01 ~ M-10. 일반 몬스터와 작은 이형 실루엣을 모아둔 전시실입니다.</span></button>
+        <button class="category-button" type="button" data-open="bosses"><strong>정예 / 보스 창구</strong><span>B-01 ~ B-08. 중간보스, 테마 보스, 강한 적 후보를 봅니다.</span></button>
+      </nav>
     </section>
+
+    <section class="category-screen" id="screen-jobs" aria-label="직업 후보 전시실">
+      <div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>직업 후보 창구</h2><p>사람형 / 하이브리드 / 역할 후보. 채택 뒤 유키가 직업명을 확정합니다.</p></div></div>
+      <div class="museum-grid">
+        <article class="exhibit-card"><div class="stage"><div class="avatar blade-saint"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part sword"></span><span class="part guard"></span></div></div><div class="exhibit-code"><span class="code">A-01</span><span class="type">human</span></div><p class="keywords">넓은 자세, 긴 검, 안정적인 전열감</p><p class="recommend"><b>루다 추천:</b> 기본 전사 / 수호검사 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar lantern-mender"><span class="part aura"></span><span class="part shadow"></span><span class="part staff"></span><span class="part lamp"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">A-02</span><span class="type">human</span></div><p class="keywords">작은 등불, 부드러운 원형, 후열 지원감</p><p class="recommend"><b>루다 추천:</b> 사제 / 회복사 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar thorn-runner"><span class="part shadow"></span><span class="part bow"></span><span class="part arrow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">A-03</span><span class="type">human</span></div><p class="keywords">기울어진 몸, 긴 활, 빠른 사선</p><p class="recommend"><b>루다 추천:</b> 궁수 / 추적자 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar moon-mask"><span class="part aura"></span><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part hood"></span><span class="part head"></span><span class="part mask"></span><span class="part moon"></span></div></div><div class="exhibit-code"><span class="code">A-04</span><span class="type">human</span></div><p class="keywords">후드, 반달 장식, 가면 실루엣</p><p class="recommend"><b>루다 추천:</b> 그림자술사 / 저주 직업 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bell-guard"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part shield"></span><span class="part bell"></span></div></div><div class="exhibit-code"><span class="code">A-05</span><span class="type">human</span></div><p class="keywords">큰 방패, 방울 장식, 묵직한 덩어리</p><p class="recommend"><b>루다 추천:</b> 성벽수호자 / 탱커 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar spark-needle"><span class="part aura"></span><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part needle"></span><span class="part spark"></span></div></div><div class="exhibit-code"><span class="code">A-06</span><span class="type">human</span></div><p class="keywords">가느다란 창, 별 모양 점, 날렵한 인상</p><p class="recommend"><b>루다 추천:</b> 결투가 / 창술사 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar ember-horn"><span class="part shadow"></span><span class="part tail"></span><span class="part feet"></span><span class="part body"></span><span class="part horn left"></span><span class="part horn right"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">A-07</span><span class="type">hybrid</span></div><p class="keywords">작은 뿔, 꼬리, 장난스러운 전열감</p><p class="recommend"><b>루다 추천:</b> 화각검사 / 돌진형 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar raven-scout"><span class="part shadow"></span><span class="part feet"></span><span class="part wing"></span><span class="part body"></span><span class="part head"></span><span class="part beak"></span></div></div><div class="exhibit-code"><span class="code">A-08</span><span class="type">hybrid</span></div><p class="keywords">부리 가면, 한쪽 날개, 정찰 실루엣</p><p class="recommend"><b>루다 추천:</b> 까마귀 척후 / 정찰형 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar star-votary"><span class="part aura"></span><span class="part shadow"></span><span class="part halo"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part orb"></span></div></div><div class="exhibit-code"><span class="code">A-09</span><span class="type">human</span></div><p class="keywords">얇은 후광, 별빛 구슬, 의식형 후열</p><p class="recommend"><b>루다 추천:</b> 별기도사 / 축복형 지원 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar iron-piper"><span class="part shadow"></span><span class="part pipe"></span><span class="part flag"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">A-10</span><span class="type">human</span></div><p class="keywords">깃발 달린 관악기, 박자감, 지휘 실루엣</p><p class="recommend"><b>루다 추천:</b> 철피리꾼 / 전장 버퍼 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar red-thread"><span class="part aura"></span><span class="part shadow"></span><span class="part thread"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part pin"></span></div></div><div class="exhibit-code"><span class="code">A-11</span><span class="type">human</span></div><p class="keywords">붉은 실, 바늘, 연결과 봉인의 인상</p><p class="recommend"><b>루다 추천:</b> 실술사 / 지속 피해 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar mist-warder"><span class="part shadow"></span><span class="part cloak"></span><span class="part staff"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">A-12</span><span class="type">human</span></div><p class="keywords">반투명 망토, 물안개, 방어 자세</p><p class="recommend"><b>루다 추천:</b> 안개문지기 / 보호막 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar cinder-dancer"><span class="part shadow"></span><span class="part ribbon"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part spark"></span></div></div><div class="exhibit-code"><span class="code">A-13</span><span class="type">human</span></div><p class="keywords">휘어진 리본, 불꽃, 회피형 몸짓</p><p class="recommend"><b>루다 추천:</b> 화무가 / 연속 회피 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar gauntlet-scribe"><span class="part shadow"></span><span class="part scroll"></span><span class="part gauntlet"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">A-14</span><span class="type">new job</span></div><p class="keywords">두꺼운 장갑, 두루마리, 기록하는 전투가</p><p class="recommend"><b>루다 추천:</b> 문장권사 / 무투가 직업 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar noon-duelist"><span class="part shadow"></span><span class="part rapier"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part hat"></span></div></div><div class="exhibit-code"><span class="code">A-15</span><span class="type">new job</span></div><p class="keywords">챙 넓은 모자, 가는 검, 한 박자 빠른 자세</p><p class="recommend"><b>루다 추천:</b> 정오의 결투가 / 치명타 직업 후보</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar signal-monk"><span class="part aura"></span><span class="part shadow"></span><span class="part ring"></span><span class="part bead"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">A-16</span><span class="type">new job</span></div><p class="keywords">원형 파동, 염주 점, 조용한 집중감</p><p class="recommend"><b>루다 추천:</b> 신호수도사 / 턴 조절 지원 후보</p></article>
+      </div>
+    </section>
+
+    <section class="category-screen" id="screen-monsters" aria-label="몬스터 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>몬스터 창구</h2><p>M-01, M-02를 포함한 일반 몬스터 후보 전시실입니다.</p></div></div><div class="museum-grid">
+      <article class="exhibit-card"><div class="stage"><div class="avatar shell-kin small"><span class="part shadow"></span><span class="part body"></span><span class="part shell"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">M-01</span><span class="type">monster</span></div><p class="keywords">껍질 덩어리, 낮은 무게중심, 단단함</p><p class="recommend"><b>루다 추천:</b> 껍질지킴 / 방패 몬스터 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar glass-wisp small"><span class="part shadow"></span><span class="part body"></span><span class="part shine"></span><span class="part eye left"></span><span class="part eye right"></span></div></div><div class="exhibit-code"><span class="code">M-02</span><span class="type">monster</span></div><p class="keywords">투명한 물방울, 큰 눈, 작은 빛</p><p class="recommend"><b>루다 추천:</b> 유리위습 / 마력 몬스터 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar moss-mite small"><span class="part shadow"></span><span class="part body"></span><span class="part sprout"></span><span class="part eye left"></span><span class="part eye right"></span></div></div><div class="exhibit-code"><span class="code">M-03</span><span class="type">monster</span></div><p class="keywords">이끼, 새싹, 작지만 끈질긴 덩어리</p><p class="recommend"><b>루다 추천:</b> 이끼진드기 / 회복 방해 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar ink-mollusk small"><span class="part shadow"></span><span class="part tentacle t1"></span><span class="part tentacle t2"></span><span class="part tentacle t3"></span><span class="part body"></span><span class="part eye"></span></div></div><div class="exhibit-code"><span class="code">M-04</span><span class="type">monster</span></div><p class="keywords">촉수, 보랏빛 먹물, 물렁한 이형</p><p class="recommend"><b>루다 추천:</b> 먹물말랑 / 디버프 몬스터 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar clock-bat small"><span class="part shadow"></span><span class="part wing left"></span><span class="part wing right"></span><span class="part body"></span><span class="part gear"></span></div></div><div class="exhibit-code"><span class="code">M-05</span><span class="type">monster</span></div><p class="keywords">작은 날개, 톱니 장식, 빠른 공격감</p><p class="recommend"><b>루다 추천:</b> 시계박쥐 / 속도 몬스터 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar spore-ram small"><span class="part shadow"></span><span class="part body"></span><span class="part horn left"></span><span class="part horn right"></span><span class="part spore"></span></div></div><div class="exhibit-code"><span class="code">M-06</span><span class="type">monster</span></div><p class="keywords">둥근 뿔, 포자, 어린 돌진감</p><p class="recommend"><b>루다 추천:</b> 포자램 / 자연 몬스터 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar tin-goblin small"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part helmet"></span><span class="part wrench"></span></div></div><div class="exhibit-code"><span class="code">M-07</span><span class="type">monster</span></div><p class="keywords">양철 투구, 렌치, 작은 기계 장난감</p><p class="recommend"><b>루다 추천:</b> 땜장이 고블린 / 수리형 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar salt-crawler small"><span class="part shadow"></span><span class="part leg left"></span><span class="part leg right"></span><span class="part body"></span><span class="part crystal"></span></div></div><div class="exhibit-code"><span class="code">M-08</span><span class="type">new monster</span></div><p class="keywords">소금 결정, 낮은 몸체, 느린 접근감</p><p class="recommend"><b>루다 추천:</b> 소금기어미 / 둔화 몬스터 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar paper-ghoul small"><span class="part shadow"></span><span class="part tag"></span><span class="part body"></span><span class="part eye left"></span><span class="part eye right"></span></div></div><div class="exhibit-code"><span class="code">M-09</span><span class="type">new monster</span></div><p class="keywords">종이 부적, 축 늘어진 몸, 봉인된 느낌</p><p class="recommend"><b>루다 추천:</b> 부적구울 / 저주 몬스터 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar echo-bulb small"><span class="part shadow"></span><span class="part wave"></span><span class="part body"></span><span class="part bulb"></span></div></div><div class="exhibit-code"><span class="code">M-10</span><span class="type">new monster</span></div><p class="keywords">빛나는 전구, 작은 파동, 소리치는 실루엣</p><p class="recommend"><b>루다 추천:</b> 메아리구근 / 경보 몬스터 후보</p></article>
+      </div></section>
+
+    <section class="category-screen" id="screen-bosses" aria-label="정예 보스 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>정예 / 보스 창구</h2><p>큰 덩어리, 강한 장식, 테마가 읽히는 보스 후보입니다.</p></div></div><div class="museum-grid">
+      <article class="exhibit-card"><div class="stage"><div class="avatar crown-ogre"><span class="part shadow"></span><span class="part club"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part crown"></span></div></div><div class="exhibit-code"><span class="code">B-01</span><span class="type">elite</span></div><p class="keywords">왕관, 큰 몽둥이, 정면 압박감</p><p class="recommend"><b>루다 추천:</b> 왕관오거 / 중간보스 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mirror-duke"><span class="part shadow"></span><span class="part cape"></span><span class="part feet"></span><span class="part body"></span><span class="part mirror"></span></div></div><div class="exhibit-code"><span class="code">B-02</span><span class="type">elite</span></div><p class="keywords">얼굴 같은 거울, 보랏빛 망토, 환상감</p><p class="recommend"><b>루다 추천:</b> 거울공작 / 반사 보스 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar serpent-bishop"><span class="part aura"></span><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part hood"></span><span class="part fang left"></span><span class="part fang right"></span></div></div><div class="exhibit-code"><span class="code">B-03</span><span class="type">boss</span></div><p class="keywords">넓은 후드, 송곳니, 의식적인 분위기</p><p class="recommend"><b>루다 추천:</b> 독사제 주교 / 중독 보스 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar furnace-knight"><span class="part shadow"></span><span class="part greatsword"></span><span class="part feet"></span><span class="part body"></span><span class="part helm"></span><span class="part vent"></span></div></div><div class="exhibit-code"><span class="code">B-04</span><span class="type">elite</span></div><p class="keywords">화덕 갑주, 배기구, 무거운 대검</p><p class="recommend"><b>루다 추천:</b> 화로기사 / 화상 보스 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar lotus-queen"><span class="part aura"></span><span class="part shadow"></span><span class="part petal p1"></span><span class="part petal p2"></span><span class="part petal p3"></span><span class="part scepter"></span><span class="part feet"></span><span class="part body"></span></div></div><div class="exhibit-code"><span class="code">B-05</span><span class="type">boss</span></div><p class="keywords">꽃잎 왕관, 지팡이, 우아한 위압감</p><p class="recommend"><b>루다 추천:</b> 연화여왕 / 회복 보스 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar venom-countess"><span class="part aura"></span><span class="part shadow"></span><span class="part veil"></span><span class="part drop"></span><span class="part feet"></span><span class="part body"></span></div></div><div class="exhibit-code"><span class="code">B-06</span><span class="type">new boss</span></div><p class="keywords">초록 베일, 독방울, 얇지만 위험한 인상</p><p class="recommend"><b>루다 추천:</b> 독백작부인 / 중독 보스 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar bell-titan"><span class="part shadow"></span><span class="part chain"></span><span class="part belltop"></span><span class="part feet"></span><span class="part body"></span></div></div><div class="exhibit-code"><span class="code">B-07</span><span class="type">new boss</span></div><p class="keywords">거대한 종, 사슬, 느리고 큰 충격감</p><p class="recommend"><b>루다 추천:</b> 종탑거인 / 광역 기절 보스 후보</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar archive-dragon"><span class="part shadow"></span><span class="part pagewing"></span><span class="part horn"></span><span class="part feet"></span><span class="part body"></span></div></div><div class="exhibit-code"><span class="code">B-08</span><span class="type">new boss</span></div><p class="keywords">책장 날개, 뿔, 오래된 기록의 압박감</p><p class="recommend"><b>루다 추천:</b> 기록룡 / 지식형 보스 후보</p></article>
+      </div></section>
   </main>
+  <script>
+    const screens = Array.from(document.querySelectorAll('.title-screen, .category-screen'));
+    const showScreen = (name) => {
+      screens.forEach((screen) => screen.classList.remove('is-active'));
+      const target = document.querySelector(name === 'title' ? '#screen-title' : `#screen-${name}`);
+      (target || document.querySelector('#screen-title')).classList.add('is-active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    document.querySelectorAll('[data-open]').forEach((button) => button.addEventListener('click', () => showScreen(button.dataset.open)));
+    document.querySelectorAll('[data-back]').forEach((button) => button.addEventListener('click', () => showScreen('title')));
+  </script>
 </body>
 </html>

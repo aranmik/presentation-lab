@@ -15,67 +15,14 @@
       --lab-accent: #9fe6cf;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--lab-bg);
-      color: var(--lab-text);
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-    }
-
-    .lab-preview-shell {
-      width: min(100vw, 430px);
-      min-height: 100vh;
-      padding: 10px;
-      background: #0f1217;
-    }
-
-    .lab-preview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-      padding: 9px 10px;
-      border: 1px solid var(--lab-line);
-      border-radius: 8px;
-      background: var(--lab-panel);
-    }
-
-    .lab-preview-title {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.2;
-    }
-
-    .lab-preview-meta {
-      margin: 3px 0 0;
-      color: var(--lab-muted);
-      font-size: 11px;
-    }
-
-    .lab-preview-link {
-      flex: 0 0 auto;
-      margin-left: 8px;
-      color: var(--lab-accent);
-      font-size: 11px;
-      text-decoration: none;
-    }
-
-    .lab-preview-frame {
-      display: block;
-      width: 100%;
-      min-height: calc(100vh - 78px);
-      border: 1px solid var(--lab-line);
-      border-radius: 8px;
-      background: #101318;
-    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--lab-bg); color: var(--lab-text); font-family: Arial, sans-serif; display: flex; justify-content: center; }
+    .lab-preview-shell { width: min(100vw, 430px); min-height: 100vh; padding: 10px; background: #0f1217; }
+    .lab-preview-header { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; padding: 9px 10px; border: 1px solid var(--lab-line); border-radius: 8px; background: var(--lab-panel); }
+    .lab-preview-title { margin: 0; font-size: 13px; line-height: 1.2; }
+    .lab-preview-meta { margin: 3px 0 0; color: var(--lab-muted); font-size: 11px; }
+    .lab-preview-link { flex: 0 0 auto; margin-left: 8px; color: var(--lab-accent); font-size: 11px; text-decoration: none; }
+    .lab-preview-frame { display: block; width: 100%; min-height: calc(100vh - 78px); border: 1px solid var(--lab-line); border-radius: 8px; background: #101318; }
   </style>
 </head>
 <body>
@@ -83,17 +30,17 @@
     <header class="lab-preview-header">
       <div>
         <h1 class="lab-preview-title">현재 작업 미리보기</h1>
-        <p class="lab-preview-meta">Presentation Lab Museum</p>
+        <p class="lab-preview-meta">Museum Codex 02</p>
       </div>
       <div>
-        <a class="lab-preview-link" href="./index.html">기존 인덱스</a>
-        <a class="lab-preview-link" href="./lab-museum-index-01.html">크게 보기</a>
+        <a class="lab-preview-link" href="./museum-codex-01.html">이전 도감</a>
+        <a class="lab-preview-link" href="./museum-codex-02.html">크게 보기</a>
       </div>
     </header>
 
     <iframe
       class="lab-preview-frame"
-      src="./lab-museum-index-01.html"
+      src="./museum-codex-02.html"
       title="Current presentation lab preview"
     ></iframe>
   </main>
