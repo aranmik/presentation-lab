@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab - Current Preview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lab-bg: #101318;
+      --lab-panel: #171c24;
+      --lab-line: #303947;
+      --lab-text: #eef3f8;
+      --lab-muted: #9aa8b8;
+      --lab-accent: #9fe6cf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--lab-bg);
+      color: var(--lab-text);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lab-preview-shell {
+      width: min(100vw, 430px);
+      min-height: 100vh;
+      padding: 10px;
+      background: #0f1217;
+    }
+
+    .lab-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      padding: 9px 10px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel);
+    }
+
+    .lab-preview-title {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .lab-preview-meta {
+      margin: 3px 0 0;
+      color: var(--lab-muted);
+      font-size: 11px;
+    }
+
+    .lab-preview-link {
+      flex: 0 0 auto;
+      color: var(--lab-accent);
+      font-size: 11px;
+      text-decoration: none;
+    }
+
+    .lab-preview-frame {
+      display: block;
+      width: 100%;
+      min-height: calc(100vh - 78px);
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: #101318;
+    }
+  </style>
+</head>
+<body>
+  <main class="lab-preview-shell">
+    <header class="lab-preview-header">
+      <div>
+        <h1 class="lab-preview-title">Current Lab Preview</h1>
+        <p class="lab-preview-meta">Now showing: Battlefield Layout Prototype 01</p>
+      </div>
+      <a class="lab-preview-link" href="./battlefield-layout-prototype.html">open full</a>
+    </header>
+
+    <iframe
+      class="lab-preview-frame"
+      src="./battlefield-layout-prototype.html"
+      title="Current presentation lab preview"
+    ></iframe>
+  </main>
+</body>
+</html>

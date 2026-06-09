@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab - Battlefield Layout Prototype</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lab-bg: #101318;
+      --lab-panel: #171c24;
+      --lab-panel-2: #202733;
+      --lab-line: #303947;
+      --lab-text: #eef3f8;
+      --lab-muted: #9aa8b8;
+      --lab-front: #f0c36a;
+      --lab-heal: #9fe6cf;
+      --lab-attack: #d9e886;
+      --lab-hit: #ef7d6a;
+      --lab-enemy: #b87368;
+      --lab-boss: #c66882;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--lab-bg);
+      color: var(--lab-text);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lab-page {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      padding: 14px;
+      background: linear-gradient(180deg, #151a21 0%, #0f1217 100%);
+    }
+
+    .lab-kicker {
+      margin: 0 0 4px;
+      color: var(--lab-muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lab-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lab-note {
+      margin: 8px 0 12px;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .variant-block {
+      margin-bottom: 18px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(48, 57, 71, 0.7);
+    }
+
+    .variant-head {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 0 0 10px;
+      padding: 10px 11px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: rgba(23, 28, 36, 0.96);
+      backdrop-filter: blur(8px);
+    }
+
+    .variant-head h2 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .variant-head p {
+      margin: 5px 0 0;
+      color: var(--lab-muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .lab-layout-card {
+      margin-bottom: 10px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel);
+      overflow: hidden;
+    }
+
+    .lab-layout-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--lab-line);
+    }
+
+    .lab-layout-head h3 {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .lab-layout-head p {
+      margin: 3px 0 0;
+      color: var(--lab-muted);
+      font-size: 10px;
+      line-height: 1.3;
+    }
+
+    .lab-badge {
+      flex: 0 0 auto;
+      align-self: flex-start;
+      padding: 4px 7px;
+      border-radius: 5px;
+      border: 1px solid rgba(159, 230, 207, 0.45);
+      color: var(--lab-heal);
+      font-size: 10px;
+    }
+
+    .battlefield {
+      --field-h: 356px;
+      --party-left: 15px;
+      --party-bottom: 34px;
+      --party-col-gap: 18px;
+      --party-row-gap: 28px;
+      --enemy-right: 15px;
+      --enemy-top: 34px;
+      --attack-left: 128px;
+      --attack-top: 228px;
+      --attack-width: 142px;
+      --attack-rotate: -42deg;
+      --heal-left: 77px;
+      --heal-top: 176px;
+      --lane-angle: 138deg;
+
+      position: relative;
+      height: var(--field-h);
+      padding: 10px;
+      background:
+        linear-gradient(var(--lane-angle), transparent 0 35%, rgba(159, 230, 207, 0.035) 35% 40%, transparent 40% 60%, rgba(217, 232, 134, 0.035) 60% 65%, transparent 65%),
+        linear-gradient(var(--lane-angle), transparent 0 39%, rgba(255, 255, 255, 0.035) 39% 61%, transparent 61%),
+        radial-gradient(circle at 26% 82%, rgba(159, 230, 207, 0.08), transparent 35%),
+        radial-gradient(circle at 78% 20%, rgba(239, 125, 106, 0.09), transparent 32%),
+        #151b23;
+    }
+
+    .battlefield::before {
+      content: "";
+      position: absolute;
+      left: 96px;
+      right: 62px;
+      top: 46px;
+      bottom: 74px;
+      clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+      background: linear-gradient(180deg, rgba(217, 232, 134, 0.035), rgba(159, 230, 207, 0.075));
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .variant-b .battlefield {
+      --field-h: 410px;
+      --party-bottom: 42px;
+      --party-row-gap: 34px;
+      --enemy-top: 24px;
+      --attack-top: 272px;
+      --attack-width: 158px;
+      --attack-rotate: -48deg;
+      --heal-top: 216px;
+      --lane-angle: 134deg;
+    }
+
+    .variant-c .battlefield {
+      --field-h: 356px;
+      --party-left: 12px;
+      --party-bottom: 20px;
+      --party-col-gap: 20px;
+      --party-row-gap: 32px;
+      --enemy-right: 12px;
+      --enemy-top: 18px;
+      --attack-left: 126px;
+      --attack-top: 224px;
+      --attack-width: 148px;
+      --attack-rotate: -47deg;
+      --heal-top: 170px;
+      --lane-angle: 132deg;
+    }
+
+    .variant-c .battlefield::before {
+      opacity: 1;
+    }
+
+    .field-label {
+      position: absolute;
+      color: rgba(154, 168, 184, 0.76);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .field-label.enemy {
+      right: 13px;
+      top: 10px;
+    }
+
+    .field-label.party {
+      left: 13px;
+      bottom: 10px;
+    }
+
+    .party-grid {
+      position: absolute;
+      left: var(--party-left);
+      bottom: var(--party-bottom);
+      display: grid;
+      grid-template-columns: repeat(2, 46px);
+      grid-template-rows: repeat(2, 46px);
+      column-gap: var(--party-col-gap);
+      row-gap: var(--party-row-gap);
+      transform: skewY(-5deg);
+      transform-origin: left bottom;
+    }
+
+    .variant-c .party-grid {
+      transform: scale(1.05) skewY(-5deg);
+    }
+
+    .slot {
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 1px solid #3a4553;
+      border-radius: 8px;
+      background: rgba(32, 39, 51, 0.94);
+      transform: skewY(5deg);
+    }
+
+    .slot::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      right: 7px;
+      bottom: 4px;
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(238, 243, 248, 0.22);
+      z-index: 3;
+    }
+
+    .slot.front {
+      box-shadow: inset 0 -3px 0 rgba(240, 195, 106, 0.62);
+      transform: translate(-2px, 3px) skewY(5deg);
+    }
+
+    .slot.front::before {
+      background: rgba(240, 195, 106, 0.62);
+    }
+
+    .slot.back {
+      box-shadow: inset 0 -3px 0 rgba(154, 168, 184, 0.5);
+      transform: translate(8px, -3px) skewY(5deg);
+    }
+
+    .slot.empty {
+      border-style: dashed;
+      color: var(--lab-muted);
+      font-size: 9px;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .slot.empty::after {
+      content: "+";
+      position: absolute;
+      right: 6px;
+      top: 4px;
+      color: rgba(159, 230, 207, 0.5);
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .hero-token {
+      position: relative;
+      width: 28px;
+      height: 31px;
+    }
+
+    .hero-token::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 1px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #f0c9a2;
+      border: 2px solid #f8e5c8;
+    }
+
+    .hero-token::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      bottom: 1px;
+      width: 18px;
+      height: 18px;
+      border-radius: 7px 7px 5px 5px;
+      background: #78889a;
+      border: 2px solid currentColor;
+    }
+
+    .hero-warrior { color: var(--lab-front); }
+    .hero-priest { color: var(--lab-heal); }
+    .hero-archer { color: #a8d46a; }
+    .hero-rogue { color: #c7a2ff; }
+
+    .mini-mark {
+      position: absolute;
+      right: -4px;
+      top: -2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(159, 230, 207, 0.38);
+    }
+
+    .enemy-pack {
+      position: absolute;
+      right: var(--enemy-right);
+      top: var(--enemy-top);
+      width: 120px;
+      height: 132px;
+      transform-origin: right top;
+    }
+
+    .variant-c .enemy-pack {
+      transform: scale(0.92);
+    }
+
+    .enemy-token {
+      position: absolute;
+      border-radius: 45% 45% 38% 38%;
+      background: #73515a;
+      border: 2px solid var(--lab-enemy);
+      box-shadow: inset 0 -7px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .enemy-token.small {
+      width: 34px;
+      height: 34px;
+    }
+
+    .enemy-token.small:nth-child(1) { right: 6px; top: 2px; }
+    .enemy-token.small:nth-child(2) { right: 46px; top: 23px; }
+    .enemy-token.small:nth-child(3) { right: 17px; top: 76px; }
+    .enemy-token.small:nth-child(4) { right: 78px; top: 98px; opacity: 0.82; }
+
+    .large-enemy {
+      position: absolute;
+      right: calc(var(--enemy-right) + 18px);
+      top: calc(var(--enemy-top) + 18px);
+      width: 88px;
+      height: 92px;
+      border-radius: 42% 42% 35% 35%;
+      background: #6f5968;
+      border: 3px solid var(--lab-enemy);
+      box-shadow: inset 0 -15px 0 rgba(0, 0, 0, 0.14), 0 0 0 7px rgba(239, 125, 106, 0.08);
+      transform-origin: right top;
+    }
+
+    .variant-c .large-enemy {
+      transform: scale(0.94);
+    }
+
+    .large-enemy::before,
+    .large-enemy::after,
+    .boss-body::before,
+    .boss-body::after {
+      content: "";
+      position: absolute;
+      top: 35%;
+      width: 7px;
+      height: 5px;
+      border-radius: 50%;
+      background: #15191f;
+    }
+
+    .large-enemy::before,
+    .boss-body::before { left: 30%; }
+    .large-enemy::after,
+    .boss-body::after { right: 30%; }
+
+    .large-enemy-footprint {
+      position: absolute;
+      right: calc(var(--enemy-right) + 10px);
+      top: calc(var(--enemy-top) + 102px);
+      width: 106px;
+      height: 35px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(239, 125, 106, 0.2) 0 31%, transparent 33%),
+        radial-gradient(ellipse at 70% 50%, rgba(239, 125, 106, 0.2) 0 31%, transparent 33%);
+      border: 1px dashed rgba(239, 125, 106, 0.22);
+      opacity: 0.9;
+      transform-origin: right center;
+    }
+
+    .variant-c .large-enemy-footprint {
+      transform: scale(0.94);
+    }
+
+    .enemy-helper {
+      position: absolute;
+      right: 10px;
+      top: calc(var(--enemy-top) + 142px);
+      width: 32px;
+      height: 32px;
+      border-radius: 45%;
+      background: #73515a;
+      border: 2px solid rgba(184, 115, 104, 0.85);
+      transform-origin: right top;
+    }
+
+    .variant-c .enemy-helper {
+      transform: scale(0.9);
+    }
+
+    .boss-body {
+      position: absolute;
+      right: 9px;
+      top: calc(var(--enemy-top) + 6px);
+      width: 166px;
+      height: 164px;
+      border-radius: 43% 43% 35% 35%;
+      background: #62465d;
+      border: 3px solid var(--lab-boss);
+      box-shadow: inset 0 -20px 0 rgba(0, 0, 0, 0.16), 0 0 0 9px rgba(198, 104, 130, 0.08), 0 18px 26px rgba(0, 0, 0, 0.16);
+      transform-origin: right top;
+    }
+
+    .variant-c .boss-body {
+      transform: scale(0.98);
+      box-shadow: inset 0 -20px 0 rgba(0, 0, 0, 0.16), 0 0 0 9px rgba(198, 104, 130, 0.08), 0 20px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .boss-head {
+      position: absolute;
+      width: 43px;
+      height: 45px;
+      border-radius: 46% 46% 38% 38%;
+      background: #73515a;
+      border: 2px solid var(--lab-boss);
+      top: -13px;
+    }
+
+    .boss-head.one { left: 18px; transform: rotate(-12deg); }
+    .boss-head.two { left: 59px; top: -22px; }
+    .boss-head.three { right: 18px; transform: rotate(12deg); }
+
+    .fx-line {
+      position: absolute;
+      pointer-events: none;
+      z-index: 8;
+    }
+
+    .attack-line {
+      left: var(--attack-left);
+      top: var(--attack-top);
+      width: var(--attack-width);
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent 0%, var(--lab-attack) 20%, var(--lab-attack) 100%);
+      transform: rotate(var(--attack-rotate));
+      transform-origin: left center;
+      opacity: 0.82;
+    }
+
+    .attack-line::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      top: -4px;
+      border-left: 8px solid var(--lab-attack);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    .heal-line {
+      left: var(--heal-left);
+      top: var(--heal-top);
+      width: 74px;
+      height: 72px;
+      border: 2px solid transparent;
+      border-right-color: var(--lab-heal);
+      border-bottom-color: var(--lab-heal);
+      border-radius: 0 0 58px 0;
+      opacity: 0.68;
+    }
+
+    .hit-dot {
+      right: 52px;
+      top: calc(var(--enemy-top) + 64px);
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--lab-hit);
+      box-shadow: 0 0 11px rgba(239, 125, 106, 0.42);
+      opacity: 0.78;
+    }
+
+    .boss-anchor {
+      right: 82px;
+      top: calc(var(--enemy-top) + 86px);
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(217, 232, 134, 0.72);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(217, 232, 134, 0.22);
+      opacity: 0.78;
+    }
+
+    .boss-anchor::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--lab-attack);
+    }
+
+    .boss-layout {
+      --attack-top: calc(var(--field-h) - 92px);
+      --attack-width: 148px;
+      --attack-rotate: -50deg;
+      --heal-top: calc(var(--field-h) - 152px);
+    }
+
+    .layout-caption {
+      padding: 9px 11px 11px;
+      color: var(--lab-muted);
+      font-size: 11px;
+      line-height: 1.45;
+      border-top: 1px solid rgba(48, 57, 71, 0.65);
+    }
+  </style>
+</head>
+<body>
+  <main class="lab-page">
+    <header>
+      <p class="lab-kicker">Project Signal Personal / Presentation Lab</p>
+      <h1 class="lab-title">Battlefield Layout Prototype 02.5</h1>
+      <p class="lab-note">Three vertical field variants for comparing readable space on a 390px mobile screen.</p>
+    </header>
+
+    <section class="variant-block variant-a">
+      <header class="variant-head">
+        <h2>A. Current Balanced</h2>
+        <p>356px field. Prototype 02 baseline with balanced height and spacing.</p>
+      </header>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Small Mob Layout</h3><p>3-member start plus one future slot.</p></div><span class="lab-badge">1-slot</span></div>
+        <div class="battlefield">
+          <span class="field-label enemy">enemy side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back empty">join<br>later</div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-archer"></span></div></div>
+          <div class="enemy-pack"><span class="enemy-token small"></span><span class="enemy-token small"></span><span class="enemy-token small"></span><span class="enemy-token small"></span></div>
+          <span class="fx-line heal-line"></span><span class="fx-line attack-line"></span><span class="fx-line hit-dot"></span>
+        </div>
+        <p class="layout-caption">A checks whether the current 356px field is enough before making the page longer.</p>
+      </div>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Large Enemy Layout</h3><p>2-slot footprint without boss-level dominance.</p></div><span class="lab-badge">2-slot</span></div>
+        <div class="battlefield">
+          <span class="field-label enemy">enemy side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="large-enemy"></div><span class="large-enemy-footprint"></span><span class="enemy-helper"></span>
+          <span class="fx-line heal-line"></span><span class="fx-line attack-line"></span><span class="fx-line hit-dot"></span>
+        </div>
+        <p class="layout-caption">A keeps the 2-slot enemy readable while preserving compact mobile scroll length.</p>
+      </div>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Boss Layout</h3><p>Dedicated boss composition in the current height.</p></div><span class="lab-badge">boss</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body"><span class="boss-head one"></span><span class="boss-head two"></span><span class="boss-head three"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">A asks whether the boss already owns enough screen without increasing height.</p>
+      </div>
+    </section>
+
+    <section class="variant-block variant-b">
+      <header class="variant-head">
+        <h2>B. Taller Vertical Field</h2>
+        <p>410px field. More distance, longer action lane, and stronger boss presence.</p>
+      </header>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Small Mob Layout</h3><p>More breathing room around the future 4-slot party.</p></div><span class="lab-badge">1-slot</span></div>
+        <div class="battlefield">
+          <span class="field-label enemy">enemy side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back empty">join<br>later</div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-archer"></span></div></div>
+          <div class="enemy-pack"><span class="enemy-token small"></span><span class="enemy-token small"></span><span class="enemy-token small"></span><span class="enemy-token small"></span></div>
+          <span class="fx-line heal-line"></span><span class="fx-line attack-line"></span><span class="fx-line hit-dot"></span>
+        </div>
+        <p class="layout-caption">B checks whether extra height feels like useful battle space instead of only longer scrolling.</p>
+      </div>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Large Enemy Layout</h3><p>Large enemy has more room to stand apart from helpers.</p></div><span class="lab-badge">2-slot</span></div>
+        <div class="battlefield">
+          <span class="field-label enemy">enemy side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="large-enemy"></div><span class="large-enemy-footprint"></span><span class="enemy-helper"></span>
+          <span class="fx-line heal-line"></span><span class="fx-line attack-line"></span><span class="fx-line hit-dot"></span>
+        </div>
+        <p class="layout-caption">B gives the 2-slot threat more center weight while keeping it below boss scale.</p>
+      </div>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Boss Layout</h3><p>Longer vertical duel against a field-owning boss.</p></div><span class="lab-badge">boss</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body"><span class="boss-head one"></span><span class="boss-head two"></span><span class="boss-head three"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">B is the boldest vertical option, best for checking phone scroll tolerance.</p>
+      </div>
+    </section>
+
+    <section class="variant-block variant-c">
+      <header class="variant-head">
+        <h2>C. Same Height, More Vertical Composition</h2>
+        <p>356px field. Similar card height, but stronger top-right / bottom-left staging.</p>
+      </header>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Small Mob Layout</h3><p>Composition does the vertical work, not card height.</p></div><span class="lab-badge">1-slot</span></div>
+        <div class="battlefield">
+          <span class="field-label enemy">enemy side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back empty">join<br>later</div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-archer"></span></div></div>
+          <div class="enemy-pack"><span class="enemy-token small"></span><span class="enemy-token small"></span><span class="enemy-token small"></span><span class="enemy-token small"></span></div>
+          <span class="fx-line heal-line"></span><span class="fx-line attack-line"></span><span class="fx-line hit-dot"></span>
+        </div>
+        <p class="layout-caption">C tests whether vertical feeling can improve without adding scroll length.</p>
+      </div>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Large Enemy Layout</h3><p>Same height, sharper diagonal footprint read.</p></div><span class="lab-badge">2-slot</span></div>
+        <div class="battlefield">
+          <span class="field-label enemy">enemy side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="large-enemy"></div><span class="large-enemy-footprint"></span><span class="enemy-helper"></span>
+          <span class="fx-line heal-line"></span><span class="fx-line attack-line"></span><span class="fx-line hit-dot"></span>
+        </div>
+        <p class="layout-caption">C keeps the footprint language while using spacing instead of height.</p>
+      </div>
+      <div class="lab-layout-card">
+        <div class="lab-layout-head"><div><h3>Boss Layout</h3><p>Boss presence in a restrained 356px field.</p></div><span class="lab-badge">boss</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body"><span class="boss-head one"></span><span class="boss-head two"></span><span class="boss-head three"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">C is the conservative option if B feels too long on the phone.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

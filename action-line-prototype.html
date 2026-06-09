@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation Lab - Action Line Prototype</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --lab-bg: #101318;
+      --lab-panel: #171c24;
+      --lab-panel-2: #202733;
+      --lab-line: #303947;
+      --lab-text: #eef3f8;
+      --lab-muted: #9aa8b8;
+      --lab-attack: #d9e886;
+      --lab-heal: #9fe6cf;
+      --lab-hit: #ef7d6a;
+      --lab-front: #f0c36a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--lab-bg);
+      color: var(--lab-text);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lab-page {
+      width: min(100vw, 390px);
+      min-height: 100vh;
+      padding: 14px;
+      background: linear-gradient(180deg, #151a21 0%, #0f1217 100%);
+    }
+
+    .lab-kicker {
+      margin: 0 0 4px;
+      color: var(--lab-muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lab-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .lab-note {
+      margin: 8px 0 12px;
+      color: var(--lab-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .lab-stage {
+      position: relative;
+      min-height: 438px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel);
+      overflow: hidden;
+      padding: 12px;
+    }
+
+    .lab-stage-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: var(--lab-muted);
+      font-size: 11px;
+    }
+
+    .lab-field {
+      position: relative;
+      height: 355px;
+    }
+
+    .proto-token {
+      position: absolute;
+      width: 92px;
+      min-height: 104px;
+      padding: 8px 6px 7px;
+      border: 1px solid var(--lab-line);
+      border-radius: 8px;
+      background: var(--lab-panel-2);
+      text-align: center;
+    }
+
+    .proto-token h2 {
+      margin: 4px 0 0;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .proto-token p {
+      margin: 3px 0 0;
+      color: var(--lab-muted);
+      font-size: 10px;
+      line-height: 1.2;
+    }
+
+    .proto-warrior-card {
+      left: 10px;
+      top: 156px;
+      box-shadow: inset 4px 0 0 rgba(240, 195, 106, 0.9);
+    }
+
+    .proto-priest-card {
+      left: 10px;
+      top: 34px;
+      box-shadow: inset 4px 0 0 rgba(159, 230, 207, 0.75);
+    }
+
+    .proto-archer-card {
+      left: 10px;
+      top: 278px;
+      box-shadow: inset 4px 0 0 rgba(168, 212, 106, 0.75);
+    }
+
+    .proto-enemy-card {
+      right: 10px;
+      top: 156px;
+      box-shadow: inset -4px 0 0 rgba(239, 125, 106, 0.75);
+      animation: proto-hit 1.8s ease-in-out infinite;
+    }
+
+    .proto-avatar {
+      position: relative;
+      width: 62px;
+      height: 64px;
+      margin: 0 auto;
+    }
+
+    .proto-part {
+      position: absolute;
+      display: block;
+    }
+
+    .proto-base {
+      left: 10px;
+      bottom: 0;
+      width: 42px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .proto-stance {
+      left: 18px;
+      bottom: 7px;
+      width: 26px;
+      height: 8px;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid #526071;
+    }
+
+    .proto-body {
+      left: 20px;
+      top: 27px;
+      width: 24px;
+      height: 25px;
+      border-radius: 8px 8px 6px 6px;
+      background: #78889a;
+      border: 2px solid #d5dde6;
+    }
+
+    .proto-head {
+      left: 22px;
+      top: 10px;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: #f0c9a2;
+      border: 2px solid #f8e5c8;
+    }
+
+    .proto-aura {
+      inset: 4px 5px 2px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      opacity: 0.65;
+    }
+
+    .proto-warrior .proto-body {
+      left: 17px;
+      width: 29px;
+      background: #6d7685;
+      border-color: var(--lab-front);
+    }
+
+    .proto-warrior .proto-stance {
+      left: 12px;
+      width: 38px;
+      border-left-width: 13px;
+      border-right-width: 13px;
+      border-top-color: #7c6c4a;
+    }
+
+    .proto-warrior .proto-offhand {
+      left: -1px;
+      top: 25px;
+      width: 25px;
+      height: 32px;
+      border-radius: 11px 11px 15px 15px;
+      background: #455160;
+      border: 3px solid var(--lab-front);
+      box-shadow: inset 0 0 0 3px rgba(240, 195, 106, 0.22);
+      transform: rotate(-7deg);
+      z-index: 2;
+    }
+
+    .proto-warrior .proto-weapon {
+      right: -1px;
+      top: 22px;
+      width: 5px;
+      height: 36px;
+      border-radius: 4px;
+      background: #c7d0da;
+      transform: rotate(16deg);
+    }
+
+    .proto-priest .proto-body {
+      left: 21px;
+      width: 21px;
+      height: 28px;
+      background: #446b62;
+      border-color: var(--lab-heal);
+      border-radius: 14px 14px 8px 8px;
+    }
+
+    .proto-priest .proto-aura {
+      border-color: rgba(159, 230, 207, 0.72);
+      box-shadow: 0 0 16px rgba(159, 230, 207, 0.34);
+    }
+
+    .proto-priest .proto-weapon {
+      right: 4px;
+      top: 11px;
+      width: 4px;
+      height: 46px;
+      border-radius: 4px;
+      background: #d6f8ec;
+      transform: rotate(3deg);
+    }
+
+    .proto-priest .proto-weapon::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: -8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 3px solid var(--lab-heal);
+      background: rgba(159, 230, 207, 0.2);
+    }
+
+    .proto-archer .proto-body {
+      left: 24px;
+      width: 21px;
+      background: #536a3e;
+      border-color: #a8d46a;
+      transform: skewX(-8deg);
+    }
+
+    .proto-archer .proto-stance {
+      left: 16px;
+      width: 34px;
+      border-left-width: 5px;
+      border-right-width: 16px;
+      border-top-color: #5f753f;
+      transform: skewX(-15deg);
+    }
+
+    .proto-archer .proto-weapon {
+      left: 1px;
+      top: 13px;
+      width: 31px;
+      height: 47px;
+      border-left: 5px solid #a8d46a;
+      border-radius: 50% 0 0 50%;
+      transform: rotate(-13deg);
+    }
+
+    .proto-archer .proto-offhand {
+      left: 27px;
+      top: 35px;
+      width: 31px;
+      height: 3px;
+      border-radius: 3px;
+      background: #dce8c4;
+      transform: rotate(-14deg);
+      z-index: 3;
+    }
+
+    .proto-enemy {
+      width: 52px;
+      height: 54px;
+      margin: 8px auto 3px;
+      border-radius: 45% 45% 38% 38%;
+      background: #73515a;
+      border: 2px solid var(--lab-hit);
+      position: relative;
+      box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .proto-enemy::before,
+    .proto-enemy::after {
+      content: "";
+      position: absolute;
+      top: 21px;
+      width: 6px;
+      height: 4px;
+      border-radius: 50%;
+      background: #16191f;
+    }
+
+    .proto-enemy::before {
+      left: 14px;
+    }
+
+    .proto-enemy::after {
+      right: 14px;
+    }
+
+    .proto-line {
+      position: absolute;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .proto-attack-line {
+      left: 98px;
+      top: 307px;
+      width: 172px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--lab-attack) 22%, var(--lab-attack) 100%);
+      border-radius: 999px;
+      transform: rotate(-34deg);
+      transform-origin: left center;
+      opacity: 0.82;
+    }
+
+    .proto-attack-line::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      top: -4px;
+      border-left: 9px solid var(--lab-attack);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    .proto-heal-line {
+      left: 88px;
+      top: 100px;
+      width: 80px;
+      height: 86px;
+      border: 2px solid transparent;
+      border-right-color: var(--lab-heal);
+      border-bottom-color: var(--lab-heal);
+      border-radius: 0 0 70px 0;
+      opacity: 0.72;
+    }
+
+    .proto-heal-line::before,
+    .proto-heal-line::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lab-heal);
+      box-shadow: 0 0 10px rgba(159, 230, 207, 0.45);
+      animation: proto-heal-pulse 1.8s ease-in-out infinite;
+    }
+
+    .proto-heal-line::before {
+      right: 5px;
+      bottom: 10px;
+    }
+
+    .proto-heal-line::after {
+      right: 25px;
+      bottom: 0;
+      animation-delay: 0.35s;
+    }
+
+    .proto-hit-mark {
+      right: 88px;
+      top: 153px;
+      width: 18px;
+      height: 18px;
+      opacity: 0.8;
+      animation: proto-hit-flash 1.8s ease-in-out infinite;
+    }
+
+    .proto-hit-mark::before,
+    .proto-hit-mark::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      width: 2px;
+      height: 18px;
+      border-radius: 2px;
+      background: var(--lab-hit);
+    }
+
+    .proto-hit-mark::after {
+      transform: rotate(90deg);
+    }
+
+    .lab-legend {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      margin-top: 10px;
+      color: var(--lab-muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .lab-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .lab-chip {
+      width: 24px;
+      height: 3px;
+      border-radius: 3px;
+      background: var(--lab-attack);
+    }
+
+    .lab-chip-heal {
+      background: var(--lab-heal);
+    }
+
+    .lab-chip-hit {
+      width: 9px;
+      height: 9px;
+      background: var(--lab-hit);
+    }
+
+    @keyframes proto-hit {
+      0%, 74%, 100% {
+        transform: translateX(0);
+        filter: brightness(1);
+      }
+      80% {
+        transform: translateX(2px);
+        filter: brightness(1.22);
+      }
+      86% {
+        transform: translateX(-1px);
+      }
+      92% {
+        transform: translateX(1px);
+      }
+    }
+
+    @keyframes proto-hit-flash {
+      0%, 72%, 100% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+      80% {
+        opacity: 0.88;
+        transform: scale(1);
+      }
+      92% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+    }
+
+    @keyframes proto-heal-pulse {
+      0%, 100% {
+        opacity: 0.4;
+        transform: scale(0.88);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="lab-page">
+    <header>
+      <p class="lab-kicker">Project Signal Personal / Presentation Lab</p>
+      <h1 class="lab-title">Action Line Prototype 01</h1>
+      <p class="lab-note">A quiet readability test for attack, heal, and hit feedback on a 390px mobile stage.</p>
+    </header>
+
+    <section class="lab-stage" aria-label="Action line prototype stage">
+      <div class="lab-stage-label">
+        <span>Readability first</span>
+        <span>No images, no canvas</span>
+      </div>
+
+      <div class="lab-field">
+        <article class="proto-token proto-priest-card">
+          <div class="proto-avatar proto-priest" aria-hidden="true">
+            <span class="proto-part proto-aura"></span>
+            <span class="proto-part proto-base"></span>
+            <span class="proto-part proto-stance"></span>
+            <span class="proto-part proto-body"></span>
+            <span class="proto-part proto-head"></span>
+            <span class="proto-part proto-weapon"></span>
+          </div>
+          <h2>사제</h2>
+          <p>heal support</p>
+        </article>
+
+        <article class="proto-token proto-warrior-card">
+          <div class="proto-avatar proto-warrior" aria-hidden="true">
+            <span class="proto-part proto-aura"></span>
+            <span class="proto-part proto-base"></span>
+            <span class="proto-part proto-stance"></span>
+            <span class="proto-part proto-body"></span>
+            <span class="proto-part proto-head"></span>
+            <span class="proto-part proto-weapon"></span>
+            <span class="proto-part proto-offhand"></span>
+          </div>
+          <h2>전사</h2>
+          <p>front ally</p>
+        </article>
+
+        <article class="proto-token proto-archer-card">
+          <div class="proto-avatar proto-archer" aria-hidden="true">
+            <span class="proto-part proto-aura"></span>
+            <span class="proto-part proto-base"></span>
+            <span class="proto-part proto-stance"></span>
+            <span class="proto-part proto-body"></span>
+            <span class="proto-part proto-head"></span>
+            <span class="proto-part proto-weapon"></span>
+            <span class="proto-part proto-offhand"></span>
+          </div>
+          <h2>궁수</h2>
+          <p>attack line</p>
+        </article>
+
+        <article class="proto-token proto-enemy-card">
+          <div class="proto-enemy" aria-hidden="true"></div>
+          <h2>적</h2>
+          <p>small hit</p>
+        </article>
+
+        <span class="proto-line proto-heal-line" aria-hidden="true"></span>
+        <span class="proto-line proto-attack-line" aria-hidden="true"></span>
+        <span class="proto-line proto-hit-mark" aria-hidden="true"></span>
+      </div>
+
+      <div class="lab-legend">
+        <span><i class="lab-chip"></i>궁수 공격선: 얇고 조용한 방향 표시</span>
+        <span><i class="lab-chip lab-chip-heal"></i>사제 회복선: 부드러운 곡선과 작은 오라 점</span>
+        <span><i class="lab-chip lab-chip-hit"></i>피격 반응: 맞은 대상만 작게 흔들림</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

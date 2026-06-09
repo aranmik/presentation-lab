@@ -37,6 +37,14 @@ Current local preview server:
 http://localhost:4177/avatar-prototype
 ```
 
+Fixed current preview page:
+
+```text
+http://localhost:4177/preview.html
+```
+
+Use `preview.html` as the right-side Browser / Preview page when Naranim wants to keep one fixed tab open. Luda updates this page to point at the current experiment.
+
 Recommended flow:
 
 1. Luda updates a lab file.
@@ -66,6 +74,7 @@ Prototype goal:
 Current suggested priority:
 
 1. Avatar Prototype 01 readability polish.
-2. Small action-line prototype for basic attack, heal, and hit feedback.
-3. Speed gauge or action-ready state prototype.
-4. Skill label and combat log readability prototype.
+2. Action Line Prototype 01: small attack, heal, and hit feedback readability test.
+3. Battlefield Layout Prototype 01: party slots, enemy footprint, boss presence, and quiet FX path sketch.
+4. Speed gauge or action-ready state prototype.
+5. Skill label and combat log readability prototype.
