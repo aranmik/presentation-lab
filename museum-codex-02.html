@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Presentation Lab Codex 02</title>
+  <title>Museum Selection Flow 01</title>
   <style>
     :root {
       color-scheme: dark;
@@ -12,7 +12,7 @@
       --panel: #171e28;
       --panel-2: #202a36;
       --line: #303b4b;
-      --line-soft: rgba(255, 255, 255, 0.075);
+      --line-soft: rgba(255, 255, 255, 0.08);
       --text: #eef3f8;
       --muted: #9aa8b8;
       --soft: #cbd5df;
@@ -31,7 +31,7 @@
       display: flex;
       justify-content: center;
       background:
-        radial-gradient(circle at 50% 0%, rgba(159, 230, 207, 0.08), transparent 36%),
+        radial-gradient(circle at 50% 0%, rgba(159, 230, 207, 0.08), transparent 34%),
         var(--bg);
       color: var(--text);
       font-family: Arial, sans-serif;
@@ -54,7 +54,7 @@
 
     .screen.is-active {
       display: block;
-      animation: fade-in 150ms ease-out;
+      animation: fade-in 140ms ease-out;
     }
 
     @keyframes fade-in {
@@ -79,80 +79,66 @@
     }
 
     .subtitle {
-      margin: 0 0 16px;
+      margin: 0 0 15px;
       color: var(--accent);
       font-size: 13px;
       line-height: 1.45;
     }
 
-    .home-card {
-      margin-bottom: 12px;
-      padding: 14px 13px;
+    .category-grid {
+      display: grid;
+      gap: 9px;
+    }
+
+    .category-button {
+      width: 100%;
+      min-height: 76px;
+      padding: 12px;
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 10px;
       background:
-        linear-gradient(135deg, rgba(159, 230, 207, 0.075), transparent 40%),
+        linear-gradient(135deg, rgba(159, 230, 207, 0.07), transparent 44%),
         var(--panel);
-    }
-
-    .home-card h2 {
-      margin-bottom: 5px;
-      font-size: 18px;
-      line-height: 1.25;
-    }
-
-    .home-card p {
-      margin-bottom: 11px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .status-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 22px;
-      padding: 0 7px;
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.035);
-      color: var(--soft);
-      font-size: 10px;
-    }
-
-    .badge.pass { color: var(--accent); border-color: rgba(159, 230, 207, 0.35); }
-    .badge.watch { color: var(--watch); border-color: rgba(239, 193, 106, 0.35); }
-    .badge.pending { color: var(--muted); }
-
-    .home-button,
-    .back-button,
-    .view-button {
-      min-height: 40px;
-      border-radius: 9px;
-      color: var(--text);
-      text-decoration: none;
+      color: inherit;
+      text-align: left;
       cursor: pointer;
     }
 
-    .home-button {
-      width: 100%;
-      border: 1px solid rgba(159, 230, 207, 0.48);
-      background: rgba(159, 230, 207, 0.09);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .home-button:active,
+    .category-button:active,
     .back-button:active,
     .view-button:active {
       transform: translateY(1px);
+    }
+
+    .category-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 9px;
+      margin-bottom: 6px;
+    }
+
+    .category-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .category-desc {
+      display: block;
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.42;
+    }
+
+    .count {
+      flex: 0 0 auto;
+      padding: 4px 7px;
+      border: 1px solid rgba(159, 230, 207, 0.38);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 10px;
+      line-height: 1;
     }
 
     .screen-head {
@@ -162,18 +148,22 @@
       margin: -16px -14px 12px;
       padding: 13px 14px 11px;
       border-bottom: 1px solid rgba(48, 59, 75, 0.78);
-      background: rgba(18, 24, 33, 0.94);
+      background: rgba(18, 24, 33, 0.95);
       backdrop-filter: blur(8px);
     }
 
     .back-button {
       display: inline-flex;
       align-items: center;
+      min-height: 36px;
       margin-bottom: 8px;
       padding: 0 10px;
       border: 1px solid rgba(159, 230, 207, 0.42);
+      border-radius: 9px;
       background: rgba(159, 230, 207, 0.08);
+      color: var(--text);
       font-size: 12px;
+      cursor: pointer;
     }
 
     .screen-title {
@@ -189,45 +179,18 @@
       line-height: 1.45;
     }
 
-    .group {
-      margin-bottom: 13px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 38%),
-        var(--panel);
-      overflow: hidden;
-    }
-
-    .group-head {
-      padding: 11px 11px 9px;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .group-title {
-      margin: 0 0 4px;
-      font-size: 15px;
-      line-height: 1.25;
-    }
-
-    .group-desc {
-      margin: 0;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.4;
-    }
-
     .entry-list {
       display: grid;
-      gap: 8px;
-      padding: 10px;
+      gap: 10px;
     }
 
     .entry-card {
-      padding: 10px;
+      padding: 11px;
       border: 1px solid #2d3746;
-      border-radius: 9px;
-      background: rgba(16, 21, 29, 0.78);
+      border-radius: 10px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%),
+        rgba(16, 21, 29, 0.84);
     }
 
     .entry-top {
@@ -235,17 +198,21 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 8px;
-      margin-bottom: 5px;
+      margin-bottom: 7px;
     }
 
     .entry-title {
       margin: 0;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.25;
     }
 
     .entry-code {
       flex: 0 0 auto;
+      padding: 4px 7px;
+      border-radius: 6px;
+      background: rgba(159, 230, 207, 0.08);
+      border: 1px solid rgba(159, 230, 207, 0.32);
       color: var(--accent);
       font-size: 10px;
       white-space: nowrap;
@@ -253,15 +220,52 @@
 
     .entry-purpose {
       margin: 0 0 8px;
-      color: var(--muted);
-      font-size: 11px;
+      color: var(--soft);
+      font-size: 11.5px;
       line-height: 1.42;
+    }
+
+    .badge-row,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .badge,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 0 7px;
+      border-radius: 999px;
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .badge {
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--soft);
+    }
+
+    .badge.draft { color: var(--blue); border-color: rgba(154, 212, 240, 0.35); }
+    .badge.interest { color: var(--gold); border-color: rgba(240, 195, 106, 0.36); }
+    .badge.candidate { color: var(--accent); border-color: rgba(159, 230, 207, 0.38); }
+    .badge.hold { color: var(--watch); border-color: rgba(239, 193, 106, 0.32); }
+    .badge.ready { color: var(--muted); }
+
+    .tag {
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      background: #10151d;
+      color: var(--muted);
     }
 
     .entry-meta {
       display: grid;
       gap: 4px;
-      margin-bottom: 9px;
+      margin-bottom: 10px;
       color: var(--soft);
       font-size: 10.5px;
       line-height: 1.35;
@@ -273,12 +277,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 31px;
-      padding: 0 10px;
+      min-height: 34px;
+      padding: 0 11px;
       border: 1px solid rgba(154, 212, 240, 0.45);
-      border-radius: 7px;
+      border-radius: 8px;
       background: rgba(154, 212, 240, 0.08);
+      color: var(--text);
       font-size: 12px;
+      text-decoration: none;
     }
 
     .note {
@@ -298,219 +304,195 @@
     <section id="home" class="screen is-active" aria-label="도감 입구">
       <header>
         <p class="kicker">Project Signal Personal / Presentation Lab</p>
-        <h1>Presentation Lab Codex</h1>
-        <p class="subtitle">본게임 이식 전 시안을 모으고 고르는 전시관입니다. 오늘 보고 싶은 전시실만 들어가면 됩니다.</p>
+        <h1>루다의 연출 도감</h1>
+        <p class="subtitle">본게임 이식 전 시안을 모으고 고르는 전시관입니다. 오늘 보고 싶은 후보군만 골라 들어가면 됩니다.</p>
       </header>
 
-      <article class="home-card">
-        <div class="status-row">
-          <span class="badge pass">시안 있음</span>
-          <span class="badge">선별용</span>
-        </div>
-        <h2>캐릭터/아바타 도감</h2>
-        <p>직업을 먼저 정하지 않고, 실루엣과 장비 차이로 마음에 드는 후보를 고르는 전시실입니다.</p>
-        <button class="home-button" type="button" data-screen="avatar">캐릭터 전시실 들어가기</button>
-      </article>
-
-      <article class="home-card">
-        <div class="status-row">
-          <span class="badge pass">PASS 후보</span>
-          <span class="badge watch">튜닝 필요</span>
-        </div>
-        <h2>전투 연출 도감</h2>
-        <p>행동선, 피격/회복 리액션, 피해/회복 숫자처럼 전투가 읽히는 방식을 보는 전시실입니다.</p>
-        <button class="home-button" type="button" data-screen="combat">전투 연출 전시실 들어가기</button>
-      </article>
-
-      <article class="home-card">
-        <div class="status-row">
-          <span class="badge pass">전장 기준</span>
-          <span class="badge pending">HUD 준비 중</span>
-        </div>
-        <h2>전장/HUD 도감</h2>
-        <p>전장 배치, 대치 구도, 몬스터 mockup, HUD/게이지 후보를 보는 전시실입니다.</p>
-        <button class="home-button" type="button" data-screen="field">전장/HUD 전시실 들어가기</button>
-      </article>
+      <nav class="category-grid" aria-label="시안 카테고리">
+        <button class="category-button" type="button" data-screen="jobs">
+          <span class="category-top"><span class="category-title">직업/아바타 후보</span><span class="count">16개</span></span>
+          <span class="category-desc">A-01~A-16. 실루엣, 무기, 자세로 마음에 드는 직업 후보를 고릅니다.</span>
+        </button>
+        <button class="category-button" type="button" data-screen="monsters">
+          <span class="category-top"><span class="category-title">몬스터 후보</span><span class="count">11개+</span></span>
+          <span class="category-desc">M-01~M-10과 기존 몬스터 단품. 크기, 종족감, 작은 화면 가독성을 봅니다.</span>
+        </button>
+        <button class="category-button" type="button" data-screen="bosses">
+          <span class="category-top"><span class="category-title">정예/보스 후보</span><span class="count">구도 포함</span></span>
+          <span class="category-desc">큰 덩어리, 압박감, 보스 전용 대치 구도 후보를 따로 봅니다.</span>
+        </button>
+        <button class="category-button" type="button" data-screen="fx">
+          <span class="category-top"><span class="category-title">행동선/FX 후보</span><span class="count">5개</span></span>
+          <span class="category-desc">source→target, slash, 회복선, hit pulse, 숫자 queue 후보를 비교합니다.</span>
+        </button>
+        <button class="category-button" type="button" data-screen="field">
+          <span class="category-top"><span class="category-title">전장 레이아웃 후보</span><span class="count">2개</span></span>
+          <span class="category-desc">아군 좌하단 / 적 우상단, 대각선 대치, 대형 적 배치를 확인합니다.</span>
+        </button>
+        <button class="category-button" type="button" data-screen="hud">
+          <span class="category-top"><span class="category-title">HUD/게이지 후보</span><span class="count">준비 중</span></span>
+          <span class="category-desc">HP바, 속도게이지, 로그 위치 후보를 모을 자리입니다.</span>
+        </button>
+      </nav>
 
       <section class="note">
-        사용법: 첫 화면에서 카테고리를 고르고, 안쪽 화면에서 필요한 시안만 엽니다. 뒤로 가기를 누르면 다시 이 입구로 돌아옵니다.
+        선별 기준: 먼저 전시 코드와 상태 배지를 보고, 마음에 드는 후보만 보기 버튼으로 열어 확인합니다. 채택 후보는 유키가 판단하고 렌에게 이식 프롬프트로 넘깁니다.
       </section>
     </section>
 
-    <section id="avatar" class="screen" aria-label="캐릭터 아바타 도감">
+    <section id="jobs" class="screen" aria-label="직업 아바타 후보">
       <header class="screen-head">
         <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
-        <h2 class="screen-title">캐릭터/아바타 도감</h2>
-        <p class="screen-desc">아바타를 먼저 보고, 나중에 직업/몬스터/보스 역할을 붙이기 위한 선별 전시실입니다.</p>
+        <h2 class="screen-title">직업/아바타 후보</h2>
+        <p class="screen-desc">이름 확정 전 후보명입니다. 나라가 “이 실루엣 좋다”를 고르기 위한 전시실입니다.</p>
       </header>
-
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">직업 후보</h3>
-          <p class="group-desc">전열/후열/지원/교란 후보로 발전할 수 있는 인간형과 하이브리드 후보입니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Avatar Museum 01</h4><span class="entry-code">A/M</span></div>
-            <p class="entry-purpose">직업 확정 전 아바타 10종을 전시 코드로 선별합니다.</p>
-            <div class="entry-meta">
-              <div><span>상태:</span> PASS 후보</div>
-              <div><span>이식:</span> 미이식 / 본게임 후보 선별용</div>
-              <div><span>보기:</span> 덩어리, 자세, 장비, 가면, 무기 차이</div>
-            </div>
-            <a class="view-button" href="./avatar-museum-01.html">보기</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">몬스터 후보</h3>
-          <p class="group-desc">작은 화면에서 굵고 구분되는 몬스터 실루엣을 보는 전시실입니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Monster Avatar Prototype</h4><span class="entry-code">MON</span></div>
-            <p class="entry-purpose">슬라임/고블린/늑대 단품 실루엣을 확인합니다.</p>
-            <div class="entry-meta">
-              <div><span>상태:</span> WATCH</div>
-              <div><span>이식:</span> 미이식</div>
-              <div><span>보기:</span> 귀, 몸통 덩어리, 작은 크기 가독성</div>
-            </div>
-            <a class="view-button" href="./monster-avatar-prototype.html">보기</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">정예/보스 후보</h3>
-          <p class="group-desc">큰 덩어리와 압박감은 후속 전시에서 분리합니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Boss Candidate Shelf</h4><span class="entry-code">BOSS</span></div>
-            <p class="entry-purpose">전용 보스 아바타 전시는 아직 준비 중입니다.</p>
-            <div class="entry-meta"><div><span>상태:</span> 준비 중</div><div><span>이식:</span> 미이식</div></div>
-          </article>
-        </div>
-      </section>
+      <div class="entry-list">
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">기본 3직업 실루엣 묶음</h3><span class="entry-code">JOB-A-001</span></div>
+          <p class="entry-purpose">전사/사제/궁수 계열의 기본 몸집, 무기, 후열감을 비교합니다.</p>
+          <div class="badge-row"><span class="badge candidate">채택 후보</span><span class="badge">일부 반영</span></div>
+          <div class="tag-row"><span class="tag">단단함</span><span class="tag">정화</span><span class="tag">날카로움</span></div>
+          <div class="entry-meta"><div><span>포함:</span> A-01, A-02, A-03</div><div><span>추천 용도:</span> 전열 기본 / 후열 회복 / 후열 저격 후보</div></div>
+          <a class="view-button" href="./avatar-museum-01.html">보기</a>
+        </article>
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">신규 직업 실루엣 묶음</h3><span class="entry-code">JOB-A-002</span></div>
+          <p class="entry-purpose">가면, 방패, 창, 날개, 버퍼 장비처럼 확장 직업감을 봅니다.</p>
+          <div class="badge-row"><span class="badge interest">관심</span><span class="badge">미이식</span></div>
+          <div class="tag-row"><span class="tag">장난기</span><span class="tag">보호</span><span class="tag">지휘</span></div>
+          <div class="entry-meta"><div><span>포함:</span> A-04~A-16</div><div><span>추천 용도:</span> 탱커, 교란, 버퍼, 보호막, 턴 조절 후보</div></div>
+          <a class="view-button" href="./avatar-museum-01.html">보기</a>
+        </article>
+      </div>
     </section>
 
-    <section id="combat" class="screen" aria-label="전투 연출 도감">
+    <section id="monsters" class="screen" aria-label="몬스터 후보">
       <header class="screen-head">
         <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
-        <h2 class="screen-title">전투 연출 도감</h2>
-        <p class="screen-desc">source→target 행동선, 피격/회복 리액션, 숫자 queue 후보를 보는 전시실입니다.</p>
+        <h2 class="screen-title">몬스터 후보</h2>
+        <p class="screen-desc">일반 몬스터 후보만 분리해서 크기, 종족감, 작은 화면 가독성을 봅니다.</p>
       </header>
-
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">행동선</h3>
-          <p class="group-desc">누가 누구에게 행동했는지 읽히는 source→target 문법입니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Action Line R&amp;D 03.5</h4><span class="entry-code">LINE</span></div>
-            <p class="entry-purpose">straight / curve / slash / enemy line 타입과 anchor 구조를 비교합니다.</p>
-            <div class="entry-meta">
-              <div><span>상태:</span> PASS 후보</div>
-              <div><span>이식:</span> 후보 / 아직 미이식</div>
-              <div><span>보기:</span> data-source, data-target, data-line-type</div>
-            </div>
-            <a class="view-button" href="./action-line-rnd-03-5.html">보기</a>
-          </article>
-
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Action Line R&amp;D 03</h4><span class="entry-code">OLD</span></div>
-            <p class="entry-purpose">03.5 이전의 source→target 기준 비교용 시안입니다.</p>
-            <div class="entry-meta"><div><span>상태:</span> 보조 자료</div><div><span>이식:</span> 미이식</div></div>
-            <a class="view-button" href="./action-line-rnd-03.html">보기</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">피격/회복 리액션</h3>
-          <p class="group-desc">맞았거나 회복됐다는 감각이 몸체와 숫자로 읽히는지 보는 전시실입니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Action Feedback Prototype 02</h4><span class="entry-code">HIT</span></div>
-            <p class="entry-purpose">궁수 공격, 사제 회복, 늑대 공격, hit pulse, 숫자 queue를 봅니다.</p>
-            <div class="entry-meta">
-              <div><span>상태:</span> WATCH</div>
-              <div><span>이식:</span> 일부 후보</div>
-              <div><span>보기:</span> 숫자가 캐릭터를 덮지 않는지, 회복선이 공격선과 다른지</div>
-            </div>
-            <a class="view-button" href="./action-feedback-prototype-02.html">보기</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">idle/잔상 후보</h3>
-          <p class="group-desc">전투가 멈춰 보이지 않게 하는 조용한 대기감과 breathing 후보입니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Idle Prototype</h4><span class="entry-code">IDLE</span></div>
-            <p class="entry-purpose">조용한 idle 감각을 보는 초기 실험입니다.</p>
-            <div class="entry-meta"><div><span>상태:</span> 보류 / 참고 자료</div><div><span>이식:</span> 미이식</div></div>
-            <a class="view-button" href="./idle-prototype.html">보기</a>
-          </article>
-        </div>
-      </section>
+      <div class="entry-list">
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">소형/일반 몬스터 묶음</h3><span class="entry-code">MON-A-001</span></div>
+          <p class="entry-purpose">껍질, 위습, 포자, 기계 장난감 등 일반 몬스터 실루엣 후보입니다.</p>
+          <div class="badge-row"><span class="badge draft">시안</span><span class="badge">미이식</span></div>
+          <div class="tag-row"><span class="tag">단단함</span><span class="tag">이형</span><span class="tag">작은 덩어리</span></div>
+          <div class="entry-meta"><div><span>포함:</span> M-01~M-10</div><div><span>추천 용도:</span> 독/속도/자연/저주 테마 일반 몬스터 후보</div></div>
+          <a class="view-button" href="./avatar-museum-01.html">보기</a>
+        </article>
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">기존 초반 몬스터 단품</h3><span class="entry-code">MON-A-002</span></div>
+          <p class="entry-purpose">슬라임, 고블린, 늑대가 390px에서 바로 읽히는지 확인합니다.</p>
+          <div class="badge-row"><span class="badge interest">관심</span><span class="badge">일부 반영</span></div>
+          <div class="tag-row"><span class="tag">초반 기준</span><span class="tag">종족 구분</span></div>
+          <div class="entry-meta"><div><span>기준 파일:</span> monster-avatar-prototype.html</div><div><span>추천 용도:</span> 본게임 초반 몬스터 가독 기준</div></div>
+          <a class="view-button" href="./monster-avatar-prototype.html">보기</a>
+        </article>
+      </div>
     </section>
 
-    <section id="field" class="screen" aria-label="전장 HUD 도감">
+    <section id="bosses" class="screen" aria-label="정예 보스 후보">
       <header class="screen-head">
         <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
-        <h2 class="screen-title">전장/HUD 도감</h2>
-        <p class="screen-desc">전장 위 캐릭터, 대치 구도, 몬스터 mockup, HUD 후보를 보는 전시실입니다.</p>
+        <h2 class="screen-title">정예/보스 후보</h2>
+        <p class="screen-desc">아직 본게임 이식이 아니라, 압박감과 보스 대치 구도를 따로 고르는 전시실입니다.</p>
       </header>
+      <div class="entry-list">
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">정예/보스 아바타 묶음</h3><span class="entry-code">BOSS-A-001</span></div>
+          <p class="entry-purpose">왕관, 거울, 독, 종, 기록 테마의 큰 실루엣 후보입니다.</p>
+          <div class="badge-row"><span class="badge draft">시안</span><span class="badge">미이식</span></div>
+          <div class="tag-row"><span class="tag">압박감</span><span class="tag">테마성</span><span class="tag">큰 덩어리</span></div>
+          <div class="entry-meta"><div><span>포함:</span> B-01~B-08</div><div><span>추천 용도:</span> 중간보스 / 테마 보스 후보</div></div>
+          <a class="view-button" href="./avatar-museum-01.html">보기</a>
+        </article>
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">보스 전용 대치 구도</h3><span class="entry-code">BOSS-A-002</span></div>
+          <p class="entry-purpose">대형 적이 화면을 얼마나 차지해야 위압감이 나는지 확인합니다.</p>
+          <div class="badge-row"><span class="badge interest">관심</span><span class="badge">미이식</span></div>
+          <div class="tag-row"><span class="tag">대형 적</span><span class="tag">대각선</span><span class="tag">전용 구도</span></div>
+          <div class="entry-meta"><div><span>기준 파일:</span> battlefield-layout-prototype.html</div><div><span>추천 용도:</span> 보스 대치 구도 후보</div></div>
+          <a class="view-button" href="./battlefield-layout-prototype.html">보기</a>
+        </article>
+      </div>
+    </section>
 
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">전장 레이아웃 / 대치 구도</h3>
-          <p class="group-desc">카드 안 아이콘이 아니라, 전장 위 캐릭터가 대치하는 감각을 보는 전시실입니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Monster Battlefield Mockup</h4><span class="entry-code">FIELD</span></div>
-            <p class="entry-purpose">전사/사제/궁수와 슬라임/고블린/늑대가 같은 전장 안에서 대치합니다.</p>
-            <div class="entry-meta">
-              <div><span>상태:</span> PASS 후보 / 본게임 감성 기준</div>
-              <div><span>이식:</span> 후보</div>
-              <div><span>보기:</span> 아군 좌하단, 적 우상단, 전장 위 캐릭터</div>
-            </div>
-            <a class="view-button" href="./monster-battlefield-mockup.html">보기</a>
-          </article>
+    <section id="fx" class="screen" aria-label="행동선 FX 후보">
+      <header class="screen-head">
+        <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
+        <h2 class="screen-title">행동선/FX 후보</h2>
+        <p class="screen-desc">누가 누구에게 행동했는지 읽히는 source→target 문법과 숫자/피격 후보입니다.</p>
+      </header>
+      <div class="entry-list">
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">행동선 타입 비교</h3><span class="entry-code">FX-A-001</span></div>
+          <p class="entry-purpose">straight, heal curve, slash, enemy line을 한 화면에서 비교합니다.</p>
+          <div class="badge-row"><span class="badge candidate">채택 후보</span><span class="badge">일부 반영</span></div>
+          <div class="tag-row"><span class="tag">source→target</span><span class="tag">직선</span><span class="tag">곡선</span><span class="tag">slash</span></div>
+          <div class="entry-meta"><div><span>기준 파일:</span> action-line-rnd-03-5.html</div><div><span>추천 용도:</span> 궁수/사제/전사/적 공격선 후보</div></div>
+          <a class="view-button" href="./action-line-rnd-03-5.html">보기</a>
+        </article>
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">행동선 이전 비교안</h3><span class="entry-code">FX-A-002</span></div>
+          <p class="entry-purpose">03.5로 다듬기 전 기준을 비교해 무엇을 버릴지 판단합니다.</p>
+          <div class="badge-row"><span class="badge hold">보류</span><span class="badge">미이식</span></div>
+          <div class="tag-row"><span class="tag">비교용</span><span class="tag">구버전</span></div>
+          <div class="entry-meta"><div><span>기준 파일:</span> action-line-rnd-03.html</div><div><span>추천 용도:</span> 후속 판단 참고 자료</div></div>
+          <a class="view-button" href="./action-line-rnd-03.html">보기</a>
+        </article>
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">피격/회복 숫자와 queue</h3><span class="entry-code">FX-A-003</span></div>
+          <p class="entry-purpose">피해/회복 숫자, hit pulse, 같은 대상 숫자 queue를 봅니다.</p>
+          <div class="badge-row"><span class="badge interest">관심</span><span class="badge">이식 후보</span></div>
+          <div class="tag-row"><span class="tag">hit pulse</span><span class="tag">+숫자</span><span class="tag">queue</span></div>
+          <div class="entry-meta"><div><span>기준 파일:</span> action-feedback-prototype-02.html</div><div><span>추천 용도:</span> 피격/회복 가독 후보</div></div>
+          <a class="view-button" href="./action-feedback-prototype-02.html">보기</a>
+        </article>
+      </div>
+    </section>
 
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">Battlefield Layout Prototype</h4><span class="entry-code">LAYOUT</span></div>
-            <p class="entry-purpose">소형 적, 대형 적, 보스가 390px 전장에서 어느 정도 존재감을 갖는지 봅니다.</p>
-            <div class="entry-meta"><div><span>상태:</span> WATCH</div><div><span>이식:</span> 미이식</div></div>
-            <a class="view-button" href="./battlefield-layout-prototype.html">보기</a>
-          </article>
-        </div>
-      </section>
+    <section id="field" class="screen" aria-label="전장 레이아웃 후보">
+      <header class="screen-head">
+        <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
+        <h2 class="screen-title">전장 레이아웃 후보</h2>
+        <p class="screen-desc">아군 좌하단 / 적 우상단 대각 대치와 대형 적 배치를 본게임 후보로 정리합니다.</p>
+      </header>
+      <div class="entry-list">
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">기본 대각 전장</h3><span class="entry-code">FIELD-A-001</span></div>
+          <p class="entry-purpose">아군과 몬스터가 카드가 아니라 같은 전장 안에서 대치합니다.</p>
+          <div class="badge-row"><span class="badge candidate">채택 후보</span><span class="badge">일부 반영</span></div>
+          <div class="tag-row"><span class="tag">좌하단</span><span class="tag">우상단</span><span class="tag">대각선</span></div>
+          <div class="entry-meta"><div><span>기준 파일:</span> monster-battlefield-mockup.html</div><div><span>추천 용도:</span> 본게임 전장 기본 감성 기준</div></div>
+          <a class="view-button" href="./monster-battlefield-mockup.html">보기</a>
+        </article>
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">대형 적/보스 배치 비교</h3><span class="entry-code">FIELD-A-002</span></div>
+          <p class="entry-purpose">소형, 대형, 보스가 390px 화면에서 차지하는 비율을 비교합니다.</p>
+          <div class="badge-row"><span class="badge interest">관심</span><span class="badge">미이식</span></div>
+          <div class="tag-row"><span class="tag">대형 적</span><span class="tag">보스</span><span class="tag">공간감</span></div>
+          <div class="entry-meta"><div><span>기준 파일:</span> battlefield-layout-prototype.html</div><div><span>추천 용도:</span> 적 크기 점유 후보</div></div>
+          <a class="view-button" href="./battlefield-layout-prototype.html">보기</a>
+        </article>
+      </div>
+    </section>
 
-      <section class="group">
-        <div class="group-head">
-          <h3 class="group-title">HUD/게이지 R&amp;D</h3>
-          <p class="group-desc">HP/속도 게이지, 로그/HUD 위치는 본게임 shell이 잠긴 뒤 따로 전시합니다.</p>
-        </div>
-        <div class="entry-list">
-          <article class="entry-card">
-            <div class="entry-top"><h4 class="entry-title">HUD/Gauge R&amp;D</h4><span class="entry-code">HUD</span></div>
-            <p class="entry-purpose">전용 HUD/게이지 전시는 아직 준비 중입니다.</p>
-            <div class="entry-meta"><div><span>상태:</span> 준비 중</div><div><span>이식:</span> 미이식</div></div>
-          </article>
-        </div>
-      </section>
+    <section id="hud" class="screen" aria-label="HUD 게이지 후보">
+      <header class="screen-head">
+        <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
+        <h2 class="screen-title">HUD/게이지 후보</h2>
+        <p class="screen-desc">HP바, 속도게이지, 로그 위치 후보를 나중에 모을 자리입니다.</p>
+      </header>
+      <div class="entry-list">
+        <article class="entry-card">
+          <div class="entry-top"><h3 class="entry-title">HUD/Gauge R&amp;D 자리</h3><span class="entry-code">HUD-A-001</span></div>
+          <p class="entry-purpose">현재는 준비 중입니다. 본게임 Shell 기준이 더 잠기면 별도 시안으로 분리합니다.</p>
+          <div class="badge-row"><span class="badge ready">준비 중</span><span class="badge">미이식</span></div>
+          <div class="tag-row"><span class="tag">HP바</span><span class="tag">속도게이지</span><span class="tag">로그 위치</span></div>
+          <div class="entry-meta"><div><span>추천 용도:</span> 정보 피로도 / 전투 가독성 후보 수집</div><div><span>다음 작업:</span> 전용 HUD 후보 HTML 제작</div></div>
+        </article>
+      </div>
     </section>
   </main>
 
