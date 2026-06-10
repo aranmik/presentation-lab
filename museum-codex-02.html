@@ -91,6 +91,7 @@
     }
 
     .category-button {
+      display: block;
       width: 100%;
       min-height: 76px;
       padding: 12px;
@@ -102,6 +103,7 @@
       color: inherit;
       text-align: left;
       cursor: pointer;
+      text-decoration: none;
     }
 
     .category-button:active,
@@ -309,17 +311,17 @@
       </header>
 
       <nav class="category-grid" aria-label="시안 카테고리">
-        <button class="category-button" type="button" data-screen="jobs">
+        <a class="category-button" href="./avatar-museum-01.html">
           <span class="category-top"><span class="category-title">직업/아바타 후보</span><span class="count">16개</span></span>
           <span class="category-desc">A-01~A-16. 실루엣, 무기, 자세로 마음에 드는 직업 후보를 고릅니다.</span>
-        </button>
+        </a>
         <button class="category-button" type="button" data-screen="monsters">
-          <span class="category-top"><span class="category-title">몬스터 후보</span><span class="count">11개+</span></span>
-          <span class="category-desc">M-01~M-10과 기존 몬스터 단품. 크기, 종족감, 작은 화면 가독성을 봅니다.</span>
+          <span class="category-top"><span class="category-title">몬스터 후보</span><span class="count">1개</span></span>
+          <span class="category-desc">기존 초반 몬스터 단품. 크기, 종족감, 작은 화면 가독성을 봅니다.</span>
         </button>
         <button class="category-button" type="button" data-screen="bosses">
-          <span class="category-top"><span class="category-title">정예/보스 후보</span><span class="count">구도 포함</span></span>
-          <span class="category-desc">큰 덩어리, 압박감, 보스 전용 대치 구도 후보를 따로 봅니다.</span>
+          <span class="category-top"><span class="category-title">정예/보스 후보</span><span class="count">1개</span></span>
+          <span class="category-desc">큰 덩어리와 압박감을 보는 보스 전용 대치 구도 후보를 봅니다.</span>
         </button>
         <button class="category-button" type="button" data-screen="fx">
           <span class="category-top"><span class="category-title">행동선/FX 후보</span><span class="count">5개</span></span>
@@ -340,32 +342,6 @@
       </section>
     </section>
 
-    <section id="jobs" class="screen" aria-label="직업 아바타 후보">
-      <header class="screen-head">
-        <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
-        <h2 class="screen-title">직업/아바타 후보</h2>
-        <p class="screen-desc">이름 확정 전 후보명입니다. 나라가 “이 실루엣 좋다”를 고르기 위한 전시실입니다.</p>
-      </header>
-      <div class="entry-list">
-        <article class="entry-card">
-          <div class="entry-top"><h3 class="entry-title">기본 3직업 실루엣 묶음</h3><span class="entry-code">JOB-A-001</span></div>
-          <p class="entry-purpose">전사/사제/궁수 계열의 기본 몸집, 무기, 후열감을 비교합니다.</p>
-          <div class="badge-row"><span class="badge candidate">채택 후보</span><span class="badge">일부 반영</span></div>
-          <div class="tag-row"><span class="tag">단단함</span><span class="tag">정화</span><span class="tag">날카로움</span></div>
-          <div class="entry-meta"><div><span>포함:</span> A-01, A-02, A-03</div><div><span>추천 용도:</span> 전열 기본 / 후열 회복 / 후열 저격 후보</div></div>
-          <a class="view-button" href="./avatar-museum-01.html">보기</a>
-        </article>
-        <article class="entry-card">
-          <div class="entry-top"><h3 class="entry-title">신규 직업 실루엣 묶음</h3><span class="entry-code">JOB-A-002</span></div>
-          <p class="entry-purpose">가면, 방패, 창, 날개, 버퍼 장비처럼 확장 직업감을 봅니다.</p>
-          <div class="badge-row"><span class="badge interest">관심</span><span class="badge">미이식</span></div>
-          <div class="tag-row"><span class="tag">장난기</span><span class="tag">보호</span><span class="tag">지휘</span></div>
-          <div class="entry-meta"><div><span>포함:</span> A-04~A-16</div><div><span>추천 용도:</span> 탱커, 교란, 버퍼, 보호막, 턴 조절 후보</div></div>
-          <a class="view-button" href="./avatar-museum-01.html">보기</a>
-        </article>
-      </div>
-    </section>
-
     <section id="monsters" class="screen" aria-label="몬스터 후보">
       <header class="screen-head">
         <button class="back-button" type="button" data-screen="home">← 도감 입구로</button>
@@ -374,15 +350,7 @@
       </header>
       <div class="entry-list">
         <article class="entry-card">
-          <div class="entry-top"><h3 class="entry-title">소형/일반 몬스터 묶음</h3><span class="entry-code">MON-A-001</span></div>
-          <p class="entry-purpose">껍질, 위습, 포자, 기계 장난감 등 일반 몬스터 실루엣 후보입니다.</p>
-          <div class="badge-row"><span class="badge draft">시안</span><span class="badge">미이식</span></div>
-          <div class="tag-row"><span class="tag">단단함</span><span class="tag">이형</span><span class="tag">작은 덩어리</span></div>
-          <div class="entry-meta"><div><span>포함:</span> M-01~M-10</div><div><span>추천 용도:</span> 독/속도/자연/저주 테마 일반 몬스터 후보</div></div>
-          <a class="view-button" href="./avatar-museum-01.html">보기</a>
-        </article>
-        <article class="entry-card">
-          <div class="entry-top"><h3 class="entry-title">기존 초반 몬스터 단품</h3><span class="entry-code">MON-A-002</span></div>
+          <div class="entry-top"><h3 class="entry-title">기존 초반 몬스터 단품</h3><span class="entry-code">MON-A-001</span></div>
           <p class="entry-purpose">슬라임, 고블린, 늑대가 390px에서 바로 읽히는지 확인합니다.</p>
           <div class="badge-row"><span class="badge interest">관심</span><span class="badge">일부 반영</span></div>
           <div class="tag-row"><span class="tag">초반 기준</span><span class="tag">종족 구분</span></div>
@@ -400,15 +368,7 @@
       </header>
       <div class="entry-list">
         <article class="entry-card">
-          <div class="entry-top"><h3 class="entry-title">정예/보스 아바타 묶음</h3><span class="entry-code">BOSS-A-001</span></div>
-          <p class="entry-purpose">왕관, 거울, 독, 종, 기록 테마의 큰 실루엣 후보입니다.</p>
-          <div class="badge-row"><span class="badge draft">시안</span><span class="badge">미이식</span></div>
-          <div class="tag-row"><span class="tag">압박감</span><span class="tag">테마성</span><span class="tag">큰 덩어리</span></div>
-          <div class="entry-meta"><div><span>포함:</span> B-01~B-08</div><div><span>추천 용도:</span> 중간보스 / 테마 보스 후보</div></div>
-          <a class="view-button" href="./avatar-museum-01.html">보기</a>
-        </article>
-        <article class="entry-card">
-          <div class="entry-top"><h3 class="entry-title">보스 전용 대치 구도</h3><span class="entry-code">BOSS-A-002</span></div>
+          <div class="entry-top"><h3 class="entry-title">보스 전용 대치 구도</h3><span class="entry-code">BOSS-A-001</span></div>
           <p class="entry-purpose">대형 적이 화면을 얼마나 차지해야 위압감이 나는지 확인합니다.</p>
           <div class="badge-row"><span class="badge interest">관심</span><span class="badge">미이식</span></div>
           <div class="tag-row"><span class="tag">대형 적</span><span class="tag">대각선</span><span class="tag">전용 구도</span></div>
