@@ -474,6 +474,168 @@
     .boss-head.two { left: 59px; top: -22px; }
     .boss-head.three { right: 18px; transform: rotate(12deg); }
 
+    .boss-part {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .boss-body.ash-regent {
+      background: #4e3b36;
+      border-color: #f08f6f;
+      box-shadow: inset 0 -22px 0 rgba(255, 120, 80, 0.16), 0 0 0 10px rgba(240, 143, 111, 0.09), 0 20px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .ash-regent .boss-crown {
+      left: 49px;
+      top: -23px;
+      width: 68px;
+      height: 34px;
+      background: #f0c36a;
+      clip-path: polygon(0 100%, 0 42%, 20% 75%, 38% 10%, 50% 68%, 64% 10%, 82% 75%, 100% 42%, 100% 100%);
+    }
+
+    .ash-regent .boss-ember {
+      right: -15px;
+      top: 38px;
+      width: 30px;
+      height: 48px;
+      border-radius: 50% 50% 50% 0;
+      background: #ff9a5f;
+      transform: rotate(-35deg);
+      box-shadow: 0 0 20px rgba(255, 154, 95, 0.5);
+    }
+
+    .boss-body.tide-maw {
+      top: calc(var(--enemy-top) + 20px);
+      height: 132px;
+      border-radius: 48% 48% 34% 34%;
+      background: #2f586c;
+      border-color: #8fd8ff;
+      box-shadow: inset 0 -18px 0 rgba(140, 210, 240, 0.13), 0 0 0 10px rgba(143, 216, 255, 0.09), 0 18px 27px rgba(0, 0, 0, 0.18);
+    }
+
+    .tide-maw .boss-jaw {
+      left: 43px;
+      top: 15px;
+      width: 84px;
+      height: 62px;
+      border-radius: 50% 50% 14px 14px;
+      border: 7px solid #8fd8ff;
+      border-bottom-width: 10px;
+      background: #1f3b48;
+    }
+
+    .tide-maw .boss-fin {
+      top: 42px;
+      width: 45px;
+      height: 68px;
+      background: #8fd8ff;
+      clip-path: polygon(0 50%, 100% 0, 76% 100%);
+      opacity: 0.75;
+    }
+
+    .tide-maw .boss-fin.left { left: -25px; transform: rotate(-16deg); }
+    .tide-maw .boss-fin.right { right: -25px; transform: scaleX(-1) rotate(-16deg); }
+
+    .boss-body.clock-saint {
+      background: #3e4654;
+      border-color: #d8dfe8;
+      border-radius: 32px;
+      box-shadow: inset 0 -20px 0 rgba(216, 223, 232, 0.12), 0 0 0 10px rgba(240, 195, 106, 0.08), 0 18px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .clock-saint .boss-halo {
+      left: 24px;
+      top: -28px;
+      width: 118px;
+      height: 48px;
+      border: 6px dotted #f0c36a;
+      border-radius: 50%;
+    }
+
+    .clock-saint .boss-gear {
+      left: 52px;
+      top: 39px;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 10px solid #d8dfe8;
+      background: #232a34;
+      box-shadow: 0 0 0 7px rgba(216, 223, 232, 0.14);
+    }
+
+    .clock-saint .boss-hand {
+      left: 82px;
+      top: 38px;
+      width: 7px;
+      height: 79px;
+      border-radius: 7px;
+      background: #f0c36a;
+      transform: rotate(35deg);
+      transform-origin: center bottom;
+    }
+
+    .boss-body.grave-bloom {
+      background: #44334d;
+      border-color: #c08fcf;
+      box-shadow: inset 0 -20px 0 rgba(192, 143, 207, 0.12), 0 0 0 10px rgba(141, 168, 106, 0.08), 0 18px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .grave-bloom .boss-petal {
+      top: -30px;
+      width: 48px;
+      height: 72px;
+      border-radius: 50% 50% 35% 35%;
+      background: #c08fcf;
+      opacity: 0.86;
+    }
+
+    .grave-bloom .boss-petal.one { left: 60px; }
+    .grave-bloom .boss-petal.two { left: 25px; transform: rotate(-27deg); }
+    .grave-bloom .boss-petal.three { right: 25px; transform: rotate(27deg); }
+    .grave-bloom .boss-root { left: -11px; top: 105px; width: 188px; height: 40px; border-top: 8px solid #8da86a; border-radius: 50%; transform: rotate(-8deg); }
+
+    .boss-body.starfall-judge {
+      background: #2d435f;
+      border-color: #9ad4f0;
+      border-radius: 28px 28px 45px 45px;
+      box-shadow: inset 0 -20px 0 rgba(154, 212, 240, 0.12), 0 0 0 10px rgba(154, 212, 240, 0.08), 0 18px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .starfall-judge .boss-scale {
+      left: 25px;
+      top: 48px;
+      width: 118px;
+      height: 58px;
+      border-top: 8px solid #d8dfe8;
+      border-radius: 50%;
+    }
+
+    .starfall-judge .boss-scale::before,
+    .starfall-judge .boss-scale::after {
+      content: "";
+      position: absolute;
+      top: 18px;
+      width: 31px;
+      height: 18px;
+      border: 4px solid #d8dfe8;
+      border-top: none;
+      border-radius: 0 0 18px 18px;
+    }
+
+    .starfall-judge .boss-scale::before { left: 0; }
+    .starfall-judge .boss-scale::after { right: 0; }
+
+    .starfall-judge .boss-star {
+      right: -6px;
+      top: -8px;
+      width: 42px;
+      height: 42px;
+      background: #f0c36a;
+      clip-path: polygon(50% 0, 61% 36%, 98% 35%, 68% 57%, 79% 93%, 50% 70%, 21% 93%, 32% 57%, 2% 35%, 39% 36%);
+      box-shadow: 0 0 19px rgba(240, 195, 106, 0.38);
+    }
+
     .fx-line {
       position: absolute;
       pointer-events: none;
@@ -680,6 +842,63 @@
           <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
         </div>
         <p class="layout-caption">C안은 B안이 너무 길게 느껴질 때 가장 안전한 본게임 후보입니다.</p>
+      </div>
+    </section>
+
+    <section class="variant-block variant-b" aria-label="보스 5종 인게임 예시">
+      <header class="variant-head">
+        <h2>D안. 보스 5종 인게임 예시</h2>
+        <p>정예/보스 창구에 추가한 B-09 ~ B-13을 같은 전장 문법 위에 올려 본 비교용 레이어입니다.</p>
+      </header>
+      <div class="lab-layout-card" id="boss-ash-regent">
+        <div class="lab-layout-head"><div><h3>B-09 재의 섭정</h3><p>왕관과 불씨가 먼저 보이는 화상/광역 압박형.</p></div><span class="lab-badge">B-09</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body ash-regent"><span class="boss-part boss-crown"></span><span class="boss-part boss-ember"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">화염 보스는 색이 강해서, 실제 본게임에 넣을 때는 피격/회복 숫자와 충돌하지 않는지 확인이 필요합니다.</p>
+      </div>
+      <div class="lab-layout-card" id="boss-tide-maw">
+        <div class="lab-layout-head"><div><h3>B-10 조수의 아가리</h3><p>넓게 벌어진 턱과 지느러미로 화면을 가로로 누르는 보스.</p></div><span class="lab-badge">B-10</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body tide-maw"><span class="boss-part boss-jaw"></span><span class="boss-part boss-fin left"></span><span class="boss-part boss-fin right"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">밀어내기나 범위 공격 보스로 쓰기 좋지만, 너무 넓어 보이면 파티 쪽 여백이 답답해질 수 있습니다.</p>
+      </div>
+      <div class="lab-layout-card" id="boss-clock-saint">
+        <div class="lab-layout-head"><div><h3>B-11 태엽성자</h3><p>기계 성물, 시계침, 속도 조작을 암시하는 정적인 압박감.</p></div><span class="lab-badge">B-11</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body clock-saint"><span class="boss-part boss-halo"></span><span class="boss-part boss-gear"></span><span class="boss-part boss-hand"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">속도 게이지나 턴 조작 보스 후보로 읽히는지 보기 위한 장면입니다.</p>
+      </div>
+      <div class="lab-layout-card" id="boss-grave-bloom">
+        <div class="lab-layout-head"><div><h3>B-12 묘화모</h3><p>꽃잎과 뿌리가 화면을 덮는 회복/흡수형 보스.</p></div><span class="lab-badge">B-12</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body grave-bloom"><span class="boss-part boss-petal one"></span><span class="boss-part boss-petal two"></span><span class="boss-part boss-petal three"></span><span class="boss-part boss-root"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">아름답지만 위험한 타입. 회복 숫자와 독/흡수 이펙트가 붙었을 때 시끄러워지는지 확인하기 좋습니다.</p>
+      </div>
+      <div class="lab-layout-card" id="boss-starfall-judge">
+        <div class="lab-layout-head"><div><h3>B-13 별추락 심판관</h3><p>별, 저울, 판결 이미지를 합친 처형 패턴형 보스.</p></div><span class="lab-badge">B-13</span></div>
+        <div class="battlefield boss-layout">
+          <span class="field-label enemy">boss side</span><span class="field-label party">party side</span>
+          <div class="party-grid"><div class="slot back"><span class="hero-token hero-priest"><i class="mini-mark"></i></span></div><div class="slot back"><span class="hero-token hero-archer"></span></div><div class="slot front"><span class="hero-token hero-warrior"></span></div><div class="slot front"><span class="hero-token hero-rogue"></span></div></div>
+          <div class="boss-body starfall-judge"><span class="boss-part boss-scale"></span><span class="boss-part boss-star"></span></div>
+          <span class="fx-line boss-anchor"></span><span class="fx-line heal-line"></span><span class="fx-line attack-line"></span>
+        </div>
+        <p class="layout-caption">단일 대상 처형이나 조건부 심판 패턴 후보. 별 문장이 첫눈에 읽히는지 확인하면 됩니다.</p>
       </div>
     </section>
   </main>
