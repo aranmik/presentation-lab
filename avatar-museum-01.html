@@ -797,21 +797,31 @@
 
     .sr .body { left: 23px; top: 34px; width: 31px; height: 32px; border-radius: 10px 10px 7px 7px; background: #526071; border-color: #d8e0ea; }
     .sr .head { left: 27px; top: 15px; width: 23px; height: 23px; }
-    .sr .sword, .sr .lance, .sr .staff, .sr .bow, .sr .dagger, .sr .banner, .sr .lute, .sr .key {
+    .sr .sword, .sr .lance, .sr .staff, .sr .bow, .sr .dagger, .sr .rifle, .sr .banner, .sr .lute, .sr .key {
       border-radius: 4px;
       z-index: 4;
     }
     .sr .shield { left: 8px; top: 33px; width: 28px; height: 35px; border-radius: 14px 14px 17px 17px; border: 3px solid #e7d08a; background: #48515e; z-index: 5; }
-    .sr .sword { right: 8px; top: 17px; width: 5px; height: 52px; background: linear-gradient(to top, #bfc8d4, #f7fbff); transform: rotate(16deg); }
+    .sr .sword { right: 8px; top: 14px; width: 7px; height: 47px; border-radius: 6px 6px 2px 2px; background: linear-gradient(to top, #aeb8c5 0 68%, #f7fbff 69% 100%); transform: rotate(16deg); z-index: 6; }
+    .sr .sword::before { content: ""; position: absolute; left: -8px; bottom: 11px; width: 23px; height: 5px; border-radius: 5px; background: #f0c36a; }
+    .sr .sword::after { content: ""; position: absolute; left: 1px; bottom: -5px; width: 5px; height: 10px; border-radius: 4px; background: #7a5d33; }
     .sr .lance { right: 9px; top: 8px; width: 4px; height: 66px; background: #d9ecf8; transform: rotate(24deg); }
     .sr .lance::before { content: ""; position: absolute; left: -5px; top: -8px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 13px solid #f0c36a; }
-    .sr .staff { left: 13px; top: 15px; width: 4px; height: 56px; background: #d9fff3; }
+    .sr .staff { left: 13px; top: 15px; width: 5px; height: 56px; background: #d9fff3; box-shadow: inset 0 0 0 1px rgba(35,42,52,.32); z-index: 6; }
+    .sr .staff::before { content: ""; position: absolute; left: -6px; top: -9px; width: 17px; height: 17px; border-radius: 50%; border: 3px solid #9fe6cf; background: #253d3b; }
+    .sr .staff::after { content: ""; position: absolute; left: -4px; top: 9px; width: 13px; height: 4px; border-radius: 4px; background: #9fe6cf; }
     .sr .bow { right: 7px; top: 12px; width: 37px; height: 58px; border-right: 5px solid #a8d46a; border-radius: 0 50% 50% 0; transform: rotate(14deg); }
     .sr .bow::before { content: ""; position: absolute; right: 7px; top: 3px; width: 1px; height: 51px; border-radius: 2px; background: rgba(231, 239, 208, 0.88); transform: rotate(-8deg); transform-origin: center; }
     .sr .bow::after { content: ""; position: absolute; right: 4px; top: 27px; width: 8px; height: 8px; border-radius: 50%; background: rgba(231, 239, 208, 0.82); }
     .sr .arrow { left: 15px; top: 37px; width: 43px; height: 3px; border-radius: 3px; background: #e7efd0; transform: rotate(-25deg); }
-    .sr .dagger { right: 10px; top: 32px; width: 5px; height: 30px; background: #dce8f5; transform: rotate(32deg); }
+    .sr .dagger { right: 8px; top: 29px; width: 8px; height: 25px; border-radius: 6px 6px 2px 2px; background: linear-gradient(to top, #aeb8c5, #f7fbff); transform: rotate(32deg); z-index: 7; }
+    .sr .dagger::before { content: ""; position: absolute; left: -6px; bottom: 3px; width: 21px; height: 4px; border-radius: 4px; background: #9ba8bb; }
+    .sr .dagger::after { content: ""; position: absolute; left: 3px; bottom: -9px; width: 4px; height: 12px; border-radius: 4px; background: #2b3441; }
+    .sr .rifle { left: 3px; top: 39px; width: 65px; height: 7px; border-radius: 5px; background: #d8dfe8; transform: rotate(-13deg); z-index: 8; }
+    .sr .rifle::before { content: ""; position: absolute; left: 3px; top: 5px; width: 18px; height: 13px; border-radius: 4px 3px 8px 8px; background: #4b382c; transform: rotate(22deg); }
+    .sr .rifle::after { content: ""; position: absolute; right: -9px; top: 2px; width: 14px; height: 3px; border-radius: 3px; background: #9ba8bb; }
     .sr .cloak { left: 17px; top: 23px; width: 43px; height: 48px; border-radius: 50% 50% 12px 12px; background: rgba(48, 55, 69, 0.88); border: 2px solid #778399; }
+    .sr .hood { left: 17px; top: 10px; width: 43px; height: 34px; border-radius: 50% 50% 36% 36%; border: 3px solid #778399; background: #262d3a; z-index: 6; clip-path: polygon(50% 0, 94% 36%, 82% 100%, 18% 100%, 6% 36%); }
     .sr .halo { left: 22px; top: 6px; width: 33px; height: 13px; border: 3px solid rgba(240, 195, 106, 0.78); border-bottom-color: transparent; border-radius: 50%; }
     .sr .aura { border-color: rgba(159, 230, 207, 0.32); box-shadow: 0 0 14px rgba(159,230,207,.12); }
     .sr .orb { right: 8px; top: 12px; width: 17px; height: 17px; border-radius: 50%; background: #9fe6cf; box-shadow: 0 0 12px rgba(159,230,207,.42); }
@@ -832,8 +842,16 @@
     .sr .horn { top: 7px; width: 15px; height: 17px; background: #d9ecf8; clip-path: polygon(50% 0, 100% 100%, 0 100%); z-index: 6; }
     .sr .horn.left { left: 18px; transform: rotate(-22deg); }
     .sr .horn.right { right: 18px; transform: rotate(22deg); }
+    .sr .trident { right: 7px; top: 8px; width: 5px; height: 62px; border-radius: 5px; background: #d9ecf8; transform: rotate(18deg); z-index: 6; }
+    .sr .trident::before { content: ""; position: absolute; left: -8px; top: -10px; width: 22px; height: 17px; border-top: 4px solid #d9ecf8; border-left: 4px solid #d9ecf8; border-right: 4px solid #d9ecf8; border-radius: 10px 10px 0 0; }
+    .sr .trident::after { content: ""; position: absolute; left: -1px; top: -14px; width: 7px; height: 18px; border-radius: 6px; background: #d9ecf8; }
+    .sr .headband { left: 25px; top: 22px; width: 28px; height: 5px; border-radius: 5px; background: #f0c36a; box-shadow: 0 0 8px rgba(240,195,106,.42); z-index: 8; }
+    .sr .wing { left: 4px; top: 24px; width: 27px; height: 36px; border-radius: 70% 18% 70% 28%; border: 3px solid #9ad4f0; background: rgba(154,212,240,.2); transform: rotate(-21deg); z-index: 3; }
+    .sr .tail { left: 7px; bottom: 13px; width: 41px; height: 22px; border-bottom: 5px solid #9ad4f0; border-radius: 50%; transform: rotate(-18deg); z-index: 3; }
 
     .sr-warrior .body { left: 20px; width: 36px; border-color: var(--gold); background: #68717e; }
+    .sr-warrior .shield { left: 3px; top: 29px; width: 34px; height: 42px; border-width: 4px; border-color: #f0c36a; background: #4b5564; z-index: 6; }
+    .sr-warrior .sword { right: 3px; top: 16px; height: 50px; }
     .sr-guardian .body, .sr-wallkeeper .body, .sr-wall .body { border-color: #d8dfe8; background: #4c5662; }
     .sr-priest .body, .sr-shrine .body, .sr-cleric .body { border-color: var(--mint); background: #3f665d; }
     .sr-archer .body, .sr-watchbow .body, .sr-tracker .body { border-color: var(--leaf); background: #536a3e; transform: skewX(-8deg); }
@@ -843,22 +861,115 @@
     .sr-forbidden .body, .sr-mage .body { border-color: var(--violet); background: #332d4f; }
     .sr-healbow .body, .sr-purifier .body { border-color: var(--mint); background: #49695f; }
     .sr-bard .body { border-color: #f0c36a; background: #5a4d35; }
-    .sr-dragonspear .body { border-color: var(--sky); background: #2d536b; }
+    .sr-dragonspear .body { border-color: #79d88a; background: #6b2f2d; box-shadow: inset 0 -8px 0 rgba(121,216,138,.12); }
     .sr-sage .body { border-color: #c7a2ff; background: #464061; }
     .sr-sunlord .body { border-color: var(--gold); background: #6b5940; }
 
     .sr-sentinel .banner { left: 6px; top: 13px; width: 5px; height: 57px; background: #d8dfe8; transform: rotate(-13deg); }
     .sr-sentinel .banner::before { content: ""; position: absolute; right: 3px; top: 3px; width: 24px; height: 18px; border-radius: 10px 4px 4px 10px; background: #ef9a9a; }
-    .sr-vanguard .lance { right: 4px; top: 10px; transform: rotate(22deg); }
+    .sr-vanguard .lance { right: 8px; top: 18px; height: 50px; transform: rotate(21deg); opacity: .88; }
+    .sr-vanguard .lance::before { left: -4px; top: -7px; border-left-width: 6px; border-right-width: 6px; border-bottom-width: 11px; }
     .sr-warden .horn.left, .sr-warden .horn.right { background: #a8d46a; opacity: .9; }
-    .sr-watchbow .tower { right: 7px; bottom: 11px; width: 16px; height: 48px; border-radius: 5px 5px 3px 3px; border: 2px solid #d8dfe8; background: #495463; z-index: 3; }
-    .sr-watchbow .beacon { right: 6px; top: 8px; width: 18px; height: 18px; border-radius: 50%; background: #9ad4f0; box-shadow: 0 0 12px rgba(154,212,240,.38); z-index: 6; }
+    .sr-watchbow .tower { right: 4px; bottom: 10px; width: 20px; height: 52px; border-radius: 5px 5px 3px 3px; border: 3px solid #d8dfe8; background: #495463; z-index: 5; }
+    .sr-watchbow .beacon { right: 5px; top: 5px; width: 20px; height: 20px; border-radius: 50%; background: #9ad4f0; box-shadow: 0 0 12px rgba(154,212,240,.38); z-index: 6; }
     .sr-purifier .flame { right: 8px; top: 7px; width: 16px; height: 24px; border-radius: 50% 50% 50% 0; background: #f0c36a; transform: rotate(-35deg); box-shadow: 0 0 12px rgba(240,195,106,.35); z-index: 6; }
     .sr-mage .orb { background: #c7a2ff; box-shadow: 0 0 14px rgba(199,162,255,.42); }
-    .sr-gatekeeper .key { right: 8px; top: 18px; width: 5px; height: 50px; background: #f0c36a; transform: rotate(17deg); }
+    .sr-gatekeeper .key { right: 8px; top: 18px; width: 5px; height: 50px; background: #f0c36a; transform: rotate(17deg); z-index: 7; }
     .sr-gatekeeper .key::before { content: ""; position: absolute; left: -7px; top: -9px; width: 18px; height: 18px; border: 4px solid #f0c36a; border-radius: 50%; }
     .sr-dragonspear .lance::before { border-bottom-color: #9ad4f0; }
     .sr-sage .scroll { transform: rotate(-9deg); }
+    .sr-shrine .staff { left: auto; right: 5px; top: 9px; height: 63px; width: 6px; background: #e9fff8; box-shadow: 0 0 0 4px rgba(159,230,207,.14); transform: rotate(4deg); z-index: 7; }
+    .sr-shrine .staff::before { left: -8px; top: -9px; width: 20px; height: 17px; border: 3px solid #e9fff8; border-bottom-color: transparent; border-radius: 50% 50% 0 0; background: transparent; box-shadow: 0 0 10px rgba(159,230,207,.28); }
+    .sr-shrine .staff::after { left: -5px; top: 10px; width: 16px; height: 5px; background: #9fe6cf; }
+    .sr-shrine .halo { left: 25px; top: 3px; width: 27px; height: 9px; border-width: 2px; opacity: .45; }
+    .sr-guardian .shield { left: 9px; top: 39px; width: 23px; height: 28px; border-width: 3px; border-color: #d8dfe8; opacity: .92; }
+    .sr-guardian .lance { right: 4px; opacity: .95; z-index: 6; }
+    .sr-priest .orb { right: 3px; top: 8px; width: 22px; height: 22px; }
+    .sr-cleric .book { left: 5px; top: 33px; width: 35px; height: 26px; transform: rotate(-8deg); }
+    .sr-cleric .halo { opacity: .35; transform: scale(.82); }
+    .sr-purifier .flame { right: 4px; top: 4px; width: 22px; height: 31px; background: linear-gradient(135deg, #f7fff9 0 42%, #9fe6cf 43% 100%); box-shadow: 0 0 13px rgba(159,230,207,.42); }
+    .sr-sunlord .staff { left: 10px; opacity: .55; }
+    .sr-watchbow .bow, .sr-trapper .bow, .sr-tracker .bow { opacity: .52; transform: scale(.88) rotate(14deg); }
+    .sr-healbow .bow { opacity: .72; }
+    .sr-healbow .arrow { background: #9fe6cf; box-shadow: 0 0 10px rgba(159,230,207,.42); }
+    .sr-healbow .orb { right: 2px; top: 23px; width: 15px; height: 15px; }
+    .sr-trapper .trap { left: 14px; bottom: 7px; width: 48px; height: 17px; border-width: 4px; border-color: #b6de83; }
+    .sr-gatekeeper .shield { display: none; }
+    .sr-gatekeeper .door { left: 8px; top: 26px; width: 36px; height: 43px; border-radius: 7px 7px 3px 3px; border: 3px solid #d8dfe8; background: #3f4b59; z-index: 4; }
+    .sr-gatekeeper .door::after { content: ""; position: absolute; right: 6px; top: 19px; width: 5px; height: 5px; border-radius: 50%; background: #f0c36a; }
+    .sr-wall .wall { top: 31px; height: 38px; border-width: 4px; }
+    .sr-paladin .shield { left: 6px; top: 39px; width: 21px; height: 27px; opacity: .82; }
+    .sr-paladin .sword { right: 4px; height: 58px; box-shadow: 0 0 10px rgba(240,195,106,.4); }
+    .sr-paladin .halo { left: 29px; width: 20px; opacity: .5; }
+
+    .sr-thief .hood { left: 17px; top: 9px; width: 43px; height: 34px; border-color: #8b79b8; background: #2d2541; }
+    .sr-thief .cloak { left: 14px; top: 24px; width: 49px; height: 46px; border-color: #8b79b8; }
+    .sr-thief .dagger { right: 5px; top: 36px; height: 22px; }
+    .sr-thief .head { top: 18px; background: #d8b188; }
+    .sr-thief .mask { top: 25px; z-index: 8; }
+    .sr-warden .shield { left: 10px; top: 38px; width: 23px; height: 28px; border-width: 3px; border-color: #a8d46a; background: #3f5640; }
+    .sr-warden .trident { right: 4px; top: 9px; height: 63px; }
+    .sr-watchbow .cloak { left: 15px; top: 30px; width: 45px; height: 35px; border-color: rgba(168,212,106,.62); background: rgba(50,70,47,.28); z-index: 3; }
+    .sr-watchbow .bow { right: 2px; opacity: .9; transform: scale(.94) rotate(14deg); z-index: 7; }
+    .sr-watchbow .arrow { left: 13px; top: 39px; z-index: 8; }
+    .sr-watchbow .beacon { left: 17px; top: 34px; width: 10px; height: 10px; box-shadow: 0 0 8px rgba(154,212,240,.35); z-index: 8; }
+    .sr-trapper .vial { right: 5px; top: 22px; width: 17px; height: 32px; z-index: 7; }
+    .sr-trapper .bubble { right: 14px; top: 9px; }
+    .sr-paladin .aura { opacity: .62; border-color: rgba(240,195,106,.36); box-shadow: 0 0 15px rgba(240,195,106,.16); }
+    .sr-paladin .halo { left: 23px; top: 4px; width: 31px; height: 13px; opacity: .72; }
+    .sr-paladin .headband { background: #ffe1a2; }
+    .sr-sentinel .banner { left: 9px; top: 24px; height: 39px; width: 4px; }
+    .sr-sentinel .banner::before { width: 18px; height: 13px; top: 2px; }
+    .sr-forbidden .chain { top: 36px; width: 17px; height: 37px; border-top: 0; border-left: 4px dashed #9ba8bb; border-bottom: 4px solid #9ba8bb; border-radius: 0 0 12px 12px; z-index: 7; }
+    .sr-forbidden .chain.left { left: 11px; transform: rotate(8deg); }
+    .sr-forbidden .chain.right { left: auto; right: 8px; transform: scaleX(-1) rotate(8deg); }
+    .sr-forbidden .chain::after { content: ""; position: absolute; left: -6px; bottom: -7px; width: 12px; height: 8px; border-radius: 50%; background: #9ba8bb; }
+    .sr-tracker .bow { display: none; }
+    .sr-tracker .rifle { left: 2px; top: 38px; }
+    .sr-dragonspear .wing { left: 3px; top: 25px; width: 28px; height: 36px; border-color: #79d88a; background: rgba(150,47,43,.42); }
+    .sr-dragonspear .tail { left: 7px; bottom: 12px; border-bottom-color: #79d88a; }
+    .sr-dragonspear .lance { right: 4px; top: 8px; z-index: 7; background: #79d88a; box-shadow: 0 0 8px rgba(121,216,138,.22); }
+    .sr-dragonspear .lance::before { border-bottom-color: #79d88a; }
+    .sr-dragonspear .horn { background: #c9564b; filter: drop-shadow(0 0 2px rgba(121,216,138,.42)); }
+    .sr-dragonspear .horn.left { left: 17px; }
+    .sr-dragonspear .horn.right { right: 17px; }
+
+    .sr .mark { right: 7px; top: 8px; width: 18px; height: 18px; border: 3px solid #ef9a9a; border-radius: 50%; z-index: 6; }
+    .sr .mark::before { content: ""; position: absolute; left: 6px; top: -7px; width: 3px; height: 26px; background: #ef9a9a; transform: rotate(45deg); }
+    .sr .footprint { left: 8px; bottom: 12px; width: 9px; height: 13px; border-radius: 50%; background: #a8d46a; box-shadow: 13px -8px 0 rgba(168,212,106,.85); transform: rotate(-25deg); z-index: 6; }
+    .sr .heal-trail { left: 9px; top: 22px; width: 55px; height: 34px; border-top: 4px solid rgba(159,230,207,.74); border-radius: 50%; transform: rotate(-24deg); z-index: 5; }
+    .sr .vial { right: 4px; top: 27px; width: 16px; height: 31px; border-radius: 7px 7px 9px 9px; border: 3px solid #b6de83; background: linear-gradient(to bottom, transparent 0 35%, #78c85d 36% 100%); transform: rotate(-18deg); z-index: 6; }
+    .sr .smoke { left: 1px; top: 8px; width: 22px; height: 22px; border-radius: 50%; background: rgba(166,220,121,.5); box-shadow: 16px 10px 0 rgba(166,220,121,.36), 34px 1px 0 rgba(166,220,121,.28); z-index: 5; }
+    .sr .bubble { right: 16px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: #b6de83; box-shadow: -13px 9px 0 rgba(182,222,131,.8), 7px 15px 0 rgba(182,222,131,.66); z-index: 6; }
+    .sr .reverse-dagger { right: 7px; top: 31px; width: 6px; height: 34px; border-radius: 4px; background: #dce8f5; transform: rotate(-36deg); z-index: 6; }
+    .sr .long-shadow { left: 5px; bottom: 6px; width: 62px; height: 18px; border-radius: 50%; background: rgba(0,0,0,.38); transform: rotate(-16deg); z-index: 1; }
+    .sr .clock-ring { left: 14px; top: 12px; width: 50px; height: 50px; border: 5px solid #9ad4f0; border-radius: 50%; box-shadow: 0 0 12px rgba(154,212,240,.26); z-index: 5; }
+    .sr .clock-hand { left: 38px; top: 18px; width: 4px; height: 39px; border-radius: 4px; background: #e8f6ff; transform: rotate(38deg); transform-origin: center bottom; z-index: 6; }
+    .sr .gear { right: 6px; top: 8px; width: 16px; height: 16px; border: 4px dotted #d8dfe8; border-radius: 50%; z-index: 6; }
+    .sr .threadline { left: 4px; top: 21px; width: 70px; height: 43px; border: 4px solid #ef9a9a; border-left-color: transparent; border-bottom-color: transparent; border-radius: 50%; transform: rotate(-19deg); z-index: 6; }
+    .sr .knot { left: 33px; top: 34px; width: 13px; height: 13px; border: 4px solid #ffd0d4; border-radius: 50%; z-index: 7; }
+    .sr .cannon { right: 1px; top: 32px; width: 43px; height: 16px; border-radius: 9px 3px 3px 9px; background: #5d6671; border: 3px solid #d8dfe8; transform: rotate(-12deg); z-index: 6; }
+    .sr .cannon::after { content: ""; position: absolute; right: -8px; top: 3px; width: 10px; height: 10px; border-radius: 50%; background: #232a34; }
+    .sr .goggles { left: 25px; top: 17px; width: 27px; height: 10px; border-radius: 8px; border: 3px solid #f0c36a; background: rgba(154,212,240,.2); z-index: 7; }
+    .sr .shell { left: 8px; top: 12px; width: 13px; height: 13px; border-radius: 50%; background: #f0c36a; box-shadow: 0 0 10px rgba(240,195,106,.3); z-index: 6; }
+    .sr .dance-ribbon { left: 4px; top: 18px; width: 67px; height: 46px; border-top: 5px solid #ef9a9a; border-right: 4px solid rgba(239,154,154,.65); border-radius: 50%; transform: rotate(21deg); z-index: 5; }
+    .sr .curve-blade { right: 7px; top: 30px; width: 28px; height: 31px; border: 4px solid #e8f6ff; border-left-color: transparent; border-bottom-color: transparent; border-radius: 50%; transform: rotate(24deg); z-index: 6; }
+
+    .sr-plague .body { border-color: #a8d46a; background: #334d35; border-radius: 16px 16px 8px 8px; }
+    .sr-thief .body { left: 24px; top: 38px; height: 27px; border-color: #778399; background: #252936; transform: skewX(-12deg); }
+    .sr-thief .mark { border-color: #111722; background: rgba(17,23,34,.8); box-shadow: 0 0 0 2px rgba(239,154,154,.45); }
+    .sr-thief .mark::before { background: #111722; box-shadow: 0 0 0 1px rgba(239,154,154,.36); }
+    .sr-thief .reverse-dagger { right: 7px; top: 31px; height: 34px; }
+    .sr-assassin .body { left: 24px; top: 37px; height: 28px; border-color: #778399; background: #252936; transform: skewX(-10deg); }
+    .sr-assassin .hood { left: 17px; top: 8px; width: 43px; height: 35px; border-color: #5d6671; background: #181d27; }
+    .sr-assassin .cloak { left: 13px; top: 24px; width: 50px; height: 46px; border-color: #5d6671; background: rgba(19,23,32,.9); }
+    .sr-assassin .dagger { right: 5px; top: 36px; height: 23px; background: linear-gradient(to top, #8f9aac, #f4fbff); }
+    .sr-assassin .head { top: 18px; background: #c59c80; }
+    .sr-assassin .mask { top: 25px; z-index: 8; }
+    .sr-timekeeper .body { border-color: #9ad4f0; background: #33475d; }
+    .sr-binder .body { border-color: #ef9a9a; background: #4a3341; }
+    .sr-artillerist .body { border-color: #d8dfe8; background: #4b5664; }
+    .sr-dancer .body { left: 25px; top: 32px; width: 28px; border-color: #ef9a9a; background: #57405b; transform: skewX(12deg); }
   </style>
 </head>
 <body>
@@ -874,7 +985,7 @@
         <button class="category-button" type="button" data-open="jobs"><strong>직업 후보 창구</strong><span>A-01 ~ A-16. 역할 후보와 신규 개성 후보를 봅니다.</span></button>
         <button class="category-button" type="button" data-open="monsters"><strong>몬스터 창구</strong><span>M-01 ~ M-10. 일반 몬스터와 작은 이형 실루엣을 모아둔 전시실입니다.</span></button>
         <button class="category-button" type="button" data-open="bosses"><strong>정예 / 보스 창구</strong><span>B-01 ~ B-13. 중간보스, 테마 보스, 강한 적 후보를 봅니다.</span></button>
-        <button class="category-button" type="button" data-open="signal"><strong>시그널R&amp;D</strong><span>SR-01 ~ SR-24. 이름 텍스트에서 유추한 직업/역할 실루엣 후보입니다.</span></button>
+        <button class="category-button" type="button" data-open="signal"><strong>시그널R&amp;D</strong><span>SR-01 ~ SR-30. 이름 텍스트에서 유추한 30직업 실루엣 후보입니다.</span></button>
       </nav>
     </section>
 
@@ -929,31 +1040,37 @@
       <article class="exhibit-card"><div class="stage"><div class="avatar starfall-judge"><span class="part shadow"></span><span class="part blade"></span><span class="part star"></span><span class="part feet"></span><span class="part body"></span><span class="part scale"></span></div></div><div class="exhibit-code"><span class="code">B-13</span><span class="type">boss</span></div><p class="keywords">별 문장, 저울, 판결하는 칼</p><p class="recommend"><b>루다 추천:</b> 별추락 심판관 / 처형 패턴 보스 후보</p></article>
       </div></section>
 
-    <section class="category-screen" id="screen-signal" aria-label="시그널R&D 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>시그널R&amp;D</h2><p>나라님이 준 이름 텍스트만 보고 루다가 유추한 24개 역할 실루엣 후보입니다.</p></div></div><div class="museum-grid">
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-warrior"><span class="part shadow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part sword"></span></div></div><div class="exhibit-code"><span class="code">SR-01</span><span class="type">전사</span></div><p class="keywords">넓은 몸, 긴 검, 기본 전열</p><p class="recommend"><b>루다 유추:</b> 정면에서 버티는 기준 전사</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-guardian"><span class="part shadow"></span><span class="part feet"></span><span class="part shield"></span><span class="part body"></span><span class="part head"></span><span class="part lance"></span></div></div><div class="exhibit-code"><span class="code">SR-02</span><span class="type">수호자</span></div><p class="keywords">방패, 창, 묵직한 보호감</p><p class="recommend"><b>루다 유추:</b> 아군 옆을 지키는 방어형</p></article>
+    <section class="category-screen" id="screen-signal" aria-label="시그널R&D 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>시그널R&amp;D</h2><p>나라님과 유키가 고를 수 있도록 정리한 30개 직업 실루엣 후보입니다.</p></div></div><div class="museum-grid">
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-warrior"><span class="part shadow"></span><span class="part feet"></span><span class="part shield"></span><span class="part body"></span><span class="part head"></span><span class="part sword"></span></div></div><div class="exhibit-code"><span class="code">SR-01</span><span class="type">전사</span></div><p class="keywords">검, 큰 방패, 도발 전열</p><p class="recommend"><b>루다 유추:</b> 앞에서 시선을 끌고 버티는 기준 전사</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-guardian"><span class="part shadow"></span><span class="part feet"></span><span class="part shield"></span><span class="part body"></span><span class="part head"></span><span class="part lance"></span></div></div><div class="exhibit-code"><span class="code">SR-02</span><span class="type">수호자</span></div><p class="keywords">창, 작은 방패, 보호 자세</p><p class="recommend"><b>루다 유추:</b> 창으로 거리를 만들고 옆을 지키는 방어형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-priest"><span class="part aura"></span><span class="part shadow"></span><span class="part staff"></span><span class="part orb"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-03</span><span class="type">사제</span></div><p class="keywords">민트 오라, 지팡이, 회복 구슬</p><p class="recommend"><b>루다 유추:</b> 부드러운 후열 회복 담당</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-shrine"><span class="part aura"></span><span class="part shadow"></span><span class="part halo"></span><span class="part staff"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-04</span><span class="type">신관</span></div><p class="keywords">후광, 제례 지팡이, 정돈된 자세</p><p class="recommend"><b>루다 유추:</b> 의식과 축복을 담당하는 지원형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-shrine"><span class="part aura"></span><span class="part shadow"></span><span class="part halo"></span><span class="part staff"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-04</span><span class="type">신관</span></div><p class="keywords">큰 제례 지팡이, 낮은 후광, 정돈된 자세</p><p class="recommend"><b>루다 유추:</b> 의식과 축복을 담당하는 지원형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-archer"><span class="part shadow"></span><span class="part bow"></span><span class="part arrow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-05</span><span class="type">궁수</span></div><p class="keywords">활, 사선, 빠른 시선</p><p class="recommend"><b>루다 유추:</b> 후열에서 정확히 꽂는 공격수</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-disruptor"><span class="part shadow"></span><span class="part ribbon"></span><span class="part spark" style="right:8px;top:13px"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR-06</span><span class="type">교란꾼</span></div><p class="keywords">가면, 흔드는 리본, 산만한 불꽃</p><p class="recommend"><b>루다 유추:</b> 적 시선을 흐리는 교란형</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-thief"><span class="part shadow"></span><span class="part cloak"></span><span class="part dagger"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR-07</span><span class="type">도적</span></div><p class="keywords">망토, 단검, 낮은 접근감</p><p class="recommend"><b>루다 유추:</b> 빠르게 파고드는 측면 공격수</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-warden"><span class="part shadow"></span><span class="part horn left"></span><span class="part horn right"></span><span class="part staff"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-08</span><span class="type">워든</span></div><p class="keywords">숲의 뿔, 지팡이, 수호자세</p><p class="recommend"><b>루다 유추:</b> 자연 결계형 감시자</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-watchbow"><span class="part shadow"></span><span class="part tower"></span><span class="part beacon"></span><span class="part bow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-09</span><span class="type">파수궁</span></div><p class="keywords">활, 감시탑, 작은 봉화</p><p class="recommend"><b>루다 유추:</b> 경계와 저격을 겸하는 궁수</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-trapper"><span class="part shadow"></span><span class="part trap"></span><span class="part bow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-10</span><span class="type">덫꾼</span></div><p class="keywords">낮은 덫, 짧은 활, 기다림</p><p class="recommend"><b>루다 유추:</b> 적 이동을 끊는 준비형</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-paladin"><span class="part aura"></span><span class="part shadow"></span><span class="part halo"></span><span class="part shield"></span><span class="part sword"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-11</span><span class="type">성기사</span></div><p class="keywords">후광, 방패, 검</p><p class="recommend"><b>루다 유추:</b> 공격과 보호를 같이 드는 전열</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-vanguard sr-sentinel"><span class="part shadow"></span><span class="part banner"></span><span class="part lance"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-12</span><span class="type">선봉</span></div><p class="keywords">깃발, 창, 앞으로 기운 자세</p><p class="recommend"><b>루다 유추:</b> 전투 시작을 여는 돌파형</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-forbidden"><span class="part shadow"></span><span class="part seal"></span><span class="part chain"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR-13</span><span class="type">금제</span></div><p class="keywords">봉인 고리, 사슬, 금지된 표식</p><p class="recommend"><b>루다 유추:</b> 적 행동을 묶는 제약형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-thief"><span class="part long-shadow"></span><span class="part shadow"></span><span class="part mark"></span><span class="part reverse-dagger"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR-07</span><span class="type">도적</span></div><p class="keywords">긴 그림자, 역수 단검, 검은 표식</p><p class="recommend"><b>루다 유추:</b> 낮게 숨어들어 재빠르게 훔쳐 치는 측면 공격수</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-warden"><span class="part shadow"></span><span class="part shield"></span><span class="part trident"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-08</span><span class="type">워든</span></div><p class="keywords">삼지창, 작은 방패, 자연 감시</p><p class="recommend"><b>루다 유추:</b> 자연 결계 앞에서 길목을 지키는 감시자</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-watchbow"><span class="part shadow"></span><span class="part cloak"></span><span class="part beacon"></span><span class="part bow"></span><span class="part arrow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-09</span><span class="type">파수궁</span></div><p class="keywords">망토, 활, 경계 자세</p><p class="recommend"><b>루다 유추:</b> 망토를 두르고 자리를 지키는 감시 궁수</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-trapper"><span class="part shadow"></span><span class="part trap"></span><span class="part vial"></span><span class="part bubble"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-10</span><span class="type">덫꾼</span></div><p class="keywords">덫, 독약병, 기다림</p><p class="recommend"><b>루다 유추:</b> 독약과 덫으로 길목을 끊는 준비형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-paladin"><span class="part aura"></span><span class="part shadow"></span><span class="part halo"></span><span class="part shield"></span><span class="part sword"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part headband"></span></div></div><div class="exhibit-code"><span class="code">SR-11</span><span class="type">성기사</span></div><p class="keywords">머리띠, 후광, 성검방</p><p class="recommend"><b>루다 유추:</b> 성스러운 표식을 두르고 공격과 보호를 같이 드는 전열</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-vanguard sr-sentinel"><span class="part shadow"></span><span class="part banner"></span><span class="part lance"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-12</span><span class="type">선봉</span></div><p class="keywords">작은 깃발, 짧은 창, 돌파 자세</p><p class="recommend"><b>루다 유추:</b> 전투 시작을 여는 가벼운 돌파형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-forbidden"><span class="part shadow"></span><span class="part seal"></span><span class="part chain left"></span><span class="part chain right"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR-13</span><span class="type">금제</span></div><p class="keywords">양손 사슬, 봉인 고리, 금지 표식</p><p class="recommend"><b>루다 유추:</b> 양손의 사슬로 적 행동을 묶는 제약형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-wall"><span class="part shadow"></span><span class="part wall"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-14</span><span class="type">성벽</span></div><p class="keywords">벽돌 방패, 거의 움직이지 않는 덩어리</p><p class="recommend"><b>루다 유추:</b> 사람이라기보다 전선 자체인 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-healbow"><span class="part aura"></span><span class="part shadow"></span><span class="part bow"></span><span class="part arrow"></span><span class="part orb"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-15</span><span class="type">치유궁</span></div><p class="keywords">활, 회복 구슬, 따뜻한 화살</p><p class="recommend"><b>루다 유추:</b> 멀리서 회복을 꽂는 지원 궁수</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-purifier"><span class="part aura"></span><span class="part shadow"></span><span class="part staff"></span><span class="part flame"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-16</span><span class="type">정화사</span></div><p class="keywords">작은 불꽃, 맑은 오라, 의식 지팡이</p><p class="recommend"><b>루다 유추:</b> 부정 효과를 태우는 정화형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-healbow"><span class="part aura"></span><span class="part shadow"></span><span class="part heal-trail"></span><span class="part bow"></span><span class="part arrow"></span><span class="part orb"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-15</span><span class="type">치유궁</span></div><p class="keywords">민트 회복 궤적, 회복 화살, 보조 활</p><p class="recommend"><b>루다 유추:</b> 멀리서 회복을 꽂는 지원 궁수</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-purifier"><span class="part aura"></span><span class="part shadow"></span><span class="part staff"></span><span class="part flame"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-16</span><span class="type">정화사</span></div><p class="keywords">맑은 불꽃, 정화 오라, 보조 지팡이</p><p class="recommend"><b>루다 유추:</b> 부정 효과를 태우는 정화형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-mage"><span class="part aura"></span><span class="part shadow"></span><span class="part orb"></span><span class="part cloak"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-17</span><span class="type">마도</span></div><p class="keywords">보라 구체, 망토, 밀도 있는 주문감</p><p class="recommend"><b>루다 유추:</b> 압축된 마력 공격형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-bard"><span class="part shadow"></span><span class="part note"></span><span class="part lute"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-18</span><span class="type">바드</span></div><p class="keywords">음표, 작은 악기, 박자감</p><p class="recommend"><b>루다 유추:</b> 전장 리듬을 바꾸는 버퍼</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-gatekeeper"><span class="part shadow"></span><span class="part shield"></span><span class="part key"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-19</span><span class="type">수문장</span></div><p class="keywords">열쇠, 방패, 문 앞의 자세</p><p class="recommend"><b>루다 유추:</b> 통로를 막고 여는 관문형</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-cleric"><span class="part aura"></span><span class="part shadow"></span><span class="part halo"></span><span class="part book"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-20</span><span class="type">성직자</span></div><p class="keywords">책, 후광, 차분한 로브</p><p class="recommend"><b>루다 유추:</b> 기도와 기록을 함께 쓰는 지원형</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-tracker"><span class="part shadow"></span><span class="part cloak"></span><span class="part bow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-21</span><span class="type">추적자</span></div><p class="keywords">후드, 낮은 활, 사냥꾼 자세</p><p class="recommend"><b>루다 유추:</b> 표식을 따라가는 단일 추격형</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-dragonspear"><span class="part shadow"></span><span class="part horn left"></span><span class="part horn right"></span><span class="part lance"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-22</span><span class="type">용창</span></div><p class="keywords">쌍뿔, 긴 창, 돌진 압력</p><p class="recommend"><b>루다 유추:</b> 용의 형상을 빌린 관통형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-gatekeeper"><span class="part shadow"></span><span class="part door"></span><span class="part key"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-19</span><span class="type">수문장</span></div><p class="keywords">열쇠, 문, 관문 자세</p><p class="recommend"><b>루다 유추:</b> 통로를 막고 여는 관문형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-cleric"><span class="part aura"></span><span class="part shadow"></span><span class="part halo"></span><span class="part book"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-20</span><span class="type">성직자</span></div><p class="keywords">큰 책, 낮은 후광, 차분한 로브</p><p class="recommend"><b>루다 유추:</b> 기도와 기록을 함께 쓰는 지원형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-tracker"><span class="part shadow"></span><span class="part footprint"></span><span class="part mark"></span><span class="part cloak"></span><span class="part rifle"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-21</span><span class="type">추적자</span></div><p class="keywords">표식, 발자국, 긴 라이플</p><p class="recommend"><b>루다 유추:</b> 표식을 따라 조준하는 단일 추격형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-dragonspear"><span class="part shadow"></span><span class="part wing"></span><span class="part tail"></span><span class="part horn left"></span><span class="part horn right"></span><span class="part lance"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-22</span><span class="type">용창</span></div><p class="keywords">붉은 용체, 초록 엣지, 긴 창</p><p class="recommend"><b>루다 유추:</b> 붉은 용의 날개와 초록 엣지를 빌린 관통형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-sage"><span class="part aura"></span><span class="part shadow"></span><span class="part orb"></span><span class="part scroll"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-23</span><span class="type">현자</span></div><p class="keywords">두루마리, 구슬, 조용한 판단감</p><p class="recommend"><b>루다 유추:</b> 전황을 읽고 흐름을 조절하는 지혜형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-sunlord"><span class="part sun"></span><span class="part shadow"></span><span class="part crown"></span><span class="part staff"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-24</span><span class="type">성황</span></div><p class="keywords">태양 고리, 왕관, 의식 권위</p><p class="recommend"><b>루다 유추:</b> 빛과 지휘를 겸하는 최상위 지원형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-plague"><span class="part smoke"></span><span class="part shadow"></span><span class="part bubble"></span><span class="part vial"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR-25</span><span class="type">독술사</span></div><p class="keywords">독병, 초록 연기, 작은 독 기포</p><p class="recommend"><b>루다 유추:</b> 독과 부식으로 지속 피해를 거는 후열</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-assassin"><span class="part shadow"></span><span class="part cloak"></span><span class="part hood"></span><span class="part dagger"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR-26</span><span class="type">암살자</span></div><p class="keywords">두건, 어두운 망토, 짧은 단검</p><p class="recommend"><b>루다 유추:</b> 얼굴을 가리고 후열을 노리는 처형형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-timekeeper"><span class="part shadow"></span><span class="part clock-ring"></span><span class="part clock-hand"></span><span class="part gear"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-27</span><span class="type">시간술사</span></div><p class="keywords">시계 고리, 시계침, 작은 톱니</p><p class="recommend"><b>루다 유추:</b> 속도와 행동 순서를 흔드는 조작형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-binder"><span class="part shadow"></span><span class="part threadline"></span><span class="part knot"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-28</span><span class="type">결속사</span></div><p class="keywords">붉은 실, 매듭, 연결선</p><p class="recommend"><b>루다 유추:</b> 동료를 묶어 피해를 나누는 보호 연결형</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-artillerist"><span class="part shadow"></span><span class="part shell"></span><span class="part cannon"></span><span class="part goggles"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-29</span><span class="type">포격수</span></div><p class="keywords">포신, 탄환, 고글, 무거운 장비</p><p class="recommend"><b>루다 유추:</b> 느리지만 강한 기계식 후열 화력</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-dancer"><span class="part shadow"></span><span class="part dance-ribbon"></span><span class="part curve-blade"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-30</span><span class="type">무희</span></div><p class="keywords">곡선 자세, 리본, 가벼운 검, 회전 궤적</p><p class="recommend"><b>루다 유추:</b> 회피와 템포로 이어 때리는 근접 딜러</p></article>
       </div></section>
   </main>
   <script>
