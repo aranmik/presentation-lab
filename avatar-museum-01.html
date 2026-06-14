@@ -971,68 +971,567 @@
     .sr-artillerist .body { border-color: #d8dfe8; background: #4b5664; }
     .sr-dancer .body { left: 25px; top: 32px; width: 28px; border-color: #ef9a9a; background: #57405b; transform: skewX(12deg); }
 
-    .mrd { --main: #9ba8bb; --edge: #d8dfe8; --deep: #313945; }
-    .mrd .body { left: 20px; top: 30px; width: 38px; height: 38px; border: 3px solid var(--edge); border-radius: 13px; background: var(--deep); box-shadow: inset 0 -9px 0 rgba(0,0,0,.16); z-index: 4; }
+    .mrd { --main: #9ba8bb; --edge: #d8dfe8; --deep: #313945; --edge-aura: color-mix(in srgb, var(--edge) 38%, transparent); }
+    .mrd::before { content: ""; position: absolute; left: 7px; right: 7px; top: 7px; bottom: 5px; border-radius: 50%; background: radial-gradient(circle at 50% 14%, var(--edge) 0 2px, transparent 3px), radial-gradient(circle at 78% 45%, var(--edge) 0 2px, transparent 3px), radial-gradient(circle at 22% 62%, var(--edge) 0 1px, transparent 2px); opacity: .2; filter: blur(.2px); z-index: 2; }
+    .mrd::after { content: ""; position: absolute; left: 13px; right: 13px; bottom: 4px; height: 9px; border-radius: 50%; background: radial-gradient(ellipse at center, var(--edge-aura) 0 45%, transparent 72%); opacity: .28; z-index: 2; }
+    .mrd .body { left: 20px; top: 30px; width: 38px; height: 38px; border: 2px solid rgba(231,239,248,.18); border-radius: 13px; background: linear-gradient(160deg, color-mix(in srgb, var(--deep) 82%, var(--main)), var(--deep)); box-shadow: inset 0 -9px 0 rgba(0,0,0,.16), inset 0 0 0 1px rgba(255,255,255,.06), 0 0 12px rgba(0,0,0,.2); z-index: 4; }
     .mrd .body::before { content: ""; position: absolute; left: 10px; top: 12px; width: 5px; height: 5px; border-radius: 50%; background: #10151d; box-shadow: 14px 0 0 #10151d; z-index: 2; }
-    .mrd .species { left: 27px; top: 8px; width: 24px; height: 24px; z-index: 6; }
-    .mrd .role { z-index: 7; }
+    .mrd .species { left: 27px; top: 8px; width: 24px; height: 24px; filter: drop-shadow(0 0 4px var(--edge-aura)); z-index: 6; }
+    .mrd .role { filter: drop-shadow(0 0 4px var(--edge-aura)); z-index: 7; }
     .mrd .extra { z-index: 3; }
-    .mrd-tank .role { left: 4px; top: 31px; width: 30px; height: 37px; border: 4px solid var(--edge); border-radius: 14px 14px 18px 18px; background: rgba(255,255,255,.08); }
+    .mrd-tank .role { left: 4px; top: 31px; width: 30px; height: 37px; border: 2px solid rgba(255,255,255,.16); border-left: 5px solid var(--edge); border-bottom: 4px solid var(--edge); border-radius: 14px 14px 18px 18px; background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.02)); }
+    .mrd-tank .role::before { content: ""; position: absolute; left: 7px; top: 6px; width: 9px; height: 17px; border-radius: 9px; background: var(--edge-aura); }
     .mrd-melee .role { right: 2px; top: 34px; width: 30px; height: 25px; border-right: 6px solid var(--edge); border-bottom: 6px solid var(--edge); border-radius: 0 0 18px 0; transform: rotate(-20deg); }
+    .mrd-melee .role::before { content: ""; position: absolute; right: -10px; bottom: -10px; width: 16px; height: 5px; border-radius: 6px; background: var(--main); transform: rotate(38deg); }
     .mrd-ranged .role { right: 0; top: 36px; width: 42px; height: 11px; border: 3px solid var(--edge); border-radius: 9px 3px 3px 9px; background: var(--deep); transform: rotate(-10deg); }
-    .mrd-ranged .role::after { content: ""; position: absolute; right: -9px; top: 2px; width: 10px; height: 5px; border-radius: 4px; background: var(--main); }
+    .mrd-ranged .role::before { content: ""; position: absolute; left: 7px; top: 3px; width: 17px; height: 2px; border-radius: 4px; background: var(--edge); opacity: .75; }
+    .mrd-ranged .role::after { content: ""; position: absolute; right: -9px; top: 2px; width: 10px; height: 5px; border-radius: 4px; background: var(--main); box-shadow: 10px -3px 0 -3px var(--edge); }
     .mrd-support .role { left: 8px; top: 18px; width: 5px; height: 51px; border-radius: 5px; background: var(--edge); transform: rotate(-10deg); }
-    .mrd-support .role::before { content: ""; position: absolute; left: 2px; top: 2px; width: 24px; height: 17px; border-radius: 10px 4px 4px 10px; background: var(--main); }
-    .mrd-healer .role { right: 3px; top: 14px; width: 23px; height: 23px; border-radius: 50%; background: #9fe6cf; box-shadow: 0 0 12px rgba(159,230,207,.38); }
+    .mrd-support .role::before { content: ""; position: absolute; left: 2px; top: 2px; width: 24px; height: 17px; border-radius: 10px 4px 4px 10px; background: linear-gradient(90deg, var(--main), color-mix(in srgb, var(--main) 58%, var(--edge))); }
+    .mrd-support .role::after { content: ""; position: absolute; left: -7px; top: 21px; width: 21px; height: 21px; border: 2px solid var(--edge); border-left-color: transparent; border-bottom-color: transparent; border-radius: 50%; opacity: .7; transform: rotate(20deg); }
+    .mrd-healer .role { right: 3px; top: 14px; width: 23px; height: 23px; border-radius: 50%; background: var(--edge); box-shadow: 0 0 12px rgba(255,255,255,.18), 0 0 0 3px rgba(255,255,255,.1); }
     .mrd-healer .role::before, .mrd-healer .role::after { content: ""; position: absolute; left: 9px; top: 4px; width: 5px; height: 15px; border-radius: 4px; background: #f7fff9; }
     .mrd-healer .role::after { transform: rotate(90deg); }
-    .mrd-elite .body { left: 17px; top: 26px; width: 44px; height: 44px; border-width: 4px; }
-    .mrd-elite .role { left: 22px; top: 4px; width: 34px; height: 18px; background: var(--main); clip-path: polygon(0 100%, 0 42%, 22% 75%, 50% 8%, 78% 75%, 100% 42%, 100% 100%); z-index: 7; }
-    .mrd-boss .body { left: 12px; top: 24px; width: 54px; height: 47px; border-width: 4px; border-radius: 17px 17px 10px 10px; }
-    .mrd-boss .role { left: 9px; top: 7px; width: 60px; height: 35px; border: 4px solid var(--main); border-bottom-color: transparent; border-radius: 50%; z-index: 3; }
-    .mrd-boss .extra { left: 6px; bottom: 10px; width: 66px; height: 16px; border-top: 5px solid var(--edge); border-radius: 50%; }
+    .mrd-elite .body { left: 15px; top: 24px; width: 48px; height: 48px; border-width: 3px; box-shadow: -17px 17px 0 -10px var(--deep), 17px 17px 0 -10px var(--deep), inset 0 -11px 0 rgba(0,0,0,.18), inset 0 0 0 1px var(--edge-aura); }
+    .mrd-elite .extra { left: 7px; top: 25px; width: 64px; height: 42px; border: 4px solid var(--edge-aura); border-top-color: var(--edge); border-bottom-color: transparent; border-radius: 50%; opacity: .72; }
+    .mrd-elite .role { left: 20px; top: 2px; width: 38px; height: 20px; background: var(--edge); clip-path: polygon(0 100%, 0 42%, 22% 75%, 50% 8%, 78% 75%, 100% 42%, 100% 100%); z-index: 7; }
+    .mrd-elite .role::after { content: ""; position: absolute; left: 14px; top: 4px; width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: .58; }
+    .mrd-elite-alt .body { top: 25px; border-radius: 18px 18px 9px 9px; box-shadow: -20px 18px 0 -11px var(--main), 20px 18px 0 -11px var(--main), inset 0 -11px 0 rgba(0,0,0,.2), inset 0 0 0 1px var(--edge-aura); }
+    .mrd-elite-alt .role { left: 15px; top: 7px; width: 48px; height: 18px; clip-path: polygon(0 70%, 14% 8%, 32% 66%, 50% 18%, 68% 66%, 86% 8%, 100% 70%, 100% 100%, 0 100%); }
+    .mrd-elite-alt .extra { left: 4px; top: 35px; width: 70px; height: 28px; border-top-width: 5px; transform: rotate(-6deg); }
+    .mrd-boss .body { left: 9px; top: 21px; width: 60px; height: 54px; border-width: 4px; border-radius: 19px 19px 10px 10px; }
+    .mrd-boss .body::after { content: ""; position: absolute; left: -18px; top: 24px; width: 17px; height: 23px; border-radius: 12px; background: var(--edge); box-shadow: 79px 0 0 var(--edge); opacity: .84; filter: drop-shadow(0 0 5px var(--edge-aura)); }
+    .mrd-boss .role { left: 4px; top: 3px; width: 70px; height: 43px; border: 5px solid var(--edge); border-bottom-color: transparent; border-radius: 50%; z-index: 3; }
+    .mrd-boss .role::before { content: ""; position: absolute; left: 28px; top: -12px; width: 10px; height: 10px; border-radius: 50%; background: var(--edge); box-shadow: 0 0 12px var(--edge); }
+    .mrd-boss .role::after { content: ""; position: absolute; left: 15px; top: 4px; width: 34px; height: 6px; border-radius: 6px; background: var(--main); opacity: .76; }
+    .mrd-boss .extra { left: 0; bottom: 6px; width: 78px; height: 22px; border-top: 6px solid var(--edge); border-radius: 50%; box-shadow: 0 8px 0 -5px var(--main); }
 
-    .mrd-iron { --main: #f0c36a; --edge: #d8dfe8; --deep: #454f5d; }
-    .mrd-iron .body { border-radius: 9px; }
+    .mrd-iron { --main: #f0c36a; --edge: #b9c6d8; --deep: #454f5d; }
+    .mrd-iron .body { border-radius: 9px; background: linear-gradient(90deg, transparent 0 37%, var(--edge-aura) 38% 43%, transparent 44% 100%), linear-gradient(160deg, #505c6c, #303946); }
     .mrd-iron .species { border: 5px dotted var(--main); border-radius: 50%; background: #232a34; }
-    .mrd-spore { --main: #b6de83; --edge: #e3b4d9; --deep: #455d37; }
+    .mrd-iron .species::after { content: ""; position: absolute; left: 8px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--edge); box-shadow: 0 0 7px var(--edge); }
+    .mrd-iron.mrd-boss .body::after { border-radius: 4px 12px 12px 4px; background: linear-gradient(90deg, var(--edge), #eef4fa); box-shadow: 79px 0 0 #eef4fa; }
+    .mrd-spore { --main: #b6de83; --edge: #d97bbd; --deep: #455d37; }
     .mrd-spore .body { border-radius: 22px 22px 11px 11px; }
-    .mrd-spore .species { top: 10px; width: 28px; height: 18px; border-radius: 50% 50% 12px 12px; background: var(--main); box-shadow: -9px 11px 0 rgba(182,222,131,.55), 12px 10px 0 rgba(227,180,217,.72); }
-    .mrd-coral { --main: #8fd8ff; --edge: #ffb4a2; --deep: #2f586c; }
+    .mrd-spore .species { top: 10px; width: 28px; height: 18px; border-radius: 50% 50% 12px 12px; background: radial-gradient(circle at 9px 6px, var(--edge) 0 3px, transparent 4px), var(--main); box-shadow: -9px 11px 0 rgba(182,222,131,.55), 12px 10px 0 rgba(217,123,189,.72), 0 3px 0 var(--edge); }
+    .mrd-spore.mrd-boss .body::after { border-radius: 50% 50% 35% 35%; background: var(--main); box-shadow: 79px 0 0 var(--edge); }
+    .mrd-coral { --main: #8fd8ff; --edge: #ff9d7c; --deep: #2f586c; }
     .mrd-coral .body { border-radius: 48% 52% 30% 30%; }
-    .mrd-coral .species { left: 24px; top: 7px; width: 31px; height: 24px; border-left: 6px solid var(--edge); border-right: 6px solid var(--edge); border-radius: 50%; background: rgba(143,216,255,.22); }
-    .mrd-glass { --main: #c7a2ff; --edge: #9ad4f0; --deep: #354160; }
+    .mrd-coral .species { left: 24px; top: 7px; width: 31px; height: 24px; border-left: 6px solid var(--edge); border-right: 6px solid var(--edge); border-radius: 50%; background: radial-gradient(circle at 50% 62%, var(--edge-aura) 0 6px, transparent 7px), rgba(143,216,255,.22); }
+    .mrd-coral .species::after { content: ""; position: absolute; left: 10px; top: -5px; width: 10px; height: 10px; border-radius: 50% 50% 0 50%; background: var(--main); transform: rotate(45deg); }
+    .mrd-coral.mrd-boss .body::after { border-radius: 50% 0 50% 50%; background: var(--edge); box-shadow: 79px 0 0 var(--edge); transform: rotate(-18deg); }
+    .mrd-glass { --main: #c7a2ff; --edge: #74d6ff; --deep: #354160; }
     .mrd-glass .body { border-radius: 8px 20px 8px 18px; transform: rotate(-5deg); background: linear-gradient(135deg, rgba(154,212,240,.35), var(--deep)); }
-    .mrd-glass .species { background: var(--edge); clip-path: polygon(50% 0, 100% 38%, 74% 100%, 26% 100%, 0 38%); box-shadow: 0 0 10px rgba(154,212,240,.35); }
-    .mrd-paper { --main: #f4e6c7; --edge: #ef9a9a; --deep: #5a4b42; }
+    .mrd-glass .species { background: linear-gradient(135deg, #e8fbff, var(--edge) 46%, var(--main)); clip-path: polygon(50% 0, 100% 38%, 74% 100%, 26% 100%, 0 38%); box-shadow: 0 0 10px rgba(116,214,255,.38); }
+    .mrd-glass .species::after { content: ""; position: absolute; left: 8px; top: 5px; width: 9px; height: 2px; border-radius: 3px; background: #fff; transform: rotate(-28deg); opacity: .72; }
+    .mrd-glass.mrd-boss .body::after { border-radius: 3px; background: linear-gradient(135deg, #fff, var(--edge)); box-shadow: 79px 0 0 var(--main); transform: rotate(12deg); }
+    .mrd-paper { --main: #f4e6c7; --edge: #ef7373; --deep: #5a4b42; }
     .mrd-paper .body { border-radius: 6px 6px 16px 16px; background: #f4e6c7; border-color: #d7c196; }
     .mrd-paper .species { width: 21px; height: 31px; border-radius: 4px; background: #f7ead3; border: 3px solid #d7c196; transform: rotate(-10deg); }
     .mrd-paper .species::after { content: ""; position: absolute; left: 5px; top: 8px; width: 9px; height: 3px; border-radius: 3px; background: var(--edge); box-shadow: 0 8px 0 var(--edge); }
-    .mrd-orc { --main: #9fcf77; --edge: #d7e58a; --deep: #4f633e; }
+    .mrd-paper.mrd-boss .body::after { border-radius: 3px 3px 12px 12px; background: #f7ead3; box-shadow: 79px 0 0 #f7ead3; border: 2px solid var(--edge); }
+    .mrd-orc { --main: #8fb85f; --edge: #caa444; --deep: #3f5a37; }
     .mrd-orc .body { border-radius: 18px 18px 9px 9px; width: 42px; left: 18px; }
     .mrd-orc .species { left: 23px; top: 9px; width: 32px; height: 24px; border-radius: 48% 48% 35% 35%; background: var(--main); border: 3px solid var(--edge); }
     .mrd-orc .species::before { content: ""; position: absolute; left: -12px; top: 7px; width: 13px; height: 9px; border-radius: 80% 0 0 80%; background: var(--main); box-shadow: 43px 0 0 var(--main); }
     .mrd-orc .species::after { content: ""; position: absolute; left: 7px; bottom: -8px; width: 5px; height: 10px; border-radius: 0 0 5px 5px; background: #f7ead3; box-shadow: 12px 0 0 #f7ead3; }
-    .mrd-goblin { --main: #b6de83; --edge: #f0c36a; --deep: #3d5634; }
+    .mrd-orc.mrd-boss .body::after { width: 20px; border-radius: 6px 16px 16px 6px; background: var(--edge); box-shadow: 77px 0 0 var(--edge); }
+    .mrd-goblin { --main: #83c653; --edge: #d4ee55; --deep: #304d2c; }
     .mrd-goblin .body { left: 23px; width: 32px; height: 34px; border-radius: 10px 10px 18px 18px; }
-    .mrd-goblin .species { left: 25px; top: 11px; width: 29px; height: 22px; border-radius: 50%; background: var(--main); border: 3px solid var(--edge); }
-    .mrd-goblin .species::before { content: ""; position: absolute; left: -15px; top: 3px; width: 18px; height: 16px; background: var(--main); clip-path: polygon(0 50%, 100% 0, 75% 100%); }
-    .mrd-goblin .species::after { content: ""; position: absolute; right: -15px; top: 3px; width: 18px; height: 16px; background: var(--main); clip-path: polygon(100% 50%, 0 0, 25% 100%); }
-    .mrd-troll { --main: #9cb286; --edge: #c4d7a4; --deep: #53614c; }
+    .mrd-goblin .species { left: 25px; top: 11px; width: 29px; height: 22px; border-radius: 50%; background: var(--main); border: 2px solid rgba(255,255,255,.18); box-shadow: inset 0 -4px 0 rgba(0,0,0,.12); }
+    .mrd-goblin .species::before { content: ""; position: absolute; left: -15px; top: 3px; width: 18px; height: 16px; background: linear-gradient(135deg, var(--edge) 0 26%, var(--main) 27%); clip-path: polygon(0 50%, 100% 0, 75% 100%); filter: drop-shadow(0 0 3px var(--edge)); }
+    .mrd-goblin .species::after { content: ""; position: absolute; right: -15px; top: 3px; width: 18px; height: 16px; background: linear-gradient(225deg, var(--edge) 0 26%, var(--main) 27%); clip-path: polygon(100% 50%, 0 0, 25% 100%); filter: drop-shadow(0 0 3px var(--edge)); }
+    .mrd-goblin.mrd-boss .body::after { border-radius: 5px 13px 13px 5px; background: var(--edge); box-shadow: 79px 0 0 var(--edge); transform: rotate(-12deg); }
+    .mrd-troll { --main: #8f9a77; --edge: #a875ff; --deep: #4d5547; }
     .mrd-troll .body { left: 15px; top: 27px; width: 48px; height: 43px; border-radius: 20px 20px 10px 10px; }
     .mrd-troll .species { left: 25px; top: 5px; width: 29px; height: 26px; border-radius: 13px 13px 9px 9px; background: var(--main); border: 3px solid var(--edge); }
-    .mrd-troll .species::before { content: ""; position: absolute; left: -2px; top: -10px; width: 7px; height: 14px; border-radius: 8px; background: #7f9a6d; box-shadow: 10px -3px 0 #7f9a6d, 20px 0 0 #7f9a6d; }
+    .mrd-troll .species::before { content: ""; position: absolute; left: -2px; top: -10px; width: 7px; height: 14px; border-radius: 8px; background: var(--edge); box-shadow: 10px -3px 0 #7f9a6d, 20px 0 0 var(--edge); }
     .mrd-troll .species::after { content: ""; position: absolute; left: 4px; bottom: -7px; width: 18px; height: 5px; border-radius: 5px; background: #d8dfe8; }
-    .mrd-naga { --main: #79d88a; --edge: #9ad4f0; --deep: #305c4b; }
+    .mrd-troll.mrd-boss .body::after { width: 22px; height: 25px; border-radius: 50%; background: var(--edge); box-shadow: 75px 0 0 var(--edge); }
+    .mrd-naga { --main: #65bfc4; --edge: #4ee37a; --deep: #284d4c; }
     .mrd-naga .body { left: 22px; top: 27px; width: 34px; height: 38px; border-radius: 20px 20px 8px 8px; }
-    .mrd-naga .species { left: 22px; top: 6px; width: 34px; height: 28px; border-radius: 50% 50% 35% 35%; background: var(--deep); border: 4px solid var(--edge); }
+    .mrd-naga .species { left: 22px; top: 6px; width: 34px; height: 28px; border-radius: 50% 50% 35% 35%; background: radial-gradient(circle at 50% 23%, var(--edge-aura) 0 8px, transparent 9px), var(--deep); border: 3px solid var(--edge); }
     .mrd-naga .species::before { content: ""; position: absolute; left: -9px; top: 8px; width: 12px; height: 16px; border-radius: 70% 0 70% 70%; background: var(--main); box-shadow: 31px 0 0 var(--main); }
-    .mrd-naga .extra { left: 10px; bottom: 9px; width: 58px; height: 23px; border-bottom: 6px solid var(--main); border-radius: 50%; transform: rotate(-10deg); }
-    .mrd-draco { --main: #c9564b; --edge: #79d88a; --deep: #653834; }
-    .mrd-draco .body { border-color: var(--edge); background: var(--deep); }
+    .mrd-naga .extra { left: 10px; bottom: 9px; width: 58px; height: 23px; border-bottom: 6px solid var(--main); border-radius: 50%; box-shadow: 0 4px 0 -2px var(--edge-aura); transform: rotate(-10deg); }
+    .mrd-naga.mrd-boss .body::after { height: 30px; border-radius: 50%; background: transparent; border: 5px solid var(--edge); border-top-color: transparent; box-shadow: 79px 0 0 -5px transparent; transform: rotate(-18deg); }
+    .mrd-draco { --main: #9e3f38; --edge: #ff5a4d; --deep: #4f2728; }
+    .mrd-draco .body { border-color: rgba(255,255,255,.18); background: linear-gradient(180deg, #5d2929, var(--deep)); }
     .mrd-draco .species { left: 24px; top: 7px; width: 30px; height: 24px; border-radius: 12px 12px 8px 8px; background: var(--main); border: 3px solid var(--edge); }
     .mrd-draco .species::before { content: ""; position: absolute; left: -5px; top: -11px; width: 12px; height: 15px; background: var(--edge); clip-path: polygon(50% 0, 100% 100%, 0 100%); box-shadow: 22px 0 0 var(--edge); }
-    .mrd-draco .extra { left: 6px; top: 29px; width: 28px; height: 34px; border: 4px solid var(--edge); border-right-color: transparent; border-bottom-color: transparent; border-radius: 50%; transform: rotate(-24deg); }
+    .mrd-draco .species::after { content: ""; position: absolute; right: -6px; top: 8px; width: 13px; height: 5px; border-radius: 50%; background: var(--edge); transform: rotate(-18deg); }
+    .mrd-draco .extra { left: 6px; top: 29px; width: 28px; height: 34px; border: 4px solid var(--edge); border-right-color: transparent; border-bottom-color: transparent; border-radius: 50%; box-shadow: inset 5px 2px 0 rgba(255,255,255,.08); transform: rotate(-24deg); }
+    .mrd-draco.mrd-boss .body::after { width: 20px; height: 27px; border-radius: 12px 12px 3px 12px; background: var(--edge); box-shadow: 78px 0 0 var(--edge); transform: rotate(-16deg); }
+    .mrd-ninja { --main: #6f7884; --edge: #c8ced6; --deep: #252b33; }
+    .mrd-ninja .body { left: 20px; top: 31px; width: 38px; height: 36px; border-color: var(--edge); border-radius: 18px 18px 10px 10px; background: linear-gradient(160deg, #343b45, var(--deep)); transform: skewX(-5deg); opacity: .92; }
+    .mrd-ninja .body::after { content: ""; position: absolute; left: 6px; top: 20px; width: 24px; height: 5px; border-radius: 4px; background: var(--edge); opacity: .55; }
+    .mrd-ninja .species { left: 23px; top: 8px; width: 32px; height: 26px; border: 3px solid var(--edge); border-radius: 14px 14px 8px 8px; background: #1f242c; }
+    .mrd-ninja .species::before { content: ""; position: absolute; left: 3px; top: 8px; width: 20px; height: 6px; border-radius: 6px; background: var(--edge); box-shadow: 24px -3px 0 -3px var(--edge); opacity: .9; }
+    .mrd-ninja .species::after { content: ""; position: absolute; left: 8px; top: 10px; width: 5px; height: 3px; border-radius: 50%; background: #10151d; box-shadow: 10px 0 0 #10151d; }
+    .mrd-ninja .extra { left: 6px; bottom: 9px; width: 64px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 16px 10px, rgba(200,206,214,.32) 0 8px, transparent 9px), radial-gradient(circle at 42px 11px, rgba(200,206,214,.2) 0 10px, transparent 11px); opacity: .8; }
+    .mrd-ninja.mrd-boss .body::after { width: 5px; height: 34px; border-radius: 5px; background: #eef4fa; box-shadow: 90px -4px 0 #eef4fa; transform: rotate(-28deg); }
+    .mrd-grasswolf { --main: #9aa870; --edge: #e6ef93; --deep: #3a4038; }
+    .mrd-grasswolf .body { left: 18px; top: 38px; width: 44px; height: 25px; border-radius: 18px 18px 9px 9px; background: var(--deep); }
+    .mrd-grasswolf .body::before { left: 20px; top: 9px; width: 4px; height: 4px; box-shadow: 9px 0 0 #10151d; }
+    .mrd-grasswolf .species { left: 24px; top: 15px; width: 31px; height: 24px; border-radius: 14px 14px 8px 8px; background: var(--main); border: 2px solid var(--edge); }
+    .mrd-grasswolf .species::before { content: ""; position: absolute; left: -3px; top: -9px; width: 11px; height: 12px; background: var(--edge); clip-path: polygon(50% 0, 100% 100%, 0 100%); box-shadow: 24px 0 0 var(--edge); }
+    .mrd-grasswolf .extra { left: 12px; top: 43px; width: 18px; height: 14px; border-top: 5px solid var(--edge); border-radius: 50%; transform: rotate(-24deg); }
+
+    .bt { --main: #9fdc82; --edge: #e8f59d; --deep: #3f5b45; --glow: color-mix(in srgb, var(--edge) 34%, transparent); }
+    .bt::before { content: ""; position: absolute; left: 10px; right: 10px; top: 8px; bottom: 8px; border-radius: 50%; background: radial-gradient(circle at 24% 62%, var(--glow) 0 7px, transparent 8px), radial-gradient(circle at 76% 32%, var(--glow) 0 5px, transparent 6px); opacity: .55; z-index: 2; }
+    .bt .shadow { left: 14px; bottom: 3px; width: 50px; height: 9px; background: rgba(0,0,0,.28); z-index: 1; }
+    .bt .body { left: 20px; top: 34px; width: 38px; height: 34px; border: 2px solid rgba(255,255,255,.2); border-radius: 18px 18px 11px 11px; background: linear-gradient(180deg, var(--main), var(--deep)); box-shadow: inset 0 -7px 0 rgba(0,0,0,.12); z-index: 4; }
+    .bt .head { left: 24px; top: 13px; width: 30px; height: 27px; border: 2px solid var(--edge); border-radius: 50% 50% 42% 42%; background: var(--main); filter: drop-shadow(0 0 4px var(--glow)); z-index: 6; }
+    .bt .head::before { content: ""; position: absolute; left: 8px; top: 12px; width: 4px; height: 4px; border-radius: 50%; background: #10151d; box-shadow: 10px 0 0 #10151d; }
+    .bt .head::after { content: ""; position: absolute; left: 10px; bottom: 4px; width: 10px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.45); }
+    .bt .ears { left: 22px; top: 6px; width: 10px; height: 12px; border-radius: 50% 50% 20% 20%; background: var(--edge); box-shadow: 24px 0 0 var(--edge); z-index: 5; }
+    .bt .extra { left: 7px; top: 34px; width: 64px; height: 34px; border: 3px solid var(--glow); border-bottom-color: transparent; border-radius: 50%; opacity: .8; z-index: 3; }
+    .bt .role { z-index: 8; filter: drop-shadow(0 0 3px var(--glow)); }
+    .bt-tank .role { left: 4px; top: 37px; width: 28px; height: 30px; border: 4px solid var(--edge); border-radius: 14px 14px 18px 18px; background: rgba(255,255,255,.08); }
+    .bt-melee .role { right: 5px; top: 38px; width: 31px; height: 22px; border-right: 5px solid var(--edge); border-bottom: 5px solid var(--edge); border-radius: 0 0 18px 0; transform: rotate(-20deg); }
+    .bt-ranged .role { right: 1px; top: 34px; width: 34px; height: 9px; border: 3px solid var(--edge); border-radius: 10px; transform: rotate(-12deg); }
+    .bt-ranged .role::after { content: ""; position: absolute; right: -10px; top: 1px; width: 8px; height: 8px; border-radius: 50%; background: var(--main); }
+    .bt-support .role { left: 10px; top: 18px; width: 5px; height: 47px; border-radius: 5px; background: var(--edge); transform: rotate(-10deg); }
+    .bt-support .role::before { content: ""; position: absolute; left: 2px; top: 3px; width: 23px; height: 16px; border-radius: 12px 6px 6px 12px; background: var(--main); }
+    .bt-healer .role { right: 5px; top: 13px; width: 23px; height: 23px; border-radius: 50%; background: var(--edge); box-shadow: 0 0 12px var(--glow); }
+    .bt-healer .role::before, .bt-healer .role::after { content: ""; position: absolute; left: 9px; top: 4px; width: 5px; height: 15px; border-radius: 4px; background: #faffef; }
+    .bt-healer .role::after { transform: rotate(90deg); }
+    .bt-bear { --main: #b99c72; --edge: #f3df9a; --deep: #674e3a; }
+    .bt-bear .body { left: 16px; width: 46px; height: 38px; border-radius: 22px 22px 12px 12px; }
+    .bt-bear .ears { border-radius: 50%; }
+    .bt-boar { --main: #b38b6a; --edge: #ecd18d; --deep: #624b3e; }
+    .bt-boar .head { width: 34px; left: 22px; border-radius: 42% 42% 35% 35%; }
+    .bt-boar .head::after { left: 9px; bottom: 2px; width: 15px; height: 8px; background: #efd5b6; }
+    .bt-boar .ears { left: 20px; transform: rotate(-8deg); }
+    .bt-turtle { --main: #78bd77; --edge: #e8f59d; --deep: #395f45; }
+    .bt-turtle .body { left: 14px; top: 37px; width: 50px; height: 27px; border-radius: 50% 50% 18px 18px; box-shadow: inset 0 0 0 5px rgba(232,245,157,.28); }
+    .bt-turtle .head { left: 32px; top: 16px; width: 22px; height: 21px; }
+    .bt-turtle .ears { display: none; }
+    .bt-mole { --main: #9d8067; --edge: #f1d48d; --deep: #4f3f36; }
+    .bt-mole .body { top: 40px; height: 26px; border-radius: 18px; }
+    .bt-mole .head { top: 20px; height: 22px; }
+    .bt-mole .extra { left: 7px; top: 55px; width: 64px; height: 8px; border: 0; border-top: 5px solid var(--edge); transform: rotate(-4deg); }
+    .bt-wolf { --main: #879480; --edge: #dbe88f; --deep: #39423e; }
+    .bt-wolf .body { left: 17px; top: 40px; width: 46px; height: 25px; border-radius: 18px 18px 9px 9px; }
+    .bt-wolf .head { top: 18px; border-radius: 14px 14px 8px 8px; }
+    .bt-wolf .ears { clip-path: polygon(50% 0, 100% 100%, 0 100%); border-radius: 0; }
+    .bt-wolf .extra { left: 10px; top: 43px; width: 16px; height: 15px; border: 0; border-top: 5px solid var(--edge); transform: rotate(-24deg); }
+    .bt-fox { --main: #d8a45f; --edge: #fff0a8; --deep: #7d5631; }
+    .bt-fox .ears { clip-path: polygon(50% 0, 100% 100%, 0 100%); border-radius: 0; }
+    .bt-fox .extra { left: 6px; top: 42px; width: 24px; height: 18px; border: 0; border-top: 8px solid var(--edge); border-radius: 50%; transform: rotate(-30deg); }
+    .bt-lynx { --main: #c4a96f; --edge: #f7e39e; --deep: #66553b; }
+    .bt-lynx .ears { height: 15px; border-radius: 50% 50% 0 0; box-shadow: 24px 0 0 var(--edge), 1px -5px 0 -3px #10151d, 25px -5px 0 -3px #10151d; }
+    .bt-weasel { --main: #d6bf83; --edge: #f5e7a5; --deep: #695b3e; }
+    .bt-weasel .body { left: 14px; top: 43px; width: 50px; height: 20px; border-radius: 18px; }
+    .bt-weasel .head { left: 39px; top: 25px; width: 22px; height: 20px; }
+    .bt-weasel .ears { left: 37px; top: 20px; width: 7px; height: 8px; box-shadow: 17px 0 0 var(--edge); }
+    .bt-bird { --main: #8db7d9; --edge: #f0f7b0; --deep: #36566a; }
+    .bt-bird .body { left: 24px; top: 36px; width: 31px; height: 30px; border-radius: 50%; }
+    .bt-bird .head { left: 27px; top: 15px; width: 25px; height: 24px; }
+    .bt-bird .head::after { left: 22px; bottom: 8px; width: 10px; height: 7px; clip-path: polygon(0 0, 100% 50%, 0 100%); background: var(--edge); }
+    .bt-bird .ears { display: none; }
+    .bt-bird .extra { left: 12px; top: 38px; width: 23px; height: 21px; border: 0; border-left: 8px solid var(--edge); border-radius: 50%; transform: rotate(-16deg); }
+    .bt-rabbit { --main: #d7c6a0; --edge: #f6e9b2; --deep: #6b6049; }
+    .bt-rabbit .ears { left: 24px; top: 0; width: 7px; height: 20px; border-radius: 8px; box-shadow: 19px 0 0 var(--edge); }
+    .bt-squirrel { --main: #c4935d; --edge: #f1e28f; --deep: #6b4c31; }
+    .bt-squirrel .extra { left: 4px; top: 31px; width: 24px; height: 30px; border: 7px solid var(--edge); border-right-color: transparent; border-bottom-color: transparent; border-radius: 50%; transform: rotate(-24deg); }
+    .bt-hedgehog { --main: #b79867; --edge: #f0e29b; --deep: #5c4938; }
+    .bt-hedgehog .extra { left: 15px; top: 31px; width: 48px; height: 20px; border: 0; background: repeating-linear-gradient(135deg, var(--edge) 0 5px, transparent 5px 10px); clip-path: polygon(0 100%, 8% 20%, 18% 100%, 28% 20%, 40% 100%, 52% 20%, 64% 100%, 76% 20%, 90% 100%, 100% 20%, 100% 100%); opacity: .9; }
+    .bt-slime { --main: #8de1a2; --edge: #e6f8a3; --deep: #3c7659; }
+    .bt-slime .head, .bt-slime .ears { display: none; }
+    .bt-slime .body { left: 17px; top: 26px; width: 44px; height: 42px; border-radius: 50% 50% 35% 35%; background: radial-gradient(circle at 31px 13px, rgba(255,255,255,.55) 0 5px, transparent 6px), linear-gradient(180deg, var(--main), var(--deep)); }
+    .bt-firefly { --main: #b7e783; --edge: #f8ff9d; --deep: #526b3a; }
+    .bt-firefly .body { left: 27px; top: 38px; width: 24px; height: 26px; border-radius: 50%; box-shadow: 0 0 18px var(--edge); }
+    .bt-firefly .head { left: 28px; top: 18px; width: 22px; height: 20px; }
+    .bt-firefly .extra { left: 12px; top: 30px; width: 54px; height: 25px; border: 0; background: radial-gradient(circle at 15px 10px, rgba(248,255,157,.42) 0 9px, transparent 10px), radial-gradient(circle at 39px 10px, rgba(248,255,157,.32) 0 9px, transparent 10px); }
+    .bt-mushroom { --main: #bde58d; --edge: #f1b6d8; --deep: #4f6a3e; }
+    .bt-mushroom .head { left: 20px; top: 9px; width: 38px; height: 22px; border-radius: 50% 50% 12px 12px; background: radial-gradient(circle at 12px 8px, var(--edge) 0 4px, transparent 5px), var(--main); }
+    .bt-mushroom .ears { display: none; }
+    .bt-bud { --main: #a8df80; --edge: #ffd6e6; --deep: #476c3f; }
+    .bt-bud .head { border-radius: 50% 50% 45% 45%; background: radial-gradient(circle at 50% 0, var(--edge) 0 8px, transparent 9px), var(--main); }
+    .bt-bud .extra { left: 26px; top: 7px; width: 26px; height: 16px; border: 0; border-top: 6px solid var(--edge); border-radius: 50%; }
+    .bt-deer { --main: #c9a878; --edge: #f2e79f; --deep: #69563b; }
+    .bt-deer .ears { left: 21px; top: 7px; width: 8px; height: 12px; transform: rotate(-18deg); box-shadow: 28px 9px 0 var(--edge); }
+    .bt-deer .extra { left: 18px; top: 3px; width: 42px; height: 18px; border: 0; border-top: 4px solid var(--edge); border-radius: 50%; }
+    .bt-lamb { --main: #e4ddc4; --edge: #f8f2b0; --deep: #8a806a; }
+    .bt-lamb .body { background: radial-gradient(circle at 10px 8px, #f8f2e5 0 8px, transparent 9px), radial-gradient(circle at 27px 12px, #f8f2e5 0 9px, transparent 10px), var(--main); }
+    .bt-flower { --main: #9edc82; --edge: #ffd1df; --deep: #477044; }
+    .bt-flower .head { background: var(--main); box-shadow: -8px 0 0 -3px var(--edge), 8px 0 0 -3px var(--edge), 0 -8px 0 -3px var(--edge); }
+    .bt-elite .body { left: 15px; top: 28px; width: 48px; height: 42px; border-width: 3px; }
+    .bt-elite .head { left: 21px; top: 7px; width: 36px; height: 31px; border-width: 3px; }
+    .bt-elite .extra { left: 4px; top: 22px; width: 70px; height: 48px; border: 5px solid var(--glow); border-top-color: var(--edge); border-bottom-color: transparent; }
+    .bt-elite .role { left: 19px; top: 0; width: 40px; height: 19px; background: var(--edge); clip-path: polygon(0 100%, 0 45%, 22% 75%, 50% 5%, 78% 75%, 100% 45%, 100% 100%); }
+    .bt-boss .body { left: 9px; top: 26px; width: 60px; height: 48px; border-width: 4px; }
+    .bt-boss .head { left: 18px; top: 4px; width: 42px; height: 36px; border-width: 4px; }
+    .bt-boss .extra { left: 0; top: 5px; width: 78px; height: 58px; border: 6px solid var(--edge); border-bottom-color: transparent; border-radius: 50%; opacity: .84; }
+    .bt-boss .role { left: 2px; bottom: 5px; width: 74px; height: 22px; border-top: 7px solid var(--edge); border-radius: 50%; }
+    .bt-lion { --main: #d6ad5d; --edge: #fff09c; --deep: #7a542f; }
+    .bt-lion .head { box-shadow: 0 0 0 9px rgba(255,240,156,.26); }
+    .bt-lion .ears { left: 18px; top: 4px; box-shadow: 32px 0 0 var(--edge); }
+    .bt-owl { --main: #9cb98a; --edge: #f1ef9c; --deep: #4a5a45; }
+    .bt-owl .head { border-radius: 15px 15px 50% 50%; }
+    .bt-owl .ears { left: 20px; top: 1px; width: 13px; height: 14px; clip-path: polygon(0 0, 100% 100%, 0 100%); border-radius: 0; box-shadow: 25px 0 0 var(--edge); }
+    .bt-owl .extra { background: radial-gradient(circle at 19px 19px, rgba(241,239,156,.26) 0 14px, transparent 15px), radial-gradient(circle at 51px 19px, rgba(241,239,156,.2) 0 14px, transparent 15px); }
+    .bt-deer.bt-elite .ears,
+    .bt-deer.bt-boss .ears { left: 17px; top: -1px; width: 11px; height: 18px; border-radius: 999px; box-shadow: 33px 0 0 var(--edge); }
+    .bt-deer.bt-elite .ears::before,
+    .bt-deer.bt-elite .ears::after,
+    .bt-deer.bt-boss .ears::before,
+    .bt-deer.bt-boss .ears::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      width: 18px;
+      height: 15px;
+      border-top: 4px solid var(--edge);
+      border-radius: 50%;
+      filter: drop-shadow(0 0 5px var(--edge));
+    }
+    .bt-deer.bt-elite .ears::before,
+    .bt-deer.bt-boss .ears::before { left: -8px; border-left: 4px solid var(--edge); transform: rotate(-18deg); }
+    .bt-deer.bt-elite .ears::after,
+    .bt-deer.bt-boss .ears::after { right: -41px; border-right: 4px solid var(--edge); transform: rotate(18deg); }
+
+    .grammar-strip,
+    .layout-lab {
+      grid-column: 1 / -1;
+      display: grid;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .grammar-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grammar-chip,
+    .layout-note,
+    .scenario-card,
+    .species-swatch {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .grammar-chip {
+      min-height: 54px;
+      padding: 7px;
+    }
+
+    .grammar-chip b,
+    .layout-note b,
+    .scenario-title b,
+    .species-swatch b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--text);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .grammar-chip span,
+    .layout-note span,
+    .scenario-title span,
+    .species-swatch span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .layout-lab {
+      grid-template-columns: 1fr;
+    }
+
+    .layout-note {
+      padding: 9px 10px;
+    }
+
+    .scenario-card {
+      padding: 9px;
+      overflow: hidden;
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .scenario-title b {
+      font-size: 12px;
+      flex: 0 0 108px;
+    }
+
+    .battle-frame {
+      position: relative;
+      height: 294px;
+      border: 1px solid #2c3542;
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(116,214,255,.06), transparent 29%),
+        radial-gradient(ellipse at 50% 39%, rgba(159,230,207,.08), transparent 45%),
+        linear-gradient(180deg, #10151d 0 58%, #151a21 59% 100%);
+      overflow: hidden;
+    }
+
+    .battle-frame::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 36px;
+      height: 118px;
+      border: 1px dashed rgba(154,168,184,.18);
+      border-radius: 50%;
+      transform: perspective(190px) rotateX(58deg);
+    }
+
+    .battle-frame::after {
+      content: "FX SAFE";
+      position: absolute;
+      right: 10px;
+      top: 78px;
+      color: rgba(154,168,184,.34);
+      font-size: 9px;
+      letter-spacing: .12em;
+    }
+
+    .battle-hud {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      display: grid;
+      grid-template-columns: 1fr 52px;
+      gap: 8px;
+      padding: 8px;
+      background: linear-gradient(180deg, rgba(16,21,29,.92), rgba(16,21,29,.28));
+      z-index: 9;
+    }
+
+    .battle-hp,
+    .battle-turn {
+      height: 16px;
+      border: 1px solid rgba(154,168,184,.24);
+      border-radius: 999px;
+      background: rgba(0,0,0,.24);
+      overflow: hidden;
+    }
+
+    .battle-hp::before {
+      content: "";
+      display: block;
+      width: 68%;
+      height: 100%;
+      background: linear-gradient(90deg, #ef7373, #f0c36a);
+      border-radius: inherit;
+    }
+
+    .battle-turn::before {
+      content: "TURN";
+      display: grid;
+      place-items: center;
+      height: 100%;
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: .08em;
+    }
+
+    .enemy-unit {
+      position: absolute;
+      width: 74px;
+      height: 92px;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+
+    .enemy-unit .avatar,
+    .enemy-unit .avatar.small {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) scale(var(--avatar-scale, .78));
+      transform-origin: center bottom;
+    }
+
+    .enemy-unit .unit-label {
+      position: absolute;
+      left: 50%;
+      bottom: 2px;
+      min-width: 48px;
+      padding: 2px 5px;
+      border-radius: 999px;
+      background: rgba(16,21,29,.72);
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.2;
+      text-align: center;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .enemy-unit.is-small { --avatar-scale: .72; }
+    .enemy-unit.is-elite { --avatar-scale: .95; width: 86px; height: 108px; z-index: 5; }
+    .enemy-unit.is-boss { --avatar-scale: 1.34; width: 128px; height: 142px; z-index: 6; }
+    .enemy-unit.is-boss-large { --avatar-scale: 1.54; width: 148px; height: 164px; z-index: 6; }
+
+    .lane-front { top: 126px; }
+    .lane-mid { top: 96px; }
+    .lane-back { top: 66px; }
+    .lane-boss { top: 82px; }
+
+    .ally-ghost {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      opacity: .42;
+    }
+
+    .ally-ghost span {
+      height: 38px;
+      border: 1px solid rgba(159,230,207,.18);
+      border-radius: 50% 50% 12px 12px;
+      background: rgba(159,230,207,.06);
+    }
+
+    .damage-space {
+      position: absolute;
+      left: 44px;
+      right: 44px;
+      top: 38px;
+      height: 44px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(240,195,106,.08), transparent);
+      color: rgba(240,195,106,.48);
+      font-size: 9px;
+      letter-spacing: .08em;
+      text-align: center;
+      line-height: 44px;
+      z-index: 2;
+    }
+
+    .species-comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .species-swatch {
+      min-height: 154px;
+      padding: 8px;
+    }
+
+    .swatch-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 88px;
+      margin-top: 6px;
+      border-radius: 7px;
+      background: rgba(16,21,29,.62);
+      overflow: hidden;
+    }
+
+    .swatch-row .avatar,
+    .swatch-row .avatar.small {
+      position: absolute;
+      top: 5px;
+      transform-origin: center bottom;
+    }
+
+    .swatch-row .avatar:nth-child(1) { left: 4px; transform: scale(.58); }
+    .swatch-row .avatar:nth-child(2) { left: 46px; top: 2px; transform: scale(.68); }
+    .swatch-row .avatar:nth-child(3) { right: 0; top: -2px; transform: scale(.78); }
+
+    .beginner-theme {
+      grid-column: 1 / -1;
+      display: grid;
+      gap: 10px;
+    }
+
+    .theme-note,
+    .theme-party,
+    .theme-battle {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .theme-note {
+      padding: 10px;
+    }
+
+    .theme-note b,
+    .theme-party b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .theme-note span,
+    .theme-party span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .theme-party {
+      padding: 9px;
+    }
+
+    .theme-lineup {
+      position: relative;
+      height: 136px;
+      margin-top: 8px;
+      border-radius: 7px;
+      background:
+        radial-gradient(ellipse at 50% 72%, rgba(212,238,85,.09), transparent 55%),
+        #10151d;
+      overflow: hidden;
+    }
+
+    .theme-lineup .avatar,
+    .theme-lineup .avatar.small {
+      position: absolute;
+      top: 42px;
+      transform-origin: center bottom;
+    }
+
+    .theme-lineup .avatar:nth-child(1) { left: 8px; transform: scale(.64); }
+    .theme-lineup .avatar:nth-child(2) { left: 58px; top: 34px; transform: scale(.76); }
+    .theme-lineup .avatar:nth-child(3) { left: 120px; top: 44px; transform: scale(.66); }
+    .theme-lineup .avatar:nth-child(4) { left: 178px; top: 38px; transform: scale(.72); }
+    .theme-lineup .avatar:nth-child(5) { right: 8px; top: 45px; transform: scale(.62); }
+
+    .theme-rank {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .theme-rank .species-swatch {
+      min-height: 164px;
+    }
+
+    .theme-rank .swatch-row {
+      height: 92px;
+    }
+
+    .theme-battle {
+      padding: 9px;
+    }
+
+    .beginner-theme .enemy-unit.is-boss {
+      --avatar-scale: 1.14;
+    }
   </style>
 </head>
 <body>
@@ -1047,7 +1546,9 @@
       <nav class="category-menu" aria-label="avatar museum categories">
         <button class="category-button" type="button" data-open="jobs"><strong>직업 후보 창구</strong><span>A-01 ~ A-16. 역할 후보와 신규 개성 후보를 봅니다.</span></button>
         <button class="category-button" type="button" data-open="monsters"><strong>몬스터 창구</strong><span>M-01 ~ M-10. 일반 몬스터와 작은 이형 실루엣을 모아둔 전시실입니다.</span></button>
-        <button class="category-button" type="button" data-open="monster-rnd"><strong>몬스터 R&amp;D</strong><span>MR-01 ~ MR-70. 10개 종족의 역할별 소형, 정예, 보스 묶음입니다.</span></button>
+        <button class="category-button" type="button" data-open="monster-rnd"><strong>몬스터 R&amp;D</strong><span>MR-01 ~ MR-88. 11개 종족의 소형 5역할, 정예 2종, 보스 묶음입니다.</span></button>
+        <button class="category-button" type="button" data-open="monster-layout"><strong>전투 배치 R&amp;D</strong><span>Monster R&amp;D Layout 01. 소형 / 정예 / 보스의 모바일 전투 배치감을 봅니다.</span></button>
+        <button class="category-button" type="button" data-open="beginner-theme"><strong>초보자 테마 R&amp;D</strong><span>동물 연합 / 새싹 숲 / 말랑한 입문용 Actor 후보군입니다.</span></button>
         <button class="category-button" type="button" data-open="bosses"><strong>정예 / 보스 창구</strong><span>B-01 ~ B-13. 중간보스, 테마 보스, 강한 적 후보를 봅니다.</span></button>
         <button class="category-button" type="button" data-open="signal"><strong>시그널R&amp;D</strong><span>SR-01 ~ SR-30. 이름 텍스트에서 유추한 30직업 실루엣 후보입니다.</span></button>
       </nav>
@@ -1088,86 +1589,255 @@
       <article class="exhibit-card"><div class="stage"><div class="avatar echo-bulb small"><span class="part shadow"></span><span class="part wave"></span><span class="part body"></span><span class="part bulb"></span></div></div><div class="exhibit-code"><span class="code">M-10</span><span class="type">new monster</span></div><p class="keywords">빛나는 전구, 작은 파동, 소리치는 실루엣</p><p class="recommend"><b>루다 추천:</b> 메아리구근 / 경보 몬스터 후보</p></article>
       </div></section>
 
-    <section class="category-screen" id="screen-monster-rnd" aria-label="몬스터 R&D 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>몬스터 R&amp;D</h2><p>10개 종족마다 소형 5역할, 정예 1종, 보스 1종을 묶은 외형 후보입니다.</p></div></div><div class="museum-grid">
+    <section class="category-screen" id="screen-monster-rnd" aria-label="몬스터 R&D 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>몬스터 R&amp;D</h2><p>11개 종족마다 소형 5역할, 정예 2종, 보스 1종을 묶은 외형 후보입니다.</p></div></div><div class="museum-grid">
+      <div class="grammar-strip" aria-label="Monster Avatar Tier Grammar 01">
+        <div class="grammar-chip"><b>1. 종족 먼저</b><span>색감과 얼굴/실루엣으로 먼저 읽히게 정리</span></div>
+        <div class="grammar-chip"><b>2. 역할 다음</b><span>방패, 칼날, 포신, 깃, 십자는 보조 파츠</span></div>
+        <div class="grammar-chip"><b>3. 등급 마지막</b><span>정예는 상체/왕관, 보스는 고리/상징/그림자</span></div>
+      </div>
       <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-iron mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-01</span><span class="type">암철기계족 탱커</span></div><p class="keywords">톱니 얼굴, 장갑판 방패, 낮은 중량감</p><p class="recommend"><b>루다 추천:</b> 톱니방벽 / 전열 탱커</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-iron mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-02</span><span class="type">암철기계족 근접</span></div><p class="keywords">기계 몸체, 톱날 팔, 전진 압박</p><p class="recommend"><b>루다 추천:</b> 철톱첨병 / 근접 딜러</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-iron mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-03</span><span class="type">암철기계족 원거리</span></div><p class="keywords">리벳 포신, 금속 코어, 직선 사격</p><p class="recommend"><b>루다 추천:</b> 리벳사수 / 원거리 딜러</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-iron mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-04</span><span class="type">암철기계족 지원</span></div><p class="keywords">신호 깃, 톱니 머리, 정비 지휘</p><p class="recommend"><b>루다 추천:</b> 신호정비병 / 서포터</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-iron mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-05</span><span class="type">암철기계족 힐러</span></div><p class="keywords">수리 십자, 윤활 코어, 금속 회복</p><p class="recommend"><b>루다 추천:</b> 윤활수복기 / 힐러</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-iron mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-06</span><span class="type">암철기계족 정예</span></div><p class="keywords">왕관 톱니, 감시 장갑, 명령 개체</p><p class="recommend"><b>루다 추천:</b> 태엽감시자 / 속도 조작 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-iron mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-07</span><span class="type">암철기계족 보스</span></div><p class="keywords">거대 포환 고리, 철갑 몸체, 느린 폭격</p><p class="recommend"><b>루다 추천:</b> 암철거포 / 광역 원거리 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-iron mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-07</span><span class="type">암철기계족 정예 II</span></div><p class="keywords">파쇄 팔, 철갑 어깨, 돌격 관문</p><p class="recommend"><b>루다 추천:</b> 쇳날집행기 / 돌격형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-iron mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-08</span><span class="type">암철기계족 보스</span></div><p class="keywords">거대 포환 고리, 철갑 몸체, 느린 폭격</p><p class="recommend"><b>루다 추천:</b> 암철거포 / 광역 원거리 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-08</span><span class="type">균사포자족 탱커</span></div><p class="keywords">버섯 갓, 포자 방패, 둥근 전열</p><p class="recommend"><b>루다 추천:</b> 버섯방패 / 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-09</span><span class="type">균사포자족 근접</span></div><p class="keywords">균사 발톱, 갓 머리, 끈적 접근</p><p class="recommend"><b>루다 추천:</b> 균사발톱 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-10</span><span class="type">균사포자족 원거리</span></div><p class="keywords">포자 분사구, 분홍 갓, 원거리 살포</p><p class="recommend"><b>루다 추천:</b> 포자분사체 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-11</span><span class="type">균사포자족 지원</span></div><p class="keywords">균사 깃, 연결 포자, 군집 보조</p><p class="recommend"><b>루다 추천:</b> 균사연결체 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-12</span><span class="type">균사포자족 힐러</span></div><p class="keywords">이슬 십자, 회복 포자, 부드러운 갓</p><p class="recommend"><b>루다 추천:</b> 이슬치유포자 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-spore mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-13</span><span class="type">균사포자족 정예</span></div><p class="keywords">왕갓 포자, 연결 지휘, 독성 군집</p><p class="recommend"><b>루다 추천:</b> 포자대장 / 중독 서포터 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-spore mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-14</span><span class="type">균사포자족 보스</span></div><p class="keywords">거대 균핵, 포자 왕관, 회복 군집</p><p class="recommend"><b>루다 추천:</b> 균핵모체 / 소환·회복 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-09</span><span class="type">균사포자족 탱커</span></div><p class="keywords">버섯 갓, 포자 방패, 둥근 전열</p><p class="recommend"><b>루다 추천:</b> 버섯방패 / 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-10</span><span class="type">균사포자족 근접</span></div><p class="keywords">균사 발톱, 갓 머리, 끈적 접근</p><p class="recommend"><b>루다 추천:</b> 균사발톱 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-11</span><span class="type">균사포자족 원거리</span></div><p class="keywords">포자 분사구, 분홍 갓, 원거리 살포</p><p class="recommend"><b>루다 추천:</b> 포자분사체 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-12</span><span class="type">균사포자족 지원</span></div><p class="keywords">균사 깃, 연결 포자, 군집 보조</p><p class="recommend"><b>루다 추천:</b> 균사연결체 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-spore mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-13</span><span class="type">균사포자족 힐러</span></div><p class="keywords">이슬 십자, 회복 포자, 부드러운 갓</p><p class="recommend"><b>루다 추천:</b> 이슬치유포자 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-spore mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-14</span><span class="type">균사포자족 정예</span></div><p class="keywords">왕갓 포자, 연결 지휘, 독성 군집</p><p class="recommend"><b>루다 추천:</b> 포자대장 / 중독 서포터 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-spore mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-15</span><span class="type">균사포자족 정예 II</span></div><p class="keywords">균핵 방패, 포자 어깨, 증식 관문</p><p class="recommend"><b>루다 추천:</b> 균핵수호체 / 수비형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-spore mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-16</span><span class="type">균사포자족 보스</span></div><p class="keywords">거대 균핵, 포자 왕관, 회복 군집</p><p class="recommend"><b>루다 추천:</b> 균핵모체 / 소환·회복 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-15</span><span class="type">조개산호족 탱커</span></div><p class="keywords">조개 귀, 산호 방패, 물가 전열</p><p class="recommend"><b>루다 추천:</b> 산호갑각 / 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-16</span><span class="type">조개산호족 근접</span></div><p class="keywords">집게 곡선, 조개 머리, 물살 돌격</p><p class="recommend"><b>루다 추천:</b> 집게돌격수 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-17</span><span class="type">조개산호족 원거리</span></div><p class="keywords">물가시 포신, 산호 귀, 직선 발사</p><p class="recommend"><b>루다 추천:</b> 물가시사수 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-18</span><span class="type">조개산호족 지원</span></div><p class="keywords">조류 깃, 파도 신호, 흐름 보조</p><p class="recommend"><b>루다 추천:</b> 조류나팔 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-19</span><span class="type">조개산호족 힐러</span></div><p class="keywords">해초 십자, 조개 코어, 물 회복</p><p class="recommend"><b>루다 추천:</b> 해초치유사 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-coral mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-20</span><span class="type">조개산호족 정예</span></div><p class="keywords">산호 왕관, 파도 장갑, 밀어내기</p><p class="recommend"><b>루다 추천:</b> 산호투사 / 밀어내기 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-coral mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-21</span><span class="type">조개산호족 보스</span></div><p class="keywords">큰 조수 고리, 산호 심장, 파도 압박</p><p class="recommend"><b>루다 추천:</b> 조수심장 / 탱커·서포트 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-17</span><span class="type">조개산호족 탱커</span></div><p class="keywords">조개 귀, 산호 방패, 물가 전열</p><p class="recommend"><b>루다 추천:</b> 산호갑각 / 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-18</span><span class="type">조개산호족 근접</span></div><p class="keywords">집게 곡선, 조개 머리, 물살 돌격</p><p class="recommend"><b>루다 추천:</b> 집게돌격수 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-19</span><span class="type">조개산호족 원거리</span></div><p class="keywords">물가시 포신, 산호 귀, 직선 발사</p><p class="recommend"><b>루다 추천:</b> 물가시사수 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-20</span><span class="type">조개산호족 지원</span></div><p class="keywords">조류 깃, 파도 신호, 흐름 보조</p><p class="recommend"><b>루다 추천:</b> 조류나팔 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-coral mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-21</span><span class="type">조개산호족 힐러</span></div><p class="keywords">해초 십자, 조개 코어, 물 회복</p><p class="recommend"><b>루다 추천:</b> 해초치유사 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-coral mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-22</span><span class="type">조개산호족 정예</span></div><p class="keywords">산호 왕관, 파도 장갑, 밀어내기</p><p class="recommend"><b>루다 추천:</b> 산호투사 / 밀어내기 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-coral mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-23</span><span class="type">조개산호족 정예 II</span></div><p class="keywords">조류 지팡이, 산호 어깨, 회복 파도</p><p class="recommend"><b>루다 추천:</b> 조류사제 / 회복형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-coral mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-24</span><span class="type">조개산호족 보스</span></div><p class="keywords">큰 조수 고리, 산호 심장, 파도 압박</p><p class="recommend"><b>루다 추천:</b> 조수심장 / 탱커·서포트 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-22</span><span class="type">유리성운족 탱커</span></div><p class="keywords">수정 몸체, 투명 방패, 반사 전열</p><p class="recommend"><b>루다 추천:</b> 수정방패 / 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-23</span><span class="type">유리성운족 근접</span></div><p class="keywords">유리 칼날, 결정 머리, 파편 접근</p><p class="recommend"><b>루다 추천:</b> 파편검무 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-24</span><span class="type">유리성운족 원거리</span></div><p class="keywords">프리즘 포신, 결정 코어, 빛 사격</p><p class="recommend"><b>루다 추천:</b> 프리즘사수 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-25</span><span class="type">유리성운족 지원</span></div><p class="keywords">굴절 깃, 수정 몸체, 반사 보조</p><p class="recommend"><b>루다 추천:</b> 굴절지원체 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-26</span><span class="type">유리성운족 힐러</span></div><p class="keywords">광정 십자, 맑은 코어, 빛 회복</p><p class="recommend"><b>루다 추천:</b> 광정치유체 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-glass mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-27</span><span class="type">유리성운족 정예</span></div><p class="keywords">무지개 왕관, 결정 장갑, 폭발 반사</p><p class="recommend"><b>루다 추천:</b> 무지개집행체 / 반사 딜러 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-glass mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-28</span><span class="type">유리성운족 보스</span></div><p class="keywords">거울 고리, 성운 결정, 되비침</p><p class="recommend"><b>루다 추천:</b> 성운거울 / 반사·지원 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-25</span><span class="type">유리성운족 탱커</span></div><p class="keywords">수정 몸체, 투명 방패, 반사 전열</p><p class="recommend"><b>루다 추천:</b> 수정방패 / 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-26</span><span class="type">유리성운족 근접</span></div><p class="keywords">유리 칼날, 결정 머리, 파편 접근</p><p class="recommend"><b>루다 추천:</b> 파편검무 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-27</span><span class="type">유리성운족 원거리</span></div><p class="keywords">프리즘 포신, 결정 코어, 빛 사격</p><p class="recommend"><b>루다 추천:</b> 프리즘사수 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-28</span><span class="type">유리성운족 지원</span></div><p class="keywords">굴절 깃, 수정 몸체, 반사 보조</p><p class="recommend"><b>루다 추천:</b> 굴절지원체 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-glass mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-29</span><span class="type">유리성운족 힐러</span></div><p class="keywords">광정 십자, 맑은 코어, 빛 회복</p><p class="recommend"><b>루다 추천:</b> 광정치유체 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-glass mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-30</span><span class="type">유리성운족 정예</span></div><p class="keywords">무지개 왕관, 결정 장갑, 폭발 반사</p><p class="recommend"><b>루다 추천:</b> 무지개집행체 / 반사 딜러 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-glass mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-31</span><span class="type">유리성운족 정예 II</span></div><p class="keywords">성운 후광, 굴절 어깨, 예언 광선</p><p class="recommend"><b>루다 추천:</b> 성운예언체 / 지원형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-glass mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-32</span><span class="type">유리성운족 보스</span></div><p class="keywords">거울 고리, 성운 결정, 되비침</p><p class="recommend"><b>루다 추천:</b> 성운거울 / 반사·지원 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-29</span><span class="type">종이부적족 탱커</span></div><p class="keywords">접힌 몸, 부적 방패, 종이 장벽</p><p class="recommend"><b>루다 추천:</b> 접지벽 / 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-30</span><span class="type">종이부적족 근접</span></div><p class="keywords">접칼 팔, 부적 얼굴, 얇은 베기</p><p class="recommend"><b>루다 추천:</b> 접칼인형 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-31</span><span class="type">종이부적족 원거리</span></div><p class="keywords">먹선 포신, 종이 몸체, 부적 투척</p><p class="recommend"><b>루다 추천:</b> 먹선투척수 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-32</span><span class="type">종이부적족 지원</span></div><p class="keywords">부적 깃, 종이 북, 봉인 신호</p><p class="recommend"><b>루다 추천:</b> 부적북 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-33</span><span class="type">종이부적족 힐러</span></div><p class="keywords">봉합 십자, 접힌 몸, 종이 회복</p><p class="recommend"><b>루다 추천:</b> 봉합치유지 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-paper mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-34</span><span class="type">종이부적족 정예</span></div><p class="keywords">금줄 왕관, 접힌 장갑, 금제 명령</p><p class="recommend"><b>루다 추천:</b> 금줄집행자 / 제어 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-paper mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-35</span><span class="type">종이부적족 보스</span></div><p class="keywords">거대 백지 고리, 부적 왕관, 봉인 압박</p><p class="recommend"><b>루다 추천:</b> 백지왕 / 제어·약화 보스</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-36</span><span class="type">오크 탱커</span></div><p class="keywords">초록 귀, 엄니, 큰 방패</p><p class="recommend"><b>루다 추천:</b> 엄니방패병 / 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-37</span><span class="type">오크 근접</span></div><p class="keywords">엄니 얼굴, 도끼 팔, 돌진 자세</p><p class="recommend"><b>루다 추천:</b> 도끼돌격병 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-38</span><span class="type">오크 원거리</span></div><p class="keywords">투창 포즈, 굵은 몸, 짧은 사격</p><p class="recommend"><b>루다 추천:</b> 투창오크 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-39</span><span class="type">오크 지원</span></div><p class="keywords">부족 깃, 엄니 얼굴, 함성 보조</p><p class="recommend"><b>루다 추천:</b> 전쟁고함꾼 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-40</span><span class="type">오크 힐러</span></div><p class="keywords">전투 약초, 회복 십자, 부족 주술</p><p class="recommend"><b>루다 추천:</b> 약초주술사 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-orc mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-41</span><span class="type">오크 정예</span></div><p class="keywords">엄니 왕관, 전쟁 깃, 지휘 개체</p><p class="recommend"><b>루다 추천:</b> 엄니대장 / 버프 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-orc mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-42</span><span class="type">오크 보스</span></div><p class="keywords">거대 엄니, 전쟁 고리, 압박 전열</p><p class="recommend"><b>루다 추천:</b> 대족장 / 도발·광역 버프 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-tank"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-33</span><span class="type">종이부적족 탱커</span></div><p class="keywords">접힌 몸, 부적 방패, 종이 장벽</p><p class="recommend"><b>루다 추천:</b> 접지벽 / 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-melee"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-34</span><span class="type">종이부적족 근접</span></div><p class="keywords">접칼 팔, 부적 얼굴, 얇은 베기</p><p class="recommend"><b>루다 추천:</b> 접칼인형 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-ranged"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-35</span><span class="type">종이부적족 원거리</span></div><p class="keywords">먹선 포신, 종이 몸체, 부적 투척</p><p class="recommend"><b>루다 추천:</b> 먹선투척수 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-support"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-36</span><span class="type">종이부적족 지원</span></div><p class="keywords">부적 깃, 종이 북, 봉인 신호</p><p class="recommend"><b>루다 추천:</b> 부적북 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-paper mrd-healer"><span class="part shadow"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-37</span><span class="type">종이부적족 힐러</span></div><p class="keywords">봉합 십자, 접힌 몸, 종이 회복</p><p class="recommend"><b>루다 추천:</b> 봉합치유지 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-paper mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-38</span><span class="type">종이부적족 정예</span></div><p class="keywords">금줄 왕관, 접힌 장갑, 금제 명령</p><p class="recommend"><b>루다 추천:</b> 금줄집행자 / 제어 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-paper mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-39</span><span class="type">종이부적족 정예 II</span></div><p class="keywords">접지 칼날, 봉인 소매, 금제 돌진</p><p class="recommend"><b>루다 추천:</b> 접지검객 / 공격형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-paper mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-40</span><span class="type">종이부적족 보스</span></div><p class="keywords">거대 백지 고리, 부적 왕관, 봉인 압박</p><p class="recommend"><b>루다 추천:</b> 백지왕 / 제어·약화 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-41</span><span class="type">오크 탱커</span></div><p class="keywords">초록 귀, 엄니, 큰 방패</p><p class="recommend"><b>루다 추천:</b> 엄니방패병 / 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-42</span><span class="type">오크 근접</span></div><p class="keywords">엄니 얼굴, 도끼 팔, 돌진 자세</p><p class="recommend"><b>루다 추천:</b> 도끼돌격병 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-43</span><span class="type">오크 원거리</span></div><p class="keywords">투창 포즈, 굵은 몸, 짧은 사격</p><p class="recommend"><b>루다 추천:</b> 투창오크 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-44</span><span class="type">오크 지원</span></div><p class="keywords">부족 깃, 엄니 얼굴, 함성 보조</p><p class="recommend"><b>루다 추천:</b> 전쟁고함꾼 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-orc mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-45</span><span class="type">오크 힐러</span></div><p class="keywords">전투 약초, 회복 십자, 부족 주술</p><p class="recommend"><b>루다 추천:</b> 약초주술사 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-orc mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-46</span><span class="type">오크 정예</span></div><p class="keywords">엄니 왕관, 전쟁 깃, 지휘 개체</p><p class="recommend"><b>루다 추천:</b> 엄니대장 / 버프 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-orc mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-47</span><span class="type">오크 정예 II</span></div><p class="keywords">뼈도끼 팔, 황금 엄니, 광전 돌격</p><p class="recommend"><b>루다 추천:</b> 뼈도끼광전사 / 돌격형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-orc mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-48</span><span class="type">오크 보스</span></div><p class="keywords">거대 엄니, 전쟁 고리, 압박 전열</p><p class="recommend"><b>루다 추천:</b> 대족장 / 도발·광역 버프 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-43</span><span class="type">고블린 탱커</span></div><p class="keywords">큰 귀, 작은 방패, 얕은 전열</p><p class="recommend"><b>루다 추천:</b> 깡통방패 / 회피 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-44</span><span class="type">고블린 근접</span></div><p class="keywords">긴 귀, 작은 칼, 빠른 찌르기</p><p class="recommend"><b>루다 추천:</b> 찌르개 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-45</span><span class="type">고블린 원거리</span></div><p class="keywords">장난감 포신, 큰 귀, 비겁한 사격</p><p class="recommend"><b>루다 추천:</b> 새총사수 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-46</span><span class="type">고블린 지원</span></div><p class="keywords">작은 깃발, 귀 실루엣, 함정 신호</p><p class="recommend"><b>루다 추천:</b> 덫신호꾼 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-47</span><span class="type">고블린 힐러</span></div><p class="keywords">수상한 약병, 회복 십자, 응급 땜질</p><p class="recommend"><b>루다 추천:</b> 약병땜장이 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-goblin mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-48</span><span class="type">고블린 정예</span></div><p class="keywords">금귀 왕관, 함정 지휘, 빠른 명령</p><p class="recommend"><b>루다 추천:</b> 덫두목 / 행동 가속 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-goblin mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-49</span><span class="type">고블린 보스</span></div><p class="keywords">거대 함정 고리, 큰 귀, 장난감 화력</p><p class="recommend"><b>루다 추천:</b> 함정왕 / 설치·원거리 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-49</span><span class="type">고블린 탱커</span></div><p class="keywords">큰 귀, 작은 방패, 얕은 전열</p><p class="recommend"><b>루다 추천:</b> 깡통방패 / 회피 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-50</span><span class="type">고블린 근접</span></div><p class="keywords">긴 귀, 작은 칼, 빠른 찌르기</p><p class="recommend"><b>루다 추천:</b> 찌르개 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-51</span><span class="type">고블린 원거리</span></div><p class="keywords">장난감 포신, 큰 귀, 비겁한 사격</p><p class="recommend"><b>루다 추천:</b> 새총사수 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-52</span><span class="type">고블린 지원</span></div><p class="keywords">작은 깃발, 귀 실루엣, 함정 신호</p><p class="recommend"><b>루다 추천:</b> 덫신호꾼 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-goblin mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-53</span><span class="type">고블린 힐러</span></div><p class="keywords">수상한 약병, 회복 십자, 응급 땜질</p><p class="recommend"><b>루다 추천:</b> 약병땜장이 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-goblin mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-54</span><span class="type">고블린 정예</span></div><p class="keywords">금귀 왕관, 함정 지휘, 빠른 명령</p><p class="recommend"><b>루다 추천:</b> 덫두목 / 행동 가속 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-goblin mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-55</span><span class="type">고블린 정예 II</span></div><p class="keywords">토템 등짐, 약탈 깃, 초원 주술</p><p class="recommend"><b>루다 추천:</b> 토템주술관 / 지휘형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-goblin mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-56</span><span class="type">고블린 보스</span></div><p class="keywords">거대 함정 고리, 큰 귀, 장난감 화력</p><p class="recommend"><b>루다 추천:</b> 함정왕 / 설치·원거리 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-50</span><span class="type">트롤 탱커</span></div><p class="keywords">큰 몸, 이끼 머리, 재생 방패</p><p class="recommend"><b>루다 추천:</b> 이끼방벽 / 재생 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-51</span><span class="type">트롤 근접</span></div><p class="keywords">큰 팔, 돌기 머리, 묵직한 후려침</p><p class="recommend"><b>루다 추천:</b> 굵은팔 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-52</span><span class="type">트롤 원거리</span></div><p class="keywords">바위 투척, 거친 몸, 둔한 포물선</p><p class="recommend"><b>루다 추천:</b> 돌던짐꾼 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-53</span><span class="type">트롤 지원</span></div><p class="keywords">토템 깃, 큰 몸, 둔화 함성</p><p class="recommend"><b>루다 추천:</b> 토템등짐 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-54</span><span class="type">트롤 힐러</span></div><p class="keywords">재생 십자, 이끼 돌기, 자가 회복</p><p class="recommend"><b>루다 추천:</b> 재생이끼 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-troll mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-55</span><span class="type">트롤 정예</span></div><p class="keywords">돌기 왕관, 큰 몸, 버티는 압박</p><p class="recommend"><b>루다 추천:</b> 돌기거한 / 재생 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-troll mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-56</span><span class="type">트롤 보스</span></div><p class="keywords">거대 재생 고리, 두꺼운 몸, 장기전 압박</p><p class="recommend"><b>루다 추천:</b> 재생거인 / 탱커·회복 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-57</span><span class="type">트롤 탱커</span></div><p class="keywords">큰 몸, 이끼 머리, 재생 방패</p><p class="recommend"><b>루다 추천:</b> 이끼방벽 / 재생 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-58</span><span class="type">트롤 근접</span></div><p class="keywords">큰 팔, 돌기 머리, 묵직한 후려침</p><p class="recommend"><b>루다 추천:</b> 굵은팔 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-59</span><span class="type">트롤 원거리</span></div><p class="keywords">바위 투척, 거친 몸, 둔한 포물선</p><p class="recommend"><b>루다 추천:</b> 돌던짐꾼 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-60</span><span class="type">트롤 지원</span></div><p class="keywords">토템 깃, 큰 몸, 둔화 함성</p><p class="recommend"><b>루다 추천:</b> 토템등짐 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-troll mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-61</span><span class="type">트롤 힐러</span></div><p class="keywords">재생 십자, 이끼 돌기, 자가 회복</p><p class="recommend"><b>루다 추천:</b> 재생이끼 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-troll mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-62</span><span class="type">트롤 정예</span></div><p class="keywords">돌기 왕관, 큰 몸, 버티는 압박</p><p class="recommend"><b>루다 추천:</b> 돌기거한 / 재생 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-troll mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-63</span><span class="type">트롤 정예 II</span></div><p class="keywords">바위 어깨, 재생 돌기, 지진 압박</p><p class="recommend"><b>루다 추천:</b> 바위등짐 / 괴력형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-troll mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-64</span><span class="type">트롤 보스</span></div><p class="keywords">거대 재생 고리, 두꺼운 몸, 장기전 압박</p><p class="recommend"><b>루다 추천:</b> 재생거인 / 탱커·회복 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-57</span><span class="type">나가 탱커</span></div><p class="keywords">뱀 꼬리, 후드 머리, 비늘 방패</p><p class="recommend"><b>루다 추천:</b> 비늘방패 / 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-58</span><span class="type">나가 근접</span></div><p class="keywords">뱀 꼬리, 곡선 베기, 휘감기</p><p class="recommend"><b>루다 추천:</b> 휘감검 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-59</span><span class="type">나가 원거리</span></div><p class="keywords">독침 포신, 뱀 후드, 직선 독화살</p><p class="recommend"><b>루다 추천:</b> 독침사수 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-60</span><span class="type">나가 지원</span></div><p class="keywords">물결 깃, 꼬리 고리, 속박 신호</p><p class="recommend"><b>루다 추천:</b> 물결술사 / 속박 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-61</span><span class="type">나가 힐러</span></div><p class="keywords">물 십자, 후드 머리, 비늘 회복</p><p class="recommend"><b>루다 추천:</b> 샘비늘 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-naga mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-62</span><span class="type">나가 정예</span></div><p class="keywords">후드 왕관, 뱀 꼬리, 구속 명령</p><p class="recommend"><b>루다 추천:</b> 후드사령 / 속박 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-naga mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-63</span><span class="type">나가 보스</span></div><p class="keywords">거대 물결 고리, 뱀 후드, 속박 압박</p><p class="recommend"><b>루다 추천:</b> 심해후드 / 속박·중독 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-65</span><span class="type">나가 탱커</span></div><p class="keywords">뱀 꼬리, 후드 머리, 비늘 방패</p><p class="recommend"><b>루다 추천:</b> 비늘방패 / 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-66</span><span class="type">나가 근접</span></div><p class="keywords">뱀 꼬리, 곡선 베기, 휘감기</p><p class="recommend"><b>루다 추천:</b> 휘감검 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-67</span><span class="type">나가 원거리</span></div><p class="keywords">독침 포신, 뱀 후드, 직선 독화살</p><p class="recommend"><b>루다 추천:</b> 독침사수 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-68</span><span class="type">나가 지원</span></div><p class="keywords">물결 깃, 꼬리 고리, 속박 신호</p><p class="recommend"><b>루다 추천:</b> 물결술사 / 속박 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-naga mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-69</span><span class="type">나가 힐러</span></div><p class="keywords">물 십자, 후드 머리, 비늘 회복</p><p class="recommend"><b>루다 추천:</b> 샘비늘 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-naga mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-70</span><span class="type">나가 정예</span></div><p class="keywords">후드 왕관, 뱀 꼬리, 구속 명령</p><p class="recommend"><b>루다 추천:</b> 후드사령 / 속박 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-naga mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-71</span><span class="type">나가 정예 II</span></div><p class="keywords">독비늘 후광, 꼬리 의식, 중독 명령</p><p class="recommend"><b>루다 추천:</b> 독비늘무녀 / 주술형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-naga mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-72</span><span class="type">나가 보스</span></div><p class="keywords">거대 물결 고리, 뱀 후드, 속박 압박</p><p class="recommend"><b>루다 추천:</b> 심해후드 / 속박·중독 보스</p></article>
 
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-64</span><span class="type">드라코 탱커</span></div><p class="keywords">작은 날개, 뿔, 비늘 방패</p><p class="recommend"><b>루다 추천:</b> 비늘수호 / 탱커</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-65</span><span class="type">드라코 근접</span></div><p class="keywords">뿔 머리, 날개, 발톱 돌진</p><p class="recommend"><b>루다 추천:</b> 날개발톱 / 근접 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-66</span><span class="type">드라코 원거리</span></div><p class="keywords">숨결 포신, 붉은 몸, 초록 엣지</p><p class="recommend"><b>루다 추천:</b> 숨결사수 / 원거리 딜러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-67</span><span class="type">드라코 지원</span></div><p class="keywords">용깃 신호, 날개, 위협 포효</p><p class="recommend"><b>루다 추천:</b> 포효기수 / 서포터</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-68</span><span class="type">드라코 힐러</span></div><p class="keywords">온기 십자, 붉은 비늘, 용혈 회복</p><p class="recommend"><b>루다 추천:</b> 용혈치유사 / 힐러</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-draco mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-69</span><span class="type">드라코 정예</span></div><p class="keywords">쌍뿔 왕관, 작은 날개, 숨결 지휘</p><p class="recommend"><b>루다 추천:</b> 쌍뿔기수 / 광역 화상 정예</p></article>
-      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-draco mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-70</span><span class="type">드라코 보스</span></div><p class="keywords">거대 날개 고리, 붉은 용체, 초록 엣지</p><p class="recommend"><b>루다 추천:</b> 드라코군주 / 숨결·돌진 보스</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-73</span><span class="type">드라코 탱커</span></div><p class="keywords">작은 날개, 뿔, 비늘 방패</p><p class="recommend"><b>루다 추천:</b> 비늘수호 / 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-74</span><span class="type">드라코 근접</span></div><p class="keywords">뿔 머리, 날개, 발톱 돌진</p><p class="recommend"><b>루다 추천:</b> 날개발톱 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-75</span><span class="type">드라코 원거리</span></div><p class="keywords">숨결 포신, 붉은 몸, 초록 엣지</p><p class="recommend"><b>루다 추천:</b> 숨결사수 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-76</span><span class="type">드라코 지원</span></div><p class="keywords">용깃 신호, 날개, 위협 포효</p><p class="recommend"><b>루다 추천:</b> 포효기수 / 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-draco mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-77</span><span class="type">드라코 힐러</span></div><p class="keywords">온기 십자, 붉은 비늘, 용혈 회복</p><p class="recommend"><b>루다 추천:</b> 용혈치유사 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-draco mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-78</span><span class="type">드라코 정예</span></div><p class="keywords">쌍뿔 왕관, 작은 날개, 숨결 지휘</p><p class="recommend"><b>루다 추천:</b> 쌍뿔기수 / 광역 화상 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-draco mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-79</span><span class="type">드라코 정예 II</span></div><p class="keywords">잿불 팔, 붉은 뿔, 돌진 화염</p><p class="recommend"><b>루다 추천:</b> 잿불비늘장군 / 돌격형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-draco mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-80</span><span class="type">드라코 보스</span></div><p class="keywords">거대 날개 고리, 붉은 용체, 초록 엣지</p><p class="recommend"><b>루다 추천:</b> 드라코군주 / 숨결·돌진 보스</p></article>
+
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-ninja mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-81</span><span class="type">닌자 탱커</span></div><p class="keywords">회색 엣지, 연막, 짧은 방패</p><p class="recommend"><b>루다 추천:</b> 연막방패 / 회피 탱커</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-ninja mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-82</span><span class="type">닌자 근접</span></div><p class="keywords">복면, 낮은 자세, 그림자 베기</p><p class="recommend"><b>루다 추천:</b> 그림자쌍검 / 근접 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-ninja mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-83</span><span class="type">닌자 원거리</span></div><p class="keywords">수리검 사선, 회색 엣지, 은신 사격</p><p class="recommend"><b>루다 추천:</b> 수리검투척수 / 원거리 딜러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-ninja mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-84</span><span class="type">닌자 지원</span></div><p class="keywords">연막 깃, 은신 신호, 흐린 몸</p><p class="recommend"><b>루다 추천:</b> 연막술사 / 은신 서포터</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd small mrd-ninja mrd-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-85</span><span class="type">닌자 힐러</span></div><p class="keywords">응급 붕대, 회색 십자, 숨은 회복</p><p class="recommend"><b>루다 추천:</b> 그림자구호 / 힐러</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-ninja mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-86</span><span class="type">닌자 정예</span></div><p class="keywords">회색 왕관, 잔상, 기습 지휘</p><p class="recommend"><b>루다 추천:</b> 그림자두목 / 은신 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-ninja mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div></div><div class="exhibit-code"><span class="code">MR-87</span><span class="type">닌자 정예 II</span></div><p class="keywords">분신 고리, 연막 소매, 환술 지휘</p><p class="recommend"><b>루다 추천:</b> 연막환술사 / 교란형 정예</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar mrd mrd-ninja mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div><div class="exhibit-code"><span class="code">MR-88</span><span class="type">닌자 보스</span></div><p class="keywords">거대 연막 고리, 회색 엣지, 분신 압박</p><p class="recommend"><b>루다 추천:</b> 무영대장 / 은신·기습 보스</p></article>
       </div></section>
+
+    <section class="category-screen" id="screen-monster-layout" aria-label="Monster R&D Layout 01 전투 배치 검증"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>전투 배치 R&amp;D</h2><p>Monster R&amp;D Layout 01. 본게임 모바일 세로 전투 구도를 가정한 배치감 확인 창구입니다.</p></div></div><div class="layout-lab">
+      <div class="layout-note"><b>검증 기준</b><span>상단 HUD 아래 1차 적 영역, 중앙 피해 숫자/피격 FX 여백, 하단 아군 자리까지 겹침 없이 남기는지 봅니다.</span></div>
+
+      <div class="layout-note"><b>초보자 테마 전용 배치</b><span>고블린을 제외한 동물/새싹 숲 Actor 후보가 첫 전투 화면에서도 역할과 덩치감이 읽히는지 확인합니다.</span></div>
+      <article class="scenario-card"><div class="scenario-title"><b>BT-01. 소형 일반</b><span>곰방패 + 풀빛늑대 + 깃새 + 이슬말랑 / 말랑한 인상 안에서 전열과 후열이 구분되는지 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:18%"><div class="avatar bt bt-bear bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">tank</span></div>
+        <div class="enemy-unit is-small lane-mid" style="left:40%"><div class="avatar bt bt-wolf bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">melee</span></div>
+        <div class="enemy-unit is-small lane-back" style="left:62%"><div class="avatar bt bt-bird bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">range</span></div>
+        <div class="enemy-unit is-small lane-front" style="left:82%"><div class="avatar bt bt-slime bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">support</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>BT-02. 정예 관문</b><span>올빼미 현자 + 새싹거북 + 새싹사슴 / 정예가 보스 전 관문처럼 한 단계 위로 보이는지 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:21%"><div class="avatar bt bt-turtle bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">guard</span></div>
+        <div class="enemy-unit is-elite lane-mid" style="left:50%"><div class="avatar bt bt-owl bt-elite bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">elite</span></div>
+        <div class="enemy-unit is-small lane-front" style="left:79%"><div class="avatar bt bt-deer bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">heal</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>BT-03. 보스 단독</b><span>새싹숲 사자왕 / 첫 테마답게 친숙하지만 상단 중앙에서 충분히 보스로 보이는지 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-boss-large lane-boss" style="left:50%"><div class="avatar bt bt-lion bt-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">boss</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>BT-04. 보스 수행원</b><span>숲사슴왕 + 토끼/양 수행원 / 보스 존재감과 소형 판독성이 함께 살아나는지 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:19%"><div class="avatar bt bt-rabbit bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">seed</span></div>
+        <div class="enemy-unit is-boss lane-boss" style="left:50%"><div class="avatar bt bt-deer bt-boss bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">boss</span></div>
+        <div class="enemy-unit is-small lane-front" style="left:81%"><div class="avatar bt bt-lamb bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">heal</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>01. 소형 4체</b><span>고블린 일반 배치 / 촘촘하지만 귀와 역할 파츠가 살아야 함</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:22%"><div class="avatar mrd small mrd-goblin mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">tank</span></div>
+        <div class="enemy-unit is-small lane-mid" style="left:42%"><div class="avatar mrd small mrd-goblin mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">melee</span></div>
+        <div class="enemy-unit is-small lane-mid" style="left:62%"><div class="avatar mrd small mrd-goblin mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">range</span></div>
+        <div class="enemy-unit is-small lane-front" style="left:80%"><div class="avatar mrd small mrd-goblin mrd-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">support</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>02. 혼합 배치</b><span>나가 정예 + 닌자/나가 소형 / 정예가 몸통과 후광으로 한 단계 위여야 함</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:23%"><div class="avatar mrd small mrd-ninja mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">small</span></div>
+        <div class="enemy-unit is-elite lane-mid" style="left:50%"><div class="avatar mrd mrd-naga mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><span class="unit-label">elite</span></div>
+        <div class="enemy-unit is-small lane-front" style="left:77%"><div class="avatar mrd small mrd-naga mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">small</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>02B. 고블린 정예 2종</b><span>고블린 전용 테마 후보 / 보스 전 관문이 둘 다 상위 개체로 보이는지 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:18%"><div class="avatar mrd small mrd-grasswolf mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">wolf</span></div>
+        <div class="enemy-unit is-elite lane-mid" style="left:42%"><div class="avatar mrd mrd-goblin mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><span class="unit-label">captain</span></div>
+        <div class="enemy-unit is-elite lane-mid" style="left:66%"><div class="avatar mrd mrd-goblin mrd-elite mrd-elite-alt"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><span class="unit-label">shaman</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>03. 보스 단독</b><span>드라코 보스 / HUD와 피해 숫자 여백을 침범하지 않으면서 압박감 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-boss-large lane-boss" style="left:50%"><div class="avatar mrd mrd-draco mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">boss</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <article class="scenario-card"><div class="scenario-title"><b>04. 보스 수행원</b><span>암철기계족 보스 + 닌자/기계 소형 / 보스 상징과 소형 판독성 동시 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:18%"><div class="avatar mrd small mrd-iron mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">guard</span></div>
+        <div class="enemy-unit is-boss lane-boss" style="left:50%"><div class="avatar mrd mrd-iron mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">boss</span></div>
+        <div class="enemy-unit is-small lane-front" style="left:82%"><div class="avatar mrd small mrd-ninja mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><span class="unit-label">add</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></article>
+
+      <div class="layout-note"><b>대표 종족 크기 비교</b><span>각 칸은 소형 / 정예 / 보스를 한 줄에 놓은 간이 스케일 표입니다. 작은 카드에서 종족이 먼저 읽히는지 확인합니다.</span></div>
+      <div class="species-comparison">
+        <div class="species-swatch"><b>고블린</b><span>귀 끝 엣지와 작은 체구</span><div class="swatch-row"><div class="avatar mrd small mrd-goblin mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><div class="avatar mrd mrd-goblin mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><div class="avatar mrd mrd-goblin mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div></div>
+        <div class="species-swatch"><b>트롤</b><span>큰 몸통과 보라 재생 돌기</span><div class="swatch-row"><div class="avatar mrd small mrd-troll mrd-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><div class="avatar mrd mrd-troll mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><div class="avatar mrd mrd-troll mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div></div>
+        <div class="species-swatch"><b>나가</b><span>후드 머리와 꼬리 곡선</span><div class="swatch-row"><div class="avatar mrd small mrd-naga mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><div class="avatar mrd mrd-naga mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><div class="avatar mrd mrd-naga mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div></div>
+        <div class="species-swatch"><b>드라코</b><span>뿔과 날개 고리</span><div class="swatch-row"><div class="avatar mrd small mrd-draco mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><div class="avatar mrd mrd-draco mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><div class="avatar mrd mrd-draco mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div></div>
+        <div class="species-swatch"><b>닌자</b><span>복면, 연막, 은회색 시선</span><div class="swatch-row"><div class="avatar mrd small mrd-ninja mrd-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><div class="avatar mrd mrd-ninja mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><div class="avatar mrd mrd-ninja mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div></div>
+        <div class="species-swatch"><b>암철기계족</b><span>기계 발광선과 톱니 코어</span><div class="swatch-row"><div class="avatar mrd small mrd-iron mrd-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div><div class="avatar mrd mrd-iron mrd-elite"><span class="part shadow"></span><span class="part extra"></span><span class="part body"></span><span class="part species"></span><span class="part role"></span></div><div class="avatar mrd mrd-iron mrd-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part species"></span></div></div></div>
+      </div>
+    </div></section>
+
+    <section class="category-screen" id="screen-beginner-theme" aria-label="초보자 테마 Actor 후보군"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>초보자 테마 R&amp;D</h2><p>고블린을 제외한 동물 연합 / 새싹 숲 / 말랑한 입문용 Actor 후보군입니다.</p></div></div><div class="beginner-theme">
+      <div class="theme-note"><b>테마 방향</b><span>초보자 테마는 한 종족 통일형이 아니라 숲과 초원의 친숙한 생물이 섞인 입문용 연합입니다. 고블린은 제외하고, 이후 전용 테마들과 확실히 다른 부드러운 첫 인상을 목표로 합니다.</span></div>
+
+      <div class="theme-note"><b>소형 5역할 후보군</b><span>각 역할별 4종 후보입니다. 최종 조합은 나라가 골라 섞을 수 있도록 고정 팩이 아닌 후보 보관소로 정리했습니다.</span></div>
+      <div class="museum-grid">
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bear bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T01</span><span class="type">탱커 후보</span></div><p class="keywords">작은 곰, 둥근 방패, 편안한 전열</p><p class="recommend"><b>루다 추천:</b> 곰방패 / 기본 탱커</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-boar bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T02</span><span class="type">탱커 후보</span></div><p class="keywords">멧돼지, 낮은 돌진, 두꺼운 앞면</p><p class="recommend"><b>루다 추천:</b> 덤불멧돼지 / 돌진 탱커</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-turtle bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T03</span><span class="type">탱커 후보</span></div><p class="keywords">거북이, 둥근 등껍질, 안전한 첫 방어</p><p class="recommend"><b>루다 추천:</b> 새싹거북 / 수비 탱커</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-mole bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T04</span><span class="type">탱커 후보</span></div><p class="keywords">큰 두더지, 흙손, 낮은 버티기</p><p class="recommend"><b>루다 추천:</b> 땅굴두더지 / 방어 탱커</p></article>
+
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-wolf bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M01</span><span class="type">근접 후보</span></div><p class="keywords">초원 늑대, 낮은 자세, 빠른 물기</p><p class="recommend"><b>루다 추천:</b> 풀빛늑대 / 근접 딜러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-fox bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M02</span><span class="type">근접 후보</span></div><p class="keywords">여우, 큰 꼬리, 장난스러운 찌르기</p><p class="recommend"><b>루다 추천:</b> 잎여우 / 회피 근접</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lynx bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M03</span><span class="type">근접 후보</span></div><p class="keywords">스라소니, 귀털, 민첩한 발톱</p><p class="recommend"><b>루다 추천:</b> 숲스라소니 / 치명 근접</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-weasel bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M04</span><span class="type">근접 후보</span></div><p class="keywords">족제비, 긴 몸, 빠른 파고들기</p><p class="recommend"><b>루다 추천:</b> 들족제비 / 연타 근접</p></article>
+
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bird bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-R01</span><span class="type">원거리 후보</span></div><p class="keywords">작은 새, 깃털 투척, 가벼운 후열</p><p class="recommend"><b>루다 추천:</b> 깃새 / 원거리 딜러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-rabbit bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-R02</span><span class="type">원거리 후보</span></div><p class="keywords">토끼, 씨앗 새총, 긴 귀 실루엣</p><p class="recommend"><b>루다 추천:</b> 씨앗토끼 / 원거리 딜러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-squirrel bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-R03</span><span class="type">원거리 후보</span></div><p class="keywords">다람쥐, 도토리 투척, 큰 꼬리</p><p class="recommend"><b>루다 추천:</b> 도토리다람쥐 / 투척 딜러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-hedgehog bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-R04</span><span class="type">원거리 후보</span></div><p class="keywords">고슴도치, 작은 가시, 안전한 견제</p><p class="recommend"><b>루다 추천:</b> 가시고슴 / 견제 딜러</p></article>
+
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-slime bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S01</span><span class="type">서포터 후보</span></div><p class="keywords">풀빛 슬라임, 말랑 신호, 버프 링</p><p class="recommend"><b>루다 추천:</b> 이슬말랑 / 버프 서포터</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-firefly bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S02</span><span class="type">서포터 후보</span></div><p class="keywords">반딧불 요정, 작은 빛, 신호 지원</p><p class="recommend"><b>루다 추천:</b> 반딧불씨 / 속도 서포터</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-mushroom bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S03</span><span class="type">서포터 후보</span></div><p class="keywords">버섯 정령, 포자 깃, 부드러운 보조</p><p class="recommend"><b>루다 추천:</b> 버섯신호 / 서포터</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bud bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S04</span><span class="type">서포터 후보</span></div><p class="keywords">꽃봉오리, 풍선감, 신호 파동</p><p class="recommend"><b>루다 추천:</b> 꽃봉신호 / 보호 서포터</p></article>
+
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-deer bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H01</span><span class="type">힐러 후보</span></div><p class="keywords">어린 사슴, 새싹 뿔, 숲 회복</p><p class="recommend"><b>루다 추천:</b> 새싹사슴 / 힐러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lamb bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H02</span><span class="type">힐러 후보</span></div><p class="keywords">양, 몽실한 몸, 편안한 회복광</p><p class="recommend"><b>루다 추천:</b> 풀양 / 안정 힐러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-rabbit bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H03</span><span class="type">힐러 후보</span></div><p class="keywords">토끼 치유사, 긴 귀, 응급 회복</p><p class="recommend"><b>루다 추천:</b> 약초토끼 / 빠른 힐러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-flower bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H04</span><span class="type">힐러 후보</span></div><p class="keywords">꽃 정령, 잎사귀 몸, 회복 향기</p><p class="recommend"><b>루다 추천:</b> 꽃잎정령 / 회복 힐러</p></article>
+      </div>
+
+      <div class="theme-note"><b>정예 후보군</b><span>보스 도전 열쇠를 지키는 관문 후보입니다. 전열 압박, 후열 지원, 자연 주술, 육중한 돌격형을 나누어 봅니다.</span></div>
+      <div class="museum-grid">
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-owl bt-elite bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-E01</span><span class="type">정예 후보</span></div><p class="keywords">올빼미 현자, 숲의 안내자, 후열 지휘</p><p class="recommend"><b>루다 추천:</b> 숲올빼미 현자 / 지원 정예</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-boar bt-elite bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-E02</span><span class="type">정예 후보</span></div><p class="keywords">멧돼지 돌격대장, 두꺼운 전면, 관문 돌파</p><p class="recommend"><b>루다 추천:</b> 덤불돌격대장 / 전열 정예</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-wolf bt-elite bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-E03</span><span class="type">정예 후보</span></div><p class="keywords">큰 늑대 우두머리, 빠른 압박, 낮은 돌진</p><p class="recommend"><b>루다 추천:</b> 초원늑대 우두머리 / 공격 정예</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-deer bt-elite bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-E04</span><span class="type">정예 후보</span></div><p class="keywords">사슴 수호자, 새싹 왕관, 회복 관문</p><p class="recommend"><b>루다 추천:</b> 사슴수호자 / 자연 정예</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-mushroom bt-elite bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-E05</span><span class="type">정예 후보</span></div><p class="keywords">거대 버섯 수호체, 포자 방패, 느린 압박</p><p class="recommend"><b>루다 추천:</b> 버섯수호체 / 수비 정예</p></article>
+      </div>
+
+      <div class="theme-note"><b>보스 후보군</b><span>초보자 테마의 얼굴 후보입니다. 보스답지만 너무 괴기하지 않고, 첫 테마의 부드러운 자연 톤을 유지합니다.</span></div>
+      <div class="museum-grid">
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lion bt-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B01</span><span class="type">보스 후보</span></div><p class="keywords">숲의 왕 사자, 밝은 갈기, 첫 테마의 얼굴</p><p class="recommend"><b>루다 추천:</b> 새싹숲 사자왕 / 대표 보스</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-deer bt-boss bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B02</span><span class="type">보스 후보</span></div><p class="keywords">큰 사슴왕, 숲의 수호자, 회복 고리</p><p class="recommend"><b>루다 추천:</b> 숲사슴왕 / 수호 보스</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bear bt-boss bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B03</span><span class="type">보스 후보</span></div><p class="keywords">연합 수호자 곰, 큰 방패감, 부드러운 압박</p><p class="recommend"><b>루다 추천:</b> 숲곰장로 / 방어 보스</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-owl bt-boss bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B04</span><span class="type">보스 후보</span></div><p class="keywords">거대 올빼미 군주, 날개 고리, 지휘 보스</p><p class="recommend"><b>루다 추천:</b> 밤숲올빼미 / 지원 보스</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-mushroom bt-boss bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B05</span><span class="type">보스 후보</span></div><p class="keywords">버섯왕, 자연 왕관, 포자 연합</p><p class="recommend"><b>루다 추천:</b> 새싹버섯왕 / 소환 보스</p></article>
+      </div>
+
+      <div class="theme-note"><b>추천 조합 예시</b><span>A: 곰방패 / 풀빛늑대 / 깃새 / 이슬말랑 / 새싹사슴 + 올빼미 현자 + 사자왕<br>B: 새싹거북 / 잎여우 / 씨앗토끼 / 버섯신호 / 풀양 + 멧돼지 돌격대장 + 사슴왕<br>C: 땅굴두더지 / 들족제비 / 도토리다람쥐 / 꽃봉신호 / 꽃잎정령 + 버섯수호체 + 숲곰장로</span></div>
+
+      <div class="theme-battle"><div class="scenario-title"><b>BT 후보 전투</b><span>소형 / 정예 / 보스 후보가 첫 테마 화면에서 너무 약해 보이지 않는지 확인</span></div><div class="battle-frame">
+        <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
+        <div class="enemy-unit is-small lane-front" style="left:18%"><div class="avatar bt bt-bear bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">tank</span></div>
+        <div class="enemy-unit is-elite lane-mid" style="left:43%"><div class="avatar bt bt-owl bt-elite bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">elite</span></div>
+        <div class="enemy-unit is-boss lane-boss" style="left:68%"><div class="avatar bt bt-lion bt-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">boss</span></div>
+        <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
+      </div></div>
+    </div></section>
 
     <section class="category-screen" id="screen-bosses" aria-label="정예 보스 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>정예 / 보스 창구</h2><p>큰 덩어리, 강한 장식, 테마가 읽히는 보스 후보입니다.</p></div></div><div class="museum-grid">
       <article class="exhibit-card"><div class="stage"><div class="avatar crown-ogre"><span class="part shadow"></span><span class="part club"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part crown"></span></div></div><div class="exhibit-code"><span class="code">B-01</span><span class="type">elite</span></div><p class="keywords">왕관, 큰 몽둥이, 정면 압박감</p><p class="recommend"><b>루다 추천:</b> 왕관오거 / 중간보스 후보</p></article>
