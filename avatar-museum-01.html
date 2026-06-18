@@ -971,6 +971,47 @@
     .sr-artillerist .body { border-color: #d8dfe8; background: #4b5664; }
     .sr-dancer .body { left: 25px; top: 32px; width: 28px; border-color: #ef9a9a; background: #57405b; transform: skewX(12deg); }
 
+    .sr2 { --accent: #d8dfe8; --deep: #3e4654; --soft: rgba(216,223,232,.28); }
+    .sr2 .body { border-color: var(--accent); background: var(--deep); box-shadow: inset 0 -8px 0 rgba(0,0,0,.18), 0 0 12px var(--soft); }
+    .sr2 .head { background: #d2a684; }
+    .sr2 .duel-ring { left: 10px; top: 19px; width: 56px; height: 42px; border: 3px solid var(--soft); border-bottom-color: transparent; border-radius: 50%; transform: rotate(-16deg); z-index: 3; }
+    .sr2 .counter-spark { right: 6px; top: 12px; width: 15px; height: 15px; background: var(--accent); clip-path: polygon(50% 0, 66% 35%, 100% 50%, 66% 65%, 50% 100%, 34% 65%, 0 50%, 34% 35%); box-shadow: 0 0 10px var(--soft); z-index: 7; }
+    .sr2 .life-line { left: 7px; top: 31px; width: 63px; height: 23px; border-top: 4px solid var(--accent); border-right: 4px solid var(--accent); border-radius: 50%; transform: rotate(-18deg); z-index: 5; }
+    .sr2 .cross { right: 8px; top: 13px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--soft); z-index: 7; }
+    .sr2 .cross::before, .sr2 .cross::after { content: ""; position: absolute; left: 9px; top: 4px; width: 4px; height: 14px; border-radius: 4px; background: #f7fff9; }
+    .sr2 .cross::after { transform: rotate(90deg); }
+    .sr2 .sky-mark { right: 6px; top: 6px; width: 18px; height: 18px; background: var(--accent); clip-path: polygon(50% 0, 61% 36%, 98% 35%, 68% 57%, 79% 93%, 50% 70%, 21% 93%, 32% 57%, 2% 35%, 39% 36%); box-shadow: 0 0 11px var(--soft); z-index: 7; }
+    .sr2 .aim-line { left: 10px; top: 24px; width: 58px; height: 3px; border-radius: 4px; background: var(--accent); transform: rotate(-48deg); z-index: 6; }
+    .sr2 .plague-cloud { left: 1px; top: 7px; width: 23px; height: 23px; border-radius: 50%; background: rgba(182,222,131,.48); box-shadow: 16px 10px 0 rgba(182,222,131,.34), 36px 2px 0 rgba(182,222,131,.24); z-index: 5; }
+    .sr2 .infection-dot { right: 7px; top: 11px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: -14px 10px 0 rgba(182,222,131,.75), 5px 16px 0 rgba(182,222,131,.6), -24px 24px 0 rgba(182,222,131,.5); z-index: 7; }
+    .sr2 .tempo-ring { left: 5px; top: 16px; width: 66px; height: 46px; border-top: 5px solid var(--accent); border-right: 4px solid var(--soft); border-radius: 50%; transform: rotate(22deg); z-index: 5; }
+    .sr2 .beat { right: 9px; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: -14px 10px 0 var(--accent), 3px 23px 0 rgba(240,195,106,.72); z-index: 7; }
+    .sr2 .barrier { left: 5px; top: 21px; width: 67px; height: 47px; border: 5px solid var(--accent); border-bottom-color: transparent; border-radius: 50% 50% 18px 18px; background: rgba(255,255,255,.04); z-index: 4; }
+    .sr2 .crest { left: 30px; top: 24px; width: 18px; height: 18px; background: var(--accent); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); box-shadow: 0 0 10px var(--soft); z-index: 8; }
+    .sr2 .formation { left: 10px; top: 38px; width: 58px; height: 24px; border: 3px solid var(--accent); border-radius: 8px; background: linear-gradient(90deg, transparent 31%, var(--soft) 32% 36%, transparent 37% 64%, var(--soft) 65% 69%, transparent 70%), linear-gradient(0deg, transparent 43%, var(--soft) 44% 52%, transparent 53%); z-index: 4; }
+    .sr2-bladesaint-a { --accent: #f0c36a; --deep: #3f4652; --soft: rgba(240,195,106,.32); }
+    .sr2-bladesaint-a .sword { right: 8px; top: 7px; height: 65px; transform: rotate(4deg); }
+    .sr2-bladesaint-a .body { left: 21px; top: 35px; width: 34px; transform: skewX(-4deg); }
+    .sr2-bladesaint-b { --accent: #d8dfe8; --deep: #333b49; --soft: rgba(216,223,232,.3); }
+    .sr2-bladesaint-b .sword { right: 4px; top: 11px; height: 60px; transform: rotate(27deg); }
+    .sr2-bladesaint-b .counter-spark { left: 12px; right: auto; top: 22px; }
+    .sr2-savior-a, .sr2-savior-b { --accent: #9fe6cf; --deep: #3a5c55; --soft: rgba(159,230,207,.32); }
+    .sr2-savior-a .halo { left: 25px; top: 5px; width: 28px; height: 12px; border-color: rgba(159,230,207,.72); }
+    .sr2-savior-b .life-line { top: 25px; height: 31px; }
+    .sr2-skybow-a, .sr2-skybow-b { --accent: #9ad4f0; --deep: #354966; --soft: rgba(154,212,240,.32); }
+    .sr2-skybow-a .bow { right: 7px; top: 3px; height: 68px; border-right-color: var(--accent); transform: rotate(-11deg); }
+    .sr2-skybow-b .bow { right: 3px; top: 9px; height: 63px; border-right-color: var(--accent); transform: rotate(8deg); }
+    .sr2-skybow-b .sky-mark { left: 9px; right: auto; top: 11px; }
+    .sr2-plague-a, .sr2-plague-b { --accent: #b6de83; --deep: #304635; --soft: rgba(182,222,131,.34); }
+    .sr2-plague-a .mask, .sr2-plague-b .mask { z-index: 8; }
+    .sr2-plague-b .vial { right: 3px; top: 19px; height: 36px; }
+    .sr2-dancer-a, .sr2-dancer-b { --accent: #ef9a9a; --deep: #57405b; --soft: rgba(239,154,154,.32); }
+    .sr2-dancer-a .body, .sr2-dancer-b .body { left: 25px; width: 28px; transform: skewX(12deg); }
+    .sr2-dancer-b .tempo-ring { transform: rotate(-28deg); border-top-color: rgba(240,195,106,.9); }
+    .sr2-wardmaster-a, .sr2-wardmaster-b { --accent: #d8dfe8; --deep: #414d5c; --soft: rgba(216,223,232,.34); }
+    .sr2-wardmaster-a .body, .sr2-wardmaster-b .body { top: 36px; }
+    .sr2-wardmaster-b .barrier { border-color: rgba(216,223,232,.78); }
+
     .mrd { --main: #9ba8bb; --edge: #d8dfe8; --deep: #313945; --edge-aura: color-mix(in srgb, var(--edge) 38%, transparent); }
     .mrd::before { content: ""; position: absolute; left: 7px; right: 7px; top: 7px; bottom: 5px; border-radius: 50%; background: radial-gradient(circle at 50% 14%, var(--edge) 0 2px, transparent 3px), radial-gradient(circle at 78% 45%, var(--edge) 0 2px, transparent 3px), radial-gradient(circle at 22% 62%, var(--edge) 0 1px, transparent 2px); opacity: .2; filter: blur(.2px); z-index: 2; }
     .mrd::after { content: ""; position: absolute; left: 13px; right: 13px; bottom: 4px; height: 9px; border-radius: 50%; background: radial-gradient(ellipse at center, var(--edge-aura) 0 45%, transparent 72%); opacity: .28; z-index: 2; }
@@ -1111,10 +1152,13 @@
     .bt-mole .head { top: 20px; height: 22px; }
     .bt-mole .extra { left: 7px; top: 55px; width: 64px; height: 8px; border: 0; border-top: 5px solid var(--edge); transform: rotate(-4deg); }
     .bt-wolf { --main: #879480; --edge: #dbe88f; --deep: #39423e; }
-    .bt-wolf .body { left: 17px; top: 40px; width: 46px; height: 25px; border-radius: 18px 18px 9px 9px; }
-    .bt-wolf .head { top: 18px; border-radius: 14px 14px 8px 8px; }
-    .bt-wolf .ears { clip-path: polygon(50% 0, 100% 100%, 0 100%); border-radius: 0; }
-    .bt-wolf .extra { left: 10px; top: 43px; width: 16px; height: 15px; border: 0; border-top: 5px solid var(--edge); transform: rotate(-24deg); }
+    .bt-wolf .body { left: 15px; top: 41px; width: 50px; height: 23px; border-radius: 18px 20px 9px 9px; }
+    .bt-wolf .body::after { content: ""; position: absolute; left: 9px; bottom: -6px; width: 5px; height: 10px; border-radius: 5px; background: var(--deep); box-shadow: 27px 0 0 var(--deep); }
+    .bt-wolf .head { left: 29px; top: 17px; width: 30px; height: 25px; border-radius: 15px 13px 9px 9px; }
+    .bt-wolf .head::before { left: 7px; top: 10px; box-shadow: 9px 0 0 #10151d; }
+    .bt-wolf .head::after { left: auto; right: -9px; bottom: 5px; width: 16px; height: 10px; border-radius: 8px 10px 10px 4px; background: linear-gradient(90deg, var(--main), var(--edge)); clip-path: polygon(0 12%, 100% 50%, 0 88%); }
+    .bt-wolf .ears { left: 27px; top: 3px; width: 12px; height: 17px; clip-path: polygon(50% 0, 100% 100%, 0 100%); border-radius: 0; box-shadow: 22px 0 0 var(--edge); }
+    .bt-wolf .extra { left: 5px; top: 39px; width: 28px; height: 24px; border: 0; border-top: 8px solid var(--edge); border-radius: 50%; transform: rotate(-32deg); }
     .bt-fox { --main: #d8a45f; --edge: #fff0a8; --deep: #7d5631; }
     .bt-fox .ears { clip-path: polygon(50% 0, 100% 100%, 0 100%); border-radius: 0; }
     .bt-fox .extra { left: 6px; top: 42px; width: 24px; height: 18px; border: 0; border-top: 8px solid var(--edge); border-radius: 50%; transform: rotate(-30deg); }
@@ -1138,7 +1182,11 @@
     .bt-hedgehog .extra { left: 15px; top: 31px; width: 48px; height: 20px; border: 0; background: repeating-linear-gradient(135deg, var(--edge) 0 5px, transparent 5px 10px); clip-path: polygon(0 100%, 8% 20%, 18% 100%, 28% 20%, 40% 100%, 52% 20%, 64% 100%, 76% 20%, 90% 100%, 100% 20%, 100% 100%); opacity: .9; }
     .bt-slime { --main: #8de1a2; --edge: #e6f8a3; --deep: #3c7659; }
     .bt-slime .head, .bt-slime .ears { display: none; }
-    .bt-slime .body { left: 17px; top: 26px; width: 44px; height: 42px; border-radius: 50% 50% 35% 35%; background: radial-gradient(circle at 31px 13px, rgba(255,255,255,.55) 0 5px, transparent 6px), linear-gradient(180deg, var(--main), var(--deep)); }
+    .bt-slime .extra,
+    .bt-slime.bt-support .role { display: none; }
+    .bt-slime .body { left: 14px; top: 25px; width: 50px; height: 44px; border-radius: 54% 54% 38% 38%; background: radial-gradient(circle at 33px 11px, rgba(255,255,255,.58) 0 5px, transparent 6px), radial-gradient(circle at 18px 21px, #16211c 0 4px, transparent 5px), radial-gradient(circle at 33px 22px, #16211c 0 4px, transparent 5px), linear-gradient(180deg, var(--main), var(--deep)); box-shadow: inset 0 -8px 0 rgba(0,0,0,.12), 0 0 14px rgba(141,225,162,.18); }
+    .bt-slime .body::before { content: ""; position: absolute; left: 19px; top: 21px; width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.78); box-shadow: 15px 1px 0 rgba(255,255,255,.68); }
+    .bt-slime .body::after { content: ""; position: absolute; left: 18px; bottom: 8px; width: 15px; height: 6px; border-bottom: 2px solid rgba(255,255,255,.62); border-radius: 50%; }
     .bt-firefly { --main: #b7e783; --edge: #f8ff9d; --deep: #526b3a; }
     .bt-firefly .body { left: 27px; top: 38px; width: 24px; height: 26px; border-radius: 50%; box-shadow: 0 0 18px var(--edge); }
     .bt-firefly .head { left: 28px; top: 18px; width: 22px; height: 20px; }
@@ -1153,7 +1201,11 @@
     .bt-deer .ears { left: 21px; top: 7px; width: 8px; height: 12px; transform: rotate(-18deg); box-shadow: 28px 9px 0 var(--edge); }
     .bt-deer .extra { left: 18px; top: 3px; width: 42px; height: 18px; border: 0; border-top: 4px solid var(--edge); border-radius: 50%; }
     .bt-lamb { --main: #e4ddc4; --edge: #f8f2b0; --deep: #8a806a; }
-    .bt-lamb .body { background: radial-gradient(circle at 10px 8px, #f8f2e5 0 8px, transparent 9px), radial-gradient(circle at 27px 12px, #f8f2e5 0 9px, transparent 10px), var(--main); }
+    .bt-lamb.bt-healer .role { display: none; }
+    .bt-lamb .extra { border: 0; background: radial-gradient(circle at 17px 11px, rgba(248,242,229,.45) 0 8px, transparent 9px), radial-gradient(circle at 44px 14px, rgba(248,242,229,.35) 0 7px, transparent 8px); }
+    .bt-lamb .body { left: 16px; top: 37px; width: 46px; height: 31px; border-radius: 20px 22px 13px 13px; background: radial-gradient(circle at 10px 8px, #f8f2e5 0 8px, transparent 9px), radial-gradient(circle at 27px 12px, #f8f2e5 0 9px, transparent 10px), radial-gradient(circle at 36px 8px, #f8f2e5 0 7px, transparent 8px), var(--main); }
+    .bt-lamb .head { left: 25px; top: 16px; width: 28px; height: 25px; background: radial-gradient(circle at 7px 3px, #f8f2e5 0 6px, transparent 7px), radial-gradient(circle at 18px 2px, #f8f2e5 0 6px, transparent 7px), var(--main); }
+    .bt-lamb .ears { left: 17px; top: 18px; width: 11px; height: 10px; border-radius: 50%; box-shadow: 32px 0 0 var(--edge); }
     .bt-flower { --main: #9edc82; --edge: #ffd1df; --deep: #477044; }
     .bt-flower .head { background: var(--main); box-shadow: -8px 0 0 -3px var(--edge), 8px 0 0 -3px var(--edge), 0 -8px 0 -3px var(--edge); }
     .bt-elite .body { left: 15px; top: 28px; width: 48px; height: 42px; border-width: 3px; }
@@ -1165,8 +1217,10 @@
     .bt-boss .extra { left: 0; top: 5px; width: 78px; height: 58px; border: 6px solid var(--edge); border-bottom-color: transparent; border-radius: 50%; opacity: .84; }
     .bt-boss .role { left: 2px; bottom: 5px; width: 74px; height: 22px; border-top: 7px solid var(--edge); border-radius: 50%; }
     .bt-lion { --main: #d6ad5d; --edge: #fff09c; --deep: #7a542f; }
-    .bt-lion .head { box-shadow: 0 0 0 9px rgba(255,240,156,.26); }
-    .bt-lion .ears { left: 18px; top: 4px; box-shadow: 32px 0 0 var(--edge); }
+    .bt-lion.bt-boss .extra { left: 6px; top: -2px; width: 66px; height: 64px; border: 0; border-radius: 50%; background: linear-gradient(180deg, var(--edge), #e0b95d 68%, var(--deep)); clip-path: polygon(50% 0, 58% 13%, 70% 4%, 73% 20%, 91% 17%, 83% 33%, 100% 43%, 84% 51%, 93% 69%, 74% 67%, 70% 88%, 56% 74%, 50% 100%, 42% 75%, 28% 88%, 25% 67%, 6% 69%, 16% 51%, 0 43%, 17% 33%, 9% 17%, 27% 20%, 30% 4%, 42% 13%); opacity: .9; filter: drop-shadow(0 0 9px rgba(255,240,156,.28)); }
+    .bt-lion .head { background: var(--main); box-shadow: 0 0 0 5px rgba(255,240,156,.18); }
+    .bt-lion .head::after { left: 9px; bottom: 4px; width: 22px; height: 11px; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #3c271f 0 2px, transparent 3px), #f4d89a; }
+    .bt-lion .ears { left: 18px; top: 4px; border-radius: 50%; box-shadow: 32px 0 0 var(--edge); }
     .bt-owl { --main: #9cb98a; --edge: #f1ef9c; --deep: #4a5a45; }
     .bt-owl .head { border-radius: 15px 15px 50% 50%; }
     .bt-owl .ears { left: 20px; top: 1px; width: 13px; height: 14px; clip-path: polygon(0 0, 100% 100%, 0 100%); border-radius: 0; box-shadow: 25px 0 0 var(--edge); }
@@ -1511,6 +1565,58 @@
     .theme-lineup .avatar:nth-child(4) { left: 178px; top: 38px; transform: scale(.72); }
     .theme-lineup .avatar:nth-child(5) { right: 8px; top: 45px; transform: scale(.62); }
 
+    .selection-roster {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .selection-pick {
+      position: relative;
+      min-height: 112px;
+      padding: 6px;
+      border: 1px solid rgba(154,168,184,.14);
+      border-radius: 7px;
+      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(16,21,29,.72));
+      overflow: hidden;
+    }
+
+    .selection-pick .avatar,
+    .selection-pick .avatar.small {
+      position: absolute;
+      left: 50%;
+      top: 23px;
+      transform: translateX(-50%) scale(.54);
+      transform-origin: center bottom;
+    }
+
+    .selection-pick.is-boss .avatar {
+      top: 10px;
+      transform: translateX(-50%) scale(.66);
+    }
+
+    .selection-pick strong,
+    .selection-pick small {
+      position: relative;
+      z-index: 20;
+      display: block;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .selection-pick strong {
+      color: var(--text);
+      font-size: 10px;
+    }
+
+    .selection-pick small {
+      margin-top: 76px;
+      color: var(--accent);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
     .theme-rank {
       display: grid;
       grid-template-columns: 1fr;
@@ -1551,6 +1657,7 @@
         <button class="category-button" type="button" data-open="beginner-theme"><strong>초보자 테마 R&amp;D</strong><span>동물 연합 / 새싹 숲 / 말랑한 입문용 Actor 후보군입니다.</span></button>
         <button class="category-button" type="button" data-open="bosses"><strong>정예 / 보스 창구</strong><span>B-01 ~ B-13. 중간보스, 테마 보스, 강한 적 후보를 봅니다.</span></button>
         <button class="category-button" type="button" data-open="signal"><strong>시그널R&amp;D</strong><span>SR-01 ~ SR-30. 이름 텍스트에서 유추한 30직업 실루엣 후보입니다.</span></button>
+        <button class="category-button" type="button" data-open="signal-second"><strong>2차 직업 R&amp;D</strong><span>SR2-25A ~ SR2-30B. 신규 2차 직업 6종의 2안 아바타 후보입니다.</span></button>
       </nav>
     </section>
 
@@ -1698,10 +1805,10 @@
       <div class="layout-note"><b>검증 기준</b><span>상단 HUD 아래 1차 적 영역, 중앙 피해 숫자/피격 FX 여백, 하단 아군 자리까지 겹침 없이 남기는지 봅니다.</span></div>
 
       <div class="layout-note"><b>초보자 테마 전용 배치</b><span>고블린을 제외한 동물/새싹 숲 Actor 후보가 첫 전투 화면에서도 역할과 덩치감이 읽히는지 확인합니다.</span></div>
-      <article class="scenario-card"><div class="scenario-title"><b>BT-01. 소형 일반</b><span>곰방패 + 풀빛늑대 + 깃새 + 이슬말랑 / 말랑한 인상 안에서 전열과 후열이 구분되는지 확인</span></div><div class="battle-frame">
+      <article class="scenario-card"><div class="scenario-title"><b>BT-01. 소형 일반</b><span>곰방패 + 잎여우 + 깃새 + 이슬말랑 / 나라 선정 소형 라인업의 전열과 후열 구분 확인</span></div><div class="battle-frame">
         <div class="battle-hud"><div class="battle-hp"></div><div class="battle-turn"></div></div><div class="damage-space">DAMAGE / HIT FX</div>
         <div class="enemy-unit is-small lane-front" style="left:18%"><div class="avatar bt bt-bear bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">tank</span></div>
-        <div class="enemy-unit is-small lane-mid" style="left:40%"><div class="avatar bt bt-wolf bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">melee</span></div>
+        <div class="enemy-unit is-small lane-mid" style="left:40%"><div class="avatar bt bt-fox bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">melee</span></div>
         <div class="enemy-unit is-small lane-back" style="left:62%"><div class="avatar bt bt-bird bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">range</span></div>
         <div class="enemy-unit is-small lane-front" style="left:82%"><div class="avatar bt bt-slime bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><span class="unit-label">support</span></div>
         <div class="ally-ghost"><span></span><span></span><span></span><span></span></div>
@@ -1781,16 +1888,27 @@
 
     <section class="category-screen" id="screen-beginner-theme" aria-label="초보자 테마 Actor 후보군"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>초보자 테마 R&amp;D</h2><p>고블린을 제외한 동물 연합 / 새싹 숲 / 말랑한 입문용 Actor 후보군입니다.</p></div></div><div class="beginner-theme">
       <div class="theme-note"><b>테마 방향</b><span>초보자 테마는 한 종족 통일형이 아니라 숲과 초원의 친숙한 생물이 섞인 입문용 연합입니다. 고블린은 제외하고, 이후 전용 테마들과 확실히 다른 부드러운 첫 인상을 목표로 합니다.</span></div>
+      <div class="theme-note"><b>나라 선정 1차 그룹</b><span>탱커: BT-T01 / 근접: BT-M02 / 원거리: BT-R01 / 서포터: BT-S01 / 힐러: BT-H02 / 정예01: BT-E01 / 정예02: BT-E04 / 보스: BT-B01<br>핫픽스 반영: 탱커는 곰방패, 근접 딜러는 잎여우로 확정 메모를 교체했습니다.</span></div>
+      <div class="theme-party"><b>나라 선정 라인업</b><span>나라가 고른 후보만 먼저 모아 본 1차 그룹입니다. 탱커는 BT-T01, 근접 딜러는 BT-M02 기준으로 표시합니다.</span><div class="selection-roster">
+        <div class="selection-pick"><strong>탱커</strong><div class="avatar bt bt-bear bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-T01</small></div>
+        <div class="selection-pick"><strong>근접</strong><div class="avatar bt bt-fox bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-M02</small></div>
+        <div class="selection-pick"><strong>원거리</strong><div class="avatar bt bt-bird bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-R01</small></div>
+        <div class="selection-pick"><strong>서포터</strong><div class="avatar bt bt-slime bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-S01</small></div>
+        <div class="selection-pick"><strong>힐러</strong><div class="avatar bt bt-lamb bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-H02</small></div>
+        <div class="selection-pick"><strong>정예 01</strong><div class="avatar bt bt-owl bt-elite bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-E01</small></div>
+        <div class="selection-pick"><strong>정예 02</strong><div class="avatar bt bt-deer bt-elite bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-E04</small></div>
+        <div class="selection-pick is-boss"><strong>보스</strong><div class="avatar bt bt-lion bt-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div><small>BT-B01</small></div>
+      </div></div>
 
       <div class="theme-note"><b>소형 5역할 후보군</b><span>각 역할별 4종 후보입니다. 최종 조합은 나라가 골라 섞을 수 있도록 고정 팩이 아닌 후보 보관소로 정리했습니다.</span></div>
       <div class="museum-grid">
-        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bear bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T01</span><span class="type">탱커 후보</span></div><p class="keywords">작은 곰, 둥근 방패, 편안한 전열</p><p class="recommend"><b>루다 추천:</b> 곰방패 / 기본 탱커</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bear bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T01</span><span class="type">탱커 후보</span></div><p class="keywords">작은 곰, 둥근 방패, 편안한 전열</p><p class="recommend"><b>나라 선정:</b> 곰방패 / 기본 탱커</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-boar bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T02</span><span class="type">탱커 후보</span></div><p class="keywords">멧돼지, 낮은 돌진, 두꺼운 앞면</p><p class="recommend"><b>루다 추천:</b> 덤불멧돼지 / 돌진 탱커</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-turtle bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T03</span><span class="type">탱커 후보</span></div><p class="keywords">거북이, 둥근 등껍질, 안전한 첫 방어</p><p class="recommend"><b>루다 추천:</b> 새싹거북 / 수비 탱커</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-mole bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-T04</span><span class="type">탱커 후보</span></div><p class="keywords">큰 두더지, 흙손, 낮은 버티기</p><p class="recommend"><b>루다 추천:</b> 땅굴두더지 / 방어 탱커</p></article>
 
-        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-wolf bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M01</span><span class="type">근접 후보</span></div><p class="keywords">초원 늑대, 낮은 자세, 빠른 물기</p><p class="recommend"><b>루다 추천:</b> 풀빛늑대 / 근접 딜러</p></article>
-        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-fox bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M02</span><span class="type">근접 후보</span></div><p class="keywords">여우, 큰 꼬리, 장난스러운 찌르기</p><p class="recommend"><b>루다 추천:</b> 잎여우 / 회피 근접</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-wolf bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M01</span><span class="type">근접 후보</span></div><p class="keywords">초원 늑대, 뾰족귀, 긴 주둥이</p><p class="recommend"><b>루다 튜닝:</b> 풀빛늑대 / 늑대 형상 강화</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-fox bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M02</span><span class="type">근접 후보</span></div><p class="keywords">여우, 큰 꼬리, 장난스러운 찌르기</p><p class="recommend"><b>나라 선정:</b> 잎여우 / 회피 근접</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lynx bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M03</span><span class="type">근접 후보</span></div><p class="keywords">스라소니, 귀털, 민첩한 발톱</p><p class="recommend"><b>루다 추천:</b> 숲스라소니 / 치명 근접</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-weasel bt-melee"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-M04</span><span class="type">근접 후보</span></div><p class="keywords">족제비, 긴 몸, 빠른 파고들기</p><p class="recommend"><b>루다 추천:</b> 들족제비 / 연타 근접</p></article>
 
@@ -1799,13 +1917,13 @@
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-squirrel bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-R03</span><span class="type">원거리 후보</span></div><p class="keywords">다람쥐, 도토리 투척, 큰 꼬리</p><p class="recommend"><b>루다 추천:</b> 도토리다람쥐 / 투척 딜러</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-hedgehog bt-ranged"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-R04</span><span class="type">원거리 후보</span></div><p class="keywords">고슴도치, 작은 가시, 안전한 견제</p><p class="recommend"><b>루다 추천:</b> 가시고슴 / 견제 딜러</p></article>
 
-        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-slime bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S01</span><span class="type">서포터 후보</span></div><p class="keywords">풀빛 슬라임, 말랑 신호, 버프 링</p><p class="recommend"><b>루다 추천:</b> 이슬말랑 / 버프 서포터</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-slime bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S01</span><span class="type">서포터 후보</span></div><p class="keywords">풀빛 슬라임, 큰 눈동자, 말랑한 몸</p><p class="recommend"><b>나라 선정:</b> 이슬말랑 / 단독 슬라임</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-firefly bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S02</span><span class="type">서포터 후보</span></div><p class="keywords">반딧불 요정, 작은 빛, 신호 지원</p><p class="recommend"><b>루다 추천:</b> 반딧불씨 / 속도 서포터</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-mushroom bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S03</span><span class="type">서포터 후보</span></div><p class="keywords">버섯 정령, 포자 깃, 부드러운 보조</p><p class="recommend"><b>루다 추천:</b> 버섯신호 / 서포터</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bud bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-S04</span><span class="type">서포터 후보</span></div><p class="keywords">꽃봉오리, 풍선감, 신호 파동</p><p class="recommend"><b>루다 추천:</b> 꽃봉신호 / 보호 서포터</p></article>
 
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-deer bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H01</span><span class="type">힐러 후보</span></div><p class="keywords">어린 사슴, 새싹 뿔, 숲 회복</p><p class="recommend"><b>루다 추천:</b> 새싹사슴 / 힐러</p></article>
-        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lamb bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H02</span><span class="type">힐러 후보</span></div><p class="keywords">양, 몽실한 몸, 편안한 회복광</p><p class="recommend"><b>루다 추천:</b> 풀양 / 안정 힐러</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lamb bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H02</span><span class="type">힐러 후보</span></div><p class="keywords">양, 몽실한 몸, 단독 실루엣</p><p class="recommend"><b>나라 선정:</b> 풀양 / 양 단독 후보</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-rabbit bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H03</span><span class="type">힐러 후보</span></div><p class="keywords">토끼 치유사, 긴 귀, 응급 회복</p><p class="recommend"><b>루다 추천:</b> 약초토끼 / 빠른 힐러</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-flower bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-H04</span><span class="type">힐러 후보</span></div><p class="keywords">꽃 정령, 잎사귀 몸, 회복 향기</p><p class="recommend"><b>루다 추천:</b> 꽃잎정령 / 회복 힐러</p></article>
       </div>
@@ -1821,7 +1939,7 @@
 
       <div class="theme-note"><b>보스 후보군</b><span>초보자 테마의 얼굴 후보입니다. 보스답지만 너무 괴기하지 않고, 첫 테마의 부드러운 자연 톤을 유지합니다.</span></div>
       <div class="museum-grid">
-        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lion bt-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B01</span><span class="type">보스 후보</span></div><p class="keywords">숲의 왕 사자, 밝은 갈기, 첫 테마의 얼굴</p><p class="recommend"><b>루다 추천:</b> 새싹숲 사자왕 / 대표 보스</p></article>
+        <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-lion bt-boss"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B01</span><span class="type">보스 후보</span></div><p class="keywords">숲의 왕 사자, 뾰족 갈기, 첫 테마의 얼굴</p><p class="recommend"><b>나라 선정:</b> 새싹숲 사자왕 / 대표 보스</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-deer bt-boss bt-healer"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B02</span><span class="type">보스 후보</span></div><p class="keywords">큰 사슴왕, 숲의 수호자, 회복 고리</p><p class="recommend"><b>루다 추천:</b> 숲사슴왕 / 수호 보스</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-bear bt-boss bt-tank"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B03</span><span class="type">보스 후보</span></div><p class="keywords">연합 수호자 곰, 큰 방패감, 부드러운 압박</p><p class="recommend"><b>루다 추천:</b> 숲곰장로 / 방어 보스</p></article>
         <article class="exhibit-card"><div class="stage"><div class="avatar bt bt-owl bt-boss bt-support"><span class="part shadow"></span><span class="part extra"></span><span class="part role"></span><span class="part body"></span><span class="part head"></span><span class="part ears"></span></div></div><div class="exhibit-code"><span class="code">BT-B04</span><span class="type">보스 후보</span></div><p class="keywords">거대 올빼미 군주, 날개 고리, 지휘 보스</p><p class="recommend"><b>루다 추천:</b> 밤숲올빼미 / 지원 보스</p></article>
@@ -1886,6 +2004,26 @@
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-binder"><span class="part shadow"></span><span class="part threadline"></span><span class="part knot"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-28</span><span class="type">결속사</span></div><p class="keywords">붉은 실, 매듭, 연결선</p><p class="recommend"><b>루다 유추:</b> 동료를 묶어 피해를 나누는 보호 연결형</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-artillerist"><span class="part shadow"></span><span class="part shell"></span><span class="part cannon"></span><span class="part goggles"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-29</span><span class="type">포격수</span></div><p class="keywords">포신, 탄환, 고글, 무거운 장비</p><p class="recommend"><b>루다 유추:</b> 느리지만 강한 기계식 후열 화력</p></article>
       <article class="exhibit-card"><div class="stage"><div class="avatar sr sr-dancer"><span class="part shadow"></span><span class="part dance-ribbon"></span><span class="part curve-blade"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR-30</span><span class="type">무희</span></div><p class="keywords">곡선 자세, 리본, 가벼운 검, 회전 궤적</p><p class="recommend"><b>루다 유추:</b> 회피와 템포로 이어 때리는 근접 딜러</p></article>
+      </div></section>
+
+    <section class="category-screen" id="screen-signal-second" aria-label="2차 직업 R&D 전시실"><div class="category-header"><button class="back-button" type="button" data-back>← 타이틀로</button><div class="category-title-wrap"><h2>2차 직업 R&amp;D</h2><p>SR-25~SR-30 신규 2차 직업 6종의 2안 후보입니다. 본게임 이식 전, 작은 카드에서 먼저 읽히는 실루엣과 상징을 검토합니다.</p></div></div><div class="museum-grid">
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-bladesaint-a"><span class="part shadow"></span><span class="part duel-ring"></span><span class="part counter-spark"></span><span class="part sword"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-25A</span><span class="type">검성 A</span></div><p class="keywords">읽힘: 세운 장검, 결투 고리, 반격 별</p><p class="recommend"><b>PASS:</b> 22 창/용, 23 현자, 24 태양과 분리. class: sr2-bladesaint-a</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-bladesaint-b"><span class="part shadow"></span><span class="part duel-ring"></span><span class="part counter-spark"></span><span class="part sword"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-25B</span><span class="type">검성 B</span></div><p class="keywords">읽힘: 비스듬한 검, 간파 표식, 처형 각도</p><p class="recommend"><b>WATCH:</b> 전사 검과 겹침 주의, 방패 없음으로 분리. class: sr2-bladesaint-b</p></article>
+
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-savior-a"><span class="part aura"></span><span class="part shadow"></span><span class="part life-line"></span><span class="part halo"></span><span class="part cross"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-26A</span><span class="type">구원자 A</span></div><p class="keywords">읽힘: 생명선, 빛 십자, 작은 후광</p><p class="recommend"><b>PASS:</b> 24 왕관/태양 대신 구명선 중심. class: sr2-savior-a</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-savior-b"><span class="part aura"></span><span class="part shadow"></span><span class="part life-line"></span><span class="part orb"></span><span class="part cross"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-26B</span><span class="type">구원자 B</span></div><p class="keywords">읽힘: 붙잡는 곡선, 회복 구슬, 정화광</p><p class="recommend"><b>WATCH:</b> 사제와 유사, 십자+생명선 크기로 분리. class: sr2-savior-b</p></article>
+
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-skybow-a"><span class="part shadow"></span><span class="part aim-line"></span><span class="part sky-mark"></span><span class="part bow"></span><span class="part arrow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-27A</span><span class="type">천궁 A</span></div><p class="keywords">읽힘: 위쪽 조준, 별표식, 긴 장궁</p><p class="recommend"><b>PASS:</b> 21 라이플/표식과 분리, 궁수보다 지휘감. class: sr2-skybow-a</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-skybow-b"><span class="part shadow"></span><span class="part sky-mark"></span><span class="part mark"></span><span class="part bow"></span><span class="part arrow"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-27B</span><span class="type">천궁 B</span></div><p class="keywords">읽힘: 별 조준선, 표식 계승, 지휘 활</p><p class="recommend"><b>WATCH:</b> 파수궁 망토 없음, 표식이 작으면 궁수화 위험. class: sr2-skybow-b</p></article>
+
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-plague-a"><span class="part plague-cloud"></span><span class="part shadow"></span><span class="part infection-dot"></span><span class="part vial"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR2-28A</span><span class="type">역병술사 A</span></div><p class="keywords">읽힘: 독안개, 가면, 병, 감염 점</p><p class="recommend"><b>PASS:</b> 10 덫보다 상태이상 전문가로 보임. class: sr2-plague-a</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-plague-b"><span class="part plague-cloud"></span><span class="part shadow"></span><span class="part vial"></span><span class="part bubble"></span><span class="part infection-dot"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span><span class="part mask"></span></div></div><div class="exhibit-code"><span class="code">SR2-28B</span><span class="type">역병술사 B</span></div><p class="keywords">읽힘: 확산 입자, 큰 독병, 혼란 안개</p><p class="recommend"><b>RISK:</b> 적/괴물처럼 보일 수 있음, 영웅 몸체 유지 필요. class: sr2-plague-b</p></article>
+
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-dancer-a"><span class="part shadow"></span><span class="part tempo-ring"></span><span class="part dance-ribbon"></span><span class="part beat"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-29A</span><span class="type">무희 A</span></div><p class="keywords">읽힘: 리본 궤적, 박자 점, 회전 자세</p><p class="recommend"><b>PASS:</b> 바드 악기 제거, 신관 축복은 빛 점으로만. class: sr2-dancer-a</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-dancer-b"><span class="part aura"></span><span class="part shadow"></span><span class="part tempo-ring"></span><span class="part ribbon"></span><span class="part beat"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-29B</span><span class="type">무희 B</span></div><p class="keywords">읽힘: 축복 원무, 박자 리본, 가벼운 후열</p><p class="recommend"><b>WATCH:</b> 기존 SR-30과 겹침, 축복/템포 강조 필요. class: sr2-dancer-b</p></article>
+
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-wardmaster-a"><span class="part shadow"></span><span class="part barrier"></span><span class="part crest"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-30A</span><span class="type">결계장 A</span></div><p class="keywords">읽힘: 반원 결계, 중앙 문장, 보호막</p><p class="recommend"><b>PASS:</b> 14 성벽보다 술식 방벽, 24 태양 없음. class: sr2-wardmaster-a</p></article>
+      <article class="exhibit-card"><div class="stage"><div class="avatar sr sr2 sr2-wardmaster-b"><span class="part aura"></span><span class="part shadow"></span><span class="part formation"></span><span class="part barrier"></span><span class="part crest"></span><span class="part feet"></span><span class="part body"></span><span class="part head"></span></div></div><div class="exhibit-code"><span class="code">SR2-30B</span><span class="type">결계장 B</span></div><p class="keywords">읽힘: 진형 격자, 보호 고리, 문장 핵</p><p class="recommend"><b>WATCH:</b> 방패처럼 보이면 위험, 격자/문장을 키워 분리. class: sr2-wardmaster-b</p></article>
       </div></section>
   </main>
   <script>
