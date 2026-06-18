@@ -333,20 +333,39 @@
       z-index: 1;
     }
 
+    .hero-avatar.first-tier {
+      --tier-ring: rgba(218,226,237,.72);
+      --tier-ring-soft: rgba(218,226,237,.16);
+      --tier-ring-glow: rgba(218,226,237,.2);
+      --tier-mark: rgba(245,248,252,.72);
+      --tier-mark-soft: rgba(245,248,252,.28);
+    }
+
+    .hero-avatar.second-tier {
+      --tier-ring: rgba(240,195,106,.68);
+      --tier-ring-soft: rgba(240,195,106,.16);
+      --tier-ring-glow: rgba(240,195,106,.18);
+      --tier-mark: rgba(255,240,187,.72);
+      --tier-mark-soft: rgba(255,240,187,.28);
+    }
+
+    .hero-avatar.first-tier .shadow,
     .hero-avatar.second-tier .shadow {
       left: 6px;
       bottom: 2px;
       width: 66px;
       height: 18px;
-      border: 1px solid rgba(240,195,106,.68);
+      border: 1px solid var(--tier-ring);
       background:
-        radial-gradient(ellipse at center, rgba(240,195,106,.16) 0 38%, transparent 68%),
+        radial-gradient(ellipse at center, var(--tier-ring-soft) 0 38%, transparent 68%),
         rgba(0,0,0,.32);
       box-shadow:
-        inset 0 0 0 2px rgba(240,195,106,.12),
-        0 0 10px rgba(240,195,106,.18);
+        inset 0 0 0 2px var(--tier-ring-soft),
+        0 0 10px var(--tier-ring-glow);
     }
 
+    .hero-avatar.first-tier .shadow::before,
+    .hero-avatar.first-tier .shadow::after,
     .hero-avatar.second-tier .shadow::before,
     .hero-avatar.second-tier .shadow::after {
       content: "";
@@ -354,23 +373,25 @@
       pointer-events: none;
     }
 
+    .hero-avatar.first-tier .shadow::before,
     .hero-avatar.second-tier .shadow::before {
       left: 11px;
       top: 4px;
       width: 42px;
       height: 8px;
       border-radius: 50%;
-      border-top: 1px solid rgba(255,240,187,.66);
-      border-bottom: 1px solid rgba(255,240,187,.28);
+      border-top: 1px solid var(--tier-mark);
+      border-bottom: 1px solid var(--tier-mark-soft);
     }
 
+    .hero-avatar.first-tier .shadow::after,
     .hero-avatar.second-tier .shadow::after {
       left: 29px;
       top: 3px;
       width: 8px;
       height: 8px;
-      border-left: 1px solid rgba(255,240,187,.72);
-      border-top: 1px solid rgba(255,240,187,.72);
+      border-left: 1px solid var(--tier-mark);
+      border-top: 1px solid var(--tier-mark);
       opacity: .86;
       transform: rotate(45deg);
     }
@@ -1381,20 +1402,23 @@
       return String(status).toLowerCase();
     }
 
-    function isSecondTier(item) {
-      return Number(String(item.sr).replace("SR-", "")) >= 22;
+    function tierBaseClass(item) {
+      const srNumber = Number(String(item.sr).replace("SR-", ""));
+      if (srNumber >= 22) return "second-tier";
+      if (srNumber >= 7) return "first-tier";
+      return "";
     }
 
-    function renderAvatar(cls, parts, secondTier = false) {
-      const tierClass = secondTier ? " second-tier" : "";
+    function renderAvatar(cls, parts, tierClass = "") {
+      const tierBase = tierClass ? ` ${tierClass}` : "";
       const allParts = [...parts, ...baseParts].filter((part, index, arr) => arr.indexOf(part) === index);
-      return `<div class="hero-avatar ${cls}${tierClass}">${allParts.map((part) => `<span class="part ${part}"></span>`).join("")}</div>`;
+      return `<div class="hero-avatar ${cls}${tierBase}">${allParts.map((part) => `<span class="part ${part}"></span>`).join("")}</div>`;
     }
 
     function renderVariant(item, variantInfo) {
       const scaleCells = stageLabels.map(([stageClass, label]) => `
         <div class="scale-cell">
-          <div class="avatar-stage ${stageClass}">${renderAvatar(variantInfo.cls, variantInfo.parts, isSecondTier(item))}</div>
+          <div class="avatar-stage ${stageClass}">${renderAvatar(variantInfo.cls, variantInfo.parts, tierBaseClass(item))}</div>
           <span class="size-label">${label}</span>
         </div>
       `).join("");
