@@ -586,6 +586,39 @@
 
     .cross::after { transform: rotate(90deg); }
 
+    .triple-cross {
+      right: 8px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      clip-path: polygon(38% 0, 62% 0, 62% 36%, 100% 36%, 100% 62%, 62% 62%, 62% 100%, 38% 100%, 38% 62%, 0 62%, 0 36%, 38% 36%);
+      box-shadow: 0 0 8px rgba(183,255,228,.34);
+      z-index: 8;
+    }
+
+    .triple-cross::before,
+    .triple-cross::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      clip-path: inherit;
+      opacity: .86;
+    }
+
+    .triple-cross::before {
+      left: -18px;
+      top: 9px;
+    }
+
+    .triple-cross::after {
+      left: -5px;
+      top: 24px;
+      opacity: .72;
+    }
+
     .halo {
       left: 22px;
       top: 6px;
@@ -1280,6 +1313,9 @@
     .sr2-dancer-a, .sr2-dancer-b, .sr2-dancer-c { --accent: #ff9fc8; --body: #57405b; }
     .sr2-dancer-d { --accent: var(--gold); --body: #55475e; }
     .sr2-wardmaster-a, .sr2-wardmaster-b, .sr2-wardmaster-c, .sr2-wardmaster-d { --accent: #cbd9ff; --body: #414d5c; }
+    .sr2-wardmaster-d .hex-field { border-width: 3px; }
+    .sr2-wardmaster-d .formation { border-width: 2px; }
+    .sr2-wardmaster-d .anchor-sigil { border-width: 3px; }
     .sr-seed31 { --accent: #b7ffe4; --body: #3b5557; }
     .sr-seed32 { --accent: var(--gold); --body: #5c5545; }
     .sr-seed33 { --accent: #c7a2ff; --body: #40334f; }
@@ -1392,44 +1428,14 @@
       {
         id: "second-new",
         title: "SR-25~SR-30 신규 2차 설계 대상",
-        note: "A/B는 기준안, C/D는 더 자유로운 창작안. LOCK 전 비교 대상.",
+        note: "나라 확정안 기준 LOCK 대표 아바타. 본게임 이식 전 최종 감각 확인 대상.",
         items: [
-          candidate("SR-25", "검성", "워든 + 전사", "전열 반격 / 처형", "검, 결투, 간파, 반격", [
-            variant("A", "PASS", "sr2-bladesaint-a", ["duel-ring", "counter-spark", "sword"], "세운 장검과 결투 고리", "전사와 겹치지만 방패가 없어 분리", "소형 PASS"),
-            variant("B", "WATCH", "sr2-bladesaint-b", ["duel-ring", "counter-spark", "sword"], "비스듬한 검과 간파 표식", "검이 평범하면 전사화 위험", "소형 WATCH"),
-            variant("C", "PASS", "sr2-bladesaint-c", ["iaido-arc", "sight-slit", "sword"], "발도 궤적과 눈가 간파선", "무기보다 동작으로 읽힘", "소형 PASS"),
-            variant("D", "WATCH", "sr2-bladesaint-d", ["afterimage", "duel-ring", "counter-spark", "sword"], "잔상과 반격 대기", "잔상이 약하면 일반 검사화", "소형 WATCH")
-          ]),
-          candidate("SR-26", "구원자", "정화사 + 사제", "정화 / 위급 치유 / 소생", "빛, 정화, 생명선, 구원", [
-            variant("A", "PASS", "sr2-savior-a", ["aura", "life-line", "halo", "cross"], "생명선과 빛 십자", "성황의 태양/왕관과 분리", "소형 PASS"),
-            variant("B", "WATCH", "sr2-savior-b", ["aura", "life-line", "orb", "cross"], "붙잡는 곡선과 회복 구슬", "사제와 겹침 주의", "소형 WATCH"),
-            variant("C", "PASS", "sr2-savior-c", ["aura", "rescue-thread", "revive-seed", "cross"], "끌어올리는 생명줄과 소생 씨앗", "힐보다 구조가 먼저 보임", "소형 PASS"),
-            variant("D", "WATCH", "sr2-savior-d", ["aura", "mercy-wave", "life-line", "cross"], "바닥 구명 파동", "민트 지원군과 색 겹침", "소형 WATCH")
-          ]),
-          candidate("SR-27", "천궁", "추적자 + 궁수", "표식 / 원거리 지휘 / 저격", "하늘, 별표식, 장궁, 조준", [
-            variant("A", "PASS", "sr2-skybow-a", ["aim-line", "sky-mark", "bow", "arrow"], "위쪽 조준과 별표식", "추적자 라이플과 분리", "소형 PASS"),
-            variant("B", "WATCH", "sr2-skybow-b", ["sky-mark", "mark", "bow", "arrow"], "별 조준선과 표식 계승", "표식이 작으면 기본 궁수화", "소형 WATCH"),
-            variant("C", "PASS", "sr2-skybow-c", ["constellation", "sky-mark", "bow", "command-arrow"], "별자리와 하늘 지휘선", "장궁보다 지휘가 먼저 보임", "소형 PASS"),
-            variant("D", "WATCH", "sr2-skybow-d", ["constellation", "aim-line", "bow", "sky-mark"], "별 관측과 하늘 조준선", "활 실루엣 약화 주의", "소형 WATCH")
-          ]),
-          candidate("SR-28", "역병술사", "덫꾼 + 교란꾼", "독 / 디버프 확산", "독안개, 가면, 병, 감염", [
-            variant("A", "PASS", "sr2-plague-a", ["plague-cloud", "infection-dot", "vial", "mask"], "독안개와 감염 점", "덫꾼보다 확산감", "소형 PASS"),
-            variant("B", "RISK", "sr2-plague-b", ["plague-cloud", "vial", "bubble", "infection-dot", "mask"], "큰 독병과 혼란 안개", "몬스터처럼 보일 위험", "소형 WATCH"),
-            variant("C", "PASS", "sr2-plague-c", ["plague-cloud", "spread-ring", "plague-lantern", "infection-dot", "mask"], "독등과 확산 장판", "상태이상 전문가로 잘 읽힘", "소형 PASS"),
-            variant("D", "RISK", "sr2-plague-d", ["plague-cloud", "spread-ring", "vial", "bubble", "infection-dot", "mask"], "퍼지는 장판과 기울어진 독병", "초록 입자 과밀 주의", "소형 WATCH")
-          ]),
-          candidate("SR-29", "무희", "바드 + 신관", "리듬 / 템포 / 축복", "춤, 리본, 박자, 축복", [
-            variant("A", "PASS", "sr2-dancer-a", ["tempo-ring", "dance-ribbon", "beat"], "리본 궤적과 박자 점", "바드 악기 제거", "소형 PASS"),
-            variant("B", "WATCH", "sr2-dancer-b", ["aura", "tempo-ring", "ribbon", "beat"], "축복 원무와 템포 리본", "기존 SR-30 무희와 겹침", "소형 WATCH"),
-            variant("C", "PASS", "sr2-dancer-c", ["rhythm-orbit", "double-ribbon", "step-spark"], "이중 리본과 발끝 빛", "움직임이 가장 먼저 읽힘", "소형 PASS"),
-            variant("D", "WATCH", "sr2-dancer-d", ["aura", "double-ribbon", "tempo-ring", "beat", "step-spark"], "금빛 박자와 축복 원무", "화려하면 성황/바드로 흐름", "소형 WATCH")
-          ]),
-          candidate("SR-30", "결계장", "성벽 + 수호자", "결계 / 보호막 / 진형 안정", "방벽, 문장, 보호막, 결계", [
-            variant("A", "PASS", "sr2-wardmaster-a", ["barrier", "crest"], "반원 결계와 중앙 문장", "성벽보다 술식 방벽", "소형 PASS"),
-            variant("B", "WATCH", "sr2-wardmaster-b", ["aura", "formation", "barrier", "crest"], "진형 격자와 보호 고리", "방패처럼 보이면 위험", "소형 WATCH"),
-            variant("C", "PASS", "sr2-wardmaster-c", ["ward-gate", "anchor-sigil"], "결계문과 고정 문장", "공간을 세우는 직업으로 보임", "소형 PASS"),
-            variant("D", "WATCH", "sr2-wardmaster-d", ["aura", "hex-field", "anchor-sigil", "formation"], "육각 결계와 앵커 문장", "결계가 크면 캐릭터가 묻힘", "소형 WATCH")
-          ])
+          confirmed("SR-25", "검성", "워든 + 전사", "전열 반격 / 처형", "검, 결투, 간파, 반격", "C", "sr2-bladesaint-c", ["iaido-arc", "sight-slit", "sword"], "검을 앞으로 겨눈 결투자 실루엣 확정", "전사와 달리 방패 없이 간파/마무리 동작으로 분리", "소형 PASS"),
+          confirmed("SR-26", "구원자", "정화사 + 사제", "정화 / 위급 치유 / 소생", "빛, 정화, 생명선, 구원", "A", "sr2-savior-a", ["aura", "life-line", "triple-cross"], "후광 제거, 작은 십자가 3개로 신성한 구조자 확정", "사제의 구슬보다 소생/구원 상징이 먼저 읽힘", "소형 WATCH"),
+          confirmed("SR-27", "천궁", "추적자 + 궁수", "표식 / 원거리 지휘 / 저격", "하늘, 별표식, 장궁, 조준", "C", "sr2-skybow-c", ["constellation", "sky-mark", "bow", "command-arrow"], "별자리와 하늘 지휘선 확정", "추적자 라이플과 명확히 분리", "소형 PASS"),
+          confirmed("SR-28", "역병술사", "덫꾼 + 교란꾼", "독 / 디버프 확산", "독안개, 가면, 병, 감염", "A", "sr2-plague-a", ["plague-cloud", "infection-dot", "vial", "mask"], "독안개와 감염 점 확정", "덫꾼보다 확산/감염감이 강함", "소형 PASS"),
+          confirmed("SR-29", "무희", "바드 + 신관", "리듬 / 템포 / 축복", "춤, 리본, 박자, 축복", "C", "sr2-dancer-c", ["rhythm-orbit", "double-ribbon", "step-spark"], "분홍 리본과 발끝 빛 확정", "바드 악기 없이 움직임과 무대감으로 분리", "소형 PASS"),
+          confirmed("SR-30", "결계장", "성벽 + 수호자", "결계 / 보호막 / 진형 안정", "방벽, 문장, 보호막, 결계", "D", "sr2-wardmaster-d", ["aura", "hex-field", "anchor-sigil", "formation"], "육각 결계와 앵커 문장 확정, 엣지 얇게 조정", "성벽의 물리 방어보다 술식 결계로 분리", "소형 WATCH")
         ]
       },
       {
@@ -1470,6 +1476,19 @@
         role,
         key,
         variants
+      };
+    }
+
+    function confirmed(sr, name, combo, role, key, choice, cls, parts, memo, overlap, mobile) {
+      return {
+        sr,
+        name,
+        tier: "2차",
+        status: "LOCK",
+        combo,
+        role,
+        key,
+        variants: [variant(`확정 ${choice}`, "LOCK", cls, parts, memo, overlap, mobile)]
       };
     }
 
@@ -1558,13 +1577,13 @@
 
     const jobs = groups.flatMap((group) => group.items);
     const variants = jobs.reduce((sum, item) => sum + item.variants.length, 0);
-    const candidateItems = jobs.filter((item) => item.status === "CANDIDATE").length;
+    const lockedSecondItems = jobs.filter((item) => item.status === "LOCK" && Number(String(item.sr).replace("SR-", "")) >= 25 && Number(String(item.sr).replace("SR-", "")) <= 30).length;
     const placeholderItems = jobs.filter((item) => item.status === "PLACEHOLDER" || item.status === "SEED").length;
 
     document.getElementById("summary").innerHTML = [
       ["36", "SR-01~SR-36 전체 슬롯"],
       [String(variants), "표시 아바타 후보"],
-      [String(candidateItems), "신규 2차 설계 직업"],
+      [String(lockedSecondItems), "SR-25~30 LOCK 확정"],
       [String(placeholderItems), "씨앗 / placeholder 슬롯"]
     ].map(([value, label]) => `<div class="summary-item"><strong>${value}</strong><span>${label}</span></div>`).join("");
 
