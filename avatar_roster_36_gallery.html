@@ -333,6 +333,48 @@
       z-index: 1;
     }
 
+    .hero-avatar.second-tier .shadow {
+      left: 6px;
+      bottom: 2px;
+      width: 66px;
+      height: 18px;
+      border: 1px solid rgba(240,195,106,.68);
+      background:
+        radial-gradient(ellipse at center, rgba(240,195,106,.16) 0 38%, transparent 68%),
+        rgba(0,0,0,.32);
+      box-shadow:
+        inset 0 0 0 2px rgba(240,195,106,.12),
+        0 0 10px rgba(240,195,106,.18);
+    }
+
+    .hero-avatar.second-tier .shadow::before,
+    .hero-avatar.second-tier .shadow::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .hero-avatar.second-tier .shadow::before {
+      left: 11px;
+      top: 4px;
+      width: 42px;
+      height: 8px;
+      border-radius: 50%;
+      border-top: 1px solid rgba(255,240,187,.66);
+      border-bottom: 1px solid rgba(255,240,187,.28);
+    }
+
+    .hero-avatar.second-tier .shadow::after {
+      left: 29px;
+      top: 3px;
+      width: 8px;
+      height: 8px;
+      border-left: 1px solid rgba(255,240,187,.72);
+      border-top: 1px solid rgba(255,240,187,.72);
+      opacity: .86;
+      transform: rotate(45deg);
+    }
+
     .feet {
       left: 25px;
       bottom: 10px;
@@ -1339,15 +1381,20 @@
       return String(status).toLowerCase();
     }
 
-    function renderAvatar(cls, parts) {
+    function isSecondTier(item) {
+      return Number(String(item.sr).replace("SR-", "")) >= 22;
+    }
+
+    function renderAvatar(cls, parts, secondTier = false) {
+      const tierClass = secondTier ? " second-tier" : "";
       const allParts = [...parts, ...baseParts].filter((part, index, arr) => arr.indexOf(part) === index);
-      return `<div class="hero-avatar ${cls}">${allParts.map((part) => `<span class="part ${part}"></span>`).join("")}</div>`;
+      return `<div class="hero-avatar ${cls}${tierClass}">${allParts.map((part) => `<span class="part ${part}"></span>`).join("")}</div>`;
     }
 
     function renderVariant(item, variantInfo) {
       const scaleCells = stageLabels.map(([stageClass, label]) => `
         <div class="scale-cell">
-          <div class="avatar-stage ${stageClass}">${renderAvatar(variantInfo.cls, variantInfo.parts)}</div>
+          <div class="avatar-stage ${stageClass}">${renderAvatar(variantInfo.cls, variantInfo.parts, isSecondTier(item))}</div>
           <span class="size-label">${label}</span>
         </div>
       `).join("");
