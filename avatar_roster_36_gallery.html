@@ -1,0 +1,1424 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avatar Roster Gallery 01 - SR-01~SR-36</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111720;
+      --panel: #18212d;
+      --panel-2: #202b39;
+      --line: #344356;
+      --text: #eef3f8;
+      --muted: #9ba8bb;
+      --gold: #f0c36a;
+      --mint: #9fe6cf;
+      --sky: #9ad4f0;
+      --leaf: #a8d46a;
+      --rose: #ef9a9a;
+      --violet: #c7a2ff;
+      --danger: #ff9a75;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(154, 212, 240, .12), transparent 34rem),
+        linear-gradient(180deg, #0f151d, var(--bg));
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0;
+    }
+
+    main {
+      width: min(1400px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 40px;
+    }
+
+    header {
+      display: grid;
+      gap: 12px;
+      padding: 16px 0 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      font-size: clamp(1.45rem, 4.5vw, 2.2rem);
+      line-height: 1.1;
+    }
+
+    .lead {
+      max-width: 900px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .95rem;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .summary-item,
+    .legend,
+    .section-nav a {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(24, 33, 45, .82);
+      border-radius: 8px;
+    }
+
+    .summary-item {
+      padding: 10px;
+      min-height: 70px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .summary-item span {
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .section-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0;
+      background: rgba(17, 23, 32, .94);
+      backdrop-filter: blur(10px);
+    }
+
+    .section-nav a {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: .82rem;
+      white-space: nowrap;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 10px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 23px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: #f7fbff;
+      font-size: .72rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .tag.lock { color: #202532; background: var(--gold); }
+    .tag.pass { color: #10251f; background: var(--mint); }
+    .tag.watch { color: #202532; background: var(--sky); }
+    .tag.rework, .tag.risk { color: #2d1611; background: var(--danger); }
+    .tag.candidate { color: #221a2f; background: var(--violet); }
+    .tag.seed { color: #13210f; background: var(--leaf); }
+    .tag.placeholder { color: #202532; background: #c7ced8; }
+
+    section {
+      padding: 18px 0 4px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .section-head h2 {
+      font-size: 1.1rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: right;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 10px;
+    }
+
+    .roster-card {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(32, 43, 57, .92), rgba(21, 29, 40, .96));
+      overflow: hidden;
+    }
+
+    .card-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .card-title {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .code {
+      color: var(--gold);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .name {
+      font-size: 1.03rem;
+      font-weight: 800;
+    }
+
+    .tier {
+      color: var(--muted);
+      font-size: .74rem;
+    }
+
+    .meta {
+      display: grid;
+      gap: 4px;
+      padding: 9px 10px;
+      color: var(--muted);
+      font-size: .78rem;
+      line-height: 1.38;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .meta b {
+      color: #dbe5ef;
+      font-weight: 700;
+    }
+
+    .variant-grid {
+      display: grid;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .roster-card.has-many .variant-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .variant {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .variant-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      min-height: 25px;
+    }
+
+    .variant-label {
+      color: #e8edf3;
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .scale-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+    }
+
+    .scale-cell {
+      display: grid;
+      place-items: center;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .avatar-stage {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), transparent),
+        radial-gradient(circle at center, rgba(255,255,255,.06), transparent 65%),
+        #121a25;
+      overflow: hidden;
+    }
+
+    .stage-large { height: 122px; }
+    .stage-battle { height: 90px; }
+    .stage-small { height: 62px; }
+
+    .stage-large .hero-avatar { transform: scale(1.22); }
+    .stage-battle .hero-avatar { transform: scale(.88); }
+    .stage-small .hero-avatar { transform: scale(.58); }
+
+    .size-label {
+      color: var(--muted);
+      font-size: .68rem;
+    }
+
+    .variant-note {
+      display: grid;
+      gap: 3px;
+      color: var(--muted);
+      font-size: .73rem;
+      line-height: 1.35;
+    }
+
+    .variant-note b {
+      color: #dce6f0;
+    }
+
+    .hero-avatar {
+      --accent: #d8dfe8;
+      --deep: #4f5b6b;
+      --body: #536172;
+      --skin: #d3a985;
+      position: relative;
+      width: 78px;
+      height: 78px;
+      flex: 0 0 auto;
+      transform-origin: center;
+    }
+
+    .part {
+      position: absolute;
+      display: block;
+    }
+
+    .shadow {
+      left: 9px;
+      bottom: 4px;
+      width: 60px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.34);
+      z-index: 1;
+    }
+
+    .feet {
+      left: 25px;
+      bottom: 10px;
+      width: 28px;
+      height: 7px;
+      border-radius: 7px;
+      background: #2b3441;
+      box-shadow: -8px 0 0 #2b3441, 8px 0 0 #2b3441;
+      z-index: 2;
+    }
+
+    .body {
+      left: 23px;
+      top: 34px;
+      width: 31px;
+      height: 32px;
+      border: 3px solid var(--accent);
+      border-radius: 10px 10px 7px 7px;
+      background: var(--body);
+      box-shadow: inset 0 -8px 0 rgba(0,0,0,.18);
+      z-index: 4;
+    }
+
+    .head {
+      left: 27px;
+      top: 15px;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: var(--skin);
+      border: 2px solid rgba(255,255,255,.18);
+      z-index: 5;
+    }
+
+    .shield {
+      left: 8px;
+      top: 33px;
+      width: 28px;
+      height: 35px;
+      border-radius: 14px 14px 17px 17px;
+      border: 3px solid var(--accent);
+      background: #48515e;
+      z-index: 6;
+    }
+
+    .sword {
+      right: 8px;
+      top: 14px;
+      width: 7px;
+      height: 47px;
+      border-radius: 6px 6px 2px 2px;
+      background: linear-gradient(to top, #aeb8c5 0 68%, #f7fbff 69% 100%);
+      transform: rotate(16deg);
+      z-index: 7;
+    }
+
+    .sword::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      bottom: 11px;
+      width: 23px;
+      height: 5px;
+      border-radius: 5px;
+      background: var(--accent);
+    }
+
+    .lance {
+      right: 9px;
+      top: 8px;
+      width: 4px;
+      height: 66px;
+      border-radius: 4px;
+      background: #d9ecf8;
+      transform: rotate(24deg);
+      z-index: 6;
+    }
+
+    .lance::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: -8px;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 13px solid var(--accent);
+    }
+
+    .staff {
+      left: 13px;
+      top: 15px;
+      width: 5px;
+      height: 56px;
+      border-radius: 4px;
+      background: #d9fff3;
+      z-index: 6;
+    }
+
+    .staff::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: -9px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      background: #253d3b;
+    }
+
+    .bow {
+      right: 7px;
+      top: 12px;
+      width: 37px;
+      height: 58px;
+      border-right: 5px solid var(--accent);
+      border-radius: 0 50% 50% 0;
+      transform: rotate(14deg);
+      z-index: 6;
+    }
+
+    .bow::before {
+      content: "";
+      position: absolute;
+      right: 7px;
+      top: 3px;
+      width: 1px;
+      height: 51px;
+      background: rgba(231, 239, 208, .88);
+      transform: rotate(-8deg);
+    }
+
+    .arrow {
+      left: 15px;
+      top: 37px;
+      width: 43px;
+      height: 3px;
+      border-radius: 3px;
+      background: #e7efd0;
+      transform: rotate(-25deg);
+      z-index: 7;
+    }
+
+    .orb, .cross {
+      right: 8px;
+      top: 12px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(159,230,207,.42);
+      z-index: 7;
+    }
+
+    .cross::before, .cross::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 3px;
+      width: 4px;
+      height: 12px;
+      border-radius: 4px;
+      background: #f7fff9;
+    }
+
+    .cross::after { transform: rotate(90deg); }
+
+    .halo {
+      left: 22px;
+      top: 6px;
+      width: 33px;
+      height: 13px;
+      border: 3px solid rgba(240,195,106,.78);
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      z-index: 3;
+    }
+
+    .aura {
+      left: 8px;
+      top: 9px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: 3px solid rgba(159,230,207,.26);
+      box-shadow: 0 0 14px rgba(159,230,207,.12);
+      z-index: 2;
+    }
+
+    .mask {
+      left: 27px;
+      top: 24px;
+      width: 23px;
+      height: 8px;
+      border-radius: 5px;
+      background: #232a34;
+      z-index: 8;
+    }
+
+    .hood {
+      left: 17px;
+      top: 10px;
+      width: 43px;
+      height: 34px;
+      border-radius: 50% 50% 36% 36%;
+      border: 3px solid var(--accent);
+      background: #262d3a;
+      clip-path: polygon(50% 0, 94% 36%, 82% 100%, 18% 100%, 6% 36%);
+      z-index: 6;
+    }
+
+    .cloak {
+      left: 17px;
+      top: 23px;
+      width: 43px;
+      height: 48px;
+      border-radius: 50% 50% 12px 12px;
+      background: rgba(48,55,69,.88);
+      border: 2px solid var(--accent);
+      z-index: 3;
+    }
+
+    .ribbon, .dance-ribbon {
+      left: 6px;
+      top: 20px;
+      width: 66px;
+      height: 43px;
+      border-top: 5px solid var(--accent);
+      border-right: 4px solid rgba(239,154,154,.58);
+      border-radius: 50%;
+      transform: rotate(22deg);
+      z-index: 5;
+    }
+
+    .spark, .counter-spark, .step-spark {
+      right: 7px;
+      top: 12px;
+      width: 15px;
+      height: 15px;
+      background: var(--accent);
+      clip-path: polygon(50% 0, 66% 35%, 100% 50%, 66% 65%, 50% 100%, 34% 65%, 0 50%, 34% 35%);
+      box-shadow: 0 0 10px rgba(255,255,255,.2);
+      z-index: 8;
+    }
+
+    .trap {
+      left: 15px;
+      bottom: 8px;
+      width: 48px;
+      height: 16px;
+      border: 4px solid var(--accent);
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      z-index: 6;
+    }
+
+    .vial {
+      right: 4px;
+      top: 24px;
+      width: 17px;
+      height: 32px;
+      border-radius: 7px 7px 9px 9px;
+      border: 3px solid var(--accent);
+      background: linear-gradient(to bottom, transparent 0 35%, #78c85d 36% 100%);
+      transform: rotate(-18deg);
+      z-index: 7;
+    }
+
+    .bubble {
+      right: 16px;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: -13px 9px 0 rgba(182,222,131,.8), 7px 15px 0 rgba(182,222,131,.66);
+      z-index: 7;
+    }
+
+    .seal {
+      left: 25px;
+      top: 10px;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 10px rgba(239,154,154,.28);
+      z-index: 6;
+    }
+
+    .chain {
+      left: 11px;
+      top: 36px;
+      width: 56px;
+      height: 34px;
+      border-left: 4px dashed #9ba8bb;
+      border-bottom: 4px solid #9ba8bb;
+      border-radius: 0 0 14px 14px;
+      z-index: 7;
+    }
+
+    .wall {
+      left: 7px;
+      top: 35px;
+      width: 62px;
+      height: 32px;
+      border: 3px solid var(--accent);
+      border-radius: 7px;
+      background: linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px) 0 0/18px 100%, #4b5664;
+      z-index: 4;
+    }
+
+    .heal-trail, .life-line {
+      left: 9px;
+      top: 22px;
+      width: 55px;
+      height: 34px;
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      transform: rotate(-24deg);
+      z-index: 5;
+    }
+
+    .flame {
+      right: 5px;
+      top: 5px;
+      width: 22px;
+      height: 31px;
+      border-radius: 50% 50% 50% 0;
+      background: linear-gradient(135deg, #f7fff9 0 42%, var(--accent) 43% 100%);
+      transform: rotate(-35deg);
+      box-shadow: 0 0 13px rgba(159,230,207,.42);
+      z-index: 7;
+    }
+
+    .note {
+      right: 8px;
+      top: 9px;
+      width: 17px;
+      height: 29px;
+      border-left: 4px solid var(--accent);
+      border-bottom: 4px solid var(--accent);
+      border-radius: 0 0 11px 11px;
+      z-index: 7;
+    }
+
+    .note::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      bottom: -8px;
+      width: 13px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .lute {
+      left: 7px;
+      top: 33px;
+      width: 25px;
+      height: 32px;
+      border-radius: 50% 50% 12px 12px;
+      border: 3px solid var(--accent);
+      background: #5b412c;
+      transform: rotate(-13deg);
+      z-index: 6;
+    }
+
+    .door {
+      left: 9px;
+      top: 26px;
+      width: 36px;
+      height: 43px;
+      border-radius: 7px 7px 3px 3px;
+      border: 3px solid var(--accent);
+      background: #3f4b59;
+      z-index: 4;
+    }
+
+    .key {
+      right: 8px;
+      top: 18px;
+      width: 5px;
+      height: 50px;
+      border-radius: 4px;
+      background: var(--gold);
+      transform: rotate(17deg);
+      z-index: 7;
+    }
+
+    .key::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: -9px;
+      width: 18px;
+      height: 18px;
+      border: 4px solid var(--gold);
+      border-radius: 50%;
+    }
+
+    .book, .scroll {
+      left: 8px;
+      top: 38px;
+      width: 26px;
+      height: 20px;
+      border-radius: 5px;
+      background: #e8ddc0;
+      border: 2px solid #c7b27a;
+      z-index: 6;
+    }
+
+    .rifle {
+      left: 3px;
+      top: 39px;
+      width: 65px;
+      height: 7px;
+      border-radius: 5px;
+      background: #d8dfe8;
+      transform: rotate(-13deg);
+      z-index: 8;
+    }
+
+    .mark {
+      right: 7px;
+      top: 8px;
+      width: 18px;
+      height: 18px;
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      z-index: 7;
+    }
+
+    .mark::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: -7px;
+      width: 3px;
+      height: 26px;
+      background: var(--accent);
+      transform: rotate(45deg);
+    }
+
+    .footprint {
+      left: 8px;
+      bottom: 12px;
+      width: 9px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 13px -8px 0 rgba(168,212,106,.85);
+      transform: rotate(-25deg);
+      z-index: 6;
+    }
+
+    .wing {
+      left: 4px;
+      top: 24px;
+      width: 27px;
+      height: 36px;
+      border-radius: 70% 18% 70% 28%;
+      border: 3px solid var(--accent);
+      background: rgba(154,212,240,.2);
+      transform: rotate(-21deg);
+      z-index: 3;
+    }
+
+    .tail {
+      left: 7px;
+      bottom: 13px;
+      width: 41px;
+      height: 22px;
+      border-bottom: 5px solid var(--accent);
+      border-radius: 50%;
+      transform: rotate(-18deg);
+      z-index: 3;
+    }
+
+    .horn-left, .horn-right {
+      top: 7px;
+      width: 15px;
+      height: 17px;
+      background: var(--accent);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      z-index: 6;
+    }
+
+    .horn-left { left: 18px; transform: rotate(-22deg); }
+    .horn-right { right: 18px; transform: rotate(22deg); }
+
+    .sun {
+      left: 19px;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(240,195,106,.2);
+      border: 3px solid rgba(240,195,106,.75);
+      box-shadow: 0 0 16px rgba(240,195,106,.3);
+      z-index: 2;
+    }
+
+    .crown {
+      left: 24px;
+      top: 5px;
+      width: 30px;
+      height: 16px;
+      background: var(--gold);
+      clip-path: polygon(0 100%, 0 35%, 22% 80%, 50% 10%, 78% 80%, 100% 35%, 100% 100%);
+      z-index: 6;
+    }
+
+    .duel-ring, .iaido-arc {
+      left: 5px;
+      top: 18px;
+      width: 68px;
+      height: 43px;
+      border-top: 5px solid var(--accent);
+      border-radius: 50%;
+      transform: rotate(-24deg);
+      z-index: 5;
+    }
+
+    .afterimage {
+      left: 12px;
+      top: 31px;
+      width: 50px;
+      height: 35px;
+      border-radius: 18px 18px 8px 8px;
+      border: 3px solid rgba(255,255,255,.18);
+      opacity: .72;
+      transform: skewX(-18deg);
+      z-index: 3;
+    }
+
+    .sight-slit {
+      left: 24px;
+      top: 23px;
+      width: 29px;
+      height: 5px;
+      border-radius: 5px;
+      background: #10151d;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.14);
+      z-index: 8;
+    }
+
+    .rescue-thread, .mercy-wave {
+      left: 5px;
+      top: 16px;
+      width: 68px;
+      height: 48px;
+      border: 4px solid var(--accent);
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      transform: rotate(-34deg);
+      z-index: 5;
+    }
+
+    .revive-seed {
+      left: 31px;
+      top: 11px;
+      width: 16px;
+      height: 22px;
+      border-radius: 50% 50% 45% 45%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(183,255,228,.34);
+      z-index: 8;
+    }
+
+    .sky-mark {
+      right: 6px;
+      top: 6px;
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      clip-path: polygon(50% 0, 61% 36%, 98% 35%, 68% 57%, 79% 93%, 50% 70%, 21% 93%, 32% 57%, 2% 35%, 39% 36%);
+      box-shadow: 0 0 11px rgba(154,212,240,.32);
+      z-index: 8;
+    }
+
+    .aim-line, .command-arrow {
+      left: 10px;
+      top: 24px;
+      width: 58px;
+      height: 3px;
+      border-radius: 4px;
+      background: var(--accent);
+      transform: rotate(-48deg);
+      z-index: 7;
+    }
+
+    .constellation {
+      left: 8px;
+      top: 6px;
+      width: 61px;
+      height: 32px;
+      border-top: 3px dotted var(--accent);
+      border-radius: 50%;
+      transform: rotate(-18deg);
+      z-index: 6;
+    }
+
+    .constellation::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 19px -7px 0 var(--accent), 38px 2px 0 var(--accent);
+    }
+
+    .plague-cloud {
+      left: 1px;
+      top: 7px;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: rgba(182,222,131,.48);
+      box-shadow: 16px 10px 0 rgba(182,222,131,.34), 36px 2px 0 rgba(182,222,131,.24);
+      z-index: 5;
+    }
+
+    .infection-dot {
+      right: 7px;
+      top: 11px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: -14px 10px 0 rgba(182,222,131,.75), 5px 16px 0 rgba(182,222,131,.6), -24px 24px 0 rgba(182,222,131,.5);
+      z-index: 8;
+    }
+
+    .plague-lantern {
+      left: 7px;
+      top: 22px;
+      width: 22px;
+      height: 32px;
+      border: 3px solid var(--accent);
+      border-radius: 9px 9px 12px 12px;
+      background: radial-gradient(circle at 50% 62%, rgba(182,222,131,.95) 0 8px, rgba(48,70,53,.9) 9px);
+      box-shadow: 0 0 13px rgba(182,222,131,.38);
+      z-index: 7;
+    }
+
+    .spread-ring {
+      left: 5px;
+      bottom: 7px;
+      width: 67px;
+      height: 19px;
+      border-top: 5px dotted var(--accent);
+      border-radius: 50%;
+      transform: rotate(-8deg);
+      z-index: 5;
+    }
+
+    .tempo-ring, .rhythm-orbit {
+      left: 6px;
+      top: 16px;
+      width: 66px;
+      height: 46px;
+      border-top: 5px solid var(--accent);
+      border-right: 4px solid rgba(239,154,154,.3);
+      border-radius: 50%;
+      transform: rotate(22deg);
+      z-index: 5;
+    }
+
+    .double-ribbon {
+      left: 5px;
+      top: 14px;
+      width: 67px;
+      height: 49px;
+      border-top: 5px solid var(--accent);
+      border-left: 4px solid rgba(255,255,255,.16);
+      border-radius: 50%;
+      transform: rotate(-31deg);
+      z-index: 5;
+    }
+
+    .beat {
+      right: 9px;
+      top: 12px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: -14px 10px 0 var(--accent), 3px 23px 0 rgba(240,195,106,.72);
+      z-index: 8;
+    }
+
+    .barrier, .hex-field {
+      left: 5px;
+      top: 21px;
+      width: 67px;
+      height: 47px;
+      border: 5px solid var(--accent);
+      border-bottom-color: transparent;
+      border-radius: 50% 50% 18px 18px;
+      background: rgba(255,255,255,.04);
+      z-index: 4;
+    }
+
+    .crest, .anchor-sigil {
+      left: 30px;
+      top: 24px;
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      box-shadow: 0 0 10px rgba(255,255,255,.16);
+      z-index: 8;
+    }
+
+    .formation {
+      left: 10px;
+      top: 38px;
+      width: 58px;
+      height: 24px;
+      border: 3px solid var(--accent);
+      border-radius: 8px;
+      background: linear-gradient(90deg, transparent 31%, rgba(216,223,232,.24) 32% 36%, transparent 37% 64%, rgba(216,223,232,.24) 65% 69%, transparent 70%);
+      z-index: 4;
+    }
+
+    .ward-gate {
+      left: 13px;
+      top: 18px;
+      width: 52px;
+      height: 52px;
+      border: 5px solid var(--accent);
+      border-radius: 12px 12px 5px 5px;
+      border-bottom-width: 8px;
+      background: linear-gradient(90deg, transparent 46%, rgba(216,223,232,.24) 47% 53%, transparent 54%);
+      z-index: 4;
+    }
+
+    .hex-field {
+      top: 10px;
+      height: 58px;
+      border-bottom-color: var(--accent);
+      clip-path: polygon(24% 0, 76% 0, 100% 50%, 76% 100%, 24% 100%, 0 50%);
+      border-radius: 0;
+    }
+
+    .anchor-sigil {
+      top: 30px;
+      width: 22px;
+      height: 22px;
+      border: 4px solid var(--accent);
+      border-radius: 50%;
+      background: transparent;
+      clip-path: none;
+    }
+
+    .long-shadow {
+      left: 5px;
+      bottom: 6px;
+      width: 62px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.38);
+      transform: rotate(-16deg);
+      z-index: 1;
+    }
+
+    .placeholder-grid {
+      left: 10px;
+      top: 17px;
+      width: 58px;
+      height: 52px;
+      border: 3px dashed var(--accent);
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      z-index: 3;
+    }
+
+    .sr-warrior { --accent: var(--gold); --body: #68717e; }
+    .sr-warrior .shield { left: 3px; top: 29px; width: 34px; height: 42px; }
+    .sr-guardian, .sr-wall, .sr-gatekeeper { --accent: #d8dfe8; --body: #4c5662; }
+    .sr-guardian .shield { left: 9px; top: 39px; width: 23px; height: 28px; }
+    .sr-archer, .sr-watchbow, .sr-tracker { --accent: var(--leaf); --body: #536a3e; }
+    .sr-priest, .sr-shrine, .sr-cleric, .sr-purifier, .sr-healbow { --accent: var(--mint); --body: #49695f; }
+    .sr-disruptor, .sr-thief, .sr-forbidden, .sr-mage { --accent: var(--violet); --body: #372b52; }
+    .sr-warden, .sr-trapper { --accent: #a8d46a; --body: #405c3f; }
+    .sr-paladin, .sr-vanguard, .sr-bard, .sr-sunlord { --accent: var(--gold); --body: #5f604f; }
+    .sr-wall .wall { top: 31px; height: 38px; }
+    .sr-dragonspear { --accent: #79d88a; --body: #6b2f2d; }
+    .sr-sage { --accent: var(--violet); --body: #464061; }
+    .sr2-bladesaint-a, .sr2-bladesaint-c { --accent: #f6d58c; --body: #3f4652; }
+    .sr2-bladesaint-b, .sr2-bladesaint-d { --accent: #e8f6ff; --body: #333b49; }
+    .sr2-bladesaint-c .body { left: 24px; width: 29px; transform: skewX(-14deg); }
+    .sr2-bladesaint-c .sword { right: 13px; top: 12px; height: 55px; transform: rotate(72deg); }
+    .sr2-savior-a, .sr2-savior-b, .sr2-savior-c, .sr2-savior-d { --accent: #b7ffe4; --body: #3a5c55; }
+    .sr2-skybow-a, .sr2-skybow-b, .sr2-skybow-c, .sr2-skybow-d { --accent: #b8dcff; --body: #354966; }
+    .sr2-plague-a, .sr2-plague-b, .sr2-plague-c, .sr2-plague-d { --accent: #b6de83; --body: #304635; }
+    .sr2-dancer-a, .sr2-dancer-b, .sr2-dancer-c { --accent: #ff9fc8; --body: #57405b; }
+    .sr2-dancer-d { --accent: var(--gold); --body: #55475e; }
+    .sr2-wardmaster-a, .sr2-wardmaster-b, .sr2-wardmaster-c, .sr2-wardmaster-d { --accent: #cbd9ff; --body: #414d5c; }
+    .sr-seed31 { --accent: #b7ffe4; --body: #3b5557; }
+    .sr-seed32 { --accent: var(--gold); --body: #5c5545; }
+    .sr-seed33 { --accent: #c7a2ff; --body: #40334f; }
+    .sr-seed34 { --accent: #9fe6cf; --body: #4a5f59; }
+    .sr-seed35 { --accent: #d8dfe8; --body: #414c58; }
+    .sr-seed36 { --accent: #f0c36a; --body: #5a5042; }
+
+    @media (max-width: 720px) {
+      main { width: min(100% - 18px, 680px); padding-top: 10px; }
+      .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card-grid { grid-template-columns: 1fr; }
+      .card-head { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+      .section-head p { text-align: left; }
+      .roster-card.has-many .variant-grid { grid-template-columns: 1fr; }
+      .scale-strip { grid-template-columns: 1fr 1fr 1fr; }
+      .stage-large { height: 108px; }
+      .stage-battle { height: 78px; }
+      .stage-small { height: 56px; }
+      .stage-large .hero-avatar { transform: scale(1.06); }
+      .stage-battle .hero-avatar { transform: scale(.78); }
+      .stage-small .hero-avatar { transform: scale(.52); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Avatar Roster Gallery 01</h1>
+        <p class="lead">SR-01~SR-36 전체 영웅 아바타를 큰 보기, 전투 보기, 소형 보기로 동시에 비교하는 판정 창구입니다. 본게임 코드는 건드리지 않는 presentation-lab 전용 기준 페이지입니다.</p>
+      </div>
+      <div class="summary" id="summary"></div>
+      <div class="legend">
+        <span class="tag lock">LOCK</span>
+        <span class="tag pass">PASS</span>
+        <span class="tag watch">WATCH</span>
+        <span class="tag rework">REWORK</span>
+        <span class="tag candidate">CANDIDATE</span>
+        <span class="tag seed">SEED</span>
+        <span class="tag placeholder">PLACEHOLDER</span>
+      </div>
+    </header>
+
+    <nav class="section-nav" aria-label="roster sections">
+      <a href="#base">SR-01~06 기본</a>
+      <a href="#first">SR-07~21 1차</a>
+      <a href="#second-seed">SR-22~24 씨앗</a>
+      <a href="#second-new">SR-25~30 신규</a>
+      <a href="#locked-seed">SR-31~36 장기 씨앗</a>
+    </nav>
+
+    <div id="gallery"></div>
+  </main>
+
+  <script>
+    const baseParts = ["shadow", "feet", "body", "head"];
+    const stageLabels = [
+      ["stage-large", "큰 보기"],
+      ["stage-battle", "전투 보기"],
+      ["stage-small", "소형 보기"]
+    ];
+
+    const groups = [
+      {
+        id: "base",
+        title: "SR-01~SR-06 기본 직업",
+        note: "코드 기준 기본 6종. 본게임 이식 시 우선 LOCK 기준.",
+        items: [
+          job("SR-01", "전사", "기본", "LOCK", "-", "도발 / 전열", "검과 큰 방패가 먼저 읽힘", "sr-warrior", ["shield", "sword"], "LOCK", "기존 기준 유지", "방패가 커서 수호자와 분리", "소형 PASS"),
+          job("SR-02", "수호자", "기본", "LOCK", "-", "보호 / 전열", "창과 작은 방패", "sr-guardian", ["shield", "lance"], "LOCK", "창 중심 보호자", "전사보다 작은 방패", "소형 PASS"),
+          job("SR-03", "사제", "기본", "LOCK", "-", "회복 / 후열", "회복 구슬과 민트 오라", "sr-priest", ["aura", "staff", "orb"], "LOCK", "회복 구슬 유지", "신관보다 부드러운 후열", "소형 PASS"),
+          job("SR-04", "신관", "기본", "LOCK", "-", "축복 / 의식", "제례 지팡이와 낮은 후광", "sr-shrine", ["aura", "halo", "staff"], "LOCK", "의식형 지원", "사제 구슬과 분리", "소형 WATCH"),
+          job("SR-05", "궁수", "기본", "LOCK", "-", "원거리 / 사선", "순수 활과 화살", "sr-archer", ["bow", "arrow"], "LOCK", "기본 원거리 기준", "천궁보다 단순해야 함", "소형 PASS"),
+          job("SR-06", "교란꾼", "기본", "LOCK", "-", "교란 / 혼란", "가면과 흔들리는 리본", "sr-disruptor", ["ribbon", "spark", "mask"], "LOCK", "시선 흔들기", "무희보다 산만한 교란", "소형 WATCH")
+        ]
+      },
+      {
+        id: "first",
+        title: "SR-07~SR-21 1차 직업",
+        note: "1차 15종. SR-25~30 2차 후보와 겹침을 보는 비교 기준.",
+        items: [
+          job("SR-07", "도적", "1차", "PASS", "기본 파생", "측면 / 기습", "긴 그림자와 역수 단검", "sr-thief", ["long-shadow", "mark", "sword", "mask"], "PASS", "낮은 기습 실루엣", "검성과는 자세로 분리", "소형 PASS"),
+          job("SR-08", "워든", "1차", "PASS", "기본 파생", "감시 / 전열", "삼지창과 작은 방패", "sr-warden", ["shield", "lance"], "PASS", "검성 재료이므로 창 실루엣 유지", "수호자와 유사도 WATCH", "소형 WATCH"),
+          job("SR-09", "파수궁", "1차", "WATCH", "기본 파생", "감시 / 원거리", "망토와 활", "sr-watchbow", ["cloak", "bow", "arrow", "spark"], "WATCH", "방어 궁수", "천궁은 하늘 표식으로 분리", "소형 WATCH"),
+          job("SR-10", "덫꾼", "1차", "PASS", "기본 파생", "덫 / 독", "덫과 독약병", "sr-trapper", ["trap", "vial", "bubble"], "PASS", "역병술사 재료", "역병술사는 확산 장판으로 상위감 필요", "소형 PASS"),
+          job("SR-11", "성기사", "1차", "PASS", "기본 파생", "성검 / 보호", "후광 검방", "sr-paladin", ["aura", "halo", "shield", "sword"], "PASS", "성전 기사 기준", "SR-32 씨앗과 겹침 주의", "소형 PASS"),
+          job("SR-12", "선봉", "1차", "PASS", "기본 파생", "돌파 / 시작", "작은 깃과 창", "sr-vanguard", ["lance", "spark"], "PASS", "돌파형 전열", "용창보다 가벼움", "소형 PASS"),
+          job("SR-13", "금제", "1차", "PASS", "기본 파생", "제어 / 봉인", "사슬과 봉인 고리", "sr-forbidden", ["seal", "chain", "mask"], "PASS", "봉인 기준", "SR-33은 신성 위험성을 더해야 함", "소형 PASS"),
+          job("SR-14", "성벽", "1차", "LOCK", "기본 파생", "방어 / 전선", "벽돌 몸체", "sr-wall", ["wall"], "LOCK", "전선 자체", "결계장은 방패보다 술식 결계로 분리", "소형 PASS"),
+          job("SR-15", "치유궁", "1차", "PASS", "기본 파생", "회복 / 원거리", "회복 화살과 민트 궤적", "sr-healbow", ["aura", "heal-trail", "bow", "arrow", "orb"], "PASS", "원거리 회복", "SR-34와 겹침 예정", "소형 WATCH"),
+          job("SR-16", "정화사", "1차", "PASS", "기본 파생", "정화 / 해제", "맑은 불꽃", "sr-purifier", ["aura", "staff", "flame"], "PASS", "구원자 재료", "구원자는 소생/생명선으로 상위감 필요", "소형 PASS"),
+          job("SR-17", "마도", "1차", "PASS", "기본 파생", "마법 / 압축", "보라 구체와 망토", "sr-mage", ["aura", "orb", "cloak"], "PASS", "주문 밀도", "현자와 구슬 겹침 주의", "소형 WATCH"),
+          job("SR-18", "바드", "1차", "PASS", "기본 파생", "리듬 / 버프", "음표와 악기", "sr-bard", ["note", "lute"], "PASS", "무희 재료", "무희는 악기 없이 움직임 중심", "소형 PASS"),
+          job("SR-19", "수문장", "1차", "PASS", "기본 파생", "문 / 차단", "문과 열쇠", "sr-gatekeeper", ["door", "key"], "PASS", "관문 기준", "SR-35와 겹침 예정", "소형 PASS"),
+          job("SR-20", "성직자", "1차", "WATCH", "기본 파생", "기도 / 기록", "큰 책과 낮은 후광", "sr-cleric", ["aura", "halo", "book"], "WATCH", "책은 잘 읽힘", "사제/신관과 민트군 겹침", "소형 WATCH"),
+          job("SR-21", "추적자", "1차", "PASS", "기본 파생", "표식 / 저격", "표식과 긴 라이플", "sr-tracker", ["footprint", "mark", "cloak", "rifle"], "PASS", "천궁 재료", "천궁은 활/별 지휘로 분리", "소형 PASS")
+        ]
+      },
+      {
+        id: "second-seed",
+        title: "SR-22~SR-24 구현된 2차 씨앗",
+        note: "현재 구현됨/정식 미해금 씨앗. 신규 2차와 상위감 비교 기준.",
+        items: [
+          job("SR-22", "용창", "2차", "SEED", "선봉 + 용 계열", "관통 / 돌파", "붉은 용체와 긴 창", "sr-dragonspear", ["wing", "tail", "horn-left", "horn-right", "lance"], "SEED", "창과 용 파츠가 강함", "검성/천궁과 무기군 분리", "소형 PASS"),
+          job("SR-23", "현자", "2차", "SEED", "지식 계열", "판단 / 조율", "두루마리와 구슬", "sr-sage", ["aura", "orb", "scroll"], "SEED", "판단형 후열", "구원자와 민트빛 분리 필요", "소형 WATCH"),
+          job("SR-24", "성황", "2차", "SEED", "신성 계열", "지휘 / 빛", "태양 고리와 왕관", "sr-sunlord", ["sun", "crown", "staff"], "SEED", "왕권과 태양", "구원자/결계장은 태양 금지", "소형 PASS")
+        ]
+      },
+      {
+        id: "second-new",
+        title: "SR-25~SR-30 신규 2차 설계 대상",
+        note: "A/B는 기준안, C/D는 더 자유로운 창작안. LOCK 전 비교 대상.",
+        items: [
+          candidate("SR-25", "검성", "워든 + 전사", "전열 반격 / 처형", "검, 결투, 간파, 반격", [
+            variant("A", "PASS", "sr2-bladesaint-a", ["duel-ring", "counter-spark", "sword"], "세운 장검과 결투 고리", "전사와 겹치지만 방패가 없어 분리", "소형 PASS"),
+            variant("B", "WATCH", "sr2-bladesaint-b", ["duel-ring", "counter-spark", "sword"], "비스듬한 검과 간파 표식", "검이 평범하면 전사화 위험", "소형 WATCH"),
+            variant("C", "PASS", "sr2-bladesaint-c", ["iaido-arc", "sight-slit", "sword"], "발도 궤적과 눈가 간파선", "무기보다 동작으로 읽힘", "소형 PASS"),
+            variant("D", "WATCH", "sr2-bladesaint-d", ["afterimage", "duel-ring", "counter-spark", "sword"], "잔상과 반격 대기", "잔상이 약하면 일반 검사화", "소형 WATCH")
+          ]),
+          candidate("SR-26", "구원자", "정화사 + 사제", "정화 / 위급 치유 / 소생", "빛, 정화, 생명선, 구원", [
+            variant("A", "PASS", "sr2-savior-a", ["aura", "life-line", "halo", "cross"], "생명선과 빛 십자", "성황의 태양/왕관과 분리", "소형 PASS"),
+            variant("B", "WATCH", "sr2-savior-b", ["aura", "life-line", "orb", "cross"], "붙잡는 곡선과 회복 구슬", "사제와 겹침 주의", "소형 WATCH"),
+            variant("C", "PASS", "sr2-savior-c", ["aura", "rescue-thread", "revive-seed", "cross"], "끌어올리는 생명줄과 소생 씨앗", "힐보다 구조가 먼저 보임", "소형 PASS"),
+            variant("D", "WATCH", "sr2-savior-d", ["aura", "mercy-wave", "life-line", "cross"], "바닥 구명 파동", "민트 지원군과 색 겹침", "소형 WATCH")
+          ]),
+          candidate("SR-27", "천궁", "추적자 + 궁수", "표식 / 원거리 지휘 / 저격", "하늘, 별표식, 장궁, 조준", [
+            variant("A", "PASS", "sr2-skybow-a", ["aim-line", "sky-mark", "bow", "arrow"], "위쪽 조준과 별표식", "추적자 라이플과 분리", "소형 PASS"),
+            variant("B", "WATCH", "sr2-skybow-b", ["sky-mark", "mark", "bow", "arrow"], "별 조준선과 표식 계승", "표식이 작으면 기본 궁수화", "소형 WATCH"),
+            variant("C", "PASS", "sr2-skybow-c", ["constellation", "sky-mark", "bow", "command-arrow"], "별자리와 하늘 지휘선", "장궁보다 지휘가 먼저 보임", "소형 PASS"),
+            variant("D", "WATCH", "sr2-skybow-d", ["constellation", "aim-line", "bow", "sky-mark"], "별 관측과 하늘 조준선", "활 실루엣 약화 주의", "소형 WATCH")
+          ]),
+          candidate("SR-28", "역병술사", "덫꾼 + 교란꾼", "독 / 디버프 확산", "독안개, 가면, 병, 감염", [
+            variant("A", "PASS", "sr2-plague-a", ["plague-cloud", "infection-dot", "vial", "mask"], "독안개와 감염 점", "덫꾼보다 확산감", "소형 PASS"),
+            variant("B", "RISK", "sr2-plague-b", ["plague-cloud", "vial", "bubble", "infection-dot", "mask"], "큰 독병과 혼란 안개", "몬스터처럼 보일 위험", "소형 WATCH"),
+            variant("C", "PASS", "sr2-plague-c", ["plague-cloud", "spread-ring", "plague-lantern", "infection-dot", "mask"], "독등과 확산 장판", "상태이상 전문가로 잘 읽힘", "소형 PASS"),
+            variant("D", "RISK", "sr2-plague-d", ["plague-cloud", "spread-ring", "vial", "bubble", "infection-dot", "mask"], "퍼지는 장판과 기울어진 독병", "초록 입자 과밀 주의", "소형 WATCH")
+          ]),
+          candidate("SR-29", "무희", "바드 + 신관", "리듬 / 템포 / 축복", "춤, 리본, 박자, 축복", [
+            variant("A", "PASS", "sr2-dancer-a", ["tempo-ring", "dance-ribbon", "beat"], "리본 궤적과 박자 점", "바드 악기 제거", "소형 PASS"),
+            variant("B", "WATCH", "sr2-dancer-b", ["aura", "tempo-ring", "ribbon", "beat"], "축복 원무와 템포 리본", "기존 SR-30 무희와 겹침", "소형 WATCH"),
+            variant("C", "PASS", "sr2-dancer-c", ["rhythm-orbit", "double-ribbon", "step-spark"], "이중 리본과 발끝 빛", "움직임이 가장 먼저 읽힘", "소형 PASS"),
+            variant("D", "WATCH", "sr2-dancer-d", ["aura", "double-ribbon", "tempo-ring", "beat", "step-spark"], "금빛 박자와 축복 원무", "화려하면 성황/바드로 흐름", "소형 WATCH")
+          ]),
+          candidate("SR-30", "결계장", "성벽 + 수호자", "결계 / 보호막 / 진형 안정", "방벽, 문장, 보호막, 결계", [
+            variant("A", "PASS", "sr2-wardmaster-a", ["barrier", "crest"], "반원 결계와 중앙 문장", "성벽보다 술식 방벽", "소형 PASS"),
+            variant("B", "WATCH", "sr2-wardmaster-b", ["aura", "formation", "barrier", "crest"], "진형 격자와 보호 고리", "방패처럼 보이면 위험", "소형 WATCH"),
+            variant("C", "PASS", "sr2-wardmaster-c", ["ward-gate", "anchor-sigil"], "결계문과 고정 문장", "공간을 세우는 직업으로 보임", "소형 PASS"),
+            variant("D", "WATCH", "sr2-wardmaster-d", ["aura", "hex-field", "anchor-sigil", "formation"], "육각 결계와 앵커 문장", "결계가 크면 캐릭터가 묻힘", "소형 WATCH")
+          ])
+        ]
+      },
+      {
+        id: "locked-seed",
+        title: "SR-31~SR-36 장기 잠금 씨앗",
+        note: "정식 확정 아님. 슬롯 감각 확보용 placeholder.",
+        items: [
+          job("SR-31", "감시구원", "2차", "PLACEHOLDER", "파수궁 + 사제", "후열 감시 / 반응형 구원", "감시 표식과 구원 십자", "sr-seed31", ["placeholder-grid", "sky-mark", "cross"], "PLACEHOLDER", "보호 반응형 씨앗", "파수궁/구원자와 겹침 위험", "소형 WATCH"),
+          job("SR-32", "성전기사", "2차", "SEED", "성기사 + 신관", "축복 기사 / 전열 보호", "성검과 의식 후광", "sr-seed32", ["halo", "shield", "sword", "cross"], "SEED", "축복받은 기사", "성기사와 차별 필요", "소형 WATCH"),
+          job("SR-33", "금성봉인", "2차", "PLACEHOLDER", "금제 + 신관", "위험한 축복 / 봉인", "사슬과 빛 봉인", "sr-seed33", ["seal", "chain", "halo"], "PLACEHOLDER", "금단+신성", "금제와 색만 다르면 약함", "소형 WATCH"),
+          job("SR-34", "전장구호", "2차", "PLACEHOLDER", "치유궁 + 전사", "공세 회복 / 의무", "방패 없는 의무병", "sr-seed34", ["heal-trail", "cross", "sword"], "PLACEHOLDER", "공격형 구조", "구원자/치유궁과 겹침", "소형 WATCH"),
+          job("SR-35", "성역문지기", "2차", "SEED", "수문장 + 사제", "성역 / 차단 / 방어 치유", "문과 성역 십자", "sr-seed35", ["door", "barrier", "cross"], "SEED", "문 기반 보호", "수문장과 중복 큼", "소형 PASS"),
+          job("SR-36", "전투성직자", "2차", "PLACEHOLDER", "성직자 + 전사", "기도 / 무장", "책과 검의 결합", "sr-seed36", ["book", "sword", "halo"], "PLACEHOLDER", "무장 기도", "성직자/전사 조합을 더 과감히 해야 함", "소형 WATCH")
+        ]
+      }
+    ];
+
+    function job(sr, name, tier, status, combo, role, key, cls, parts, verdict, memo, overlap, mobile) {
+      return {
+        sr,
+        name,
+        tier,
+        status,
+        combo,
+        role,
+        key,
+        variants: [variant("기준", verdict, cls, parts, memo, overlap, mobile)]
+      };
+    }
+
+    function candidate(sr, name, combo, role, key, variants) {
+      return {
+        sr,
+        name,
+        tier: "2차",
+        status: "CANDIDATE",
+        combo,
+        role,
+        key,
+        variants
+      };
+    }
+
+    function variant(label, status, cls, parts, memo, overlap, mobile) {
+      return { label, status, cls, parts, memo, overlap, mobile };
+    }
+
+    function tagClass(status) {
+      return String(status).toLowerCase();
+    }
+
+    function renderAvatar(cls, parts) {
+      const allParts = [...parts, ...baseParts].filter((part, index, arr) => arr.indexOf(part) === index);
+      return `<div class="hero-avatar ${cls}">${allParts.map((part) => `<span class="part ${part}"></span>`).join("")}</div>`;
+    }
+
+    function renderVariant(item, variantInfo) {
+      const scaleCells = stageLabels.map(([stageClass, label]) => `
+        <div class="scale-cell">
+          <div class="avatar-stage ${stageClass}">${renderAvatar(variantInfo.cls, variantInfo.parts)}</div>
+          <span class="size-label">${label}</span>
+        </div>
+      `).join("");
+      return `
+        <div class="variant">
+          <div class="variant-head">
+            <span class="variant-label">${item.sr} ${variantInfo.label}</span>
+            <span class="tag ${tagClass(variantInfo.status)}">${variantInfo.status}</span>
+          </div>
+          <div class="scale-strip">${scaleCells}</div>
+          <div class="variant-note">
+            <span><b>판정:</b> ${variantInfo.memo}</span>
+            <span><b>겹침:</b> ${variantInfo.overlap}</span>
+            <span><b>소형:</b> ${variantInfo.mobile}</span>
+            <span><b>class:</b> ${variantInfo.cls}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCard(item) {
+      const many = item.variants.length > 1;
+      return `
+        <article class="roster-card ${many ? "has-many" : ""}">
+          <div class="card-head">
+            <div>
+              <div class="card-title">
+                <span class="code">${item.sr}</span>
+                <span class="name">${item.name}</span>
+                <span class="tier">${item.tier}</span>
+              </div>
+            </div>
+            <span class="tag ${tagClass(item.status)}">${item.status}</span>
+          </div>
+          <div class="meta">
+            <span><b>조합:</b> ${item.combo}</span>
+            <span><b>역할:</b> ${item.role}</span>
+            <span><b>핵심:</b> ${item.key}</span>
+          </div>
+          <div class="variant-grid">
+            ${item.variants.map((variantInfo) => renderVariant(item, variantInfo)).join("")}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderGroup(group) {
+      return `
+        <section id="${group.id}">
+          <div class="section-head">
+            <h2>${group.title}</h2>
+            <p>${group.note}</p>
+          </div>
+          <div class="card-grid">${group.items.map(renderCard).join("")}</div>
+        </section>
+      `;
+    }
+
+    const jobs = groups.flatMap((group) => group.items);
+    const variants = jobs.reduce((sum, item) => sum + item.variants.length, 0);
+    const candidateItems = jobs.filter((item) => item.status === "CANDIDATE").length;
+    const placeholderItems = jobs.filter((item) => item.status === "PLACEHOLDER" || item.status === "SEED").length;
+
+    document.getElementById("summary").innerHTML = [
+      ["36", "SR-01~SR-36 전체 슬롯"],
+      [String(variants), "표시 아바타 후보"],
+      [String(candidateItems), "신규 2차 설계 직업"],
+      [String(placeholderItems), "씨앗 / placeholder 슬롯"]
+    ].map(([value, label]) => `<div class="summary-item"><strong>${value}</strong><span>${label}</span></div>`).join("");
+
+    document.getElementById("gallery").innerHTML = groups.map(renderGroup).join("");
+  </script>
+</body>
+</html>
