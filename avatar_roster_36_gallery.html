@@ -334,11 +334,11 @@
     }
 
     .hero-avatar.first-tier {
-      --tier-ring: rgba(218,226,237,.72);
-      --tier-ring-soft: rgba(218,226,237,.16);
-      --tier-ring-glow: rgba(218,226,237,.2);
-      --tier-mark: rgba(245,248,252,.72);
-      --tier-mark-soft: rgba(245,248,252,.28);
+      --tier-ring: rgba(244,248,255,.92);
+      --tier-ring-soft: rgba(232,240,252,.22);
+      --tier-ring-glow: rgba(232,240,252,.3);
+      --tier-mark: rgba(255,255,255,.9);
+      --tier-mark-soft: rgba(255,255,255,.36);
     }
 
     .hero-avatar.second-tier {
@@ -482,6 +482,29 @@
       border-left: 7px solid transparent;
       border-right: 7px solid transparent;
       border-bottom: 13px solid var(--accent);
+    }
+
+    .flag {
+      left: 8px;
+      top: 23px;
+      width: 5px;
+      height: 45px;
+      border-radius: 4px;
+      background: #e8edf3;
+      transform: rotate(-10deg);
+      z-index: 7;
+    }
+
+    .flag::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 3px;
+      width: 23px;
+      height: 17px;
+      border-radius: 3px 9px 9px 3px;
+      background: var(--accent);
+      clip-path: polygon(0 0, 100% 0, 78% 50%, 100% 100%, 0 100%);
     }
 
     .staff {
@@ -706,6 +729,31 @@
       border-radius: 7px;
       background: linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px) 0 0/18px 100%, #4b5664;
       z-index: 4;
+    }
+
+    .twin-shields {
+      left: 9px;
+      top: 31px;
+      width: 25px;
+      height: 34px;
+      border: 3px solid var(--accent);
+      border-radius: 50% 50% 15px 15px;
+      background: #4c5662;
+      transform: rotate(-10deg);
+      z-index: 6;
+    }
+
+    .twin-shields::after {
+      content: "";
+      position: absolute;
+      left: 25px;
+      top: -1px;
+      width: 25px;
+      height: 34px;
+      border: 3px solid var(--accent);
+      border-radius: 50% 50% 15px 15px;
+      background: #4c5662;
+      transform: rotate(20deg);
     }
 
     .heal-trail, .life-line {
@@ -1180,16 +1228,47 @@
     }
 
     .sr-warrior { --accent: var(--gold); --body: #68717e; }
-    .sr-warrior .shield { left: 3px; top: 29px; width: 34px; height: 42px; }
+    .sr-warrior .shield { left: 9px; top: 43px; width: 20px; height: 24px; border-width: 2px; opacity: .86; }
+    .sr-warrior .sword { right: 12px; top: 8px; width: 8px; height: 58px; transform: rotate(9deg); }
     .sr-guardian, .sr-wall, .sr-gatekeeper { --accent: #d8dfe8; --body: #4c5662; }
-    .sr-guardian .shield { left: 9px; top: 39px; width: 23px; height: 28px; }
+    .sr-guardian .shield { left: 3px; top: 29px; width: 34px; height: 42px; }
+    .sr-shrine .halo { top: 4px; z-index: 8; }
+    .sr-shrine .staff { left: auto; right: 8px; top: 24px; height: 45px; transform: rotate(9deg); z-index: 4; }
+    .sr-shrine .staff::before { left: -4px; top: -9px; width: 13px; height: 13px; border-width: 2px; border-radius: 4px; transform: rotate(45deg); }
     .sr-archer, .sr-watchbow, .sr-tracker { --accent: var(--leaf); --body: #536a3e; }
     .sr-priest, .sr-shrine, .sr-cleric, .sr-purifier, .sr-healbow { --accent: var(--mint); --body: #49695f; }
     .sr-disruptor, .sr-thief, .sr-forbidden, .sr-mage { --accent: var(--violet); --body: #372b52; }
     .sr-warden, .sr-trapper { --accent: #a8d46a; --body: #405c3f; }
+    .sr-thief .sword { right: 14px; top: 32px; width: 5px; height: 25px; border-radius: 5px 5px 1px 1px; transform: rotate(39deg); clip-path: polygon(50% 0, 100% 22%, 70% 100%, 30% 100%, 0 22%); }
+    .sr-thief .sword::before { left: -5px; bottom: 5px; width: 14px; height: 3px; }
+    .sr-warden .shield { left: 9px; top: 37px; width: 25px; height: 31px; clip-path: polygon(50% 0, 100% 20%, 82% 100%, 50% 82%, 18% 100%, 0 20%); }
+    .sr-warden .lance::before { left: -5px; top: -9px; border-left-width: 7px; border-right-width: 7px; border-bottom-width: 16px; }
+    .sr-warden .lance::after { content: ""; position: absolute; left: -8px; top: -1px; width: 20px; height: 11px; border-left: 4px solid var(--accent); border-right: 4px solid var(--accent); border-top: 4px solid var(--accent); border-radius: 10px 10px 0 0; }
+    .sr-trapper { --accent: #b68cff; --body: #3c2e56; }
+    .sr-trapper .trap { border-color: #d8dfe8; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+    .sr-trapper .vial { border-color: #d8dfe8; background: linear-gradient(to bottom, transparent 0 35%, #9f6be8 36% 100%); }
+    .sr-trapper .bubble { background: #b68cff; box-shadow: -13px 9px 0 rgba(182,140,255,.8), 7px 15px 0 rgba(182,140,255,.62); }
     .sr-paladin, .sr-vanguard, .sr-bard, .sr-sunlord { --accent: var(--gold); --body: #5f604f; }
-    .sr-wall .wall { top: 31px; height: 38px; }
-    .sr-dragonspear { --accent: #79d88a; --body: #6b2f2d; }
+    .sr-vanguard .flag { left: 8px; top: 24px; }
+    .sr-forbidden .chain { left: 8px; top: 33px; width: 62px; height: 39px; border: 0; border-radius: 0; }
+    .sr-forbidden .chain::before, .sr-forbidden .chain::after { content: ""; position: absolute; top: 0; width: 20px; height: 38px; border-left: 4px dashed #d8dfe8; border-bottom: 4px solid #d8dfe8; border-radius: 0 0 12px 12px; }
+    .sr-forbidden .chain::before { left: 2px; transform: rotate(9deg); }
+    .sr-forbidden .chain::after { right: 2px; transform: rotate(-9deg); }
+    .sr-wall .body { border-radius: 13px 13px 8px 8px; }
+    .sr-healbow .orb { right: 23px; top: 18px; width: 7px; height: 7px; box-shadow: 0 0 9px rgba(159,230,207,.52); }
+    .sr-bard .lute { left: 7px; top: 37px; width: 29px; height: 18px; border-radius: 50% 45% 45% 50%; transform: rotate(-20deg); }
+    .sr-bard .lute::before { content: ""; position: absolute; left: 15px; top: -23px; width: 4px; height: 27px; border-radius: 4px; background: #e8ddc0; transform: rotate(58deg); }
+    .sr-bard .note { right: 5px; top: 7px; }
+    .sr-gatekeeper .shield { left: 15px; top: 27px; width: 40px; height: 42px; border-radius: 8px 8px 14px 14px; }
+    .sr-gatekeeper .shield::before { content: ""; position: absolute; left: 17px; top: 5px; width: 2px; height: 29px; border-radius: 2px; background: rgba(216,223,232,.45); }
+    .sr-gatekeeper .key { right: 4px; top: 22px; height: 43px; transform: rotate(10deg); }
+    .sr-tracker .rifle { left: 1px; top: 34px; width: 72px; height: 6px; transform: rotate(-20deg); }
+    .sr-tracker .rifle::before { content: ""; position: absolute; left: -8px; top: -5px; width: 16px; height: 13px; background: #4b5562; clip-path: polygon(0 38%, 78% 0, 100% 100%, 18% 78%); }
+    .sr-tracker .rifle::after { content: ""; position: absolute; right: -9px; top: 2px; width: 13px; height: 2px; border-radius: 2px; background: #f7fbff; }
+    .sr-dragonspear { --accent: #79d88a; --body: #7a302e; }
+    .sr-dragonspear .wing { left: 2px; top: 21px; width: 31px; height: 39px; background: rgba(168,55,48,.46); border-color: var(--accent); }
+    .sr-dragonspear .wing::before { content: ""; position: absolute; left: 21px; top: 3px; width: 29px; height: 35px; border: 3px solid var(--accent); border-left: 0; border-radius: 18% 70% 28% 70%; background: rgba(168,55,48,.34); transform: rotate(35deg); }
+    .sr-dragonspear .tail { border-bottom-color: #c84b43; box-shadow: 0 4px 0 rgba(121,216,138,.35); }
     .sr-sage { --accent: var(--violet); --body: #464061; }
     .sr2-bladesaint-a, .sr2-bladesaint-c { --accent: #f6d58c; --body: #3f4652; }
     .sr2-bladesaint-b, .sr2-bladesaint-d { --accent: #e8f6ff; --body: #333b49; }
@@ -1270,10 +1349,10 @@
         title: "SR-01~SR-06 기본 직업",
         note: "코드 기준 기본 6종. 본게임 이식 시 우선 LOCK 기준.",
         items: [
-          job("SR-01", "전사", "기본", "LOCK", "-", "도발 / 전열", "검과 큰 방패가 먼저 읽힘", "sr-warrior", ["shield", "sword"], "LOCK", "기존 기준 유지", "방패가 커서 수호자와 분리", "소형 PASS"),
-          job("SR-02", "수호자", "기본", "LOCK", "-", "보호 / 전열", "창과 작은 방패", "sr-guardian", ["shield", "lance"], "LOCK", "창 중심 보호자", "전사보다 작은 방패", "소형 PASS"),
+          job("SR-01", "전사", "기본", "LOCK", "-", "강타 / 전열", "큰 검과 작은 보조 방패", "sr-warrior", ["shield", "sword"], "LOCK", "공격형 기본 전사로 조정", "수호자보다 검이 먼저 읽힘", "소형 PASS"),
+          job("SR-02", "수호자", "기본", "LOCK", "-", "도발 / 전열", "창과 큰 방패", "sr-guardian", ["shield", "lance"], "LOCK", "스파르타형 방패 전열", "전사와 방패 비중으로 분리", "소형 PASS"),
           job("SR-03", "사제", "기본", "LOCK", "-", "회복 / 후열", "회복 구슬과 민트 오라", "sr-priest", ["aura", "staff", "orb"], "LOCK", "회복 구슬 유지", "신관보다 부드러운 후열", "소형 PASS"),
-          job("SR-04", "신관", "기본", "LOCK", "-", "축복 / 의식", "제례 지팡이와 낮은 후광", "sr-shrine", ["aura", "halo", "staff"], "LOCK", "의식형 지원", "사제 구슬과 분리", "소형 WATCH"),
+          job("SR-04", "신관", "기본", "LOCK", "-", "축복 / 의식", "천사링과 측면 제례 지팡이", "sr-shrine", ["aura", "halo", "staff"], "LOCK", "천사링을 가리지 않게 정리", "사제 구슬과 분리", "소형 PASS"),
           job("SR-05", "궁수", "기본", "LOCK", "-", "원거리 / 사선", "순수 활과 화살", "sr-archer", ["bow", "arrow"], "LOCK", "기본 원거리 기준", "천궁보다 단순해야 함", "소형 PASS"),
           job("SR-06", "교란꾼", "기본", "LOCK", "-", "교란 / 혼란", "가면과 흔들리는 리본", "sr-disruptor", ["ribbon", "spark", "mask"], "LOCK", "시선 흔들기", "무희보다 산만한 교란", "소형 WATCH")
         ]
@@ -1283,21 +1362,21 @@
         title: "SR-07~SR-21 1차 직업",
         note: "1차 15종. SR-25~30 2차 후보와 겹침을 보는 비교 기준.",
         items: [
-          job("SR-07", "도적", "1차", "PASS", "기본 파생", "측면 / 기습", "긴 그림자와 역수 단검", "sr-thief", ["long-shadow", "mark", "sword", "mask"], "PASS", "낮은 기습 실루엣", "검성과는 자세로 분리", "소형 PASS"),
-          job("SR-08", "워든", "1차", "PASS", "기본 파생", "감시 / 전열", "삼지창과 작은 방패", "sr-warden", ["shield", "lance"], "PASS", "검성 재료이므로 창 실루엣 유지", "수호자와 유사도 WATCH", "소형 WATCH"),
-          job("SR-09", "파수궁", "1차", "WATCH", "기본 파생", "감시 / 원거리", "망토와 활", "sr-watchbow", ["cloak", "bow", "arrow", "spark"], "WATCH", "방어 궁수", "천궁은 하늘 표식으로 분리", "소형 WATCH"),
-          job("SR-10", "덫꾼", "1차", "PASS", "기본 파생", "덫 / 독", "덫과 독약병", "sr-trapper", ["trap", "vial", "bubble"], "PASS", "역병술사 재료", "역병술사는 확산 장판으로 상위감 필요", "소형 PASS"),
+          job("SR-07", "도적", "1차", "PASS", "기본 파생", "측면 / 기습", "긴 그림자와 짧은 단검", "sr-thief", ["long-shadow", "mark", "sword", "mask"], "PASS", "단도 크기를 줄여 민첩함 강화", "검성과는 무기 길이와 자세로 분리", "소형 PASS"),
+          job("SR-08", "워든", "1차", "PASS", "기본 파생", "제압 / 전열", "삼지창과 뾰족한 방패", "sr-warden", ["shield", "lance"], "PASS", "속도 게이지를 찍어 누르는 제압형", "수호자보다 공격적인 창끝", "소형 PASS"),
+          job("SR-09", "파수궁", "1차", "WATCH", "기본 파생", "감시 / 원거리", "망토와 활", "sr-watchbow", ["cloak", "bow", "arrow"], "WATCH", "별 장식 제거, 망토 궁수로 정리", "천궁은 별/하늘 표식으로 분리", "소형 PASS"),
+          job("SR-10", "덫꾼", "1차", "PASS", "기본 파생", "덫 / 제어", "보라 독병과 은색 덫", "sr-trapper", ["trap", "vial", "bubble"], "PASS", "보라 퍼스널컬러와 은색 트랩", "역병술사는 확산 장판으로 상위감 필요", "소형 PASS"),
           job("SR-11", "성기사", "1차", "PASS", "기본 파생", "성검 / 보호", "후광 검방", "sr-paladin", ["aura", "halo", "shield", "sword"], "PASS", "성전 기사 기준", "SR-32 씨앗과 겹침 주의", "소형 PASS"),
-          job("SR-12", "선봉", "1차", "PASS", "기본 파생", "돌파 / 시작", "작은 깃과 창", "sr-vanguard", ["lance", "spark"], "PASS", "돌파형 전열", "용창보다 가벼움", "소형 PASS"),
-          job("SR-13", "금제", "1차", "PASS", "기본 파생", "제어 / 봉인", "사슬과 봉인 고리", "sr-forbidden", ["seal", "chain", "mask"], "PASS", "봉인 기준", "SR-33은 신성 위험성을 더해야 함", "소형 PASS"),
-          job("SR-14", "성벽", "1차", "LOCK", "기본 파생", "방어 / 전선", "벽돌 몸체", "sr-wall", ["wall"], "LOCK", "전선 자체", "결계장은 방패보다 술식 결계로 분리", "소형 PASS"),
-          job("SR-15", "치유궁", "1차", "PASS", "기본 파생", "회복 / 원거리", "회복 화살과 민트 궤적", "sr-healbow", ["aura", "heal-trail", "bow", "arrow", "orb"], "PASS", "원거리 회복", "SR-34와 겹침 예정", "소형 WATCH"),
+          job("SR-12", "선봉", "1차", "PASS", "기본 파생", "돌파 / 지휘", "창과 작은 깃발", "sr-vanguard", ["lance", "flag"], "PASS", "별 제거, 반대손 깃발로 지휘감 강화", "용창보다 가볍고 전열 지휘에 가까움", "소형 PASS"),
+          job("SR-13", "금제", "1차", "PASS", "기본 파생", "제어 / 봉인", "양손의 긴 은색 쇠사슬", "sr-forbidden", ["seal", "chain", "mask"], "PASS", "늘어뜨린 사슬로 속박감 강화", "SR-33은 신성 위험성을 더해야 함", "소형 PASS"),
+          job("SR-14", "성벽", "1차", "LOCK", "기본 파생", "방어 / 전선", "양손 둥근 방패", "sr-wall", ["twin-shields"], "LOCK", "벽 자체보다 방어 전사로 재해석", "결계장은 방패보다 술식 결계로 분리", "소형 PASS"),
+          job("SR-15", "치유궁", "1차", "PASS", "기본 파생", "회복 / 원거리", "회복 화살과 작은 치유 구슬", "sr-healbow", ["aura", "heal-trail", "bow", "arrow", "orb"], "PASS", "활 위 작은 치유 구슬 추가", "SR-34와 겹침 예정", "소형 PASS"),
           job("SR-16", "정화사", "1차", "PASS", "기본 파생", "정화 / 해제", "맑은 불꽃", "sr-purifier", ["aura", "staff", "flame"], "PASS", "구원자 재료", "구원자는 소생/생명선으로 상위감 필요", "소형 PASS"),
           job("SR-17", "마도", "1차", "PASS", "기본 파생", "마법 / 압축", "보라 구체와 망토", "sr-mage", ["aura", "orb", "cloak"], "PASS", "주문 밀도", "현자와 구슬 겹침 주의", "소형 WATCH"),
-          job("SR-18", "바드", "1차", "PASS", "기본 파생", "리듬 / 버프", "음표와 악기", "sr-bard", ["note", "lute"], "PASS", "무희 재료", "무희는 악기 없이 움직임 중심", "소형 PASS"),
-          job("SR-19", "수문장", "1차", "PASS", "기본 파생", "문 / 차단", "문과 열쇠", "sr-gatekeeper", ["door", "key"], "PASS", "관문 기준", "SR-35와 겹침 예정", "소형 PASS"),
+          job("SR-18", "바드", "1차", "PASS", "기본 파생", "리듬 / 버프", "바이올린과 공중 음표", "sr-bard", ["note", "lute"], "PASS", "악기와 음표가 양손처럼 분리", "무희는 악기 없이 움직임 중심", "소형 PASS"),
+          job("SR-19", "수문장", "1차", "PASS", "기본 파생", "문 / 차단", "정면 방패와 열쇠", "sr-gatekeeper", ["shield", "key"], "PASS", "정면을 막는 문지기 방패", "SR-35는 문/성역으로 상위 분리 필요", "소형 PASS"),
           job("SR-20", "성직자", "1차", "WATCH", "기본 파생", "기도 / 기록", "큰 책과 낮은 후광", "sr-cleric", ["aura", "halo", "book"], "WATCH", "책은 잘 읽힘", "사제/신관과 민트군 겹침", "소형 WATCH"),
-          job("SR-21", "추적자", "1차", "PASS", "기본 파생", "표식 / 저격", "표식과 긴 라이플", "sr-tracker", ["footprint", "mark", "cloak", "rifle"], "PASS", "천궁 재료", "천궁은 활/별 지휘로 분리", "소형 PASS")
+          job("SR-21", "추적자", "1차", "PASS", "기본 파생", "표식 / 저격", "조준 표식과 긴 라이플", "sr-tracker", ["footprint", "mark", "rifle"], "PASS", "망토 제거, 라이플 조준감 강화", "천궁은 활/별 지휘로 분리", "소형 PASS")
         ]
       },
       {
@@ -1305,7 +1384,7 @@
         title: "SR-22~SR-24 구현된 2차 씨앗",
         note: "현재 구현됨/정식 미해금 씨앗. 신규 2차와 상위감 비교 기준.",
         items: [
-          job("SR-22", "용창", "2차", "SEED", "선봉 + 용 계열", "관통 / 돌파", "붉은 용체와 긴 창", "sr-dragonspear", ["wing", "tail", "horn-left", "horn-right", "lance"], "SEED", "창과 용 파츠가 강함", "검성/천궁과 무기군 분리", "소형 PASS"),
+          job("SR-22", "용창", "2차", "SEED", "선봉 + 용 계열", "관통 / 돌파", "붉은 용날개와 긴 창", "sr-dragonspear", ["wing", "tail", "horn-left", "horn-right", "lance"], "SEED", "붉은 몸체와 녹색 엣지 유지", "검성/천궁과 무기군 분리", "소형 PASS"),
           job("SR-23", "현자", "2차", "SEED", "지식 계열", "판단 / 조율", "두루마리와 구슬", "sr-sage", ["aura", "orb", "scroll"], "SEED", "판단형 후열", "구원자와 민트빛 분리 필요", "소형 WATCH"),
           job("SR-24", "성황", "2차", "SEED", "신성 계열", "지휘 / 빛", "태양 고리와 왕관", "sr-sunlord", ["sun", "crown", "staff"], "SEED", "왕권과 태양", "구원자/결계장은 태양 금지", "소형 PASS")
         ]
